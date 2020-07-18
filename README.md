@@ -1,0 +1,2 @@
+# wuptick-frontend
+Wuptick Project
