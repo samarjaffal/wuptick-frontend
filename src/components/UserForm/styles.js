@@ -17,7 +17,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
     width: 435px;
-    height: 280px;
+    /* height: 280px; */
     background: #fff;
     border-radius: 8px;
     padding: 20px;
