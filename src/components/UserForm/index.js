@@ -1,15 +1,7 @@
 import React, { Fragment } from 'react';
-import { Link } from '@reach/router';
-import {
-    Title,
-    Container,
-    Content,
-    Input,
-    Button,
-    Span,
-    Anchor,
-} from './styles';
 import PropTypes from 'prop-types';
+import { Title, Container, Content, Input, Button, Anchor } from './styles';
+import { ClickableText } from '../ClickableText/index';
 import { useInputValue } from '../../hooks/useInputValue';
 
 export const UserForm = ({ title, type }) => {
@@ -21,6 +13,14 @@ export const UserForm = ({ title, type }) => {
         e.preventDefault();
         console.log('form submited');
     };
+
+    const anchorText =
+        type == 'login'
+            ? `You don't have an account? `
+            : 'Do you already have an account? ';
+
+    const anchorURL = type == 'login' ? 'register' : 'login';
+    const anchorTitle = anchorURL.charAt(0).toUpperCase() + anchorURL.slice(1);
 
     return (
         <Fragment>
@@ -49,10 +49,9 @@ export const UserForm = ({ title, type }) => {
                             />
                         )}
                         <Button>{title}</Button>
-                        <Span>
-                            You don't have an account?{' '}
-                            <Anchor to="/register">Register</Anchor>
-                        </Span>
+                        <ClickableText text={anchorText}>
+                            <Anchor to={`/${anchorURL}`}>{anchorTitle}</Anchor>
+                        </ClickableText>
                     </Content>
                 </Container>
             </form>

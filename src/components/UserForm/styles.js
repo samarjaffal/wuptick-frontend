@@ -71,12 +71,6 @@ export const Button = styled.button`
     }
 `;
 
-export const Span = styled.span`
-    font-size: 14px;
-    font-weight: 700;
-    color: ${Colors.gray};
-`;
-
 export const Anchor = styled(Link)`
     color: ${Colors.primary};
     cursor: pointer;
