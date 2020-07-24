@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Shadow } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
+import { Link } from '@reach/router';
 
 export const Title = styled.h1`
     color: #413f4a;
@@ -68,4 +69,17 @@ export const Button = styled.button`
         transition-property: all;
         cursor: pointer;
     }
+`;
+
+export const Span = styled.span`
+    font-size: 14px;
+    font-weight: 700;
+    color: ${Colors.gray};
+`;
+
+export const Anchor = styled(Link)`
+    color: ${Colors.primary};
+    cursor: pointer;
+    -webkit-text-decoration-line: underline; /* Safari */
+    text-decoration-line: underline;
 `;

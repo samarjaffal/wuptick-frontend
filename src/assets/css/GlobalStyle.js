@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   #app{
     height: 100vh;
   }
-  input, select, textarea, button{
+  input, select, textarea, button, span{
     font-family: 'Hind Madurai', sans-serif; 
   }
 `;

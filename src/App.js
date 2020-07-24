@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Login } from './pages/Login';
 import { GlobalStyle } from './assets/css/GlobalStyle';
 import { Helmet } from 'react-helmet';
+import { Router } from '@reach/router';
 
 export const App = () => (
     <Fragment>
@@ -13,6 +14,10 @@ export const App = () => (
             />
         </Helmet>
         <GlobalStyle />
-        <Login />
+        <Router>
+            <Login path="/" />
+            <Login path="login" type="login" />
+            <Login path="register" type="register" />
+        </Router>
     </Fragment>
 );
