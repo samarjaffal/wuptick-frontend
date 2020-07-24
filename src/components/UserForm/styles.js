@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Shadow } from '../../assets/css/shared-styles';
+import { Colors } from '../../assets/css/colors';
 
 export const Title = styled.h1`
     color: #413f4a;
@@ -30,33 +31,33 @@ export const Input = styled.input`
     width: 100%;
     height: 50px;
     border: none;
-    background: #f9faff;
+    background: ${Colors.white};
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
     font-weight: 700;
-    color: #a7a8af;
+    color: ${Colors.gray};
     :focus {
         outline: none;
-        border: 1px solid #5271ff;
+        border: 1px solid ${Colors.primary};
         border-radius: 8px;
     }
     ::placeholder,
     ::-webkit-input-placeholder {
         font-weight: 700;
-        color: #a7a8af;
+        color: ${Colors.gray};
     }
     :-ms-input-placeholder {
         font-weight: 700;
-        color: #a7a8af;
+        color: ${Colors.gray};
     }
 `;
 export const Button = styled.button`
     width: 100%;
     height: 50px;
     border: none;
-    background: #5271ff;
-    color: #f9faff;
+    background: ${Colors.primary};
+    color: ${Colors.white};
     margin-bottom: 20px;
     border-radius: 8px;
     font-weight: 700;
