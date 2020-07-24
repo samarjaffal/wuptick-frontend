@@ -1,17 +1,16 @@
 {
-	"parserOptions": {
-		"ecmaVersion": 2018
-	},
-	"extends": [
-		"eslint:recommended",
-		"prettier"
-	],
-	"env": {
-		"es6": true,
-		"node": true,
-		"mocha": true
-	},
-	"rules": {
-		"no-console": "warn"
-	}
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "parser": "babel-eslint",
+    "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "rules": {
+        "no-console": "warn"
+    }
 }
