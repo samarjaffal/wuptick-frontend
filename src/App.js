@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
-import { Login } from './pages/Login';
+/* import { Auth } from './pages/Auth'; */
 import { GlobalStyle } from './assets/css/GlobalStyle';
 import { Helmet } from 'react-helmet';
-import { Router } from '@reach/router';
+/* s */
+import Context, { Provider } from './context';
+import { Routes } from './routes/index';
 
 export const App = () => (
-    <Fragment>
+    <Provider>
         <Helmet>
             <title>Wuptick</title>
             <link
@@ -14,10 +16,6 @@ export const App = () => (
             />
         </Helmet>
         <GlobalStyle />
-        <Router>
-            <Login path="/" />
-            <Login path="login" type="login" />
-            <Login path="register" type="register" />
-        </Router>
-    </Fragment>
+        <Context.Consumer>{() => <Routes />}</Context.Consumer>
+    </Provider>
 );

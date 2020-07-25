@@ -8,7 +8,11 @@
     "env": {
         "es6": true,
         "node": true,
-        "mocha": true
+        "mocha": true,
+        "browser": true
+    },
+    "globals": {
+        "ReactDOM": true
     },
     "rules": {
         "no-console": "warn"

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { UserForm } from '../../components/UserForm';
 
-export const Login = ({ type }) => {
+export const Auth = ({ type }) => {
     return (
         <Fragment>
             {type == 'login' ? (
@@ -15,6 +15,6 @@ export const Login = ({ type }) => {
     );
 };
 
-Login.propTypes = {
+Auth.propTypes = {
     type: PropTypes.string,
 };
