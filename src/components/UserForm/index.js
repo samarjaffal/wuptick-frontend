@@ -4,14 +4,16 @@ import { Title, Container, Content, Input, Button, Anchor } from './styles';
 import { ClickableText } from '../ClickableText/index';
 import { useInputValue } from '../../hooks/useInputValue';
 
-export const UserForm = ({ title, type }) => {
+export const UserForm = ({ title, type, onSubmit, loading, error }) => {
     const email = useInputValue('');
     const password = useInputValue('');
     const repeatPassword = useInputValue('');
 
+    console.log(onSubmit, 'onsubmit');
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('form submited');
+        onSubmit({ email: email.value, password: password.value });
     };
 
     const anchorText =
@@ -21,6 +23,14 @@ export const UserForm = ({ title, type }) => {
 
     const anchorURL = type == 'login' ? 'register' : 'login';
     const anchorTitle = anchorURL.charAt(0).toUpperCase() + anchorURL.slice(1);
+
+    if (error) {
+        return <div>User exists already </div>;
+    }
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <Fragment>
@@ -48,7 +58,7 @@ export const UserForm = ({ title, type }) => {
                                 required
                             />
                         )}
-                        <Button>{title}</Button>
+                        <Button type="submit">{title}</Button>
                         <ClickableText text={anchorText}>
                             <Anchor to={`/${anchorURL}`}>{anchorTitle}</Anchor>
                         </ClickableText>
@@ -62,4 +72,5 @@ export const UserForm = ({ title, type }) => {
 UserForm.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func,
 };

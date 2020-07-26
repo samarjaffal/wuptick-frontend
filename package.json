@@ -21,6 +21,7 @@
     "homepage": "https://github.com/samarjaffal/wuptick-frontend#readme",
     "devDependencies": {
         "@babel/core": "^7.10.5",
+        "@babel/plugin-transform-runtime": "^7.10.5",
         "@babel/preset-env": "^7.10.4",
         "@babel/preset-react": "^7.10.4",
         "babel-eslint": "^10.1.0",

@@ -14,6 +14,7 @@ export const Provider = ({ children }) => {
     const value = {
         accessToken,
         isAuth,
+        setAccessToken,
         activateAuth: (token) => {
             setAccessToken(token);
             setIsAuth(true);
