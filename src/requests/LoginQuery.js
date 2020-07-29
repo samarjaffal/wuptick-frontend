@@ -1,9 +1,13 @@
 import { useLazyQuery } from 'react-apollo';
 import { gqlLogin } from './graphql/gqlLogin';
 import PropTypes from 'prop-types';
+import { useGlobalState } from '../hooks/useGlobalContext';
 
 export const LoginQuery = ({ children }) => {
-    const [login, { error, loading, data }] = useLazyQuery(gqlLogin);
+    const { activateAuth } = useGlobalState();
+    const [login, { error, loading, data }] = useLazyQuery(gqlLogin, {
+        onCompleted: (data) => activateAuth(data.login.token),
+    });
     const doLogin = (input) => {
         login({
             variables: {
@@ -12,7 +16,6 @@ export const LoginQuery = ({ children }) => {
             },
         });
     };
-    console.log(data, 'data');
     return children({ doLogin, data, loading, error });
 };
 

@@ -1,28 +1,23 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
-
+import { setAccessToken as setToken } from './shared/GetAccessToken';
 const Context = createContext();
 
 export const Provider = ({ children }) => {
     let initialAT = '';
     const [accessToken, setAccessToken] = useState(initialAT);
 
-    const initialAuth = Boolean(window.localStorage.getItem('token'));
-    const [isAuth, setIsAuth] = useState(initialAuth);
-
     const value = {
         accessToken,
-        isAuth,
         setAccessToken,
         activateAuth: (token) => {
             setAccessToken(token);
-            setIsAuth(true);
+            setToken(token);
             navigate('/');
         },
         disableAuth: () => {
             setAccessToken('');
-            setIsAuth(false);
             navigate('/');
         },
     };
