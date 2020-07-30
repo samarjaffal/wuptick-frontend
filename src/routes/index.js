@@ -1,10 +1,30 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Router, Link } from '@reach/router';
 import { Auth } from '../pages/Auth/index';
 import { Home } from '../pages/Home/index';
 import { TestPage } from '../pages/TestPage';
+import { useGlobalState } from '../hooks/useGlobalContext';
 
 export const Routes = () => {
+    const [loading, setLoading] = useState(true);
+    const { activateAuth } = useGlobalState();
+    console.log(loading, 'loading');
+
+    useEffect(() => {
+        fetch('http://localhost:27017/refresh_token', {
+            method: 'POST',
+            credentials: 'include',
+        }).then(async (data) => {
+            const { token } = await data.json();
+            setLoading(false);
+            activateAuth(token);
+        });
+    }, []);
+
+    if (loading) {
+        return <div>Loading..</div>;
+    }
+
     return (
         <Fragment>
             <header>

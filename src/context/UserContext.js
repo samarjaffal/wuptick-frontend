@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
-import { setAccessToken as setToken } from './shared/GetAccessToken';
+import { setAccessToken as setToken } from '../shared/GetAccessToken';
 const Context = createContext();
 
-export const Provider = ({ children }) => {
+export const UserContextProvider = ({ children }) => {
     let initialAT = '';
     const [accessToken, setAccessToken] = useState(initialAT);
 
@@ -14,7 +14,7 @@ export const Provider = ({ children }) => {
         activateAuth: (token) => {
             setAccessToken(token);
             setToken(token);
-            navigate('/');
+            //navigate('/');
         },
         disableAuth: () => {
             setAccessToken('');
@@ -27,6 +27,6 @@ export const Provider = ({ children }) => {
 
 export default Context;
 
-Provider.propTypes = {
+UserContextProvider.propTypes = {
     children: PropTypes.node,
 };
