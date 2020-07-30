@@ -8,7 +8,9 @@ const testQuery = gql`
     }
 `;
 export const TestQuery = ({ children }) => {
-    const [test, { error, loading, data }] = useLazyQuery(testQuery);
+    const [test, { error, loading, data }] = useLazyQuery(testQuery, {
+        fetchPolicy: 'network-only',
+    });
     return children({ test, data, loading, error });
 };
 

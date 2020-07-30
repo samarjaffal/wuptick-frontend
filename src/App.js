@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import regeneratorRuntime from 'regenerator-runtime';
 import { GlobalStyle } from './assets/css/GlobalStyle';
 import { Helmet } from 'react-helmet';

@@ -9,7 +9,9 @@ const testQuery = gql`
 `;
 
 export const TestPage = () => {
-    const { error, loading, data } = useQuery(testQuery);
+    const { error, loading, data } = useQuery(testQuery, {
+        fetchPolicy: 'network-only',
+    });
 
     if (error) {
         console.log(error);
