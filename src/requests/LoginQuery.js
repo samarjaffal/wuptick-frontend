@@ -1,11 +1,11 @@
 import { useLazyQuery } from 'react-apollo';
 import { gqlLogin } from './graphql/gqlLogin';
-import PropTypes from 'prop-types';
-import { useGlobalState } from '../hooks/useGlobalContext';
+import { useUser } from '../hooks/useUser';
 import { navigate } from '@reach/router';
+import PropTypes from 'prop-types';
 
 export const LoginQuery = ({ children }) => {
-    const { activateAuth } = useGlobalState();
+    const { activateAuth } = useUser();
     const [login, { error, loading, data }] = useLazyQuery(gqlLogin, {
         onCompleted: (data) => {
             activateAuth(data.login.token);

@@ -1,7 +1,5 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
-import { setAccessToken as setToken } from '../shared/GetAccessToken';
 const Context = createContext();
 
 export const UserContextProvider = ({ children }) => {
@@ -11,15 +9,6 @@ export const UserContextProvider = ({ children }) => {
     const value = {
         accessToken,
         setAccessToken,
-        activateAuth: (token) => {
-            setAccessToken(token);
-            setToken(token);
-            //navigate('/');
-        },
-        disableAuth: () => {
-            setAccessToken('');
-            navigate('/');
-        },
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
