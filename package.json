@@ -48,6 +48,7 @@
         "react-apollo": "^3.1.5",
         "react-dom": "^16.13.1",
         "react-helmet": "^6.1.0",
+        "react-hook-form": "^6.3.0",
         "regenerator-runtime": "^0.13.7",
         "styled-components": "^5.1.1"
     }

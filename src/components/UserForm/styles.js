@@ -35,7 +35,7 @@ export const Input = styled.input`
     background: ${Colors.white};
     padding: 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 700;
     color: ${Colors.gray};
     :focus {
@@ -76,4 +76,15 @@ export const Anchor = styled(Link)`
     cursor: pointer;
     -webkit-text-decoration-line: underline; /* Safari */
     text-decoration-line: underline;
+`;
+
+export const ErrorMessage = styled.p`
+    color: ${Colors.red};
+    margin: 0 0 10px 5px;
+    text-align: left;
+    font-size: 12.5px;
+    :before {
+        display: inline;
+        content: '⚠ ';
+    }
 `;

@@ -1,19 +1,26 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Title, Container, Content, Input, Button, Anchor } from './styles';
+import {
+    Title,
+    Container,
+    Content,
+    Input,
+    Button,
+    Anchor,
+    ErrorMessage,
+} from './styles';
 import { ClickableText } from '../ClickableText/index';
-import { useInputValue } from '../../hooks/useInputValue';
+import { useForm } from 'react-hook-form';
 
 export const UserForm = ({ title, type, onSubmit, loading, error }) => {
-    const email = useInputValue('');
-    const password = useInputValue('');
-    const repeatPassword = useInputValue('');
+    const { register, handleSubmit, errors, watch } = useForm();
 
-    console.log(onSubmit, 'onsubmit');
+    const password = useRef({});
+    password.current = watch('password', '');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit({ email: email.value, password: password.value });
+    const onFormSubmited = (data) => {
+        const formData = { email: data.email, password: data.password };
+        onSubmit(formData);
     };
 
     const anchorText =
@@ -34,31 +41,65 @@ export const UserForm = ({ title, type, onSubmit, loading, error }) => {
 
     return (
         <Fragment>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <Container>
                     <Content>
                         <Title>{title}</Title>
                         <Input
-                            {...email}
+                            name="email"
+                            ref={register({
+                                required: {
+                                    value: true,
+                                    message: 'Email field is required.',
+                                },
+                            })}
                             type="email"
                             placeholder="Email"
-                            required
                         />
+
+                        {errors.email && (
+                            <ErrorMessage>{errors.email.message}</ErrorMessage>
+                        )}
                         <Input
-                            {...password}
+                            name="password"
+                            ref={register({
+                                required: 'You must specify a password',
+                                minLength: {
+                                    value: 8,
+                                    message:
+                                        'Password must have at least 8 characters',
+                                },
+                            })}
                             type="password"
                             placeholder="Password"
-                            required
                         />
-                        {type == 'register' && (
-                            <Input
-                                {...repeatPassword}
-                                type="password"
-                                placeholder="Confirm Password"
-                                required
-                            />
+                        {errors.password && (
+                            <ErrorMessage>
+                                {errors.password.message}
+                            </ErrorMessage>
                         )}
-                        <Button type="submit">{title}</Button>
+                        {type == 'register' && (
+                            <Fragment>
+                                <Input
+                                    name="confirm_password"
+                                    ref={register({
+                                        validate: (value) =>
+                                            value === password.current ||
+                                            'The passwords do not match',
+                                    })}
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                />
+                                {errors.confirm_password && (
+                                    <ErrorMessage>
+                                        {errors.confirm_password.message}
+                                    </ErrorMessage>
+                                )}
+                            </Fragment>
+                        )}
+                        <Button onClick={handleSubmit(onFormSubmited)}>
+                            {title}
+                        </Button>
                         <ClickableText text={anchorText}>
                             <Anchor to={`/${anchorURL}`}>{anchorTitle}</Anchor>
                         </ClickableText>
@@ -73,4 +114,6 @@ UserForm.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
 };
