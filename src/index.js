@@ -11,10 +11,17 @@ import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
 import { ApolloLink, Observable } from 'apollo-link';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
-
+import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import jwtDecode from 'jwt-decode';
 
-const cache = new InMemoryCache({});
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData: {
+        __schema: {
+            types: [],
+        },
+    },
+});
+const cache = new InMemoryCache({ fragmentMatcher });
 
 const requestLink = new ApolloLink(
     (operation, forward) =>

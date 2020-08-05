@@ -9,10 +9,11 @@ export const Auth = ({ type }) => {
         <Fragment>
             {type == 'login' ? (
                 <LoginQuery>
-                    {({ loading, error, doLogin }) => (
+                    {({ loading, error, doLogin, data }) => (
                         <UserForm
                             title="Login"
                             type="login"
+                            data={data}
                             error={error}
                             loading={loading}
                             onSubmit={doLogin}
@@ -21,10 +22,11 @@ export const Auth = ({ type }) => {
                 </LoginQuery>
             ) : (
                 <RegisterMutation>
-                    {({ loading, error, doRegister }) => (
+                    {({ loading, error, doRegister, data }) => (
                         <UserForm
                             title="Register"
                             type="register"
+                            data={data}
                             error={error}
                             loading={loading}
                             onSubmit={doRegister}

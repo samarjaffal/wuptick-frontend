@@ -1,5 +1,6 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import idx from 'idx';
 import {
     Title,
     Container,
@@ -12,16 +13,28 @@ import {
 import { ClickableText } from '../ClickableText/index';
 import { useForm } from 'react-hook-form';
 
-export const UserForm = ({ title, type, onSubmit, loading, error }) => {
+export const UserForm = ({ title, type, onSubmit, loading, error, data }) => {
     const { register, handleSubmit, errors, watch } = useForm();
 
     const password = useRef({});
     password.current = watch('password', '');
 
-    const onFormSubmited = (data) => {
-        const formData = { email: data.email, password: data.password };
-        onSubmit(formData);
+    const onFormSubmited = (formData) => {
+        const newFormData = {
+            email: formData.email,
+            password: formData.password,
+        };
+        onSubmit(newFormData);
     };
+
+    useEffect(() => {
+        const typename = idx(data, (d) => d.register.__typename);
+        if (typename === 'User') {
+            console.log('registration success!');
+        } else if (typename === 'AuthUserExistError') {
+            console.log(data.register.message, 'error message handling');
+        }
+    }, [data]);
 
     const anchorText =
         type == 'login'
