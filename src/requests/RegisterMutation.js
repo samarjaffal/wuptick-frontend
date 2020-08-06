@@ -18,7 +18,7 @@ export const RegisterMutation = ({ children }) => {
             },
         });
     });
-
+    console.log(data, 'data');
     return children({ doRegister, loading, error, data });
 };
 

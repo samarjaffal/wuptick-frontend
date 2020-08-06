@@ -15,9 +15,9 @@ import { useForm } from 'react-hook-form';
 import { useFormAlert } from '../../hooks/useFormAlert';
 
 export const UserForm = ({ title, onSubmit, loading, error, data }) => {
-    const { register, handleSubmit, errors, watch } = useForm();
-    const { message } = useFormAlert(data);
     const type = title.toLowerCase();
+    const { register, handleSubmit, errors, watch } = useForm();
+    const { message } = useFormAlert(data, type);
     const password = useRef({});
     password.current = watch('password', '');
 
@@ -129,7 +129,6 @@ export const UserForm = ({ title, onSubmit, loading, error, data }) => {
 
 UserForm.propTypes = {
     title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
     loading: PropTypes.bool,
     error: PropTypes.object,
