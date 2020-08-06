@@ -4,7 +4,7 @@ import { Colors } from '../../assets/css/colors';
 export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Hind Madurai', sans-serif;
-    background: ${Colors.white};
+    background: ${Colors.backgroud};
     width: 100%;
     height: 100vh;
     margin:0;

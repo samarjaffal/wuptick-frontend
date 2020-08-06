@@ -1,7 +1,7 @@
+import { useCallback } from 'react';
 import { useLazyQuery } from 'react-apollo';
 import { gqlLogin } from './graphql/gqlLogin';
 import { useUser } from '../hooks/useUser';
-import { navigate } from '@reach/router';
 import PropTypes from 'prop-types';
 
 export const LoginQuery = ({ children }) => {
@@ -9,18 +9,17 @@ export const LoginQuery = ({ children }) => {
     const [login, { error, loading, data }] = useLazyQuery(gqlLogin, {
         onCompleted: (data) => {
             activateAuth(data.login.token);
-            navigate('/');
         },
     });
-    const doLogin = (input) => {
+    const doLogin = useCallback((input) => {
         login({
             variables: {
                 email: input.email,
                 password: input.password,
             },
         });
-    };
-    return children({ doLogin, data, loading, error });
+    });
+    return children({ doLogin, loading, error, data });
 };
 
 LoginQuery.propTypes = {

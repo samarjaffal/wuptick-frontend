@@ -7,4 +7,5 @@ export const Colors = {
     white: '#F9FAFF',
     secondary: '#BFCAFF',
     red: '#FB7B7F',
+    backgroud: '#F3F5FF',
 };

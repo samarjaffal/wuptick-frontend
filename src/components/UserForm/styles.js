@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Shadow } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
 import { Link } from '@reach/router';
@@ -14,16 +14,19 @@ export const Container = styled.div`
     justify-content: center;
     justify-content: space-between;
     height: 100vh;
+    position: relative;
+    margin: 0 20px;
 `;
 
 export const Content = styled.div`
     width: 435px;
-    /* height: 280px; */
+    max-width: 435px;
     background: #fff;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
     margin: auto;
+    position: relative;
     ${Shadow}
 `;
 

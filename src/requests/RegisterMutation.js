@@ -1,21 +1,25 @@
+import { useCallback } from 'react';
 import { gqlRegister } from './graphql/gqlRegister';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
 import { useMutation } from 'react-apollo';
 
 export const RegisterMutation = ({ children }) => {
     const [register, { error, loading, data }] = useMutation(gqlRegister, {
-        onCompleted: () => navigate('/'),
+        onCompleted: () => {
+            console.log('completed');
+        },
     });
-    const doRegister = (input) => {
+
+    const doRegister = useCallback((input) => {
         register({
             variables: {
                 email: input.email,
                 password: input.password,
             },
         });
-    };
-    return children({ doRegister, data, loading, error });
+    });
+
+    return children({ doRegister, loading, error, data });
 };
 
 RegisterMutation.propTypes = {

@@ -1,6 +1,5 @@
-import React, { Fragment, useRef, useEffect } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
-import idx from 'idx';
 import {
     Title,
     Container,
@@ -11,30 +10,16 @@ import {
     ErrorMessage,
 } from './styles';
 import { ClickableText } from '../ClickableText/index';
+import { FormAlert } from '../FormAlert/index';
 import { useForm } from 'react-hook-form';
+import { useFormAlert } from '../../hooks/useFormAlert';
 
-export const UserForm = ({ title, type, onSubmit, loading, error, data }) => {
+export const UserForm = ({ title, onSubmit, loading, error, data }) => {
     const { register, handleSubmit, errors, watch } = useForm();
-
+    const { message } = useFormAlert(data);
+    const type = title.toLowerCase();
     const password = useRef({});
     password.current = watch('password', '');
-
-    const onFormSubmited = (formData) => {
-        const newFormData = {
-            email: formData.email,
-            password: formData.password,
-        };
-        onSubmit(newFormData);
-    };
-
-    useEffect(() => {
-        const typename = idx(data, (d) => d.register.__typename);
-        if (typename === 'User') {
-            console.log('registration success!');
-        } else if (typename === 'AuthUserExistError') {
-            console.log(data.register.message, 'error message handling');
-        }
-    }, [data]);
 
     const anchorText =
         type == 'login'
@@ -44,8 +29,23 @@ export const UserForm = ({ title, type, onSubmit, loading, error, data }) => {
     const anchorURL = type == 'login' ? 'register' : 'login';
     const anchorTitle = anchorURL.charAt(0).toUpperCase() + anchorURL.slice(1);
 
+    const onFormSubmited = (formData) => {
+        const newFormData = {
+            email: formData.email,
+            password: formData.password,
+        };
+        onSubmit(newFormData);
+    };
+
+    const showFormAlert =
+        message !== '' ? <FormAlert message={message} icon="⚠️" /> : '';
+
     if (error) {
-        return <div>User exists already </div>;
+        return (
+            <div>
+                <strong>Something went wrong!</strong>
+            </div>
+        );
     }
 
     if (loading) {
@@ -58,6 +58,7 @@ export const UserForm = ({ title, type, onSubmit, loading, error, data }) => {
                 <Container>
                     <Content>
                         <Title>{title}</Title>
+                        {showFormAlert}
                         <Input
                             name="email"
                             ref={register({
@@ -110,7 +111,10 @@ export const UserForm = ({ title, type, onSubmit, loading, error, data }) => {
                                 )}
                             </Fragment>
                         )}
-                        <Button onClick={handleSubmit(onFormSubmited)}>
+                        <Button
+                            onClick={handleSubmit(onFormSubmited)}
+                            disabled={loading}
+                        >
                             {title}
                         </Button>
                         <ClickableText text={anchorText}>
@@ -129,4 +133,5 @@ UserForm.propTypes = {
     onSubmit: PropTypes.func,
     loading: PropTypes.bool,
     error: PropTypes.object,
+    data: PropTypes.object,
 };

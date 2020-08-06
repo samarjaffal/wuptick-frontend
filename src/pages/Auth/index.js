@@ -12,11 +12,10 @@ export const Auth = ({ type }) => {
                     {({ loading, error, doLogin, data }) => (
                         <UserForm
                             title="Login"
-                            type="login"
-                            data={data}
                             error={error}
                             loading={loading}
                             onSubmit={doLogin}
+                            data={data}
                         />
                     )}
                 </LoginQuery>
@@ -25,11 +24,10 @@ export const Auth = ({ type }) => {
                     {({ loading, error, doRegister, data }) => (
                         <UserForm
                             title="Register"
-                            type="register"
-                            data={data}
                             error={error}
                             loading={loading}
                             onSubmit={doRegister}
+                            data={data}
                         />
                     )}
                 </RegisterMutation>
