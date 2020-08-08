@@ -1,5 +1,6 @@
 import React from 'react';
 import regeneratorRuntime from 'regenerator-runtime';
+import './components/FontAwesomeIcons/index';
 import { GlobalStyle } from './assets/css/GlobalStyle';
 import { Helmet } from 'react-helmet';
 import Context, { UserContextProvider } from './context/UserContext';

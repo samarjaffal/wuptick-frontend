@@ -1,9 +1,20 @@
 import React from 'react';
-import { Link } from '@reach/router';
-import { gqlLogout } from '../../requests/graphql/gqlLogout';
-import { navigate } from '@reach/router';
-import { useUser } from '../../hooks/useUser';
 import { useMutation } from 'react-apollo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { navigate } from '@reach/router';
+import { gqlLogout } from '../../requests/graphql/gqlLogout';
+import { useUser } from '../../hooks/useUser';
+import {
+    Header,
+    Avatar,
+    Anchor,
+    AnchorTeam,
+    NavAnchor,
+    NavAnchorTitle,
+    NavUl,
+    NavLink,
+    TeamContainer,
+} from './styles';
 
 export const Navbar = () => {
     const { isLogged, disableAuth } = useUser();
@@ -26,25 +37,51 @@ export const Navbar = () => {
     }
 
     return (
-        <header>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="test">Test</Link>
-                </li>
-                <li>
-                    <Link to="login">Login</Link>
-                </li>
-                <li>
-                    {isLogged && (
-                        <button type="button" onClick={() => logout()}>
-                            Logout
-                        </button>
-                    )}
-                </li>
-            </ul>
-        </header>
+        <Header>
+            <Anchor to="/">Wuptick</Anchor>
+            <TeamContainer>
+                <AnchorTeam to="/">Team Name</AnchorTeam>
+            </TeamContainer>
+
+            <nav>
+                <NavUl>
+                    <NavLink>
+                        <NavAnchor to="/" option="projects">
+                            <FontAwesomeIcon icon="folder-open" />
+                            <NavAnchorTitle>Projects</NavAnchorTitle>
+                        </NavAnchor>
+                    </NavLink>
+                    <NavLink>
+                        <NavAnchor to="/" option="teams">
+                            <FontAwesomeIcon icon="users" />
+                            <NavAnchorTitle>Teams</NavAnchorTitle>
+                        </NavAnchor>
+                    </NavLink>
+                    <NavLink>
+                        <NavAnchor to="/" option="tasks">
+                            <FontAwesomeIcon icon="tasks" />
+                            <NavAnchorTitle>Tasks</NavAnchorTitle>
+                        </NavAnchor>
+                    </NavLink>
+                    {/*                     <li>
+                        <Link to="test">Test</Link>
+                    </li>
+                    <li>
+                        <Link to="login">Login</Link>
+                    </li> */}
+                    {/*   <li>
+                        {isLogged && (
+                            <button type="button" onClick={() => logout()}>
+                                Logout
+                            </button>
+                        )}
+                    </li> */}
+                </NavUl>
+            </nav>
+            <Avatar
+                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                alt="avatar"
+            />
+        </Header>
     );
 };

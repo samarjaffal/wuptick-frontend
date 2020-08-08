@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Routes } from '../Routes/index';
-import { Navbar } from '../../components/navbar';
+import { Navbar } from '../../components/Navbar';
 import { useRefreshToken } from '../../hooks/useRefreshToken';
 export const Layout = () => {
     const { refreshToken, loading, error } = useRefreshToken();
