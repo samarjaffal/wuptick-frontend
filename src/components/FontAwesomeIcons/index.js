@@ -3,6 +3,7 @@ import {
     faFolderOpen,
     faUsers,
     faTasks,
+    faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faFolderOpen, faUsers, faTasks);
+library.add(faFolderOpen, faUsers, faTasks, faBars);

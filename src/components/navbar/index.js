@@ -6,6 +6,7 @@ import { gqlLogout } from '../../requests/graphql/gqlLogout';
 import { useUser } from '../../hooks/useUser';
 import {
     Header,
+    NavContainer,
     Nav,
     Avatar,
     Anchor,
@@ -15,6 +16,7 @@ import {
     NavUl,
     NavLink,
     TeamContainer,
+    HamburguerMenu,
 } from './styles';
 
 export const Navbar = () => {
@@ -39,50 +41,53 @@ export const Navbar = () => {
 
     return (
         <Header>
-            <Anchor to="/">Wuptick</Anchor>
-            <TeamContainer>
-                <AnchorTeam to="/">Team Name</AnchorTeam>
-            </TeamContainer>
+            <HamburguerMenu icon="bars" />
+            <NavContainer>
+                <Anchor to="/">Wuptick</Anchor>
+                <TeamContainer>
+                    <AnchorTeam to="/">Team Name</AnchorTeam>
+                </TeamContainer>
 
-            <Nav>
-                <NavUl>
-                    <NavLink>
-                        <NavAnchor to="/" option="projects">
-                            <FontAwesomeIcon icon="folder-open" />
-                            <NavAnchorTitle>Projects</NavAnchorTitle>
-                        </NavAnchor>
-                    </NavLink>
-                    <NavLink>
-                        <NavAnchor to="/" option="teams">
-                            <FontAwesomeIcon icon="users" />
-                            <NavAnchorTitle>Teams</NavAnchorTitle>
-                        </NavAnchor>
-                    </NavLink>
-                    <NavLink>
-                        <NavAnchor to="/" option="tasks">
-                            <FontAwesomeIcon icon="tasks" />
-                            <NavAnchorTitle>Tasks</NavAnchorTitle>
-                        </NavAnchor>
-                    </NavLink>
-                    {/*                     <li>
+                <Nav>
+                    <NavUl>
+                        <NavLink>
+                            <NavAnchor to="/" option="projects">
+                                <FontAwesomeIcon icon="folder-open" />
+                                <NavAnchorTitle>Projects</NavAnchorTitle>
+                            </NavAnchor>
+                        </NavLink>
+                        <NavLink>
+                            <NavAnchor to="/" option="teams">
+                                <FontAwesomeIcon icon="users" />
+                                <NavAnchorTitle>Teams</NavAnchorTitle>
+                            </NavAnchor>
+                        </NavLink>
+                        <NavLink>
+                            <NavAnchor to="/" option="tasks">
+                                <FontAwesomeIcon icon="tasks" />
+                                <NavAnchorTitle>Tasks</NavAnchorTitle>
+                            </NavAnchor>
+                        </NavLink>
+                        {/*                     <li>
                         <Link to="test">Test</Link>
                     </li>
                     <li>
                         <Link to="login">Login</Link>
                     </li> */}
-                    {/*   <li>
+                        {/*   <li>
                         {isLogged && (
                             <button type="button" onClick={() => logout()}>
                                 Logout
                             </button>
                         )}
                     </li> */}
-                </NavUl>
-            </Nav>
-            <Avatar
-                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                alt="avatar"
-            />
+                    </NavUl>
+                </Nav>
+                <Avatar
+                    src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                    alt="avatar"
+                />
+            </NavContainer>
         </Header>
     );
 };

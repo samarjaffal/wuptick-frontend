@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     ShadowSecondary,
     Transition,
@@ -10,16 +11,24 @@ import { Colors } from '../../assets/css/colors';
 export const Header = styled.header`
     display: flex;
     font-size: 14px;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0px 15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0;
     background-color: ${Colors.white};
-    flex-wrap: wrap;
     ${ShadowSecondary};
 
     @media (max-width: 767px) {
         padding-top: 1em;
     }
+`;
+
+export const NavContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
 `;
 
 export const Nav = styled.nav`
@@ -39,7 +48,7 @@ export const Avatar = styled.img`
     cursor: pointer;
 
     @media (max-width: 767px) {
-        order: 1;
+        display: none;
     }
 `;
 
@@ -55,6 +64,8 @@ export const Anchor = styled(Link)`
     }
     @media (max-width: 767px) {
         order: 0;
+        width: 100%;
+        text-align: center;
     }
 `;
 
@@ -119,5 +130,18 @@ export const AnchorTeam = styled(Link)`
     }
     @media (max-width: 767px) {
         display: none;
+    }
+`;
+
+export const HamburguerMenu = styled(FontAwesomeIcon)`
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 20px;
+    color: ${Colors.black};
+    display: none;
+    ${Transition}
+    @media (max-width: 767px) {
+        display: block;
     }
 `;
