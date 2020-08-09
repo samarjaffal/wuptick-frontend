@@ -14,7 +14,19 @@ export const Header = styled.header`
     align-items: center;
     padding: 0px 15px;
     background-color: ${Colors.white};
-    ${ShadowSecondary}
+    flex-wrap: wrap;
+    ${ShadowSecondary};
+
+    @media (max-width: 767px) {
+        padding-top: 1em;
+    }
+`;
+
+export const Nav = styled.nav`
+    @media (max-width: 767px) {
+        width: 100%;
+        order: 2;
+    }
 `;
 
 export const Avatar = styled.img`
@@ -25,6 +37,10 @@ export const Avatar = styled.img`
     object-position: center;
     margin-left: 20px;
     cursor: pointer;
+
+    @media (max-width: 767px) {
+        order: 1;
+    }
 `;
 
 export const Anchor = styled(Link)`
@@ -37,22 +53,37 @@ export const Anchor = styled(Link)`
     :hover {
         color: ${Colors.primary};
     }
+    @media (max-width: 767px) {
+        order: 0;
+    }
 `;
 
 export const NavUl = styled.ul`
     list-style: none;
+    @media (max-width: 767px) {
+        padding: 0;
+    }
 `;
 
 export const NavLink = styled.li`
     display: inline-block;
     padding: 0px 20px;
+    @media (max-width: 767px) {
+        padding: 10px 0px;
+        display: block;
+    }
 `;
 
 export const NavAnchor = styled(Link)`
     font-weight: 600;
     color: ${Colors.black};
     text-decoration: none;
+    align-items: center;
     ${TransitionSecondary}
+    @media (max-width: 767px) {
+        justify-content: center;
+        display: flex;
+    }
 
     :hover {
         ${({ option }) =>
@@ -85,5 +116,8 @@ export const AnchorTeam = styled(Link)`
     :hover {
         color: ${Colors.white};
         background: ${Colors.primary};
+    }
+    @media (max-width: 767px) {
+        display: none;
     }
 `;
