@@ -28,13 +28,33 @@ export const NavContainer = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0 15px;
+    padding: 0 1em;
+    cursor: pointer;
+    @media (max-width: 767px) {
+        padding-bottom: 1em;
+        flex-wrap: nowrap;
+    }
 `;
 
 export const Nav = styled.nav`
     @media (max-width: 767px) {
-        width: 100%;
         order: 2;
+        position: absolute;
+        background: ${Colors.backgroud};
+        width: 100vw;
+        height: 60vh;
+        top: -100vh;
+        left: 0;
+        display: flex;
+        padding-top: 2em;
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 0;
+        transition: all 0.8s ease 0s;
+        opacity: 0;
+        ${({ showMobileNav }) =>
+            (showMobileNav == true && `top: 0; opacity:1`) ||
+            (showMobileNav == false && `top: -100vh; opacity:0`)}
     }
 `;
 
@@ -66,13 +86,17 @@ export const Anchor = styled(Link)`
         order: 0;
         width: 100%;
         text-align: center;
+        position: relative;
+        z-index: 1;
+        font-size: 1.3em;
     }
 `;
 
 export const NavUl = styled.ul`
     list-style: none;
     @media (max-width: 767px) {
-        padding: 0;
+        width: 100vw;
+        padding: 2em;
     }
 `;
 
@@ -80,8 +104,12 @@ export const NavLink = styled.li`
     display: inline-block;
     padding: 0px 20px;
     @media (max-width: 767px) {
-        padding: 10px 0px;
         display: block;
+        /* font-size: 1.5em; */
+        line-height: 3em;
+        background: ${Colors.white};
+        margin: 1em 0;
+        border-radius: 8px;
     }
 `;
 
@@ -135,13 +163,51 @@ export const AnchorTeam = styled(Link)`
 
 export const HamburguerMenu = styled(FontAwesomeIcon)`
     position: absolute;
-    top: 14px;
-    left: 14px;
+    top: 1em;
+    left: 1em;
     font-size: 20px;
     color: ${Colors.black};
     display: none;
     ${Transition}
+    ${HamburguerMenuContainer}:hover {
+        color: ${Colors.primary};
+    }
     @media (max-width: 767px) {
         display: block;
+        position: relative;
+        z-index: 1;
+        top: 0;
+    }
+`;
+
+export const HamburguerMenuContainer = styled.span`
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+`;
+
+export const NavLinkLogout = styled.li`
+    position: relative;
+    display: flex;
+    bottom: -30px;
+    justify-content: center;
+`;
+
+export const LogoutButton = styled.button`
+    background: #5271ff;
+    border: none;
+    width: 100%;
+    line-height: 3em;
+    color: ${Colors.white};
+    border-radius: 8px;
+    font-weight: 600;
+    :hover {
+        opacity: 0.8;
+        transition-duration: 0.5s;
+        transition-property: all;
+        cursor: pointer;
     }
 `;

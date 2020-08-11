@@ -1,6 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 import { Colors } from '../../assets/css/colors';
 
+let resizeTimer;
+window.addEventListener('resize', () => {
+    document.body.classList.add('resize-animation-stopper');
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        document.body.classList.remove('resize-animation-stopper');
+    }, 400);
+});
+
 export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Hind Madurai', sans-serif;
@@ -17,4 +26,8 @@ export const GlobalStyle = createGlobalStyle`
   input, select, textarea, button, span{
     font-family: 'Hind Madurai', sans-serif; 
   }
+  .resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
 `;

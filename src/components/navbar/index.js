@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from '@reach/router';
@@ -17,6 +17,9 @@ import {
     NavLink,
     TeamContainer,
     HamburguerMenu,
+    HamburguerMenuContainer,
+    NavLinkLogout,
+    LogoutButton,
 } from './styles';
 
 export const Navbar = () => {
@@ -31,6 +34,37 @@ export const Navbar = () => {
         },
     });
 
+    const ipad = window.matchMedia('screen and (max-width: 767px)');
+    const burguerButton = useRef(null);
+    ipad.addListener(validation);
+
+    const [isActive, setIsActive] = useState(false);
+    const isActiveRef = useRef(isActive);
+    const [match, setMatch] = useState(false);
+
+    useEffect(() => {
+        console.log(ipad.matches);
+        if (match) {
+            burguerButton.current.addEventListener('click', toggle);
+            return () => {
+                burguerButton.current.removeEventListener('click', toggle);
+            };
+        }
+    }, [match]);
+
+    function validation({ matches }) {
+        if (matches) {
+            setMatch(true);
+        } else {
+            setMatch(false);
+        }
+    }
+
+    const toggle = () => {
+        isActiveRef.current = !isActiveRef.current;
+        setIsActive(isActiveRef.current);
+    };
+
     if (loading) {
         return <div>Loading..</div>;
     }
@@ -41,14 +75,16 @@ export const Navbar = () => {
 
     return (
         <Header>
-            <HamburguerMenu icon="bars" />
             <NavContainer>
+                <HamburguerMenuContainer ref={burguerButton}>
+                    <HamburguerMenu icon="bars" />
+                </HamburguerMenuContainer>
                 <Anchor to="/">Wuptick</Anchor>
                 <TeamContainer>
                     <AnchorTeam to="/">Team Name</AnchorTeam>
                 </TeamContainer>
 
-                <Nav>
+                <Nav showMobileNav={isActive}>
                     <NavUl>
                         <NavLink>
                             <NavAnchor to="/" option="projects">
@@ -74,6 +110,16 @@ export const Navbar = () => {
                     <li>
                         <Link to="login">Login</Link>
                     </li> */}
+                        {match && isActive && (
+                            <NavLinkLogout>
+                                <LogoutButton
+                                    type="button"
+                                    onClick={() => logout()}
+                                >
+                                    Logout
+                                </LogoutButton>
+                            </NavLinkLogout>
+                        )}
                         {/*   <li>
                         {isLogged && (
                             <button type="button" onClick={() => logout()}>
