@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import { useMutation } from 'react-apollo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from '@reach/router';
 import { gqlLogout } from '../../requests/graphql/gqlLogout';
 import { useUser } from '../../hooks/useUser';
+import { useHamburguerMenu } from '../../hooks/useHamburguerMenu';
+import { useSmallScreen } from '../../hooks/useSmallScreen';
 import {
     Header,
     NavContainer,
@@ -24,6 +26,8 @@ import {
 
 export const Navbar = () => {
     const { isLogged, disableAuth } = useUser();
+    const { burguerButton, isActive } = useHamburguerMenu();
+    const { match } = useSmallScreen();
 
     const [logout, { error, loading, client }] = useMutation(gqlLogout, {
         onCompleted: () => {
@@ -33,37 +37,6 @@ export const Navbar = () => {
             navigate('/');
         },
     });
-
-    const ipad = window.matchMedia('screen and (max-width: 767px)');
-    const burguerButton = useRef(null);
-    ipad.addListener(validation);
-
-    const [isActive, setIsActive] = useState(false);
-    const isActiveRef = useRef(isActive);
-    const [match, setMatch] = useState(false);
-
-    useEffect(() => {
-        setMatch(ipad.matches);
-        if (match) {
-            burguerButton.current.addEventListener('click', toggle);
-            return () => {
-                burguerButton.current.removeEventListener('click', toggle);
-            };
-        }
-    }, [match]);
-
-    function validation({ matches }) {
-        if (matches) {
-            setMatch(true);
-        } else {
-            setMatch(false);
-        }
-    }
-
-    const toggle = () => {
-        isActiveRef.current = !isActiveRef.current;
-        setIsActive(isActiveRef.current);
-    };
 
     if (loading) {
         return <div>Loading..</div>;
