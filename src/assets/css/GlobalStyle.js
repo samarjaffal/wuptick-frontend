@@ -11,6 +11,9 @@ window.addEventListener('resize', () => {
 });
 
 export const GlobalStyle = createGlobalStyle`
+  html{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
   body {
     font-family: 'Hind Madurai', sans-serif;
     background: ${Colors.backgroud};

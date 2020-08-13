@@ -43,7 +43,7 @@ export const Navbar = () => {
     const [match, setMatch] = useState(false);
 
     useEffect(() => {
-        console.log(ipad.matches);
+        setMatch(ipad.matches);
         if (match) {
             burguerButton.current.addEventListener('click', toggle);
             return () => {
