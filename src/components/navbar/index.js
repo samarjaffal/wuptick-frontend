@@ -6,6 +6,7 @@ import { gqlLogout } from '../../requests/graphql/gqlLogout';
 import { useUser } from '../../hooks/useUser';
 import { useHamburguerMenu } from '../../hooks/useHamburguerMenu';
 import { useSmallScreen } from '../../hooks/useSmallScreen';
+import { NavItem } from '../NavItem/index';
 import {
     Header,
     NavContainer,
@@ -13,10 +14,7 @@ import {
     Avatar,
     Anchor,
     AnchorTeam,
-    NavAnchor,
-    NavAnchorTitle,
     NavUl,
-    NavLink,
     TeamContainer,
     HamburguerMenu,
     HamburguerMenuContainer,
@@ -59,30 +57,24 @@ export const Navbar = () => {
 
                 <Nav showMobileNav={isActive}>
                     <NavUl>
-                        <NavLink>
-                            <NavAnchor to="/" option="projects">
-                                <FontAwesomeIcon icon="folder-open" />
-                                <NavAnchorTitle>Projects</NavAnchorTitle>
-                            </NavAnchor>
-                        </NavLink>
-                        <NavLink>
-                            <NavAnchor to="/" option="teams">
-                                <FontAwesomeIcon icon="users" />
-                                <NavAnchorTitle>Teams</NavAnchorTitle>
-                            </NavAnchor>
-                        </NavLink>
-                        <NavLink>
-                            <NavAnchor to="/" option="tasks">
-                                <FontAwesomeIcon icon="tasks" />
-                                <NavAnchorTitle>Tasks</NavAnchorTitle>
-                            </NavAnchor>
-                        </NavLink>
-                        {/*                     <li>
-                        <Link to="test">Test</Link>
-                    </li>
-                    <li>
-                        <Link to="login">Login</Link>
-                    </li> */}
+                        <NavItem
+                            title="Projects"
+                            option="projects"
+                            url="/"
+                            icon="folder-open"
+                        />
+                        <NavItem
+                            title="Teams"
+                            option="teams"
+                            url="/"
+                            icon="users"
+                        />
+                        <NavItem
+                            title="Tasks"
+                            option="tasks"
+                            url="/"
+                            icon="tasks"
+                        />
                         {match && isActive && (
                             <NavLinkLogout>
                                 <LogoutButton
