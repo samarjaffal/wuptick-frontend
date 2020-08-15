@@ -14,7 +14,6 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
     },
-
     module: {
         rules: [
             {
@@ -27,6 +26,7 @@ module.exports = {
                     },
                 },
             },
+            { test: /\.css$/, use: 'css-loader' },
         ],
     },
 };

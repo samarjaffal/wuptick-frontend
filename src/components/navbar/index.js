@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'react-apollo';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from '@reach/router';
 import { gqlLogout } from '../../requests/graphql/gqlLogout';
+import { DropdownMenu } from '../DropdrownMenu/index';
 import { useUser } from '../../hooks/useUser';
 import { useHamburguerMenu } from '../../hooks/useHamburguerMenu';
 import { useSmallScreen } from '../../hooks/useSmallScreen';
@@ -11,6 +11,7 @@ import {
     Header,
     NavContainer,
     Nav,
+    AvatarContainer,
     Avatar,
     Anchor,
     AnchorTeam,
@@ -25,6 +26,7 @@ import {
 export const Navbar = () => {
     const { isLogged, disableAuth } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
+    const [open, setOpen] = useState(false);
     const { match } = useSmallScreen();
 
     const [logout, { error, loading, client }] = useMutation(gqlLogout, {
@@ -94,10 +96,14 @@ export const Navbar = () => {
                     </li> */}
                     </NavUl>
                 </Nav>
-                <Avatar
-                    src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                    alt="avatar"
-                />
+                <AvatarContainer>
+                    <Avatar
+                        src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                        alt="avatar"
+                        onClick={() => setOpen(!open)}
+                    />
+                    {open && <DropdownMenu></DropdownMenu>}
+                </AvatarContainer>
             </NavContainer>
         </Header>
     );

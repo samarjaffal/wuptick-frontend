@@ -15,7 +15,7 @@ export const Header = styled.header`
     top: 0;
     width: 100%;
     padding: 0;
-    background-color: ${Colors.white};
+    background-color: #fff;
     ${ShadowSecondary};
 
     @media (max-width: 767px) {
@@ -58,6 +58,12 @@ export const Nav = styled.nav`
     }
 `;
 
+export const AvatarContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const Avatar = styled.img`
     width: 30px;
     height: 30px;
@@ -66,7 +72,6 @@ export const Avatar = styled.img`
     object-position: center;
     margin-left: 20px;
     cursor: pointer;
-
     @media (max-width: 767px) {
         display: none;
     }
@@ -98,43 +103,6 @@ export const NavUl = styled.ul`
         width: 100vw;
         padding: 2em;
     }
-`;
-
-export const NavLink = styled.li`
-    display: inline-block;
-    padding: 0px 20px;
-    @media (max-width: 767px) {
-        display: block;
-        /* font-size: 1.5em; */
-        line-height: 3em;
-        background: ${Colors.white};
-        margin: 1em 0;
-        border-radius: 8px;
-    }
-`;
-
-export const NavAnchor = styled(Link)`
-    font-weight: 600;
-    color: ${Colors.black};
-    text-decoration: none;
-    align-items: center;
-    ${TransitionSecondary}
-    @media (max-width: 767px) {
-        justify-content: center;
-        display: flex;
-    }
-
-    :hover {
-        ${({ option }) =>
-            (option === 'projects' && `color:${Colors.primary}`) ||
-            (option === 'teams' && `color:${Colors.orange}`) ||
-            (option === 'tasks' && `color:${Colors.yellow}`)}
-    }
-`;
-
-export const NavAnchorTitle = styled.div`
-    display: inline-block;
-    margin-left: 5px;
 `;
 
 export const TeamContainer = styled.div`
