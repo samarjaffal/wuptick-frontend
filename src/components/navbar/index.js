@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useMutation } from 'react-apollo';
 import { navigate } from '@reach/router';
 import { gqlLogout } from '../../requests/graphql/gqlLogout';
-import { DropdownMenu } from '../DropdrownMenu/index';
+import { Dropdown } from '../Dropdrown/index';
 import { useUser } from '../../hooks/useUser';
 import { useHamburguerMenu } from '../../hooks/useHamburguerMenu';
 import { useSmallScreen } from '../../hooks/useSmallScreen';
 import { NavItem } from '../NavItem/index';
+import { DropdownMenu } from '../DropdownMenu/index';
+import { DropdownItem } from '../DropdownItem/index';
+import { DropdownContextProvider } from '../../context/DropdownContext';
 import {
     Header,
     NavContainer,
@@ -102,7 +105,41 @@ export const Navbar = () => {
                         alt="avatar"
                         onClick={() => setOpen(!open)}
                     />
-                    {open && <DropdownMenu></DropdownMenu>}
+                    {open && (
+                        <DropdownContextProvider>
+                            <Dropdown>
+                                <DropdownMenu
+                                    menu="main"
+                                    classMenu="menu-primary"
+                                >
+                                    <DropdownItem goToMenu="settings">
+                                        My Profile
+                                    </DropdownItem>
+                                    <DropdownItem>Logout</DropdownItem>
+                                </DropdownMenu>
+                                <DropdownMenu
+                                    menu="settings"
+                                    classMenu="menu-secondary"
+                                >
+                                    <DropdownItem goToMenu="main" leftIcon="🧡">
+                                        <h2>My Tutorial</h2>
+                                    </DropdownItem>
+                                    <DropdownItem leftIcon="🧡">
+                                        HTML
+                                    </DropdownItem>
+                                    <DropdownItem leftIcon="🧡">
+                                        CSS
+                                    </DropdownItem>
+                                    <DropdownItem leftIcon="🧡">
+                                        JavaScript
+                                    </DropdownItem>
+                                    <DropdownItem leftIcon="🧡">
+                                        Awesome!
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </DropdownContextProvider>
+                    )}
                 </AvatarContainer>
             </NavContainer>
         </Header>

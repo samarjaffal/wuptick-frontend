@@ -1,28 +1,7 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { Colors } from '../../assets/css/colors';
-import {
-    ShadowSecondary,
-    TransitionSecondary,
-} from '../../assets/css/shared-styles';
-
-export const Dropdown = styled.div`
-    position: absolute;
-    top: 46px;
-    width: 300px;
-    transform: translateX(-45%);
-    background-color: #fff;
-    border: 1px solid ${Colors.white};
-    border-radius: 8px;
-    padding: 14px;
-    overflow: hidden;
-    ${ShadowSecondary};
-    transition: height 500ms ease;
-`;
-
-export const Menu = styled.div`
-    width: 100%;
-`;
+import { TransitionSecondary } from '../../assets/css/shared-styles';
 
 export const MenuItem = styled(Link)`
     height: 50px;
@@ -31,13 +10,13 @@ export const MenuItem = styled(Link)`
     border-radius: 8px;
     ${TransitionSecondary};
     padding: 7px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    color: ${Colors.black};
     :hover {
         background: ${Colors.backgroud};
     }
-`;
-
-export const IconRight = styled.span`
-    margin-left: auto;
 `;
 
 export const IconButton = styled.span`
@@ -51,4 +30,7 @@ export const IconButton = styled.span`
     align-items: center;
     justify-content: center;
     transition: filter 300ms;
+`;
+export const IconRight = styled.span`
+    margin-left: auto;
 `;
