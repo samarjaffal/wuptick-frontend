@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useMutation } from 'react-apollo';
 import { navigate } from '@reach/router';
 import { gqlLogout } from '../../requests/graphql/gqlLogout';
@@ -9,8 +9,9 @@ import { useSmallScreen } from '../../hooks/useSmallScreen';
 import { NavItem } from '../NavItem/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
-import { DropdownContextProvider } from '../../context/DropdownContext';
+import { useDropdown } from '../../hooks/useDropdown';
 import { Avatar } from '../Avatar/index';
+import { OutsideClick } from '../OutsideClick/index';
 import {
     Header,
     NavContainer,
@@ -29,8 +30,14 @@ import {
 export const Navbar = () => {
     const { isLogged, disableAuth } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
-    const [open, setOpen] = useState(false);
+    const { open, setOpen } = useDropdown();
     const { match } = useSmallScreen();
+
+    useEffect(() => {
+        if (open && match) {
+            setOpen(false);
+        }
+    }, [match]);
 
     const [logout, { error, loading, client }] = useMutation(gqlLogout, {
         onCompleted: () => {
@@ -65,7 +72,7 @@ export const Navbar = () => {
                         <NavItem
                             title="Projects"
                             option="projects"
-                            url="/"
+                            url="/test"
                             icon="folder-open"
                         />
                         <NavItem
@@ -90,23 +97,16 @@ export const Navbar = () => {
                                 </LogoutButton>
                             </NavLinkLogout>
                         )}
-                        {/*   <li>
-                        {isLogged && (
-                            <button type="button" onClick={() => logout()}>
-                                Logout
-                            </button>
-                        )}
-                    </li> */}
                     </NavUl>
                 </Nav>
-                <AvatarContainer>
-                    <Avatar
-                        size={25}
-                        margin="0 0 0 20px"
-                        onClicked={() => setOpen(!open)}
-                    />
-                    {open && (
-                        <DropdownContextProvider>
+                <OutsideClick>
+                    <AvatarContainer>
+                        <Avatar
+                            size={25}
+                            margin="0 0 0 20px"
+                            onClicked={() => setOpen(!open)}
+                        />
+                        {open && (
                             <Dropdown>
                                 <DropdownMenu
                                     menu="main"
@@ -143,9 +143,9 @@ export const Navbar = () => {
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                        </DropdownContextProvider>
-                    )}
-                </AvatarContainer>
+                        )}
+                    </AvatarContainer>
+                </OutsideClick>
             </NavContainer>
         </Header>
     );

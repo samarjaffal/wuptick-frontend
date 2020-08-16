@@ -3,7 +3,7 @@ import { Routes } from '../Routes/index';
 import { Navbar } from '../../components/Navbar';
 import { useRefreshToken } from '../../hooks/useRefreshToken';
 import { useUser } from '../../hooks/useUser';
-
+import { DropdownContextProvider } from '../../context/DropdownContext';
 export const Layout = () => {
     const { loading } = useRefreshToken();
     const { isLogged } = useUser();
@@ -14,7 +14,11 @@ export const Layout = () => {
 
     return (
         <Fragment>
-            {isLogged && <Navbar />}
+            {isLogged && (
+                <DropdownContextProvider>
+                    <Navbar />
+                </DropdownContextProvider>
+            )}
             <Routes />
         </Fragment>
     );

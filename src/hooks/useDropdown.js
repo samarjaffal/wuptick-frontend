@@ -1,8 +1,9 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import Context from '../context/DropdownContext';
-
 export const useDropdown = () => {
     const {
+        open,
+        setOpen,
         dropdownRef,
         menuHeight,
         setMenuHeight,
@@ -16,6 +17,8 @@ export const useDropdown = () => {
     });
 
     return {
+        open,
+        setOpen,
         activeMenu,
         setActiveMenu,
         dropdownRef,
