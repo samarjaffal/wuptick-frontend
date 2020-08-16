@@ -118,7 +118,9 @@ export const Navbar = () => {
                                     >
                                         My Profile
                                     </DropdownItem>
-                                    <DropdownItem>Logout</DropdownItem>
+                                    <DropdownItem onClicked={() => logout()}>
+                                        Logout
+                                    </DropdownItem>
                                 </DropdownMenu>
                                 <DropdownMenu
                                     menu="settings"
