@@ -64,19 +64,6 @@ export const AvatarContainer = styled.div`
     justify-content: center;
 `;
 
-export const Avatar = styled.img`
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    margin-left: 20px;
-    cursor: pointer;
-    @media (max-width: 767px) {
-        display: none;
-    }
-`;
-
 export const Anchor = styled(Link)`
     text-decoration: none;
     margin-right: auto;

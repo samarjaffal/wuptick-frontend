@@ -10,12 +10,12 @@ import { NavItem } from '../NavItem/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
+import { Avatar } from '../Avatar/index';
 import {
     Header,
     NavContainer,
     Nav,
     AvatarContainer,
-    Avatar,
     Anchor,
     AnchorTeam,
     NavUl,
@@ -101,9 +101,9 @@ export const Navbar = () => {
                 </Nav>
                 <AvatarContainer>
                     <Avatar
-                        src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                        alt="avatar"
-                        onClick={() => setOpen(!open)}
+                        size={25}
+                        margin="0 0 0 20px"
+                        onClicked={() => setOpen(!open)}
                     />
                     {open && (
                         <DropdownContextProvider>
@@ -112,7 +112,10 @@ export const Navbar = () => {
                                     menu="main"
                                     classMenu="menu-primary"
                                 >
-                                    <DropdownItem goToMenu="settings">
+                                    <DropdownItem
+                                        leftIcon={<Avatar size={20} />}
+                                        goToMenu="settings"
+                                    >
                                         My Profile
                                     </DropdownItem>
                                     <DropdownItem>Logout</DropdownItem>
