@@ -12,6 +12,7 @@ import { DropdownItem } from '../DropdownItem/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { Avatar } from '../Avatar/index';
 import { OutsideClick } from '../OutsideClick/index';
+import { Me } from '../Me/index';
 import {
     Header,
     NavContainer,
@@ -28,7 +29,7 @@ import {
 } from './styles';
 
 export const Navbar = () => {
-    const { isLogged, disableAuth } = useUser();
+    const { disableAuth } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
     const { open, setOpen } = useDropdown();
     const { match } = useSmallScreen();
@@ -101,11 +102,16 @@ export const Navbar = () => {
                 </Nav>
                 <OutsideClick>
                     <AvatarContainer>
-                        <Avatar
-                            size={25}
-                            margin="0 0 0 20px"
-                            onClicked={() => setOpen(!open)}
-                        />
+                        <Me>
+                            {({ avatar }) => (
+                                <Avatar
+                                    size={25}
+                                    src={avatar}
+                                    margin="0 0 0 20px"
+                                    onClicked={() => setOpen(!open)}
+                                />
+                            )}
+                        </Me>
                         {open && (
                             <Dropdown>
                                 <DropdownMenu
@@ -113,7 +119,16 @@ export const Navbar = () => {
                                     classMenu="menu-primary"
                                 >
                                     <DropdownItem
-                                        leftIcon={<Avatar size={20} />}
+                                        leftIcon={
+                                            <Me>
+                                                {({ avatar }) => (
+                                                    <Avatar
+                                                        size={20}
+                                                        src={avatar}
+                                                    />
+                                                )}
+                                            </Me>
+                                        }
                                         goToMenu="settings"
                                     >
                                         My Profile
