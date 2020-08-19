@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Shadow } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
 import { Link } from '@reach/router';
+import { bold, borderRadius } from '../../assets/css/theme';
 
 export const Title = styled.h1`
     color: #413f4a;
@@ -22,7 +23,7 @@ export const Content = styled.div`
     width: 435px;
     max-width: 435px;
     background: ${Colors.white};
-    border-radius: 8px;
+    border-radius: ${borderRadius};
     padding: 20px;
     text-align: center;
     margin: auto;
@@ -37,22 +38,22 @@ export const Input = styled.input`
     border: none;
     background: ${Colors.whitePrimary};
     padding: 20px;
-    border-radius: 8px;
+    border-radius: ${borderRadius};
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: ${bold};
     color: ${Colors.gray};
     :focus {
         outline: none;
         border: 1px solid ${Colors.primary};
-        border-radius: 8px;
+        border-radius: ${borderRadius};
     }
     ::placeholder,
     ::-webkit-input-placeholder {
-        font-weight: 700;
+        font-weight: ${bold};
         color: ${Colors.gray};
     }
     :-ms-input-placeholder {
-        font-weight: 700;
+        font-weight: ${bold};
         color: ${Colors.gray};
     }
 `;
@@ -63,8 +64,8 @@ export const Button = styled.button`
     background: ${Colors.primary};
     color: ${Colors.white};
     margin-bottom: 20px;
-    border-radius: 8px;
-    font-weight: 700;
+    border-radius: ${borderRadius};
+    font-weight: ${bold};
     font-size: 16px;
     :hover {
         opacity: 0.8;

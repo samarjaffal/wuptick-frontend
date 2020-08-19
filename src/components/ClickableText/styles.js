@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
+import { bold } from '../../assets/css/theme';
 
 export const Span = styled.span`
     font-size: 14px;
-    font-weight: 700;
+    font-weight: ${bold};
     color: ${Colors.gray};
     position: absolute;
     width: 100%;

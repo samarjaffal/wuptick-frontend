@@ -2,20 +2,21 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { Colors } from '../../assets/css/colors';
 import { TransitionSecondary } from '../../assets/css/shared-styles';
+import { semiBold, borderRadius } from '../../assets/css/theme';
 
 export const MenuItem = styled(Link)`
     height: 50px;
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    border-radius: ${borderRadius};
     ${TransitionSecondary};
     padding: 7px;
     text-decoration: none;
     font-size: 1em;
-    font-weight: 600;
+    font-weight: ${semiBold};
     color: ${Colors.black};
     :hover {
-        background: ${Colors.backgroud};
+        background: ${Colors.white};
     }
 `;
 

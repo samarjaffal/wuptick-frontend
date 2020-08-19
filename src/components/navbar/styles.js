@@ -7,6 +7,7 @@ import {
     TransitionSecondary,
 } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
+import { bold, semiBold, borderRadius } from '../../assets/css/theme';
 
 export const Header = styled.header`
     display: flex;
@@ -15,7 +16,7 @@ export const Header = styled.header`
     top: 0;
     width: 100%;
     padding: 0;
-    background-color: ${Colors.white};
+    background-color: ${Colors.backgroud};
     ${ShadowSecondary};
 
     @media (max-width: 767px) {
@@ -67,7 +68,7 @@ export const AvatarContainer = styled.div`
 export const Anchor = styled(Link)`
     text-decoration: none;
     margin-right: auto;
-    font-weight: 800;
+    font-weight: ${bold};
     color: ${Colors.primary};
     font-size: 1.1em;
     ${TransitionSecondary}
@@ -99,11 +100,11 @@ export const TeamContainer = styled.div`
 export const AnchorTeam = styled(Link)`
     text-decoration: none;
     font-size: 1em;
-    font-weight: 600;
+    font-weight: ${semiBold};
     color: ${Colors.white};
     padding: 0px 15px;
     background: ${Colors.secondary};
-    border-radius: 8px;
+    border-radius: ${borderRadius};
     margin-left: 20px;
     ${ShadowSecondary}
     ${Transition}
@@ -157,8 +158,8 @@ export const LogoutButton = styled.button`
     width: 100%;
     line-height: 3em;
     color: ${Colors.white};
-    border-radius: 8px;
-    font-weight: 600;
+    border-radius: ${borderRadius};
+    font-weight: ${semiBold};
     :hover {
         opacity: 0.8;
         transition-duration: 0.5s;

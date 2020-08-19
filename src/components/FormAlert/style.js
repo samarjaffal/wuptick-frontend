@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
+import { semiBold } from '../../assets/css/theme';
 
 export const AlertContainer = styled.div`
     background: ${Colors.whitePrimary};
@@ -12,6 +13,6 @@ export const AlertContainer = styled.div`
 
 export const AlertMessage = styled.span`
     margin: 2px 0 2px 20px;
-    font-weight: 600;
+    font-weight: ${semiBold};
     color: ${Colors.red};
 `;

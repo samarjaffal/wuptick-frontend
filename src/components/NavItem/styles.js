@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { TransitionSecondary } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
-
+import { semiBold, borderRadius } from '../../assets/css/theme';
 export const NavAnchor = styled(Link)`
-    font-weight: 600;
+    font-weight: ${semiBold};
     color: ${Colors.black};
     text-decoration: none;
     align-items: center;
     padding: 0.5em;
-    border-radius: 8px;
+    border-radius: ${borderRadius};
     ${TransitionSecondary}
     @media (max-width: 767px) {
         justify-content: center;
@@ -17,7 +17,7 @@ export const NavAnchor = styled(Link)`
     }
 
     :hover {
-        background-color: ${Colors.backgroud};
+        background-color: ${Colors.white};
         ${({ option }) =>
             (option === 'projects' && `color:${Colors.primary}`) ||
             (option === 'teams' && `color:${Colors.orange}`) ||
@@ -39,6 +39,6 @@ export const NavLink = styled.li`
         line-height: 3em;
         background: ${Colors.white};
         margin: 1em 0;
-        border-radius: 8px;
+        border-radius: ${borderRadius};
     }
 `;

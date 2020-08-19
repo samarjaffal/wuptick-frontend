@@ -1,21 +1,11 @@
 import { Colors } from './colors';
 import { css } from 'styled-components';
 
-export const bold = css`
-    font-weight: 700;
-`;
-
-export const semiBold = css`
-    font-weight: 400;
-`;
-
-export const light = css`
-    font-weight: 200;
-`;
-
-export const borderRadius = css`
-    border-radius: 8px;
-`;
+export const bold = '700';
+export const semiBold = '600';
+export const regular = '400';
+export const light = '200';
+export const borderRadius = '8px';
 
 export const title = css`
     font-size: 20px;
@@ -26,7 +16,7 @@ export const title = css`
 export const subtitle = css`
     font-size: 18px;
     color: ${Colors.black};
-    font-weight: ${semiBold};
+    font-weight: ${regular};
 `;
 
 export const description = css`
