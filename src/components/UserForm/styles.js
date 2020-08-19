@@ -21,7 +21,7 @@ export const Container = styled.div`
 export const Content = styled.div`
     width: 435px;
     max-width: 435px;
-    background: #fff;
+    background: ${Colors.white};
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -35,7 +35,7 @@ export const Input = styled.input`
     width: 100%;
     height: 50px;
     border: none;
-    background: ${Colors.white};
+    background: ${Colors.whitePrimary};
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 10px;

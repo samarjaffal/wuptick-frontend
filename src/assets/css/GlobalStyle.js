@@ -16,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Hind Madurai', sans-serif;
-    background: ${Colors.backgroud};
+    background: ${Colors.whitePrimary};
     width: 100%;
     height: 100vh;
     margin:0;

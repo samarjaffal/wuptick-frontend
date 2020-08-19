@@ -15,7 +15,7 @@ export const Header = styled.header`
     top: 0;
     width: 100%;
     padding: 0;
-    background-color: #fff;
+    background-color: ${Colors.white};
     ${ShadowSecondary};
 
     @media (max-width: 767px) {
@@ -42,7 +42,7 @@ export const Nav = styled.nav`
         position: absolute;
         background: ${Colors.backgroud};
         width: 100vw;
-        height: 60vh;
+        height: 70vh;
         top: -100vh;
         left: 0;
         display: flex;
