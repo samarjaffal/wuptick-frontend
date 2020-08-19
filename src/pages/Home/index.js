@@ -1,12 +1,12 @@
 import React from 'react';
-
+import { Info } from '../../components/Info/index';
 export const Home = () => {
     return (
-        <div style={{ paddingTop: '48px' }}>
+        <div style={{ paddingTop: '48px', marginLeft: '1em' }}>
             <h1>Home</h1>
-            <h5>1</h5>
-            <h5>2</h5>
-            <h5>3</h5>
+            <Info />
+            <Info />
+            <Info />
         </div>
     );
 };
