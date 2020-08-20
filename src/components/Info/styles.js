@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
+import { Shadow } from '../../assets/css/shared-styles';
 import { subtitle, borderRadius, info, bold } from '../../assets/css/theme';
 
 const marginDefault = '0';
@@ -17,6 +18,7 @@ export const Image = styled.img`
     border-radius: ${borderRadius};
     object-fit: cover;
     object-position: center;
+    ${Shadow};
 `;
 
 export const DetailsContainer = styled.div`

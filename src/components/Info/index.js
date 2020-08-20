@@ -11,7 +11,7 @@ export const Info = () => {
                 />
                 <DetailsContainer>
                     <Title>Lorem ipsum is simply</Title>
-                    <Details>Client</Details>
+                    <Details>Client: John Doe</Details>
                     <Details>Recent</Details>
                 </DetailsContainer>
             </Container>
