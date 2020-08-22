@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Colors } from '../../assets/css/colors';
 import { Shadow } from '../../assets/css/shared-styles';
 import { subtitle, borderRadius, info, bold } from '../../assets/css/theme';
 
@@ -8,6 +7,7 @@ const sizeDefault = '50';
 
 export const Container = styled.div`
     display: flex;
+    margin: 0.5em 0;
 `;
 
 export const Image = styled.img`

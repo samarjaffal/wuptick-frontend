@@ -25,6 +25,8 @@ export const Home = () => {
                                         name={project.name}
                                         owner={`${project.owner.name} ${project.owner.last_name}`}
                                         time={project.created_at}
+                                        image={project.image}
+                                        description="Project Avatar"
                                         key={project._id}
                                     />
                                 ))

@@ -13,6 +13,7 @@ export const gqlMe = gql`
                 projects {
                     _id
                     name
+                    image
                     created_at
                     owner {
                         name
