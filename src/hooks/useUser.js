@@ -3,7 +3,12 @@ import Context from '../context/UserContext';
 import { setAccessToken as setToken } from '../shared/GetAccessToken';
 
 export const useUser = () => {
-    const { accessToken, setAccessToken } = useContext(Context);
+    const {
+        accessToken,
+        setAccessToken,
+        teamSelected,
+        setTeamSelected,
+    } = useContext(Context);
 
     const activateAuth = useCallback(
         (token) => {
@@ -22,5 +27,7 @@ export const useUser = () => {
         isLogged: Boolean(accessToken),
         activateAuth,
         disableAuth,
+        teamSelected,
+        setTeamSelected,
     };
 };

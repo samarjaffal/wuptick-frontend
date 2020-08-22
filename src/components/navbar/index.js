@@ -29,7 +29,7 @@ import {
 } from './styles';
 
 export const Navbar = () => {
-    const { disableAuth } = useUser();
+    const { disableAuth, teamSelected } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
     const { open, setOpen } = useDropdown();
     const { match } = useSmallScreen();
@@ -45,7 +45,7 @@ export const Navbar = () => {
             console.log('logout');
             disableAuth();
             client.resetStore();
-            navigate('/');
+            navigate('/login');
         },
     });
 
@@ -65,7 +65,7 @@ export const Navbar = () => {
                 </HamburguerMenuContainer>
                 <Anchor to="/">Wuptick</Anchor>
                 <TeamContainer>
-                    <AnchorTeam to="/">Team Name</AnchorTeam>
+                    <AnchorTeam to="/">{teamSelected.name}</AnchorTeam>
                 </TeamContainer>
 
                 <Nav showMobileNav={isActive}>

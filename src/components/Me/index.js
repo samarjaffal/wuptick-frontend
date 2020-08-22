@@ -5,15 +5,19 @@ import PropTypes from 'prop-types';
 export const Me = ({ children }) => {
     return (
         <MeQuery>
-            {({ error, data }) => {
+            {({ error, data, loading }) => {
                 let user;
                 if (data && data.me) {
                     user = data.me;
+                    return children({ ...user });
                 }
                 if (error) {
                     console.log(error, 'error me  component');
                 }
-                return children({ ...user });
+
+                if (loading) {
+                    return null;
+                }
             }}
         </MeQuery>
     );

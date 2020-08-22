@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Container, Image, Title, Details, DetailsContainer } from './styles';
 
-export const Info = () => {
+export const Info = ({ name, owner, time }) => {
     return (
         <Fragment>
             <Container>
@@ -10,9 +10,9 @@ export const Info = () => {
                     alt="Element Icon"
                 />
                 <DetailsContainer>
-                    <Title>Lorem ipsum is simply</Title>
-                    <Details>Client: John Doe</Details>
-                    <Details>Recent</Details>
+                    <Title>{name || 'Lorem ipsum dolor'}</Title>
+                    <Details>Owner: {owner}</Details>
+                    <Details>{time}</Details>
                 </DetailsContainer>
             </Container>
         </Fragment>
