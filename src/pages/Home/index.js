@@ -10,14 +10,19 @@ import { Info } from '../../components/Info/index';
 import { ListContainer } from '../../components/ListContainer/index';
 import { useUser } from '../../hooks/useUser';
 import { Me } from '../../components/Me/index';
+import { Colors } from '../../assets/css/colors';
 export const Home = () => {
     const { teamSelected } = useUser();
     return (
         <Container>
-            <Title>Home</Title>
+            <Title>Activity</Title>
             <Wrapper>
                 <ProjectsContainer>
-                    <ListContainer title="Favorite Projects" icon="star">
+                    <ListContainer
+                        title="Favorite Projects"
+                        icon="star"
+                        color={Colors.yellow}
+                    >
                         <Me>
                             {({ favorite_projects }) => {
                                 return favorite_projects.map((project) => (
@@ -33,7 +38,12 @@ export const Home = () => {
                             }}
                         </Me>
                     </ListContainer>
-                    <ListContainer title="Recent Projects">
+                    <ListContainer
+                        title="Recent Projects"
+                        icon="folder-open"
+                        color={Colors.primary}
+                        button={true}
+                    >
                         <Me>
                             {({ teams }) => {
                                 return teams
@@ -80,21 +90,6 @@ export const Home = () => {
                         </Me>
                     </ListContainer>
                 </ActivityContainer>
-                {/* <ProjectsContainer>
-                    <ListContainer title="My Teams" icon="users">
-                        <Me>
-                            {({ teams }) => {
-                                return teams.map((team) => (
-                                    <Info
-                                        name={team.name}
-                                        owner={`${team.owner.name} ${team.owner.last_name}`}
-                                        key={team._id}
-                                    />
-                                ));
-                            }}
-                        </Me>
-                    </ListContainer>
-                </ProjectsContainer> */}
             </Wrapper>
         </Container>
     );

@@ -104,14 +104,13 @@ export const AnchorTeam = styled(Link)`
     font-weight: ${semiBold};
     color: ${Colors.white};
     padding: 0px 15px;
-    background: ${Colors.secondary};
+    background: ${Colors.primary};
     border-radius: ${borderRadius};
     margin-left: 20px;
     ${ShadowSecondary}
     ${Transition}
     :hover {
-        color: ${Colors.white};
-        background: ${Colors.primary};
+        background: ${Colors.secondary};
     }
     @media (max-width: 767px) {
         display: none;
