@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Shadow } from '../../assets/css/shared-styles';
-import { subtitle, borderRadius, info, bold } from '../../assets/css/theme';
+import { description, borderRadius, info, bold } from '../../assets/css/theme';
 
 const marginDefault = '0';
 const sizeDefault = '50';
@@ -28,9 +28,7 @@ export const DetailsContainer = styled.div`
 
 export const Title = styled.h5`
     margin: 0;
-    ${subtitle};
-    font-weight: ${bold};
-    font-size: 14px;
+    ${description};
 `;
 
 export const Details = styled.h6`

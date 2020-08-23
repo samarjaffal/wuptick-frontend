@@ -6,6 +6,7 @@ export const semiBold = '600';
 export const regular = '400';
 export const light = '200';
 export const borderRadius = '8px';
+export const defaultFontSize = '14px';
 
 export const title = css`
     font-size: 20px;
