@@ -7,6 +7,16 @@ export const gqlMe = gql`
             name
             last_name
             avatar
+            favorite_projects {
+                _id
+                name
+                image
+                created_at
+                owner {
+                    name
+                    last_name
+                }
+            }
             teams {
                 _id
                 name

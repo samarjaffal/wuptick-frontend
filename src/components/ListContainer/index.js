@@ -6,7 +6,7 @@ export const ListContainer = ({ title, icon, children }) => {
     return (
         <Container>
             <Title>
-                <Icon icon={icon} />
+                {icon && <Icon icon={icon} />}
                 {title}
             </Title>
             {children}

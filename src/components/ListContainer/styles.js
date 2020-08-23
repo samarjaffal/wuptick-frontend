@@ -8,10 +8,12 @@ export const Container = styled.div`
     padding: 1em;
     border-radius: ${borderRadius};
     font-size: 14px;
+    margin-bottom: 1em;
 `;
 
 export const Title = styled.h4`
     margin: 0;
+    padding: 0 10px;
     margin-bottom: 1em;
     ${subtitle};
     font-weight: ${bold};

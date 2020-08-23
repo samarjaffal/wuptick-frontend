@@ -53,6 +53,7 @@ export const Nav = styled.nav`
         z-index: 0;
         transition: all 0.8s ease 0s;
         opacity: 0;
+        ${ShadowSecondary};
         ${({ showMobileNav }) =>
             (showMobileNav == true && `top: 0; opacity:1`) ||
             (showMobileNav == false && `top: -100vh; opacity:0`)}

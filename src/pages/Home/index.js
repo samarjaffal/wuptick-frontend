@@ -10,7 +10,23 @@ export const Home = () => {
         <Container>
             <Title>Home</Title>
             <ProjectsContainer>
-                <ListContainer title="Recent Projects" icon="star">
+                <ListContainer title="Favorite Projects" icon="star">
+                    <Me>
+                        {({ favorite_projects }) => {
+                            return favorite_projects.map((project) => (
+                                <Info
+                                    name={project.name}
+                                    owner={`${project.owner.name} ${project.owner.last_name}`}
+                                    time={project.created_at}
+                                    image={project.image}
+                                    description="Favorite Project Avatar"
+                                    key={project._id}
+                                />
+                            ));
+                        }}
+                    </Me>
+                </ListContainer>
+                <ListContainer title="Recent Projects">
                     <Me>
                         {({ teams }) => {
                             return teams
