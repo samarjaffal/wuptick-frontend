@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Shadow } from '../../assets/css/shared-styles';
 import { subtitle, borderRadius, info, bold } from '../../assets/css/theme';
 
@@ -36,4 +37,8 @@ export const Details = styled.h6`
     margin: 0;
     ${info};
     font-weight: ${bold};
+`;
+
+export const Clock = styled(FontAwesomeIcon)`
+    margin-right: 0.5em;
 `;
