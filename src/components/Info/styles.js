@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Shadow } from '../../assets/css/shared-styles';
+import { Shadow, Transition } from '../../assets/css/shared-styles';
+import { Colors } from '../../assets/css/colors';
 import { description, borderRadius, info, bold } from '../../assets/css/theme';
 
 const marginDefault = '0';
@@ -9,6 +10,16 @@ const sizeDefault = '50';
 export const Container = styled.div`
     display: flex;
     margin: 0.5em 0;
+    padding: 10px;
+    border-radius: ${borderRadius};
+    cursor: pointer;
+    ${Transition};
+    :hover {
+        background: ${Colors.backgroud};
+        ${Title} + & {
+            color: ${Colors.primary};
+        }
+    }
 `;
 
 export const Image = styled.img`
@@ -29,6 +40,11 @@ export const DetailsContainer = styled.div`
 export const Title = styled.h5`
     margin: 0;
     ${description};
+
+    ${Transition};
+    :hover {
+        color: ${Colors.primary};
+    }
 `;
 
 export const Details = styled.h6`

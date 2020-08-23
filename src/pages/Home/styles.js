@@ -12,7 +12,7 @@ export const Title = styled.h1`
 `;
 
 export const ProjectsContainer = styled.div`
-    max-width: 350px;
+    max-width: 320px;
     @media (max-width: 768px) {
         max-width: 100%;
     }
