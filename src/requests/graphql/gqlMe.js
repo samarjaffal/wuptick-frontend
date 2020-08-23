@@ -20,6 +20,10 @@ export const gqlMe = gql`
             teams {
                 _id
                 name
+                owner {
+                    name
+                    last_name
+                }
                 projects {
                     _id
                     name
