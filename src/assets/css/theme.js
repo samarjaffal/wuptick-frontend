@@ -9,13 +9,13 @@ export const borderRadius = '8px';
 export const defaultFontSize = '14px';
 
 export const title = css`
-    font-size: 32px;
+    font-size: 26px;
     color: ${Colors.black};
     font-weight: ${bold};
 `;
 
 export const subtitle = css`
-    font-size: 18px;
+    font-size: 16px;
     color: ${Colors.black};
     font-weight: ${regular};
 `;

@@ -19,7 +19,11 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
     ${title};
-    text-align: center;
+    margin-left: 350px;
+    @media (max-width: 768px) {
+        text-align: center;
+        margin-left: 0;
+    }
 `;
 
 export const ProjectsContainer = styled.div`

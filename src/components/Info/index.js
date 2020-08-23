@@ -11,7 +11,7 @@ export const Info = ({ name, owner, time, image, description }) => {
     return (
         <Fragment>
             <Container>
-                <Image src={image} description={description} />
+                {image && <Image src={image} description={description} />}
                 <DetailsContainer>
                     <Title>{name || 'Lorem ipsum dolor'}</Title>
                     <Details>Owner: {owner}</Details>
