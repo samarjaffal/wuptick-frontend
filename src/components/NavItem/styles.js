@@ -17,7 +17,7 @@ export const NavAnchor = styled(Link)`
     }
 
     :hover {
-        background-color: ${Colors.white};
+        background-color: ${Colors.hover};
         ${({ option }) =>
             (option === 'projects' && `color:${Colors.primary}`) ||
             (option === 'teams' && `color:${Colors.orange}`) ||

@@ -18,7 +18,7 @@ export const Header = styled.header`
     padding: 0;
     background-color: ${Colors.backgroud};
     ${ShadowSecondary};
-
+    z-index: 9999;
     @media (max-width: 767px) {
         padding-top: 1em;
     }

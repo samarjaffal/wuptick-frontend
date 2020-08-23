@@ -11,4 +11,5 @@ export const Colors = {
     secondary: '#BFCAFF',
     red: '#FB7B7F',
     backgroud: '#F3F5FF',
+    hover: '#EDF0FF',
 };

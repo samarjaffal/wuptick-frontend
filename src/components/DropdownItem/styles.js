@@ -16,7 +16,7 @@ export const MenuItem = styled(Link)`
     font-weight: ${semiBold};
     color: ${Colors.black};
     :hover {
-        background: ${Colors.white};
+        background: ${Colors.hover};
     }
 `;
 

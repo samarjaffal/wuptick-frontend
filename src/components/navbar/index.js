@@ -88,7 +88,7 @@ export const Navbar = () => {
                             url="/"
                             icon="tasks"
                         />
-                        {match && isActive && (
+                        {isActive && (
                             <NavLinkLogout>
                                 <LogoutButton
                                     type="button"

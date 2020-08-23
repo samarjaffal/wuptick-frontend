@@ -9,16 +9,12 @@ const sizeDefault = '50';
 
 export const Container = styled.div`
     display: flex;
-    margin: 0.5em 0;
     padding: 10px;
     border-radius: ${borderRadius};
     cursor: pointer;
     ${Transition};
     :hover {
-        background: ${Colors.backgroud};
-        ${Title} + & {
-            color: ${Colors.primary};
-        }
+        background: ${Colors.hover};
     }
 `;
 
@@ -40,9 +36,8 @@ export const DetailsContainer = styled.div`
 export const Title = styled.h5`
     margin: 0;
     ${description};
-
     ${Transition};
-    :hover {
+    ${Container}:hover & {
         color: ${Colors.primary};
     }
 `;
