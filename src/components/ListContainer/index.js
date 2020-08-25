@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import { Container, TitleContainer, Title, Icon, AddButton } from './styles';
+import { Container, TitleContainer, Title, Icon } from './styles';
+import { ButtonHome } from '../ButtonHome/index';
 
 export const ListContainer = ({
     title,
@@ -16,13 +17,7 @@ export const ListContainer = ({
             <TitleContainer>
                 {icon && <Icon icon={icon} color={color} />}
                 <Title>{title}</Title>
-                {button && (
-                    <Link to="/">
-                        <AddButton>
-                            <Icon icon="plus" style={{ margin: 'auto' }} />
-                        </AddButton>
-                    </Link>
-                )}
+                {button && <ButtonHome url="/" icon="plus" color={color} />}
             </TitleContainer>
             {children}
         </Container>
@@ -34,4 +29,6 @@ ListContainer.propTypes = {
     title: PropTypes.string.isRequired,
     icon: PropTypes.string,
     color: PropTypes.string,
+    button: PropTypes.bool,
+    onClicked: PropTypes.func,
 };
