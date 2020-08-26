@@ -8,6 +8,7 @@ import {
 } from './styles';
 import { Info } from '../../components/Info/index';
 import { ListContainer } from '../../components/ListContainer/index';
+import { FeedItem } from '../../components/FeedItem/index';
 import { useUser } from '../../hooks/useUser';
 import { Me } from '../../components/Me/index';
 import { Colors } from '../../assets/css/colors';
@@ -67,28 +68,13 @@ export const Home = () => {
                     </ListContainer>
                 </ProjectsContainer>
                 <ActivityContainer>
-                    <ListContainer title="Activity">
-                        <Me>
-                            {({ teams }) => {
-                                return teams
-                                    .filter(
-                                        (team) => team._id == teamSelected._id
-                                    )
-                                    .map(({ projects }) =>
-                                        projects.map((project) => (
-                                            <Info
-                                                name={project.name}
-                                                owner={`${project.owner.name} ${project.owner.last_name}`}
-                                                time={project.created_at}
-                                                image={project.image}
-                                                description="Project Avatar"
-                                                key={project._id}
-                                            />
-                                        ))
-                                    );
-                            }}
-                        </Me>
-                    </ListContainer>
+                    <FeedItem />
+                    <FeedItem />
+                    <FeedItem />
+                    <FeedItem />
+                    <FeedItem />
+                    <FeedItem />
+                    <FeedItem />
                 </ActivityContainer>
             </Wrapper>
         </Container>

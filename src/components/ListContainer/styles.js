@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-import { Transition } from '../../assets/css/shared-styles';
+import { Transition, Shadow } from '../../assets/css/shared-styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { bold, subtitle, info, borderRadius } from '../../assets/css/theme';
 export const Container = styled.div`
@@ -9,6 +9,7 @@ export const Container = styled.div`
     border-radius: ${borderRadius};
     font-size: 14px;
     margin-bottom: 1em;
+    ${({ shadow }) => (shadow == true ? Shadow : '')};
 `;
 
 export const TitleContainer = styled.div`

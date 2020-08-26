@@ -10,13 +10,14 @@ export const ListContainer = ({
     color,
     button = false,
     onClicked,
+    shadow = false,
     children,
 }) => {
     return (
-        <Container>
+        <Container shadow={shadow}>
             <TitleContainer>
                 {icon && <Icon icon={icon} color={color} />}
-                <Title>{title}</Title>
+                {title && <Title>{title}</Title>}
                 {button && <ButtonHome url="/" icon="plus" color={color} />}
             </TitleContainer>
             {children}
@@ -26,7 +27,7 @@ export const ListContainer = ({
 
 ListContainer.propTypes = {
     children: PropTypes.node.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     icon: PropTypes.string,
     color: PropTypes.string,
     button: PropTypes.bool,

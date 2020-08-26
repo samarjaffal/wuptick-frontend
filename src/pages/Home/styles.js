@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { title } from '../../assets/css/theme';
 export const Container = styled.div`
     padding-top: 48px;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 0 80px;
+    @media (max-width: 768px) {
+        text-align: center;
+        margin: 0 20px;
+    }
 `;
 
 export const Wrapper = styled.div`
