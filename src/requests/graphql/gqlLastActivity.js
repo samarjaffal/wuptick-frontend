@@ -8,12 +8,14 @@ export const gqlLastActivity = gql`
             userId
             userAvatar
             team
+            projectImg
             type
             dateFilter
             action
             created_at
             updated_at
             description
+            info
             name
         }
     }

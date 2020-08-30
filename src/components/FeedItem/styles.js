@@ -18,6 +18,7 @@ export const ImageContainer = styled.div``;
 
 export const ActitivityContainer = styled.div`
     margin: 0 1em;
+    width: 100%;
 `;
 
 export const ActivityInfo = styled.div`
@@ -50,11 +51,13 @@ export const Divider = styled.div`
     height: 1px;
     background: #d6d7e0;
     margin: 0.5em 0;
+    opacity: 0.3;
 `;
 
 export const Text = styled.div`
     ${info};
     font-weight: ${bold};
+    margin-top: 0.5em;
 `;
 
 export const User = styled.span`
@@ -73,4 +76,13 @@ export const Item = styled.span`
 export const Time = styled.span`
     ${info};
     margin-right: 1em;
+`;
+
+export const Title = styled.div`
+    ${description};
+`;
+
+export const ItemContainer = styled.div`
+    display: flex;
+    align-items: center;
 `;

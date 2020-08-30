@@ -4,7 +4,6 @@ export const Container = styled.div`
     padding-top: 48px;
     margin: 0 80px;
     @media (max-width: 768px) {
-        text-align: center;
         margin: 0 20px;
     }
 `;

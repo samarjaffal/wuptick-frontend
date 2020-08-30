@@ -79,14 +79,7 @@ export const Home = () => {
                             }
                             const { getLastActivity: logs } = data;
                             return logs.map((log) => (
-                                <FeedItem
-                                    key={log._id}
-                                    user={log.user}
-                                    userAvatar={log.userAvatar}
-                                    description={log.description}
-                                    dateFilter={log.dateFilter}
-                                    activityName={log.name}
-                                />
+                                <FeedItem key={log._id} {...log} />
                             ));
                         }}
                     </LastActivityQuery>

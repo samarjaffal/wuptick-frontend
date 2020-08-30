@@ -18,14 +18,19 @@ import {
     Action,
     Item,
     Time,
+    Title,
+    ItemContainer,
 } from './styles';
 
 export const FeedItem = ({
     user,
     userAvatar,
     description,
-    activityName,
+    name,
     dateFilter,
+    info,
+    projectImg,
+    type,
 }) => {
     const formatDate = (_date) => {
         dayjs.extend(calendar);
@@ -43,7 +48,7 @@ export const FeedItem = ({
                     <UserInfo>
                         {/* <User>{user}</User> <Action>commented on</Action>{' '} */}
                         <User>{user}</User> <Action>{description}: </Action>{' '}
-                        <Item>{activityName}</Item>
+                        <Item>{name}</Item>
                     </UserInfo>
                     <TimeInfo>
                         {/* <Time>Today 8:00pm</Time> */}
@@ -51,13 +56,21 @@ export const FeedItem = ({
                     </TimeInfo>
                 </ActivityInfo>
                 <ListContainer shadow={true}>
-                    <Text>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Optio atque sed enim vero dolorum dolore. Est
-                        sequi vel, iusto quae recusandae doloribus officiis
-                        asperiores blanditiis, incidunt, voluptates vitae
-                        voluptatum...
-                    </Text>
+                    <ItemContainer>
+                        {type == 'project' ? (
+                            <Image
+                                src={projectImg}
+                                size={30}
+                                margin="0 0.5em 0.5em 0"
+                            />
+                        ) : (
+                            ''
+                        )}
+
+                        <Title>{name}</Title>
+                    </ItemContainer>
+
+                    <Text>{info ? info : ''}</Text>
 
                     <div>
                         <Divider />
