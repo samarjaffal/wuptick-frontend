@@ -1,5 +1,8 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import calendar from 'dayjs/plugin/calendar';
 import { Image } from '../Image/index';
+import { Avatar } from '../Avatar/index';
 import { ListContainer } from '../ListContainer/index';
 import {
     Container,
@@ -17,20 +20,34 @@ import {
     Time,
 } from './styles';
 
-export const FeedItem = () => {
+export const FeedItem = ({
+    user,
+    userAvatar,
+    description,
+    activityName,
+    dateFilter,
+}) => {
+    const formatDate = (_date) => {
+        dayjs.extend(calendar);
+        let dateFormated = dayjs(_date).calendar();
+        return dateFormated;
+    };
+
     return (
         <Container>
             <ImageContainer>
-                <Image description="Feed Image" />
+                <Avatar description="Feed Image" src={userAvatar} size={50} />
             </ImageContainer>
             <ActitivityContainer>
                 <ActivityInfo>
                     <UserInfo>
-                        <User>Samar Jaffal</User> <Action>commented on</Action>{' '}
-                        <Item>Design Logo</Item>
+                        {/* <User>{user}</User> <Action>commented on</Action>{' '} */}
+                        <User>{user}</User> <Action>{description}: </Action>{' '}
+                        <Item>{activityName}</Item>
                     </UserInfo>
                     <TimeInfo>
-                        <Time>Today 8:00pm</Time>
+                        {/* <Time>Today 8:00pm</Time> */}
+                        <Time>{formatDate(dateFilter)}</Time>
                     </TimeInfo>
                 </ActivityInfo>
                 <ListContainer shadow={true}>

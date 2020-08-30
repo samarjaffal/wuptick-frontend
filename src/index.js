@@ -30,7 +30,7 @@ const requestLink = new ApolloLink(
             Promise.resolve(operation)
                 .then((operation) => {
                     const accessToken = getAccessToken();
-                    console.log(accessToken, 'accessToken');
+                    console.log(operation, 'accessToken');
                     if (accessToken) {
                         operation.setContext({
                             headers: {
