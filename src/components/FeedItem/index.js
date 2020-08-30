@@ -31,6 +31,8 @@ export const FeedItem = ({
     info,
     projectImg,
     type,
+    projectName,
+    projectId,
 }) => {
     const formatDate = (_date) => {
         dayjs.extend(calendar);
@@ -72,12 +74,16 @@ export const FeedItem = ({
 
                     <Text>{info ? info : ''}</Text>
 
-                    <div>
-                        <Divider />
+                    {projectName && (
                         <div>
-                            <AnchorProject to="/">Project</AnchorProject>
+                            <Divider />
+                            <div>
+                                <AnchorProject to="/project/123">
+                                    {projectName}
+                                </AnchorProject>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </ListContainer>
             </ActitivityContainer>
         </Container>

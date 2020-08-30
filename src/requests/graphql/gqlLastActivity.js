@@ -9,6 +9,8 @@ export const gqlLastActivity = gql`
             userAvatar
             team
             projectImg
+            projectId
+            projectName
             type
             dateFilter
             action
