@@ -20,6 +20,9 @@ import {
     Time,
     Title,
     ItemContainer,
+    CommentContainer,
+    CommentInfo,
+    CommentText,
 } from './styles';
 
 export const FeedItem = ({
@@ -33,6 +36,7 @@ export const FeedItem = ({
     type,
     projectName,
     projectId,
+    comment,
 }) => {
     const formatDate = (_date) => {
         dayjs.extend(calendar);
@@ -73,6 +77,20 @@ export const FeedItem = ({
                     </ItemContainer>
 
                     <Text>{info ? info : ''}</Text>
+
+                    {comment && (
+                        <CommentContainer>
+                            <CommentInfo>
+                                <Avatar
+                                    description="Comment Avatar"
+                                    src={userAvatar}
+                                    margin="0 0.5em 0 0"
+                                    size={30}
+                                />
+                                <CommentText>{comment.comment}</CommentText>
+                            </CommentInfo>
+                        </CommentContainer>
+                    )}
 
                     {projectName && (
                         <div>
