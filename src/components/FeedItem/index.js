@@ -25,19 +25,7 @@ import {
     CommentText,
 } from './styles';
 
-export const FeedItem = ({
-    user,
-    userAvatar,
-    description,
-    name,
-    dateFilter,
-    info,
-    projectImg,
-    type,
-    projectName,
-    projectId,
-    comment,
-}) => {
+export const FeedItem = ({ type, dateFilter, user, body }) => {
     const formatDate = (_date) => {
         dayjs.extend(calendar);
         let dateFormated = dayjs(_date).calendar();
@@ -47,17 +35,16 @@ export const FeedItem = ({
     return (
         <Container>
             <ImageContainer>
-                <Avatar description="Feed Image" src={userAvatar} size={50} />
+                <Avatar description="Feed Image" src={user.avatar} size={50} />
             </ImageContainer>
             <ActitivityContainer>
                 <ActivityInfo>
                     <UserInfo>
-                        {/* <User>{user}</User> <Action>commented on</Action>{' '} */}
-                        <User>{user}</User> <Action>{description}: </Action>{' '}
-                        <Item>{name}</Item>
+                        <User>{user.name}</User>{' '}
+                        <Action>{body.description}: </Action>{' '}
+                        <Item>{body.name}</Item>
                     </UserInfo>
                     <TimeInfo>
-                        {/* <Time>Today 8:00pm</Time> */}
                         <Time>{formatDate(dateFilter)}</Time>
                     </TimeInfo>
                 </ActivityInfo>
@@ -65,7 +52,7 @@ export const FeedItem = ({
                     <ItemContainer>
                         {type == 'project' ? (
                             <Image
-                                src={projectImg}
+                                src={body.project.image}
                                 size={30}
                                 margin="0 0.5em 0.5em 0"
                             />
@@ -73,31 +60,33 @@ export const FeedItem = ({
                             ''
                         )}
 
-                        <Title>{name}</Title>
+                        <Title>{body.name}</Title>
                     </ItemContainer>
 
-                    <Text>{info ? info : ''}</Text>
+                    <Text>{body.info ? body.info : ''}</Text>
 
-                    {comment && (
+                    {body.comment !== null && (
                         <CommentContainer>
                             <CommentInfo>
                                 <Avatar
                                     description="Comment Avatar"
-                                    src={userAvatar}
+                                    src={user.avatar}
                                     margin="0 0.5em 0 0"
                                     size={30}
                                 />
-                                <CommentText>{comment.comment}</CommentText>
+                                <CommentText>
+                                    {body.comment.comment}
+                                </CommentText>
                             </CommentInfo>
                         </CommentContainer>
                     )}
 
-                    {projectName && (
+                    {body.project.name && (
                         <div>
                             <Divider />
                             <div>
                                 <AnchorProject to="/project/123">
-                                    {projectName}
+                                    {body.project.name}
                                 </AnchorProject>
                             </div>
                         </div>

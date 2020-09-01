@@ -3,27 +3,32 @@ import gql from 'graphql-tag';
 export const gqlLastActivity = gql`
     query getLastActivity($team: ID!) {
         getLastActivity(teamId: $team) {
-            logId
             _id
-            user
-            userId
-            userAvatar
-            team
-            projectImg
-            projectId
-            projectName
-            comment {
-                _id
-                comment
-            }
             type
-            dateFilter
             action
+            user {
+                userId
+                name
+                avatar
+            }
+            dateFilter
             created_at
             updated_at
-            description
-            info
-            name
+            body {
+                logId
+                name
+                description
+                info
+                project {
+                    projectId
+                    name
+                    image
+                }
+                comment {
+                    commentId
+                    comment
+                }
+            }
         }
     }
 `;
