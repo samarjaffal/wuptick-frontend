@@ -8,11 +8,10 @@ import {
 } from './styles';
 import { Info } from '../../components/Info/index';
 import { ListContainer } from '../../components/ListContainer/index';
-import { FeedItem } from '../../components/FeedItem/index';
 import { useUser } from '../../hooks/useUser';
 import { Me } from '../../components/Me/index';
 import { Colors } from '../../assets/css/colors';
-import { LastActivityQuery } from '../../requests/LastActivity';
+import { LastActivity } from '../../components/LastActivity/index';
 export const Home = () => {
     const { teamSelected } = useUser();
     return (
@@ -69,27 +68,7 @@ export const Home = () => {
                     </ListContainer>
                 </ProjectsContainer>
                 <ActivityContainer>
-                    <LastActivityQuery>
-                        {({ loading, error, data }) => {
-                            if (loading || !data) {
-                                return 'loading...';
-                            }
-                            if (error) {
-                                console.error(error);
-                            }
-                            const { getLastActivity: logs } = data;
-                            return logs.map((log) => (
-                                <FeedItem key={log._id} {...log} />
-                            ));
-                        }}
-                    </LastActivityQuery>
-
-                    {/*    <FeedItem />
-                    <FeedItem />
-                    <FeedItem />
-                    <FeedItem />
-                    <FeedItem />
-                    <FeedItem /> */}
+                    <LastActivity />
                 </ActivityContainer>
             </Wrapper>
         </Container>
