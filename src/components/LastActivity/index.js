@@ -1,6 +1,7 @@
 import React from 'react';
 import { LastActivityQuery } from '../../requests/LastActivity';
 import { FeedItem } from '../FeedItem/index';
+import { SkeletonActivity } from '../Loaders/SkeletonActivity/index';
 export const LastActivity = () => {
     const handleLogs = (logs) => {
         return logs.length > 0 ? (
@@ -14,7 +15,7 @@ export const LastActivity = () => {
         <LastActivityQuery>
             {({ loading, error, data }) => {
                 if (loading || !data) {
-                    return 'loading...';
+                    return <SkeletonActivity />;
                 }
                 if (error) {
                     console.error(error);

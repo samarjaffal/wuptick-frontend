@@ -13,6 +13,7 @@ export const Routes = () => {
             <PublicRoute component={Auth} path="register" type="register" />
             <Auth path="register" type="register" />
             <PrivateRoute path="/" component={Home} />
+            <PrivateRoute path="/home" component={Home} />
             <PrivateRoute path="test" component={TestPage} />
         </Router>
     );

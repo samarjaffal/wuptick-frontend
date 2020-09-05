@@ -24,5 +24,9 @@ export const TestPage = () => {
         return <div>loading...</div>;
     }
 
-    return <h1>Test Page!! {data.testUser}</h1>;
+    return (
+        <div style={{ paddingTop: '48px' }}>
+            <h1>Test Page!! {data.testUser}</h1>
+        </div>
+    );
 };
