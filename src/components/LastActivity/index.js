@@ -19,9 +19,7 @@ export const LastActivity = () => {
                 if (error) {
                     console.error(error);
                 }
-                const {
-                    getLastActivity: { logs },
-                } = data;
+                const { getLastActivity: logs } = data;
 
                 return handleLogs(logs);
             }}

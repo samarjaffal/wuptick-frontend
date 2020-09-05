@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 export const LastActivityQuery = ({ children }) => {
     const { teamSelected } = useUser();
-    const date = new Date().toISOString();
-    /* const date = "2020-08-31T16:45:35.116Z"; */
     const [lastActivity, { error, loading, data }] = useLazyQuery(
         gqlLastActivity,
         {
@@ -16,14 +14,14 @@ export const LastActivityQuery = ({ children }) => {
             },
         }
     );
-    const doLastActivity = useCallback((teamId, date) => {
+    const doLastActivity = useCallback((teamId) => {
         lastActivity({
-            variables: { team: teamId, date },
+            variables: { team: teamId },
         });
     });
 
     useEffect(() => {
-        if (teamSelected._id) doLastActivity(teamSelected._id, date);
+        if (teamSelected._id) doLastActivity(teamSelected._id);
     }, [teamSelected]);
 
     return children({ loading, error, data });
