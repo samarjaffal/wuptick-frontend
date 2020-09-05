@@ -4,10 +4,8 @@ import { useUser } from '../hooks/useUser';
 
 export const useRefreshToken = () => {
     const [refreshToken, setRefreshToken] = useState(false);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const { activateAuth } = useUser();
-
+    const { activateAuth, setLoading, loading } = useUser();
     useEffect(() => {
         fetch(URL, {
             method: 'POST',

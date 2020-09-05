@@ -4,10 +4,13 @@ import { useUser } from '../../hooks/useUser';
 import PropTypes from 'prop-types';
 
 export const PrivateRoute = ({ component: Component, path }) => {
-    const { isLogged } = useUser();
+    const { isLogged, loading } = useUser();
+
     useEffect(() => {
-        !isLogged && navigate('/login');
-    }, [isLogged]);
+        if (!loading && !isLogged) {
+            navigate('/login');
+        }
+    }, [isLogged, loading]);
 
     return <Component path={path} />;
 };

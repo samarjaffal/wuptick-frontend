@@ -4,6 +4,7 @@ const Context = createContext();
 
 export const UserContextProvider = ({ children }) => {
     let initialAT = '';
+    const [loading, setLoading] = useState(true);
     const [accessToken, setAccessToken] = useState(initialAT);
     const [teamSelected, setTeamSelected] = useState({});
     const value = {
@@ -11,6 +12,8 @@ export const UserContextProvider = ({ children }) => {
         setAccessToken,
         teamSelected,
         setTeamSelected,
+        loading,
+        setLoading,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

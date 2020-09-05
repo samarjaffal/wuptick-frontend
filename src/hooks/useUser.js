@@ -8,6 +8,8 @@ export const useUser = () => {
         setAccessToken,
         teamSelected,
         setTeamSelected,
+        loading,
+        setLoading,
     } = useContext(Context);
 
     const activateAuth = useCallback(
@@ -29,5 +31,7 @@ export const useUser = () => {
         disableAuth,
         teamSelected,
         setTeamSelected,
+        loading,
+        setLoading,
     };
 };

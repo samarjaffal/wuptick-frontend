@@ -4,10 +4,12 @@ import { useUser } from '../../hooks/useUser';
 import PropTypes from 'prop-types';
 
 export const PublicRoute = ({ component: Component, path, type = null }) => {
-    const { isLogged } = useUser();
+    const { isLogged, loading } = useUser();
     useEffect(() => {
-        isLogged && navigate('/');
-    }, [isLogged]);
+        if (!loading && isLogged) {
+            navigate('/');
+        }
+    }, [isLogged, loading]);
     return <Component path={path} type={type} />;
 };
 

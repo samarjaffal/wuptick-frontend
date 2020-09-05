@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Skeleton from 'react-loading-skeleton';
 
 export const Container = styled.div`
     display: flex;
@@ -11,8 +12,8 @@ export const ActitivityContainer = styled.div`
     width: 100%;
 `;
 
-export const ActivityInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+export const AvatarSkeleton = styled(Skeleton)`
+    @media (max-width: 767px) {
+        display: none;
+    }
 `;

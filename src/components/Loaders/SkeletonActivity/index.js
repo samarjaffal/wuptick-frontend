@@ -3,7 +3,7 @@ import {
     ActitivityContainer,
     Container,
     ImageContainer,
-    ActivityInfo,
+    AvatarSkeleton,
 } from './styles';
 import { ListContainer } from '../../ListContainer/index';
 import Skeleton from 'react-loading-skeleton';
@@ -14,12 +14,10 @@ export const SkeletonActivity = () => {
         .map((item, index) => (
             <Container key={index}>
                 <ImageContainer>
-                    <Skeleton circle={true} height={50} width={50} />
+                    <AvatarSkeleton circle={true} height={50} width={50} />
                 </ImageContainer>
                 <ActitivityContainer>
-                    <ActivityInfo>
-                        <Skeleton height={10} width={500} />
-                    </ActivityInfo>
+                    <Skeleton height={10} width={'50%'} />
                     <ListContainer shadow={true}>
                         <Skeleton height={10} width={'60%'} />
                         <Skeleton height={30} width={'100%'} />
