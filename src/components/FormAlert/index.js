@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertContainer, AlertMessage } from './style';
+import PropTypes from 'prop-types';
 
 export const FormAlert = ({ message, icon }) => {
     return (
@@ -8,4 +9,9 @@ export const FormAlert = ({ message, icon }) => {
             <AlertMessage>{message}</AlertMessage>
         </AlertContainer>
     );
+};
+
+FormAlert.propTypes = {
+    message: PropTypes.string.isRequired,
+    icon: PropTypes.string,
 };

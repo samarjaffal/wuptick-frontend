@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import PropTypes from 'prop-types';
 import calendar from 'dayjs/plugin/calendar';
 import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
@@ -96,4 +97,11 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
             </ActitivityContainer>
         </Container>
     );
+};
+
+FeedItem.propTypes = {
+    type: PropTypes.string.isRequired,
+    dateFilter: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
+    body: PropTypes.object.isRequired,
 };
