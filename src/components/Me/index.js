@@ -1,9 +1,10 @@
 import React from 'react';
 import { MeQuery } from '../../requests/MeQuery';
 import PropTypes from 'prop-types';
-
+import { useUser } from '../../hooks/useUser';
 export const Me = ({ children }) => {
-    return (
+    const { isLogged } = useUser();
+    return isLogged ? (
         <MeQuery>
             {({ error, data, loading }) => {
                 let user;
@@ -20,7 +21,7 @@ export const Me = ({ children }) => {
                 }
             }}
         </MeQuery>
-    );
+    ) : null;
 };
 
 Me.propTypes = {
