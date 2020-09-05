@@ -24,9 +24,14 @@ export const ActitivityContainer = styled.div`
 export const ActivityInfo = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 `;
 
-export const UserInfo = styled.div``;
+export const UserInfo = styled.div`
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+`;
 
 export const TimeInfo = styled.div``;
 
