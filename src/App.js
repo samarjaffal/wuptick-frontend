@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import regeneratorRuntime from 'regenerator-runtime';
 import './dayjs-config';
 import './components/FontAwesomeIcons/index';
 import { GlobalStyle } from './assets/css/GlobalStyle';
 import { Helmet } from 'react-helmet';
 import Context, { UserContextProvider } from './context/UserContext';
-/* import { Routes } from './routes/index'; */
 import { Layout } from './pages/layout/index';
 export const App = () => {
     return (

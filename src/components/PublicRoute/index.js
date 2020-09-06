@@ -16,5 +16,5 @@ export const PublicRoute = ({ component: Component, path, type = null }) => {
 PublicRoute.propTypes = {
     component: PropTypes.any,
     path: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.any,
 };

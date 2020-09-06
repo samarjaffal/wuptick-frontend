@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-apollo';
 import gql from 'graphql-tag';
 import { SkeletonCardItem } from '../components/Loaders/SkeletonCardItem/index';
+import { LoggedLayout } from './Layouts/LoggedLayout/index';
 const testQuery = gql`
     query Test {
         testUser
@@ -25,9 +26,10 @@ export const TestPage = () => {
     }
 
     return (
-        <div style={{ paddingTop: '48px' }}>
-            <h1>Test Page!! {data.testUser}</h1>
-            <SkeletonCardItem />
-        </div>
+        <LoggedLayout>
+            <div style={{ paddingTop: '48px' }}>
+                <h1>Test Page!! {data.testUser}</h1>
+            </div>
+        </LoggedLayout>
     );
 };
