@@ -18,7 +18,11 @@ export const ListContainer = ({
             <TitleContainer>
                 {icon && <Icon icon={icon} color={color} />}
                 {title && <Title>{title}</Title>}
-                {button && <ButtonHome url="/" icon="plus" color={color} />}
+                {button && (
+                    <div style={{ position: 'absolute', right: 0 }}>
+                        <ButtonHome url="/" icon="plus" color={color} />
+                    </div>
+                )}
             </TitleContainer>
             {children}
         </Container>
@@ -32,4 +36,5 @@ ListContainer.propTypes = {
     color: PropTypes.string,
     button: PropTypes.bool,
     onClicked: PropTypes.func,
+    shadow: PropTypes.bool,
 };

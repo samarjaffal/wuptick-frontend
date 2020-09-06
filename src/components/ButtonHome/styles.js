@@ -1,21 +1,24 @@
 import styled from 'styled-components';
+import { Link } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
 import { info, bold, borderRadius } from '../../assets/css/theme';
-import { Transition } from '../../assets/css/shared-styles';
+import { TransitionSecondary } from '../../assets/css/shared-styles';
+
+export const Anchor = styled(Link)`
+    text-decoration: none;
+    margin: ${({ margin }) => margin || 'auto'};
+`;
 
 export const Button = styled.small`
-    position: absolute;
-    right: 0;
     ${info};
     ${({ color }) => color || Colors.primary};
     font-weight: ${bold};
-    background: ${Colors.hover};
     padding: 4px ${borderRadius};
     border-radius: ${borderRadius};
-    ${Transition}
+    ${TransitionSecondary}
     :hover {
-        background: ${Colors.secondary};
+        background: ${Colors.hover};
     }
 `;
 

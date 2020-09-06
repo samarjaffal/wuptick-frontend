@@ -17,7 +17,7 @@ export const Container = styled.div`
 export const ImageContainer = styled.div``;
 
 export const ActitivityContainer = styled.div`
-    margin: 0 1em;
+    margin-left: 1em;
     width: 100%;
 `;
 

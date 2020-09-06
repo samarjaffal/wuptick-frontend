@@ -43,3 +43,11 @@ export const ActivityContainer = styled.div`
         margin: 0;
     }
 `;
+
+export const HeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+`;

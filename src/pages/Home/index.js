@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Container,
+    HeaderContainer,
     Wrapper,
     Title,
     ProjectsContainer,
@@ -13,11 +14,36 @@ import { Me } from '../../components/Me/index';
 import { Colors } from '../../assets/css/colors';
 import { LastActivity } from '../../components/LastActivity/index';
 import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
+import { ButtonHome } from '../../components/ButtonHome/index';
 export const Home = () => {
     const { teamSelected } = useUser();
     return (
         <Container>
-            <Title>Activity</Title>
+            <HeaderContainer>
+                <Title>Activity </Title>
+                <div>
+                    <ButtonHome url="/" icon="plus" color={Colors.primary}>
+                        New Project
+                    </ButtonHome>
+                    <ButtonHome
+                        url="/"
+                        icon="plus"
+                        margin="0 0 0 1em"
+                        color={Colors.orange}
+                    >
+                        New Team
+                    </ButtonHome>
+                    <ButtonHome
+                        url="/"
+                        icon="plus"
+                        margin="0 0 0 1em"
+                        color={Colors.yellow}
+                    >
+                        New Task
+                    </ButtonHome>
+                </div>
+            </HeaderContainer>
+
             <Wrapper>
                 <ProjectsContainer>
                     <ListContainer
