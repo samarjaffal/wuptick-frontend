@@ -12,6 +12,7 @@ import { useUser } from '../../hooks/useUser';
 import { Me } from '../../components/Me/index';
 import { Colors } from '../../assets/css/colors';
 import { LastActivity } from '../../components/LastActivity/index';
+import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 export const Home = () => {
     const { teamSelected } = useUser();
     return (
@@ -24,7 +25,7 @@ export const Home = () => {
                         icon="star"
                         color={Colors.yellow}
                     >
-                        <Me>
+                        <Me loader={SkeletonCardItem} loaderProps={{ qty: 3 }}>
                             {({ favorite_projects }) => {
                                 return favorite_projects.map((project) => (
                                     <Info
@@ -45,8 +46,12 @@ export const Home = () => {
                         color={Colors.primary}
                         button={true}
                     >
-                        <Me>
-                            {({ teams }) => {
+                        <Me loader={SkeletonCardItem}>
+                            {({ teams, loading }) => {
+                                if (loading) {
+                                    return 'loading...';
+                                }
+
                                 return teams
                                     .filter(
                                         (team) => team._id == teamSelected._id

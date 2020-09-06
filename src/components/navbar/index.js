@@ -13,6 +13,8 @@ import { useDropdown } from '../../hooks/useDropdown';
 import { Avatar } from '../Avatar/index';
 import { OutsideClick } from '../OutsideClick/index';
 import { Me } from '../Me/index';
+import { SkeletonAvatar } from '../Loaders/SkeletonAvatar/index';
+import { LightSkeleton } from '../Loaders/SkeletonGeneral/index';
 import {
     Header,
     NavContainer,
@@ -53,6 +55,14 @@ export const Navbar = () => {
         return <div>Loading..</div>;
     }
 
+    const handleTeamInfo = () => {
+        return teamSelected.name == null ? (
+            <LightSkeleton width="80px" margin="0 20px" />
+        ) : (
+            <AnchorTeam to="/">{teamSelected.name}</AnchorTeam>
+        );
+    };
+
     if (error) {
         console.log('error', error);
     }
@@ -65,7 +75,8 @@ export const Navbar = () => {
                 </HamburguerMenuContainer>
                 <Anchor to="/">Wuptick</Anchor>
                 <TeamContainer>
-                    <AnchorTeam to="/">{teamSelected.name}</AnchorTeam>
+                    {/*  <AnchorTeam to="/">{teamSelected.name}</AnchorTeam> */}
+                    {handleTeamInfo()}
                 </TeamContainer>
 
                 <Nav showMobileNav={isActive}>
@@ -102,7 +113,7 @@ export const Navbar = () => {
                 </Nav>
                 <OutsideClick>
                     <AvatarContainer>
-                        <Me>
+                        <Me loader={SkeletonAvatar} loaderProps={{ qty: 1 }}>
                             {({ avatar }) => (
                                 <Avatar
                                     size={25}
@@ -120,7 +131,10 @@ export const Navbar = () => {
                                 >
                                     <DropdownItem
                                         leftIcon={
-                                            <Me>
+                                            <Me
+                                                loader={SkeletonAvatar}
+                                                loaderProps={{ qty: 1 }}
+                                            >
                                                 {({ avatar }) => (
                                                     <Avatar
                                                         size={20}

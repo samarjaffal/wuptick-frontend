@@ -10,7 +10,7 @@ export const ImageStyled = styled.img`
           `width: ${size || sizeDefault}px; 
         height: ${size || sizeDefault}px;`}
     ${({ margin }) => `margin: ${margin || marginDefault};`}
-    ${({ radius }) => `border-radius: ${radius || borderRadius}px;`}
+    ${({ radius }) => `border-radius: ${radius || borderRadius};`}
     /* border-radius: ${borderRadius}; */
     object-fit: cover;
     object-position: center;

@@ -2,7 +2,7 @@ import React from 'react';
 import { MeQuery } from '../../requests/MeQuery';
 import PropTypes from 'prop-types';
 import { useUser } from '../../hooks/useUser';
-export const Me = ({ children }) => {
+export const Me = ({ children, loader: Loader, loaderProps }) => {
     const { isLogged } = useUser();
     return isLogged ? (
         <MeQuery>
@@ -10,13 +10,14 @@ export const Me = ({ children }) => {
                 let user;
                 if (data && data.me) {
                     user = data.me;
-                    return children({ ...user });
+                    return children({ ...user, loading });
                 }
                 if (error) {
                     console.log(error, 'error me  component');
                 }
 
                 if (loading) {
+                    if (Loader) return <Loader {...loaderProps} />;
                     return null;
                 }
             }}
@@ -26,4 +27,6 @@ export const Me = ({ children }) => {
 
 Me.propTypes = {
     children: PropTypes.any,
+    loader: PropTypes.any,
+    loaderProps: PropTypes.object,
 };

@@ -74,7 +74,7 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                                     src={user.avatar}
                                     margin="0 0.5em 0 0"
                                     size={30}
-                                    radius={50}
+                                    radius="50px"
                                 />
                                 <CommentText>
                                     {body.comment.comment}
