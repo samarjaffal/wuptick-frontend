@@ -13,6 +13,7 @@ import { ApolloLink, Observable } from 'apollo-link';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 import jwtDecode from 'jwt-decode';
+import { navigate } from '@reach/router';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData: {
@@ -97,6 +98,9 @@ const client = new ApolloClient({
         onError(({ graphQLErrors, networkError }) => {
             console.log(graphQLErrors);
             console.log(networkError);
+            if (networkError) {
+                navigate('oops');
+            }
         }),
         requestLink,
         new HttpLink({
