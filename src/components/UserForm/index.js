@@ -41,11 +41,7 @@ export const UserForm = ({ title, onSubmit, loading, error, data }) => {
         message !== '' ? <FormAlert message={message} icon="⚠️" /> : '';
 
     if (error) {
-        return (
-            <div>
-                <strong>Something went wrong!</strong>
-            </div>
-        );
+        console.log('error user form');
     }
 
     if (loading) {
