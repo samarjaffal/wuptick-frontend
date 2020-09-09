@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-import { useMutation } from 'react-apollo';
-import { navigate } from '@reach/router';
-import { gqlLogout } from '../../requests/graphql/gqlLogout';
 import { Dropdown } from '../Dropdrown/index';
 import { useUser } from '../../hooks/useUser';
 import { useHamburguerMenu } from '../../hooks/useHamburguerMenu';
@@ -15,6 +12,7 @@ import { OutsideClick } from '../OutsideClick/index';
 import { Me } from '../Me/index';
 import { SkeletonAvatar } from '../Loaders/SkeletonAvatar/index';
 import { LightSkeleton } from '../Loaders/SkeletonGeneral/index';
+import { Logout } from '../Logout/index';
 import {
     Header,
     NavContainer,
@@ -31,7 +29,7 @@ import {
 } from './styles';
 
 export const Navbar = () => {
-    const { disableAuth, teamSelected } = useUser();
+    const { teamSelected } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
     const { open, setOpen } = useDropdown();
     const { match } = useSmallScreen();
@@ -42,19 +40,6 @@ export const Navbar = () => {
         }
     }, [match]);
 
-    const [logout, { error, loading, client }] = useMutation(gqlLogout, {
-        onCompleted: () => {
-            console.log('logout');
-            disableAuth();
-            client.resetStore();
-            navigate('/login');
-        },
-    });
-
-    if (loading) {
-        return <div>Loading..</div>;
-    }
-
     const handleTeamInfo = () => {
         return teamSelected.name == null ? (
             <LightSkeleton width="80px" margin="0 20px" />
@@ -62,10 +47,6 @@ export const Navbar = () => {
             <AnchorTeam to="/">{teamSelected.name}</AnchorTeam>
         );
     };
-
-    if (error) {
-        console.log('error', error);
-    }
 
     return (
         <Header>
@@ -101,12 +82,16 @@ export const Navbar = () => {
                         />
                         {isActive && (
                             <NavLinkLogout>
-                                <LogoutButton
-                                    type="button"
-                                    onClick={() => logout()}
-                                >
-                                    Logout
-                                </LogoutButton>
+                                <Logout>
+                                    {({ doLogout }) => (
+                                        <LogoutButton
+                                            type="button"
+                                            onClick={() => doLogout()}
+                                        >
+                                            Logout
+                                        </LogoutButton>
+                                    )}
+                                </Logout>
                             </NavLinkLogout>
                         )}
                     </NavUl>
@@ -147,9 +132,15 @@ export const Navbar = () => {
                                     >
                                         My Profile
                                     </DropdownItem>
-                                    <DropdownItem onClicked={() => logout()}>
-                                        Logout
-                                    </DropdownItem>
+                                    <Logout>
+                                        {({ doLogout }) => (
+                                            <DropdownItem
+                                                onClicked={() => doLogout()}
+                                            >
+                                                Logout
+                                            </DropdownItem>
+                                        )}
+                                    </Logout>
                                 </DropdownMenu>
                                 <DropdownMenu
                                     menu="settings"

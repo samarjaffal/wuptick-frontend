@@ -1,16 +1,23 @@
-import { useMutation } from 'react-apollo';
+import { useMutation, mutra } from 'react-apollo';
 import { gqlLogout } from './graphql/gqlLogout';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
+import { useUser } from '../hooks/useUser';
 
 export const LogoutMutation = ({ children }) => {
-    const [logout, { error, loading, data }] = useMutation(gqlLogout, {
-        onCompleted: () => navigate('/'),
+    const { disableAuth } = useUser();
+    const [logout, { error, loading, client }] = useMutation(gqlLogout, {
+        onCompleted: () => {
+            console.log('logout');
+            disableAuth();
+            client.resetStore();
+            navigate('/login');
+        },
     });
     const doLogout = () => {
         logout();
     };
-    return children({ doLogout, data, loading, error });
+    return children({ doLogout, loading, error });
 };
 
 LogoutMutation.propTypes = {
