@@ -3,6 +3,7 @@ import { Router, navigate } from '@reach/router';
 import { Auth } from '../Auth/index';
 import { Home } from '../Home/index';
 import { TestPage } from '../TestPage';
+import { Project } from '../Project/index';
 import { PrivateRoute } from '../../components/PrivateRoute/index';
 import { PublicRoute } from '../../components/PublicRoute/index';
 import { useUser } from '../../hooks/useUser';
@@ -14,6 +15,7 @@ const DefaultRoutes = () => {
             <PrivateRoute path="/" component={Home} />
             <PrivateRoute path="/home" component={Home} />
             <PrivateRoute path="test" component={TestPage} />
+            <PrivateRoute path="/project/:id" component={Project} />
             <NotFound default />
             <Oops path="oops" />
         </Router>

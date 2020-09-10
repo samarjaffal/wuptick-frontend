@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { title } from '../../assets/css/theme';
 export const Container = styled.div`
-    padding-top: 48px;
     margin: 0 80px;
     @media (max-width: 768px) {
         margin: 0 20px;

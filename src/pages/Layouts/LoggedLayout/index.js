@@ -12,7 +12,7 @@ export const LoggedLayout = ({ children }) => {
                     <Navbar />
                 </DropdownContextProvider>
             )}
-            {children}
+            <div style={{ paddingTop: '48px' }}>{children}</div>
         </Fragment>
     );
 };

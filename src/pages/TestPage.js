@@ -27,9 +27,7 @@ export const TestPage = () => {
 
     return (
         <LoggedLayout>
-            <div style={{ paddingTop: '48px' }}>
-                <h1>Test Page!! {data.testUser}</h1>
-            </div>
+            <h1>Test Page!! {data.testUser}</h1>
         </LoggedLayout>
     );
 };

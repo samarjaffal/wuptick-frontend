@@ -65,13 +65,13 @@ export const Navbar = () => {
                         <NavItem
                             title="Projects"
                             option="projects"
-                            url="/test"
+                            url="/project/5ef7fe59db26218144f3f705"
                             icon="folder-open"
                         />
                         <NavItem
                             title="Teams"
                             option="teams"
-                            url="/"
+                            url="/test"
                             icon="users"
                         />
                         <NavItem
