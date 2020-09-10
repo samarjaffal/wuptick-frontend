@@ -11,7 +11,6 @@ export const ImageStyled = styled.img`
         height: ${size || sizeDefault}px;`}
     ${({ margin }) => `margin: ${margin || marginDefault};`}
     ${({ radius }) => `border-radius: ${radius || borderRadius};`}
-    /* border-radius: ${borderRadius}; */
     object-fit: cover;
     object-position: center;
     ${Shadow};

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { title } from '../../assets/css/theme';
 export const Container = styled.div`
-    margin: 0 80px;
     @media (max-width: 768px) {
         margin: 0 20px;
     }
@@ -21,6 +20,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
     ${title};
     margin-left: 350px;
+    margin-top: 0;
     @media (max-width: 768px) {
         text-align: center;
         margin-left: 0;

@@ -47,6 +47,7 @@
         "apollo-link-token-refresh": "^0.3.1",
         "babel-plugin-idx": "^2.4.0",
         "dayjs": "^1.8.34",
+        "file-loader": "^6.1.0",
         "graphql": "^15.3.0",
         "graphql-tag": "^2.10.4",
         "idx": "^2.5.6",
@@ -60,6 +61,7 @@
         "react-loading-skeleton": "^2.1.1",
         "react-transition-group": "^4.4.1",
         "regenerator-runtime": "^0.13.7",
-        "styled-components": "^5.1.1"
+        "styled-components": "^5.1.1",
+        "url-loader": "^4.1.0"
     }
 }
