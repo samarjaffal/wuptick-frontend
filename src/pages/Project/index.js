@@ -1,5 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { GetProjectQuery } from '../../requests/project/getProjectQuery';
 import { Image } from '../../components/Image/index';
@@ -16,9 +18,9 @@ import {
     MembersContainer,
     MembersList,
 } from './styles';
-import PropTypes from 'prop-types';
 
-export const Project = ({ id }) => {
+export const Project = ({ id, location }) => {
+    const { tab } = queryString.parse(location.search);
     return (
         <LoggedLayout>
             <Helmet>
@@ -30,7 +32,11 @@ export const Project = ({ id }) => {
                     return (
                         <Container>
                             <ProjectInfoContainer>
-                                <Image size={100} description="Project Image" />
+                                <Image
+                                    size={100}
+                                    description="Project Image"
+                                    src={project.image}
+                                />
                                 <InfoContainer>
                                     <ProjectName>
                                         {project.name || 'Add a project name'}
@@ -65,20 +71,36 @@ export const Project = ({ id }) => {
 
                             <div
                                 className="TabsContainer"
-                                style={{ marginTop: '2em' }}
+                                style={{ marginTop: '1em' }}
                             >
                                 <div className="Tabs">
                                     <nav>
-                                        <TabItem to="/project/5ef7fe59db26218144f3f705">
+                                        <TabItem
+                                            to="/project/5ef7fe59db26218144f3f705"
+                                            active={
+                                                tab == undefined || null ? 1 : 0
+                                            }
+                                        >
                                             Modules
                                         </TabItem>
-                                        <TabItem to="/project/5ef7fe59db26218144f3f705?tab=priority-tasks">
+                                        <TabItem
+                                            to="/project/5ef7fe59db26218144f3f705?tab=priority-tasks"
+                                            active={
+                                                tab == 'priority-tasks' ? 1 : 0
+                                            }
+                                        >
                                             Priority Tasks
                                         </TabItem>
-                                        <TabItem to="/project/5ef7fe59db26218144f3f705?tab=topics">
+                                        <TabItem
+                                            to="/project/5ef7fe59db26218144f3f705?tab=topics"
+                                            active={tab == 'topics' ? 1 : 0}
+                                        >
                                             Topics
                                         </TabItem>
-                                        <TabItem to="/project/5ef7fe59db26218144f3f705?tab=files">
+                                        <TabItem
+                                            to="/project/5ef7fe59db26218144f3f705?tab=files"
+                                            active={tab == 'files' ? 1 : 0}
+                                        >
                                             Files
                                         </TabItem>
                                     </nav>

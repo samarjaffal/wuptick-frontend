@@ -6,6 +6,7 @@ export const gqlGetProject = gql`
             _id
             name
             description
+            image
         }
     }
 `;

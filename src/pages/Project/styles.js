@@ -5,7 +5,7 @@ import { description, title, info, borderRadius } from '../../assets/css/theme';
 import { Link } from '@reach/router';
 
 export const Container = styled.div`
-    margin-top: 20px;
+    /*     margin-top: 20px; */
 `;
 
 export const ProjectInfoContainer = styled.div`
@@ -52,5 +52,6 @@ export const TabItem = styled(Link)`
     &:first-child {
         margin-left: 0;
     }
+    ${({ active }) => active == 1 && `background-color: ${Colors.hover};`}
     ${TransitionSecondary}
 `;
