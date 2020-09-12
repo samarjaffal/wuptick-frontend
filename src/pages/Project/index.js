@@ -2,11 +2,12 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { LoggedLayout } from '../Layouts/LoggedLayout/index';
+import { LoggedLayout } from '../Layouts/LoggedLayout';
 import { GetProjectQuery } from '../../requests/project/getProjectQuery';
-import { Image } from '../../components/Image/index';
-import { Avatar } from '../../components/Avatar/index';
-import { ButtonHome } from '../../components/ButtonHome/index';
+import { Image } from '../../components/Image';
+import { Avatar } from '../../components/Avatar';
+import { ButtonHome } from '../../components/ButtonHome';
+import { ListModules } from '../../components/Module/ListModules';
 import { Colors } from '../../assets/css/colors';
 import {
     TabItem,
@@ -17,6 +18,7 @@ import {
     ProjectDescription,
     MembersContainer,
     MembersList,
+    TabsContainer,
 } from './styles';
 
 export const Project = ({ id, location }) => {
@@ -31,48 +33,47 @@ export const Project = ({ id, location }) => {
                     const { getProject: project } = data;
                     return (
                         <Container>
-                            <ProjectInfoContainer>
-                                <Image
-                                    size={100}
-                                    description="Project Image"
-                                    src={project.image}
-                                />
-                                <InfoContainer>
-                                    <ProjectName>
-                                        {project.name || 'Add a project name'}
-                                    </ProjectName>
-                                    <ProjectDescription>
-                                        {project.description ||
-                                            'Add a new description'}
-                                    </ProjectDescription>
-                                </InfoContainer>
-                            </ProjectInfoContainer>
-                            <MembersContainer>
-                                <MembersList>
-                                    {Array(6)
-                                        .fill()
-                                        .map((item, index) => (
-                                            <Avatar
-                                                margin="0 4px"
-                                                key={index}
-                                                size={28}
-                                            />
-                                        ))}
-                                </MembersList>
-                                <ButtonHome
-                                    url="/"
-                                    icon="plus"
-                                    color={Colors.primary}
-                                    margin="0.5em 0 0 0.5em"
-                                >
-                                    Add
-                                </ButtonHome>
-                            </MembersContainer>
-
-                            <div
-                                className="TabsContainer"
-                                style={{ marginTop: '1em' }}
-                            >
+                            <div>
+                                <ProjectInfoContainer>
+                                    <Image
+                                        size={100}
+                                        description="Project Image"
+                                        src={project.image}
+                                    />
+                                    <InfoContainer>
+                                        <ProjectName>
+                                            {project.name ||
+                                                'Add a project name'}
+                                        </ProjectName>
+                                        <ProjectDescription>
+                                            {project.description ||
+                                                'Add a new description'}
+                                        </ProjectDescription>
+                                    </InfoContainer>
+                                </ProjectInfoContainer>
+                                <MembersContainer>
+                                    <MembersList>
+                                        {Array(6)
+                                            .fill()
+                                            .map((item, index) => (
+                                                <Avatar
+                                                    margin="0 4px"
+                                                    key={index}
+                                                    size={28}
+                                                />
+                                            ))}
+                                    </MembersList>
+                                    <ButtonHome
+                                        url="/"
+                                        icon="plus"
+                                        color={Colors.primary}
+                                        margin="0.5em 0 0 0.5em"
+                                    >
+                                        Add
+                                    </ButtonHome>
+                                </MembersContainer>
+                            </div>
+                            <TabsContainer>
                                 <div className="Tabs">
                                     <nav>
                                         <TabItem
@@ -105,7 +106,8 @@ export const Project = ({ id, location }) => {
                                         </TabItem>
                                     </nav>
                                 </div>
-                            </div>
+                            </TabsContainer>
+                            <ListModules />
                         </Container>
                     );
                 }}

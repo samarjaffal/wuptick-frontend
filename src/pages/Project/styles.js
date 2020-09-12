@@ -40,6 +40,10 @@ export const MembersList = styled.div`
     margin-top: 1em;
 `;
 
+export const TabsContainer = styled.div`
+    margin: 1em 0;
+`;
+
 export const TabItem = styled(Link)`
     margin-left: 2em;
     text-decoration: none;
