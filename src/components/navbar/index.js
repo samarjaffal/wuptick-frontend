@@ -13,6 +13,7 @@ import { Me } from '../Me/index';
 import { SkeletonAvatar } from '../Loaders/SkeletonAvatar/index';
 import { LightSkeleton } from '../Loaders/SkeletonGeneral/index';
 import { Logout } from '../Logout/index';
+import { navigate } from '@reach/router';
 import {
     Header,
     NavContainer,
@@ -29,7 +30,7 @@ import {
 } from './styles';
 
 export const Navbar = () => {
-    const { teamSelected } = useUser();
+    const { teamSelected, profileURL } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
     const { open, setOpen } = useDropdown();
     const { match } = useSmallScreen();
@@ -128,7 +129,7 @@ export const Navbar = () => {
                                                 )}
                                             </Me>
                                         }
-                                        goToMenu="settings"
+                                        goToURL={profileURL}
                                     >
                                         My Profile
                                     </DropdownItem>
@@ -142,7 +143,7 @@ export const Navbar = () => {
                                         )}
                                     </Logout>
                                 </DropdownMenu>
-                                <DropdownMenu
+                                {/*   <DropdownMenu
                                     menu="settings"
                                     classMenu="menu-secondary"
                                 >
@@ -161,7 +162,7 @@ export const Navbar = () => {
                                     <DropdownItem leftIcon="🧡">
                                         Awesome!
                                     </DropdownItem>
-                                </DropdownMenu>
+                                </DropdownMenu> */}
                             </Dropdown>
                         )}
                     </AvatarContainer>

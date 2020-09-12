@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 export const DropdownItem = ({
     goToMenu,
+    goToURL,
     leftIcon,
     rightIcon,
     onClicked,
@@ -14,12 +15,14 @@ export const DropdownItem = ({
 
     const handleClick = () => {
         return (
-            (onClicked && onClicked()) || (goToMenu && setActiveMenu(goToMenu))
+            (onClicked && onClicked()) ||
+            (goToMenu && setActiveMenu(goToMenu)) ||
+            null
         );
     };
 
     return (
-        <MenuItem to="#" onClick={() => handleClick()}>
+        <MenuItem to={goToURL || '#'} onClick={() => handleClick()}>
             <IconButton>{leftIcon}</IconButton>
             {children}
             <IconRight>{rightIcon}</IconRight>

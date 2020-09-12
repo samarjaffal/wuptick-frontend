@@ -8,7 +8,8 @@ export const MeQuery = ({ children }) => {
     const { error, loading, data } = useQuery(gqlMe, {
         onCompleted: (data) => {
             console.log(data, 'data meQuery');
-            setTeamSelected(data.me.teams[0]);
+            const { me: user } = data;
+            setTeamSelected(user.teams[0]);
         },
     });
     return children({ loading, error, data });
