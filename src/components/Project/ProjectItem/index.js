@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import { ListContainer } from '../../ListContainer/index';
 import { Image } from '../../Image/index';
 import { Avatar } from '../../Avatar';
@@ -14,7 +15,7 @@ import {
 
 export const ProjectItem = () => {
     return (
-        <ListContainer>
+        <ListContainer hover={Colors.hover} cursor="pointer">
             <Container>
                 <ProjectContainer>
                     <Image
@@ -25,7 +26,7 @@ export const ProjectItem = () => {
                     <Name to="/">Fronted</Name>
                 </ProjectContainer>
                 <div className="MembersContainer">
-                    <div className="MembersList">
+                    <div className="MembersList" style={{ display: 'flex' }}>
                         {Array(6)
                             .fill()
                             .map((item, index) => (

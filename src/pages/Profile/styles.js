@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { Transition, Shadow } from '../../assets/css/shared-styles';
 import {
     title,
     description,
@@ -83,5 +84,9 @@ export const EditButton = styled(Link)`
     @media (max-width: 767px) {
         width: 100%;
         text-align: center;
+    }
+    :hover {
+        ${Shadow};
+        ${Transition};
     }
 `;

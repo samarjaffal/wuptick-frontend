@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { Colors } from '../../../assets/css/colors';
+import { Shadow, Transition } from '../../../assets/css/shared-styles';
 import { description, borderRadius, info } from '../../../assets/css/theme';
 
 export const Container = styled.div`
@@ -29,4 +30,16 @@ export const Button = styled(Link)`
     border-radius: ${borderRadius};
     text-decoration: none;
     margin: ${({ margin }) => margin || 0};
+    :hover {
+        ${Shadow};
+        ${Transition};
+    }
+`;
+
+export const Anchor = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+    :hover {
+        background-color: ${Colors.hover};
+    }
 `;

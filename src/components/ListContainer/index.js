@@ -11,10 +11,12 @@ export const ListContainer = ({
     button = false,
     onClicked,
     shadow = false,
+    hover = null,
+    cursor = 'default',
     children,
 }) => {
     return (
-        <Container shadow={shadow}>
+        <Container shadow={shadow} hover={hover} cursor={cursor}>
             <TitleContainer>
                 {icon && <Icon icon={icon} color={color} />}
                 {title && <Title>{title}</Title>}

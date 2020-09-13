@@ -10,6 +10,12 @@ export const Container = styled.div`
     font-size: 14px;
     margin-bottom: 1em;
     ${({ shadow }) => (shadow == true ? Shadow : '')};
+    cursor: ${({ cursor }) => cursor};
+    :hover {
+        background-color: ${({ hover }) => hover || Colors.white};
+    }
+    ${Transition};
+    opacity: 1;
 `;
 
 export const TitleContainer = styled.div`
