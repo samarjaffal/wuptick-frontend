@@ -1,7 +1,11 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link, useLocation } from '@reach/router';
+import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout';
 import { Avatar } from '../../components/Avatar/index';
+import { Tabs } from '../../components/Tabs';
+import { TabItem } from '../../components/Tabs/TabItem';
+import { ListProjects } from '../../components/Project/ListProjects/';
 import {
     ProfileInfoContainer,
     Profile as ProfileStyled,
@@ -15,7 +19,10 @@ import {
     EditButton,
     ButtonContainer,
 } from './styles';
-export const Profile = () => {
+export const Profile = ({ location }) => {
+    const { tab } = queryString.parse(location.search);
+    const path = useLocation();
+    const currentURL = path.pathname;
     return (
         <LoggedLayout>
             <div className="Container">
@@ -45,6 +52,22 @@ export const Profile = () => {
                         </Description>
                     </DescriptionContainer>
                 </div>
+
+                <Tabs>
+                    <TabItem
+                        text="Projects"
+                        url={`${currentURL}`}
+                        currenTab={tab}
+                        tab={undefined}
+                    />
+                    <TabItem
+                        text="Teams"
+                        url={`${currentURL}?tab=teams`}
+                        currenTab={tab}
+                        tab="teams"
+                    />
+                </Tabs>
+                <ListProjects />
             </div>
         </LoggedLayout>
     );
