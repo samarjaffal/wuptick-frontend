@@ -19,6 +19,9 @@ export const ImageContainer = styled.div``;
 export const ActitivityContainer = styled.div`
     margin-left: 1em;
     width: 100%;
+    @media (max-width: 767px) {
+        margin-left: 0;
+    }
 `;
 
 export const ActivityInfo = styled.div`

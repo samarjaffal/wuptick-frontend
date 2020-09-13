@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { title } from '../../assets/css/theme';
-export const Container = styled.div`
-    @media (max-width: 768px) {
-        margin: 0 20px;
-    }
-`;
+export const Container = styled.div``;
 
 export const Wrapper = styled.div`
     display: flex;

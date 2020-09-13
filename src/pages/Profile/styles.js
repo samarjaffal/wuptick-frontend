@@ -13,6 +13,9 @@ export const ProfileInfoContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 767px) {
+        flex-wrap: wrap;
+    }
 `;
 
 export const Profile = styled.div`
@@ -25,6 +28,10 @@ export const ProfileInfo = styled.div`
     margin-left: 1.5em;
     display: flex;
     flex-direction: column;
+    @media (max-width: 767px) {
+        margin-left: 0;
+        width: 100%;
+    }
 `;
 
 export const Name = styled.h2`
@@ -49,6 +56,9 @@ export const Age = styled.span`
 
 export const DescriptionContainer = styled.div`
     width: 60%;
+    @media (max-width: 767px) {
+        width: 100%;
+    }
 `;
 
 export const Description = styled.p`
@@ -70,4 +80,8 @@ export const EditButton = styled(Link)`
     text-decoration: none;
     ${info};
     color: ${Colors.white};
+    @media (max-width: 767px) {
+        width: 100%;
+        text-align: center;
+    }
 `;

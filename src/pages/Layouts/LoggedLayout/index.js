@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Navbar } from '../../../components/navbar/index';
 import { useUser } from '../../../hooks/useUser';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
-
+import { Container } from './styles';
 export const LoggedLayout = ({ children }) => {
     const { isLogged } = useUser();
     return (
@@ -12,15 +12,7 @@ export const LoggedLayout = ({ children }) => {
                     <Navbar />
                 </DropdownContextProvider>
             )}
-            <div
-                style={{
-                    paddingTop: '60px',
-                    marginLeft: '90px',
-                    marginRight: '75px',
-                }}
-            >
-                {children}
-            </div>
+            <Container>{children}</Container>
         </Fragment>
     );
 };
