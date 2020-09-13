@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout';
@@ -20,9 +20,21 @@ import {
     ButtonContainer,
 } from './styles';
 export const Profile = ({ location }) => {
+    const [currentTab, setCurrentTab] = useState(null);
     const { tab } = queryString.parse(location.search);
     const path = useLocation();
     const currentURL = path.pathname;
+
+    useEffect(() => {
+        console.log(tab, 'tab');
+        setCurrentTab(tab);
+    }, [tab]);
+
+    const renderTabComponent = () => {
+        let component = currentTab == undefined ? <ListProjects /> : null;
+        return component;
+    };
+
     return (
         <LoggedLayout>
             <div className="Container">
@@ -57,17 +69,17 @@ export const Profile = ({ location }) => {
                     <TabItem
                         text="Projects"
                         url={`${currentURL}`}
-                        currenTab={tab}
+                        currenTab={currentTab}
                         tab={undefined}
                     />
                     <TabItem
                         text="Teams"
                         url={`${currentURL}?tab=teams`}
-                        currenTab={tab}
+                        currenTab={currentTab}
                         tab="teams"
                     />
                 </Tabs>
-                <ListProjects />
+                {renderTabComponent()}
             </div>
         </LoggedLayout>
     );
