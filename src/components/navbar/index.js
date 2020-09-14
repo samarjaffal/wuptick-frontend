@@ -109,41 +109,40 @@ export const Navbar = () => {
                                 />
                             )}
                         </Me>
-                        {open && (
-                            <Dropdown>
-                                <DropdownMenu
-                                    menu="main"
-                                    classMenu="menu-primary"
+                        {/*  {open && (
+                           
+                        )} */}
+                        <Dropdown open={open}>
+                            <DropdownMenu menu="main" classMenu="menu-primary">
+                                <DropdownItem
+                                    leftIcon={
+                                        <Me
+                                            loader={SkeletonAvatar}
+                                            loaderProps={{ qty: 1 }}
+                                        >
+                                            {({ avatar }) => (
+                                                <Avatar
+                                                    size={20}
+                                                    src={avatar}
+                                                />
+                                            )}
+                                        </Me>
+                                    }
+                                    goToURL={profileURL}
                                 >
-                                    <DropdownItem
-                                        leftIcon={
-                                            <Me
-                                                loader={SkeletonAvatar}
-                                                loaderProps={{ qty: 1 }}
-                                            >
-                                                {({ avatar }) => (
-                                                    <Avatar
-                                                        size={20}
-                                                        src={avatar}
-                                                    />
-                                                )}
-                                            </Me>
-                                        }
-                                        goToURL={profileURL}
-                                    >
-                                        My Profile
-                                    </DropdownItem>
-                                    <Logout>
-                                        {({ doLogout }) => (
-                                            <DropdownItem
-                                                onClicked={() => doLogout()}
-                                            >
-                                                Logout
-                                            </DropdownItem>
-                                        )}
-                                    </Logout>
-                                </DropdownMenu>
-                                {/*   <DropdownMenu
+                                    My Profile
+                                </DropdownItem>
+                                <Logout>
+                                    {({ doLogout }) => (
+                                        <DropdownItem
+                                            onClicked={() => doLogout()}
+                                        >
+                                            Logout
+                                        </DropdownItem>
+                                    )}
+                                </Logout>
+                            </DropdownMenu>
+                            {/*   <DropdownMenu
                                     menu="settings"
                                     classMenu="menu-secondary"
                                 >
@@ -163,8 +162,7 @@ export const Navbar = () => {
                                         Awesome!
                                     </DropdownItem>
                                 </DropdownMenu> */}
-                            </Dropdown>
-                        )}
+                        </Dropdown>
                     </AvatarContainer>
                 </OutsideClick>
             </NavContainer>

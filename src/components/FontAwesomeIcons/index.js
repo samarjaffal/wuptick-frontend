@@ -11,6 +11,7 @@ import {
     faTrashAlt,
     faCaretDown,
     faCaretRight,
+    faEllipsisH,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -24,5 +25,6 @@ library.add(
     faEdit,
     faTrashAlt,
     faCaretDown,
-    faCaretRight
+    faCaretRight,
+    faEllipsisH
 );

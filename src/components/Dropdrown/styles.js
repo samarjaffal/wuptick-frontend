@@ -14,5 +14,7 @@ export const Dropdown = styled.div`
     padding: 14px;
     overflow: hidden;
     ${ShadowSecondary};
-    transition: height 500ms ease;
+    opacity: ${({ open }) => (open == true ? 1 : 0)};
+    transition: height 500ms ease, opacity 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
 `;

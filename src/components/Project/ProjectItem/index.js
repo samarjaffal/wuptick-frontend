@@ -10,7 +10,7 @@ import {
     ProjectContainer,
     Name,
     ButtonContainer,
-    Button,
+    OptionsButton,
 } from './styles';
 
 export const ProjectItem = ({ project }) => {
@@ -54,9 +54,16 @@ export const ProjectItem = ({ project }) => {
                         </div>
                     </div>
 
-                    <div className="ActionContainer">
+                    <div
+                        className="ActionContainer"
+                        style={{
+                            display: 'flex',
+                            justifyItems: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
                         <ButtonContainer>
-                            <Button
+                            {/*   <Button
                                 to="/"
                                 bg={Colors.whitePrimary}
                                 color={Colors.gray}
@@ -72,7 +79,15 @@ export const ProjectItem = ({ project }) => {
                                 padding="8px 10px"
                             >
                                 <FontAwesomeIcon icon="trash-alt" />
-                            </Button>
+                            </Button> */}
+                            <OptionsButton
+                                onClick={() => console.log('clicked')}
+                            >
+                                <FontAwesomeIcon
+                                    icon="ellipsis-h"
+                                    color={Colors.gray}
+                                />
+                            </OptionsButton>
                         </ButtonContainer>
                     </div>
                 </div>

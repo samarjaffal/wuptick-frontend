@@ -4,7 +4,7 @@ import { Transitions } from './Transitions.js';
 import { useDropdown } from '../../hooks/useDropdown';
 import PropTypes from 'prop-types';
 
-export const Dropdown = ({ children }) => {
+export const Dropdown = ({ open, children }) => {
     const { menuHeight, dropdownRef, setMenuHeight } = useDropdown();
 
     useEffect(() => {
@@ -12,7 +12,11 @@ export const Dropdown = ({ children }) => {
     }, []);
 
     return (
-        <DropdownContainer style={{ height: menuHeight }} ref={dropdownRef}>
+        <DropdownContainer
+            style={{ height: menuHeight }}
+            ref={dropdownRef}
+            open={open}
+        >
             <Transitions />
             {children}
         </DropdownContainer>
