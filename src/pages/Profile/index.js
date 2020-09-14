@@ -15,8 +15,6 @@ import {
     Email,
     Ocupation,
     Age,
-    DescriptionContainer,
-    Description,
     EditButton,
     ButtonContainer,
 } from './styles';
@@ -41,7 +39,15 @@ export const Profile = ({ location }) => {
     }, [tab, userId]);
 
     const renderTabComponent = () => {
-        let component = currentTab == undefined ? <ListProjects /> : null;
+        let component =
+            currentTab == undefined ? (
+                <GetUserQuery userId={userId}>
+                    {({ data }) => {
+                        const { getUser: user } = data;
+                        return <ListProjects teams={user.teams} />;
+                    }}
+                </GetUserQuery>
+            ) : null;
         return component;
     };
 

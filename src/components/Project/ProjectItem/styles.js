@@ -13,6 +13,7 @@ export const Container = styled.div`
 export const ProjectContainer = styled.div`
     display: flex;
     align-items: center;
+    width: 50%;
 `;
 
 export const Name = styled(Link)`

@@ -13,7 +13,7 @@ import {
     Button,
 } from './styles';
 
-export const ProjectItem = () => {
+export const ProjectItem = ({ project }) => {
     return (
         <ListContainer hover={Colors.hover} cursor="pointer">
             <Container>
@@ -22,38 +22,59 @@ export const ProjectItem = () => {
                         size={28}
                         margin="0 1em 0 0"
                         description="Project Image"
+                        src={project.image}
                     />
-                    <Name to="/">Fronted</Name>
+                    <Name to="/">{project.name}</Name>
                 </ProjectContainer>
-                <div className="MembersContainer">
-                    <div className="MembersList" style={{ display: 'flex' }}>
-                        {Array(6)
-                            .fill()
-                            .map((item, index) => (
-                                <Avatar margin="0 4px" key={index} size={28} />
-                            ))}
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        width: '50%',
+                    }}
+                >
+                    <div className="MembersContainer">
+                        <div
+                            className="MembersList"
+                            style={{ display: 'flex' }}
+                        >
+                            {project.members.map((member, index) => {
+                                return (
+                                    member.user !== null &&
+                                    Object.keys(member.user).length > 0 && (
+                                        <Avatar
+                                            margin="0 4px"
+                                            key={index}
+                                            size={28}
+                                            src={member.user.avatar}
+                                        />
+                                    )
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-                <div className="ActionContainer">
-                    <ButtonContainer>
-                        <Button
-                            to="/"
-                            bg={Colors.whitePrimary}
-                            color={Colors.gray}
-                            padding="8px 10px"
-                            margin="0 1em 0 0"
-                        >
-                            <FontAwesomeIcon icon="edit" />
-                        </Button>
-                        <Button
-                            to="/"
-                            bg={Colors.whitePrimary}
-                            color={Colors.red}
-                            padding="8px 10px"
-                        >
-                            <FontAwesomeIcon icon="trash-alt" />
-                        </Button>
-                    </ButtonContainer>
+
+                    <div className="ActionContainer">
+                        <ButtonContainer>
+                            <Button
+                                to="/"
+                                bg={Colors.whitePrimary}
+                                color={Colors.gray}
+                                padding="8px 10px"
+                                margin="0 1em 0 0"
+                            >
+                                <FontAwesomeIcon icon="edit" />
+                            </Button>
+                            <Button
+                                to="/"
+                                bg={Colors.whitePrimary}
+                                color={Colors.red}
+                                padding="8px 10px"
+                            >
+                                <FontAwesomeIcon icon="trash-alt" />
+                            </Button>
+                        </ButtonContainer>
+                    </div>
                 </div>
             </Container>
         </ListContainer>

@@ -9,6 +9,8 @@ import {
     faPlus,
     faEdit,
     faTrashAlt,
+    faCaretDown,
+    faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -20,5 +22,7 @@ library.add(
     faClock,
     faPlus,
     faEdit,
-    faTrashAlt
+    faTrashAlt,
+    faCaretDown,
+    faCaretRight
 );

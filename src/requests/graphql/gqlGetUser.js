@@ -15,6 +15,7 @@ export const gqlGetUser = gql`
                 projects {
                     _id
                     name
+                    image
                     members {
                         user {
                             _id
