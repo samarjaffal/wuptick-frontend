@@ -16,6 +16,11 @@ export const gqlGetUser = gql`
                     _id
                     name
                     image
+                    created_at
+                    owner {
+                        name
+                        last_name
+                    }
                     members {
                         user {
                             _id

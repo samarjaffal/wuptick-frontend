@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../../assets/css/colors';
 import { Shadow, Transition } from '../../../assets/css/shared-styles';
-import { description, borderRadius, info } from '../../../assets/css/theme';
+import {
+    description,
+    borderRadius,
+    info,
+    bold,
+} from '../../../assets/css/theme';
 
 export const Container = styled.div`
     display: flex;
@@ -13,6 +19,12 @@ export const Container = styled.div`
 export const ProjectContainer = styled.div`
     display: flex;
     align-items: center;
+    width: 50%;
+`;
+
+export const MembersContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
     width: 50%;
 `;
 
@@ -63,4 +75,14 @@ export const Anchor = styled(Link)`
     :hover {
         background-color: ${Colors.hover};
     }
+`;
+
+export const Details = styled.h6`
+    margin: 0;
+    ${info};
+    font-weight: ${bold};
+`;
+
+export const Clock = styled(FontAwesomeIcon)`
+    margin-right: 0.5em;
 `;
