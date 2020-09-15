@@ -14,18 +14,30 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 424px) {
+        flex-wrap: wrap;
+    }
+    position: relative;
 `;
 
 export const ProjectContainer = styled.div`
     display: flex;
     align-items: center;
     width: 50%;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const MembersContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 50%;
+    @media (max-width: 424px) {
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 0.5em;
+    }
 `;
 
 export const Name = styled(Link)`
@@ -66,6 +78,12 @@ export const OptionsButton = styled.div`
     :hover {
         opacity: 1;
         background-color: ${Colors.white};
+    }
+
+    @media (max-width: 424px) {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 `;
 

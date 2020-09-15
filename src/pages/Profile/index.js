@@ -64,7 +64,11 @@ export const Profile = ({ location }) => {
                             >
                                 <ProfileInfoContainer>
                                     <ProfileStyled>
-                                        <Avatar size={100} src={user.avatar} />
+                                        <Avatar
+                                            size={100}
+                                            src={user.avatar}
+                                            hide={false}
+                                        />
                                         <ProfileInfo>
                                             <Name>
                                                 {user.name} {user.last_name}

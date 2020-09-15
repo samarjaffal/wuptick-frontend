@@ -17,6 +17,7 @@ import {
     Details,
     Clock,
 } from './styles';
+import PropTypes from 'prop-types';
 
 export const ProjectItem = ({ project }) => {
     let date = dayjs(project.created_at);
@@ -58,6 +59,7 @@ export const ProjectItem = ({ project }) => {
                                         key={index}
                                         size={28}
                                         src={member.user.avatar}
+                                        hide={false}
                                     />
                                 )
                             );
@@ -87,4 +89,8 @@ export const ProjectItem = ({ project }) => {
             </Container>
         </ListContainer>
     );
+};
+
+ProjectItem.propTypes = {
+    project: PropTypes.object,
 };

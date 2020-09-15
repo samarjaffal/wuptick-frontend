@@ -23,6 +23,12 @@ export const Profile = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    @media (max-width: 767px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 1em;
+    }
 `;
 
 export const ProfileInfo = styled.div`
@@ -86,7 +92,8 @@ export const EditButton = styled(Link)`
     }
     color: ${Colors.white};
     @media (max-width: 767px) {
-        width: 100%;
+        margin: auto;
+        width: 40%;
         text-align: center;
     }
 `;

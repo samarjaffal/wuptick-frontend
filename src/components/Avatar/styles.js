@@ -13,6 +13,6 @@ export const Avatar = styled.img`
     object-position: center;
     cursor: pointer;
     @media (max-width: 767px) {
-        display: none;
+        display: ${({ hide }) => (hide == true ? 'none' : 'block')};
     }
 `;
