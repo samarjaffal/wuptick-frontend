@@ -5,7 +5,7 @@ import { borderRadius } from '../../assets/css/theme';
 
 export const Dropdown = styled.div`
     position: absolute;
-    top: 46px;
+    top: ${({ open }) => (open == true ? '46px' : '40px')};
     width: 300px;
     transform: translateX(-45%);
     background-color: ${Colors.backgroud};
@@ -15,6 +15,6 @@ export const Dropdown = styled.div`
     overflow: hidden;
     ${ShadowSecondary};
     opacity: ${({ open }) => (open == true ? 1 : 0)};
-    transition: height 500ms ease, opacity 0.2s ease-in-out,
-        transform 0.2s ease-in-out;
+    visibility: ${({ open }) => (open == true ? 'visible' : 'hidden')};
+    transition: height 500ms ease, all 0.2s ease 0s;
 `;

@@ -80,13 +80,13 @@ export const EditButton = styled(Link)`
     border-radius: ${borderRadius};
     text-decoration: none;
     ${info};
+    :hover {
+        ${Shadow};
+        ${Transition};
+    }
     color: ${Colors.white};
     @media (max-width: 767px) {
         width: 100%;
         text-align: center;
-    }
-    :hover {
-        ${Shadow};
-        ${Transition};
     }
 `;
