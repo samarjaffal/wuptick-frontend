@@ -29,11 +29,9 @@ export const Profile = ({ location }) => {
     const getUserIdFromURL = () => {
         const splittedURL = currentURL.split('-');
         setUserId(splittedURL[2]);
-        console.log(userId, 'userID');
     };
 
     useEffect(() => {
-        console.log(tab, 'tab');
         setCurrentTab(tab);
         getUserIdFromURL();
     }, [tab, userId]);
@@ -98,12 +96,12 @@ export const Profile = ({ location }) => {
                         currenTab={currentTab}
                         tab={undefined}
                     />
-                    <TabItem
+                    {/*     <TabItem
                         text="Teams"
                         url={`${currentURL}?tab=teams`}
                         currenTab={currentTab}
                         tab="teams"
-                    />
+                    /> */}
                 </Tabs>
                 {renderTabComponent()}
             </div>
