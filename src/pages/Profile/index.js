@@ -7,6 +7,7 @@ import { Tabs } from '../../components/Tabs';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { ListProjects } from '../../components/Project/ListProjects/';
 import { GetUserQuery } from '../../requests/User/GetUserQuery';
+import { useUser } from '../../hooks/useUser';
 import {
     ProfileInfoContainer,
     Profile as ProfileStyled,
@@ -24,6 +25,7 @@ export const Profile = ({ location }) => {
     const currentURL = path.pathname;
     const [currentTab, setCurrentTab] = useState(null);
     const [userId, setUserId] = useState(null);
+    const { currentUser, profileURL } = useUser();
     const { tab } = queryString.parse(location.search);
 
     const getUserIdFromURL = () => {
@@ -78,12 +80,15 @@ export const Profile = ({ location }) => {
                                             <Age>22 years</Age>
                                         </ProfileInfo>
                                     </ProfileStyled>
-
-                                    <ButtonContainer>
-                                        <EditButton to="/">
-                                            Edit Profile
-                                        </EditButton>
-                                    </ButtonContainer>
+                                    {currentUser._id == userId && (
+                                        <ButtonContainer>
+                                            <EditButton
+                                                to={`/${profileURL}/edit`}
+                                            >
+                                                Edit Profile
+                                            </EditButton>
+                                        </ButtonContainer>
+                                    )}
                                 </ProfileInfoContainer>
                             </div>
                         );

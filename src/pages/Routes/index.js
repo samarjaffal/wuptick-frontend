@@ -8,6 +8,7 @@ import { PrivateRoute } from '../../components/PrivateRoute/index';
 import { PublicRoute } from '../../components/PublicRoute/index';
 import { useUser } from '../../hooks/useUser';
 import { Profile } from '../Profile/index';
+import { EditProfile } from '../Profile/EditProfile/index';
 const DefaultRoutes = () => {
     const { isLogged, profileURL } = useUser();
     return isLogged ? (
@@ -17,6 +18,7 @@ const DefaultRoutes = () => {
             <PrivateRoute path="test" component={TestPage} />
             <PrivateRoute path="/project/:id" component={Project} />
             <PrivateRoute path={profileURL} component={Profile} />
+            <PrivateRoute path={`${profileURL}/edit`} component={EditProfile} />
             <NotFound default />
             <Oops path="oops" />
         </Router>

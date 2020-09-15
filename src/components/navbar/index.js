@@ -128,7 +128,7 @@ export const Navbar = () => {
                                             )}
                                         </Me>
                                     }
-                                    goToURL={profileURL}
+                                    goToURL={`/${profileURL}`}
                                 >
                                     My Profile
                                 </DropdownItem>
