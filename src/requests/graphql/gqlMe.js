@@ -7,6 +7,8 @@ export const gqlMe = gql`
             name
             last_name
             avatar
+            email
+            occupation
             favorite_projects {
                 _id
                 name
