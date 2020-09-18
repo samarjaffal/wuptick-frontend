@@ -12,10 +12,16 @@ import { Transition, Shadow } from '../../../assets/css/shared-styles';
 
 export const Title = styled.h1`
     ${title}
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 `;
 
 export const AccountTitle = styled.h2`
     ${title}
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 `;
 
 export const SubTitle = styled.h4`
@@ -36,6 +42,9 @@ export const FormContainer = styled.div`
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 export const AccountContainer = styled.div`
@@ -46,6 +55,10 @@ export const AccountContainer = styled.div`
 
 export const InfoContainer = styled.div`
     width: 80%;
+    @media (max-width: 768px) {
+        order: 2;
+        width: 100%;
+    }
 `;
 
 export const AvatarContainer = styled.div`
@@ -54,20 +67,46 @@ export const AvatarContainer = styled.div`
     flex-direction: column;
     align-items: center;
     margin: auto;
+    @media (max-width: 768px) {
+        order: 1;
+        margin-bottom: 1em;
+        width: 100%;
+    }
 `;
 
 export const ButtonContainer = styled.div`
     margin-top: 0.5em;
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 `;
 
 export const PasswordResetContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+    }
+`;
+
+export const PasswordInfoContainer = styled.div`
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
+
+export const DeleteAccountInfoContainer = styled.div`
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const DeleteAccountContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+    }
 `;
 
 export const PasswordAnchorContainer = styled.div`
@@ -136,9 +175,9 @@ export const SaveButton = styled.button`
         ${Shadow};
         ${Transition};
     }
-    /*     @media (max-width: 767px) {
+    @media (max-width: 768px) {
         margin: auto;
-        width: 40%;
+        width: 60%;
         text-align: center;
-    } */
+    }
 `;

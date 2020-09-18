@@ -15,6 +15,8 @@ import {
     PasswordAnchorContainer,
     DeleteAccountContainer,
     DeleteAnchorContainer,
+    PasswordInfoContainer,
+    DeleteAccountInfoContainer,
     Row,
     Input,
     Anchor,
@@ -71,7 +73,9 @@ export const EditProfile = () => {
                         </InfoContainer>
                         <AvatarContainer>
                             <Avatar hide={false} size={120} />
-                            <Anchor href="#">Change picture</Anchor>
+                            <div>
+                                <Anchor href="#">Change picture</Anchor>
+                            </div>
                         </AvatarContainer>
                     </FormContainer>
                     <ButtonContainer>
@@ -85,22 +89,22 @@ export const EditProfile = () => {
                 </div>
                 <AccountContainer>
                     <PasswordResetContainer>
-                        <div className="Password_Info_Container">
+                        <PasswordInfoContainer>
                             <SubTitle>Password</SubTitle>
                             <Description>
                                 Change the password of your account
                             </Description>
-                        </div>
+                        </PasswordInfoContainer>
                         <PasswordAnchorContainer>
                             <Anchor href="#">Change password</Anchor>
                         </PasswordAnchorContainer>
                     </PasswordResetContainer>
                     <Hr />
                     <DeleteAccountContainer>
-                        <div className="DeleteAccount_Info_Container">
+                        <DeleteAccountInfoContainer>
                             <SubTitle>Delete</SubTitle>
                             <Description>Delete my account</Description>
-                        </div>
+                        </DeleteAccountInfoContainer>
                         <DeleteAnchorContainer>
                             <Anchor href="#" color="red">
                                 Delete account
