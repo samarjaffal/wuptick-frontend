@@ -1,4 +1,4 @@
-import { useMutation, mutra } from 'react-apollo';
+import { useMutation } from 'react-apollo';
 import { gqlLogout } from './graphql/gqlLogout';
 import PropTypes from 'prop-types';
 import { navigate } from '@reach/router';
