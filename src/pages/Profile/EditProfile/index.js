@@ -28,7 +28,6 @@ import {
 } from './styles';
 export const EditProfile = () => {
     const { register, handleSubmit } = useForm();
-
     return (
         <EditUserMutation>
             {({ doEditUser }) => {
@@ -50,6 +49,7 @@ export const EditProfile = () => {
                                         email,
                                         avatar,
                                         occupation,
+                                        birthday,
                                     }) => {
                                         return (
                                             <FormContainer>
@@ -91,6 +91,9 @@ export const EditProfile = () => {
                                                             placeholder="Birthday"
                                                             width="45%"
                                                             ref={register()}
+                                                            defaultValue={
+                                                                birthday
+                                                            }
                                                         />
                                                         <Input
                                                             type="text"

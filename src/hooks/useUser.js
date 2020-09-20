@@ -1,4 +1,5 @@
 import { useContext, useCallback } from 'react';
+import dayjs from 'dayjs';
 import Context from '../context/UserContext';
 import { setAccessToken as setToken } from '../shared/GetAccessToken';
 import jwtDecode from 'jwt-decode';
@@ -38,6 +39,21 @@ export const useUser = () => {
         setToken('');
     }, []);
 
+    const getAge = useCallback((bornDate) => {
+        const currentYear = dayjs().format('YYYY');
+        const bornYear = dayjs(bornDate).format('YYYY');
+        let age = currentYear - bornYear;
+
+        const month = dayjs().format('M') - dayjs(bornDate).format('M');
+        if (
+            month < 0 ||
+            (month === 0 && dayjs().getDate('L') < dayjs(bornDate).format('L'))
+        ) {
+            age = age - 1;
+        }
+        return age;
+    });
+
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
 
@@ -52,5 +68,6 @@ export const useUser = () => {
         currentUser,
         setCurrentUser,
         profileURL,
+        getAge,
     };
 };

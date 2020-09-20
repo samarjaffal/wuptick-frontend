@@ -25,7 +25,7 @@ export const Profile = ({ location }) => {
     const currentURL = path.pathname;
     const [currentTab, setCurrentTab] = useState(null);
     const [userId, setUserId] = useState(null);
-    const { currentUser, profileURL } = useUser();
+    const { currentUser, profileURL, getAge } = useUser();
     const { tab } = queryString.parse(location.search);
 
     const getUserIdFromURL = () => {
@@ -77,7 +77,9 @@ export const Profile = ({ location }) => {
                                             <Ocupation>
                                                 {user.occupation}
                                             </Ocupation>
-                                            <Age>22 years</Age>
+                                            <Age>
+                                                {getAge(user.birthday)} years
+                                            </Age>
                                         </ProfileInfo>
                                     </ProfileStyled>
                                     {currentUser._id == userId && (

@@ -9,6 +9,7 @@ export const gqlGetUser = gql`
             avatar
             occupation
             email
+            birthday
             teams {
                 _id
                 name
