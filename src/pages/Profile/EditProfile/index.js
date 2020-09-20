@@ -30,7 +30,7 @@ export const EditProfile = () => {
     const { register, handleSubmit } = useForm();
     return (
         <EditUserMutation>
-            {({ doEditUser }) => {
+            {({ doEditUser, loading }) => {
                 const onFormSubmited = (formData) => {
                     const input = { ...formData };
                     doEditUser(input);
@@ -125,9 +125,12 @@ export const EditProfile = () => {
                                 </Me>
                                 <ButtonContainer>
                                     <SaveButton
+                                        disabled={loading}
                                         onClick={handleSubmit(onFormSubmited)}
                                     >
-                                        Save Changes
+                                        {loading
+                                            ? 'Loading...'
+                                            : 'Save Changes'}
                                     </SaveButton>
                                 </ButtonContainer>
                             </form>

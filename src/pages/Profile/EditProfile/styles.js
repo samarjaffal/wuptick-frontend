@@ -175,6 +175,7 @@ export const SaveButton = styled.button`
         ${Shadow};
         ${Transition};
     }
+    opacity: ${({ disabled }) => (disabled == true ? 0.6 : 1)};
     @media (max-width: 768px) {
         margin: auto;
         width: 60%;

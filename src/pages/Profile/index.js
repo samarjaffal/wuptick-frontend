@@ -8,6 +8,8 @@ import { TabItem } from '../../components/Tabs/TabItem';
 import { ListProjects } from '../../components/Project/ListProjects/';
 import { GetUserQuery } from '../../requests/User/GetUserQuery';
 import { useUser } from '../../hooks/useUser';
+import { SkeletonInfoProfile } from '../../components/Loaders/SkeletonInfoProfile/index';
+import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 import {
     ProfileInfoContainer,
     Profile as ProfileStyled,
@@ -41,7 +43,11 @@ export const Profile = ({ location }) => {
     const renderTabComponent = () => {
         let component =
             currentTab == undefined ? (
-                <GetUserQuery userId={userId}>
+                <GetUserQuery
+                    userId={userId}
+                    loader={SkeletonCardItem}
+                    loaderProps={{ qty: 6 }}
+                >
                     {({ data }) => {
                         const { getUser: user } = data;
                         return <ListProjects teams={user.teams} />;
@@ -54,7 +60,11 @@ export const Profile = ({ location }) => {
     return (
         <LoggedLayout>
             <div className="Container">
-                <GetUserQuery userId={userId}>
+                <GetUserQuery
+                    userId={userId}
+                    loader={SkeletonInfoProfile}
+                    loaderProps={{ qty: 1 }}
+                >
                     {({ data }) => {
                         const { getUser: user } = data;
                         return (

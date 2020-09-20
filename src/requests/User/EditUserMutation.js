@@ -20,9 +20,9 @@ export const EditUserMutation = ({ children }) => {
         });
     });
 
-    if (loading) {
+    /*  if (loading) {
         return 'loading edit user mutation...';
-    }
+    } */
 
     if (error) {
         console.error(error, 'error');
