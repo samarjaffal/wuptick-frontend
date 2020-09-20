@@ -43,7 +43,7 @@ export const Nav = styled.nav`
         position: absolute;
         background: ${Colors.backgroud};
         width: 100vw;
-        height: 70vh;
+        /* height: 70vh; */
         top: -100vh;
         left: 0;
         display: flex;
@@ -160,6 +160,7 @@ export const LogoutButton = styled.button`
     color: ${Colors.white};
     border-radius: ${borderRadius};
     font-weight: ${semiBold};
+    margin-bottom: 20px;
     :hover {
         opacity: 0.8;
         transition-duration: 0.5s;

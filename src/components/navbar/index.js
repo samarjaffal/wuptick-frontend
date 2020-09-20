@@ -33,9 +33,10 @@ export const Navbar = () => {
     const { teamSelected, profileURL } = useUser();
     const { burguerButton, isActive } = useHamburguerMenu();
     const { open, setOpen } = useDropdown();
-    const { match } = useSmallScreen();
+    const { match, screen, setMatch } = useSmallScreen();
 
     useEffect(() => {
+        setMatch(screen.matches);
         if (open && match) {
             setOpen(false);
         }
@@ -81,7 +82,7 @@ export const Navbar = () => {
                             url="/"
                             icon="tasks"
                         />
-                        {isActive && (
+                        {isActive && match && (
                             <NavLinkLogout>
                                 <Logout>
                                     {({ doLogout }) => (

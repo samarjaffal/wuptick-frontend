@@ -4,8 +4,7 @@ const SIZE = 'screen and (max-width: 767px)';
 
 export const useSmallScreen = () => {
     const screen = window.matchMedia(SIZE);
-    screen.addListener(validation);
-
+    screen.addEventListener('change', validation);
     const [match, setMatch] = useState(false);
 
     function validation({ matches }) {
