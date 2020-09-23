@@ -6,6 +6,7 @@ import { Avatar } from '../../components/Avatar/index';
 import { Tabs } from '../../components/Tabs';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { ListProjects } from '../../components/Project/ListProjects/';
+import { ListTeams } from '../../components/Teams/ListTeams/index';
 import { GetUserQuery } from '../../requests/User/GetUserQuery';
 import { useUser } from '../../hooks/useUser';
 import { SkeletonInfoProfile } from '../../components/Loaders/SkeletonInfoProfile/index';
@@ -41,20 +42,22 @@ export const Profile = ({ location }) => {
     }, [tab, userId]);
 
     const renderTabComponent = () => {
-        let component =
-            currentTab == undefined ? (
-                <GetUserQuery
-                    userId={userId}
-                    loader={SkeletonCardItem}
-                    loaderProps={{ qty: 6 }}
-                >
-                    {({ data }) => {
-                        const { getUser: user } = data;
-                        return <ListProjects teams={user.teams} />;
-                    }}
-                </GetUserQuery>
-            ) : null;
-        return component;
+        return (
+            <GetUserQuery
+                userId={userId}
+                loader={SkeletonCardItem}
+                loaderProps={{ qty: 6 }}
+            >
+                {({ data }) => {
+                    const { getUser: user } = data;
+                    return currentTab == undefined ? (
+                        <ListProjects teams={user.teams} />
+                    ) : (
+                        <ListTeams teams={user.teams} />
+                    );
+                }}
+            </GetUserQuery>
+        );
     };
 
     return (
@@ -113,12 +116,12 @@ export const Profile = ({ location }) => {
                         currenTab={currentTab}
                         tab={undefined}
                     />
-                    {/*     <TabItem
+                    <TabItem
                         text="Teams"
                         url={`${currentURL}?tab=teams`}
                         currenTab={currentTab}
                         tab="teams"
-                    /> */}
+                    />
                 </Tabs>
                 {renderTabComponent()}
             </div>

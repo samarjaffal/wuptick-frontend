@@ -13,6 +13,12 @@ export const gqlGetUser = gql`
             teams {
                 _id
                 name
+                members {
+                    _id
+                    name
+                    last_name
+                    avatar
+                }
                 projects {
                     _id
                     name
