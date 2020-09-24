@@ -5,12 +5,12 @@ import { TransitionSecondary } from '../../assets/css/shared-styles';
 import { semiBold, borderRadius } from '../../assets/css/theme';
 
 export const MenuItem = styled(Link)`
-    height: 50px;
+    /* height: 50px; */
     display: flex;
     align-items: center;
     border-radius: ${borderRadius};
     ${TransitionSecondary};
-    padding: 7px;
+    /* padding: 7px; */
     text-decoration: none;
     font-size: 1em;
     font-weight: ${semiBold};

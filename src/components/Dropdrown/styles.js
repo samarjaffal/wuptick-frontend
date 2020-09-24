@@ -6,8 +6,11 @@ import { borderRadius } from '../../assets/css/theme';
 export const Dropdown = styled.div`
     position: absolute;
     top: ${({ open }) => (open == true ? '46px' : '40px')};
-    width: 300px;
-    transform: translateX(-45%);
+    width: ${({ width }) => (width ? width : '300px')};
+    ${({ transform }) =>
+        transform
+            ? `transform: translateX(${transform});`
+            : `transform: translateX(-45%);`};
     background-color: ${Colors.backgroud};
     border: 1px solid ${Colors.white};
     border-radius: ${borderRadius};
@@ -17,4 +20,11 @@ export const Dropdown = styled.div`
     opacity: ${({ open }) => (open == true ? 1 : 0)};
     visibility: ${({ open }) => (open == true ? 'visible' : 'hidden')};
     transition: height 500ms ease, all 0.2s ease 0s;
+    z-index: 999;
+
+    @media (max-width: 424px) {
+        transform: none;
+        right: 0;
+        top: 30px;
+    }
 `;
