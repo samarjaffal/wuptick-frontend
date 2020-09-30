@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { LoggedLayout } from '../../Layouts/LoggedLayout';
 import { Avatar } from '../../../components/Avatar/index';
 import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
+import { Modal } from '../../../components/Modal/index';
 import {
     Title,
     SubTitle,
@@ -28,6 +29,7 @@ import {
 } from './styles';
 export const EditProfile = () => {
     const { register, handleSubmit } = useForm();
+    const modalRef = useRef();
     return (
         <EditUserMutation>
             {({ doEditUser, loading }) => {
@@ -151,7 +153,12 @@ export const EditProfile = () => {
                                         </Description>
                                     </PasswordInfoContainer>
                                     <PasswordAnchorContainer>
-                                        <Anchor href="#">
+                                        <Anchor
+                                            href="#"
+                                            onClick={() =>
+                                                modalRef.current.openModal()
+                                            }
+                                        >
                                             Change password
                                         </Anchor>
                                     </PasswordAnchorContainer>
@@ -172,6 +179,15 @@ export const EditProfile = () => {
                                 </DeleteAccountContainer>
                             </AccountContainer>
                         </div>
+                        <Modal ref={modalRef}>
+                            <h2>Modal header</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Repellendus quasi voluptates,
+                                voluptatem necessitatibus expedita sed veniam
+                                earum inventore adipisci quia.
+                            </p>
+                        </Modal>
                     </LoggedLayout>
                 );
             }}

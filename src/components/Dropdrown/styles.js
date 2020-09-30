@@ -20,7 +20,7 @@ export const Dropdown = styled.div`
     opacity: ${({ open }) => (open == true ? 1 : 0)};
     visibility: ${({ open }) => (open == true ? 'visible' : 'hidden')};
     transition: height 500ms ease, all 0.2s ease 0s;
-    z-index: 999;
+    z-index: 99;
 
     @media (max-width: 424px) {
         transform: none;
