@@ -129,7 +129,7 @@ export const Input = styled.input`
     width: ${({ width }) => (width ? width : '100%')};
     height: 50px;
     border: none;
-    background: ${Colors.whitePrimary};
+    background-color: ${({ bg }) => (bg ? bg : Colors.whitePrimary)};
     padding: 20px;
     border-radius: ${borderRadius};
     margin-bottom: 10px;
@@ -151,10 +151,12 @@ export const Input = styled.input`
     }
 `;
 
-export const Anchor = styled.a`
+export const Anchor = styled.span`
     ${description};
     color: ${({ color }) => (color ? Colors[color] : Colors.primary)};
     margin-top: 0.5em;
+    cursor: pointer;
+    text-decoration: underline;
 `;
 
 export const Hr = styled.hr`
@@ -170,6 +172,7 @@ export const SaveButton = styled.button`
     text-decoration: none;
     ${info};
     color: ${Colors.white};
+    width: ${({ width }) => (width ? width : 'auto')};
     cursor: pointer;
     :hover {
         ${Shadow};

@@ -29,13 +29,18 @@ export const ModalBox = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     min-height: 30%;
-    width: 60%;
+    width: 35%;
+    max-width: 60%;
     background-color: ${Colors.whitePrimary};
     ${Shadow};
     z-index: 101;
     border-radius: ${borderRadius};
     overflow-y: auto;
     padding: 40px;
+
+    @media (max-width: 768px) {
+        width: 60%;
+    }
 `;
 
 export const CloseButton = styled.div`
@@ -56,4 +61,8 @@ export const CloseButton = styled.div`
     :hover {
         background-color: ${Colors.hover};
     }
+`;
+
+export const Title = styled.h2`
+    color: ${Colors.black};
 `;

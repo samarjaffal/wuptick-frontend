@@ -5,6 +5,7 @@ import { Avatar } from '../../../components/Avatar/index';
 import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
 import { Modal } from '../../../components/Modal/index';
+import { Colors } from '../../../assets/css/colors';
 import {
     Title,
     SubTitle,
@@ -154,7 +155,6 @@ export const EditProfile = () => {
                                     </PasswordInfoContainer>
                                     <PasswordAnchorContainer>
                                         <Anchor
-                                            href="#"
                                             onClick={() =>
                                                 modalRef.current.openModal()
                                             }
@@ -179,14 +179,40 @@ export const EditProfile = () => {
                                 </DeleteAccountContainer>
                             </AccountContainer>
                         </div>
-                        <Modal ref={modalRef}>
-                            <h2>Modal header</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Repellendus quasi voluptates,
-                                voluptatem necessitatibus expedita sed veniam
-                                earum inventore adipisci quia.
-                            </p>
+                        <Modal ref={modalRef} title="Change your password.">
+                            <form>
+                                <div style={{ width: '100%' }}>
+                                    <Input
+                                        type="password"
+                                        name="old_password"
+                                        placeholder="Old Password"
+                                        width="100%"
+                                        ref={register()}
+                                        bg={Colors.white}
+                                    />
+                                    <Input
+                                        type="password"
+                                        name="new_password"
+                                        placeholder="New Password"
+                                        width="100%"
+                                        ref={register()}
+                                        bg={Colors.white}
+                                    />
+                                    <Input
+                                        type="password"
+                                        name="confirm_password"
+                                        placeholder="Confirm New Password"
+                                        width="100%"
+                                        ref={register()}
+                                        bg={Colors.white}
+                                    />
+                                    <ButtonContainer>
+                                        <SaveButton width="100%">
+                                            Save
+                                        </SaveButton>
+                                    </ButtonContainer>
+                                </div>
+                            </form>
                         </Modal>
                     </LoggedLayout>
                 );

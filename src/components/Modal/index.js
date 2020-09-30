@@ -2,9 +2,15 @@ import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import ReactDom from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
-import { ModalWrapper, ModalBackdrop, ModalBox, CloseButton } from './styles';
+import {
+    ModalWrapper,
+    ModalBackdrop,
+    ModalBox,
+    CloseButton,
+    Title,
+} from './styles';
 
-const Modal = forwardRef(({ children }, ref) => {
+const Modal = forwardRef(({ children, title }, ref) => {
     const [display, setDisplay] = useState(false);
 
     useImperativeHandle(ref, () => {
@@ -34,6 +40,7 @@ const Modal = forwardRef(({ children }, ref) => {
                                   color={Colors.gray}
                               />
                           </CloseButton>
+                          <Title>{title || ''}</Title>
                           {children}
                       </ModalBox>
                   </ModalWrapper>,
