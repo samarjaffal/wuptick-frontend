@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../index';
+import { Input } from '../../../Forms/Input/index';
 import { Colors } from '../../../../assets/css/colors';
-import { ButtonContainer, Input, SaveButton } from './styles';
+import { ButtonContainer, SaveButton } from './styles';
 
 export const ChangePasswordModal = ({ modalRef }) => {
     const { register, handleSubmit } = useForm();
