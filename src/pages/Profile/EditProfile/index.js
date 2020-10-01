@@ -4,7 +4,7 @@ import { LoggedLayout } from '../../Layouts/LoggedLayout';
 import { Avatar } from '../../../components/Avatar/index';
 import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
-import { Modal } from '../../../components/Modal/index';
+import { ChangePasswordModal } from '../../../components/Modal/templates/ChangePasswordModal/index';
 import { Colors } from '../../../assets/css/colors';
 import {
     Title,
@@ -179,41 +179,7 @@ export const EditProfile = () => {
                                 </DeleteAccountContainer>
                             </AccountContainer>
                         </div>
-                        <Modal ref={modalRef} title="Change your password.">
-                            <form>
-                                <div style={{ width: '100%' }}>
-                                    <Input
-                                        type="password"
-                                        name="old_password"
-                                        placeholder="Old Password"
-                                        width="100%"
-                                        ref={register()}
-                                        bg={Colors.white}
-                                    />
-                                    <Input
-                                        type="password"
-                                        name="new_password"
-                                        placeholder="New Password"
-                                        width="100%"
-                                        ref={register()}
-                                        bg={Colors.white}
-                                    />
-                                    <Input
-                                        type="password"
-                                        name="confirm_password"
-                                        placeholder="Confirm New Password"
-                                        width="100%"
-                                        ref={register()}
-                                        bg={Colors.white}
-                                    />
-                                    <ButtonContainer>
-                                        <SaveButton width="100%">
-                                            Save
-                                        </SaveButton>
-                                    </ButtonContainer>
-                                </div>
-                            </form>
-                        </Modal>
+                        <ChangePasswordModal modalRef={modalRef} />
                     </LoggedLayout>
                 );
             }}
