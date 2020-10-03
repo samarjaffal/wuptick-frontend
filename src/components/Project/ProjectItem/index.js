@@ -37,7 +37,7 @@ const ProjectDropDown = ({ openDrop }) => {
     }, [openDrop]);
 
     return (
-        <Dropdown open={open} transform="-91%" width="200px">
+        <Dropdown open={open} transform="-91%" width="200px" top="46px">
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="edit" />}
