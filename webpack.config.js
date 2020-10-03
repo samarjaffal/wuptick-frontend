@@ -1,4 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path');
+var stylePathResolves =
+    'includePaths[]=' +
+    path.resolve('./') +
+    '&' +
+    'includePaths[]=' +
+    path.resolve('./node_modules');
 
 module.exports = {
     output: {
@@ -27,7 +35,17 @@ module.exports = {
                     },
                 },
             },
-            { test: /\.css$/, use: 'css-loader' },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract(
+                    'style',
+                    'css' + '!sass?outputStyle=expanded&' + stylePathResolves
+                ),
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
             {
                 test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
                 loader: 'url-loader?limit=100000',

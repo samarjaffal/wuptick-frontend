@@ -5,7 +5,6 @@ import { Avatar } from '../../../components/Avatar/index';
 import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
 import { ChangePasswordModal } from '../../../components/Modal/templates/ChangePasswordModal/index';
-import { Colors } from '../../../assets/css/colors';
 import {
     Title,
     SubTitle,

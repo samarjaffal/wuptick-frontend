@@ -33,4 +33,19 @@ export const GlobalStyle = createGlobalStyle`
   animation: none !important;
   transition: none !important;
 }
+.w-success {
+  background-color: ${Colors.primary};
+  border-left: 8px solid darken(#685dc3, 15%);
+}
+
+.w-error {
+  background-color: ${Colors.red};
+  border-left: 8px solid darken(#685dc3, 15%);
+}
+
+.w-info {
+  background-color: ${Colors.secondary};
+  border-left: 8px solid darken(#685dc3, 15%);
+}
+
 `;
