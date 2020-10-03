@@ -9,6 +9,8 @@ export const gqlLastActivity = gql`
             user {
                 userId
                 name
+                firstName
+                lastName
                 avatar
             }
             dateFilter

@@ -17,7 +17,7 @@ const DefaultRoutes = () => {
             <PrivateRoute path="/home" component={Home} />
             <PrivateRoute path="test" component={TestPage} />
             <PrivateRoute path="/project/:id" component={Project} />
-            <PrivateRoute path={profileURL} component={Profile} />
+            <PrivateRoute path="/profile/:username" component={Profile} />
             <PrivateRoute path={`${profileURL}/edit`} component={EditProfile} />
             <NotFound default />
             <Oops path="oops" />

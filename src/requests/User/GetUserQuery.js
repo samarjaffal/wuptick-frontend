@@ -11,6 +11,7 @@ export const GetUserQuery = ({
     loaderProps,
 }) => {
     const [getUser, { error, loading, data }] = useLazyQuery(gqlGetUser, {
+        fetchPolicy: 'no-cache',
         onCompleted: (data) => {
             console.log(data, 'data GetUserQuery');
         },
@@ -23,6 +24,7 @@ export const GetUserQuery = ({
     });
 
     useEffect(() => {
+        console.log(userId, 'userId');
         if (userId) doGetUser();
     }, [userId]);
 
@@ -31,7 +33,7 @@ export const GetUserQuery = ({
         return 'loading...';
     }
 
-    if (!data) return null;
+    if (!data) return 'no data';
 
     if (error) {
         console.log(error, 'error');

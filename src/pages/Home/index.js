@@ -16,8 +16,9 @@ import { Colors } from '../../assets/css/colors';
 import { LastActivity } from '../../components/LastActivity/index';
 import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 import { ButtonHome } from '../../components/ButtonHome/index';
+
 export const Home = () => {
-    const { teamSelected } = useUser();
+    const { teamSelected, generateProfileUrl } = useUser();
     return (
         <LoggedLayout>
             <Container>
@@ -61,6 +62,11 @@ export const Home = () => {
                                     return favorite_projects.map((project) => (
                                         <Info
                                             name={project.name}
+                                            profileUrl={generateProfileUrl(
+                                                project.owner.name,
+                                                project.owner.last_name,
+                                                project.owner._id
+                                            )}
                                             owner={`${project.owner.name} ${project.owner.last_name}`}
                                             time={project.created_at}
                                             image={project.image}
@@ -92,6 +98,11 @@ export const Home = () => {
                                             projects.map((project) => (
                                                 <Info
                                                     name={project.name}
+                                                    profileUrl={generateProfileUrl(
+                                                        project.owner.name,
+                                                        project.owner.last_name,
+                                                        project.owner._id
+                                                    )}
                                                     owner={`${project.owner.name} ${project.owner.last_name}`}
                                                     time={project.created_at}
                                                     image={project.image}

@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import calendar from 'dayjs/plugin/calendar';
+import { useUser } from '../../hooks/useUser';
 import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
 import { ListContainer } from '../ListContainer/index';
@@ -27,6 +28,8 @@ import {
 } from './styles';
 
 export const FeedItem = ({ type, dateFilter, user, body }) => {
+    const { generateProfileUrl } = useUser();
+
     const formatDate = (_date) => {
         dayjs.extend(calendar);
         let dateFormated = dayjs(_date).calendar();
@@ -41,7 +44,15 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
             <ActitivityContainer>
                 <ActivityInfo>
                     <UserInfo>
-                        <User>{user.name}</User>{' '}
+                        <User
+                            to={generateProfileUrl(
+                                user.firstName,
+                                user.lastName,
+                                user.userId
+                            )}
+                        >
+                            {user.name}
+                        </User>{' '}
                         <Action>{body.description}: </Action>{' '}
                         <Item>{body.name}</Item>
                     </UserInfo>

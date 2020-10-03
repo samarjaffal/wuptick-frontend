@@ -1,19 +1,31 @@
 import React from 'react';
-import { Container, Title, Details, DetailsContainer, Clock } from './styles';
 import { Image } from '../Image/index';
+import { Colors } from '../../assets/css/colors';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import {
+    Container,
+    Title,
+    OwnerAnchor,
+    Details,
+    DetailsContainer,
+    Clock,
+} from './styles';
 
-export const Info = ({ name, owner, time, image, description }) => {
+export const Info = ({ name, owner, time, image, description, profileUrl }) => {
     let date = dayjs(time);
     dayjs.extend(relativeTime);
+
     return (
         <Container>
             {image && <Image src={image} description={description} />}
             <DetailsContainer>
                 <Title>{name || 'Lorem ipsum dolor'}</Title>
-                <Details>Owner: {owner}</Details>
+                <OwnerAnchor to={profileUrl}>
+                    Owner:{' '}
+                    <span style={{ color: Colors.primary }}>{owner}</span>
+                </OwnerAnchor>
                 <Details>
                     <Clock icon="clock" />
                     {dayjs(date.format()).fromNow() || 'No time...'}

@@ -54,6 +54,12 @@ export const useUser = () => {
         return age;
     });
 
+    const generateProfileUrl = (name, lastName, id) => {
+        const profile = `${name}-${lastName}-${id}`;
+        const url = `profile/${profile}`;
+        return url;
+    };
+
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
 
@@ -69,5 +75,6 @@ export const useUser = () => {
         setCurrentUser,
         profileURL,
         getAge,
+        generateProfileUrl,
     };
 };

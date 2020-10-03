@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Shadow, Transition } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
@@ -46,6 +47,13 @@ export const Details = styled.h6`
     margin: 0;
     ${info};
     font-weight: ${bold};
+`;
+
+export const OwnerAnchor = styled(Link)`
+    margin: 0;
+    ${info};
+    font-weight: ${bold};
+    text-decoration: none;
 `;
 
 export const Clock = styled(FontAwesomeIcon)`

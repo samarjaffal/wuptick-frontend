@@ -68,8 +68,13 @@ export const Text = styled.div`
     margin-top: 0.5em;
 `;
 
-export const User = styled.span`
+export const User = styled(Link)`
     ${description};
+    text-decoration: none;
+    ${Transition};
+    :hover {
+        color: ${Colors.primary};
+    }
 `;
 
 export const Action = styled.span`

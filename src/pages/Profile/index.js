@@ -23,13 +23,15 @@ import {
     ButtonContainer,
 } from './styles';
 
-export const Profile = ({ location }) => {
+export const Profile = ({ location, username }) => {
     const path = useLocation();
     const currentURL = path.pathname;
     const [currentTab, setCurrentTab] = useState(null);
     const [userId, setUserId] = useState(null);
     const { currentUser, profileURL, getAge } = useUser();
     const { tab } = queryString.parse(location.search);
+
+    console.log(username);
 
     const getUserIdFromURL = () => {
         const splittedURL = currentURL.split('-');

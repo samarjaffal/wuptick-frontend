@@ -16,6 +16,7 @@ export const gqlMe = gql`
                 image
                 created_at
                 owner {
+                    _id
                     name
                     last_name
                 }
@@ -33,6 +34,7 @@ export const gqlMe = gql`
                     image
                     created_at
                     owner {
+                        _id
                         name
                         last_name
                     }
