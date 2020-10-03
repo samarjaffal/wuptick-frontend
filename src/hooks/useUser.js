@@ -47,7 +47,7 @@ export const useUser = () => {
         const month = dayjs().format('M') - dayjs(bornDate).format('M');
         if (
             month < 0 ||
-            (month === 0 && dayjs().getDate('L') < dayjs(bornDate).format('L'))
+            (month === 0 && dayjs().format('L') < dayjs(bornDate).format('L'))
         ) {
             age = age - 1;
         }

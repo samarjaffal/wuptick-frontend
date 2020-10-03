@@ -31,3 +31,14 @@ export const SaveButton = styled.button`
         text-align: center;
     }
 `;
+
+export const ErrorMessage = styled.p`
+    color: ${Colors.red};
+    margin: 0 0 10px 5px;
+    text-align: left;
+    font-size: 12.5px;
+    :before {
+        display: inline;
+        content: '⚠ ';
+    }
+`;
