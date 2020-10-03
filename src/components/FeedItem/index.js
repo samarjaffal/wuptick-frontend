@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import calendar from 'dayjs/plugin/calendar';
+import { navigate } from '@reach/router';
 import { useUser } from '../../hooks/useUser';
 import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
@@ -39,7 +40,20 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
     return (
         <Container>
             <ImageContainer>
-                <Avatar description="Feed Image" src={user.avatar} size={50} />
+                <Avatar
+                    description="Feed Image"
+                    src={user.avatar}
+                    size={50}
+                    onClicked={() =>
+                        navigate(
+                            generateProfileUrl(
+                                user.firstName,
+                                user.lastName,
+                                user.userId
+                            )
+                        )
+                    }
+                />
             </ImageContainer>
             <ActitivityContainer>
                 <ActivityInfo>

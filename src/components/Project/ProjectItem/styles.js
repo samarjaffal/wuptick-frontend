@@ -61,6 +61,17 @@ export const Button = styled(Link)`
     }
 `;
 
+export const ActionContainer = styled.div`
+    display: flex;
+    justify-items: center;
+    align-items: center;
+`;
+
+export const DetailsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const OptionsButton = styled.div`
     border: none;
     background-color: transparent;
@@ -99,6 +110,13 @@ export const Details = styled.h6`
     margin: 0;
     ${info};
     font-weight: ${bold};
+`;
+
+export const OwnerAnchor = styled(Link)`
+    margin: 0;
+    ${info};
+    font-weight: ${bold};
+    text-decoration: none;
 `;
 
 export const Clock = styled(FontAwesomeIcon)`

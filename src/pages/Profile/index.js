@@ -31,8 +31,6 @@ export const Profile = ({ location, username }) => {
     const { currentUser, profileURL, getAge } = useUser();
     const { tab } = queryString.parse(location.search);
 
-    console.log(username);
-
     const getUserIdFromURL = () => {
         const splittedURL = currentURL.split('-');
         setUserId(splittedURL[2]);
@@ -41,7 +39,7 @@ export const Profile = ({ location, username }) => {
     useEffect(() => {
         setCurrentTab(tab);
         getUserIdFromURL();
-    }, [tab, userId]);
+    }, [tab, userId, currentURL]);
 
     const renderTabComponent = () => {
         return (

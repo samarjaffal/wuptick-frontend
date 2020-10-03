@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
+import { navigate } from '@reach/router';
 import { ListContainer } from '../../ListContainer/index';
 import { Image } from '../../Image/index';
 import { Avatar } from '../../Avatar';
@@ -13,14 +14,18 @@ import { DropdownItem } from '../../DropdownItem/index';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
 import { OutsideClick } from '../../OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { useUser } from '../../../hooks/useUser';
 import {
     Container,
     ProjectContainer,
     MembersContainer,
     Name,
     ButtonContainer,
+    ActionContainer,
+    DetailsContainer,
     OptionsButton,
     Details,
+    OwnerAnchor,
     Clock,
 } from './styles';
 
@@ -59,6 +64,8 @@ const ProjectDropDown = ({ openDrop }) => {
 
 export const ProjectItem = ({ project }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
+    const { generateProfileUrl } = useUser();
+
     let date = dayjs(project.created_at);
     dayjs.extend(relativeTime);
 
@@ -77,18 +84,26 @@ export const ProjectItem = ({ project }) => {
                                 />
                             </div>
 
-                            <div>
+                            <DetailsContainer>
                                 <Name to="/">{project.name}</Name>
-                                <Details>
+                                <OwnerAnchor
+                                    to={generateProfileUrl(
+                                        project.owner.name,
+                                        project.owner.last_name,
+                                        project.owner._id
+                                    )}
+                                >
                                     Owner:{' '}
-                                    {`${project.owner.name} ${project.owner.last_name}`}
-                                </Details>
+                                    <span
+                                        style={{ color: Colors.primary }}
+                                    >{`${project.owner.name} ${project.owner.last_name}`}</span>
+                                </OwnerAnchor>
                                 <Details>
                                     <Clock icon="clock" />
                                     {dayjs(date.format()).fromNow() ||
                                         'No time...'}
                                 </Details>
-                            </div>
+                            </DetailsContainer>
                         </ProjectContainer>
                         <MembersContainer>
                             <div
@@ -105,20 +120,23 @@ export const ProjectItem = ({ project }) => {
                                                 size={28}
                                                 src={member.user.avatar}
                                                 hide={false}
+                                                onClicked={() =>
+                                                    navigate(
+                                                        generateProfileUrl(
+                                                            member.user.name,
+                                                            member.user
+                                                                .last_name,
+                                                            member.user._id
+                                                        )
+                                                    )
+                                                }
                                             />
                                         )
                                     );
                                 })}
                             </div>
 
-                            <div
-                                className="ActionContainer"
-                                style={{
-                                    display: 'flex',
-                                    justifyItems: 'center',
-                                    alignItems: 'center',
-                                }}
-                            >
+                            <ActionContainer>
                                 <ButtonContainer>
                                     <OptionsButton
                                         onClick={() =>
@@ -132,7 +150,7 @@ export const ProjectItem = ({ project }) => {
                                     </OptionsButton>
                                 </ButtonContainer>
                                 <ProjectDropDown openDrop={openDropDown} />
-                            </div>
+                            </ActionContainer>
                         </MembersContainer>
                     </Container>
                 </ListContainer>

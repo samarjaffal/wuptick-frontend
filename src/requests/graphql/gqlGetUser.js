@@ -25,6 +25,7 @@ export const gqlGetUser = gql`
                     image
                     created_at
                     owner {
+                        _id
                         name
                         last_name
                     }

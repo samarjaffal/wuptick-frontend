@@ -24,7 +24,6 @@ export const GetUserQuery = ({
     });
 
     useEffect(() => {
-        console.log(userId, 'userId');
         if (userId) doGetUser();
     }, [userId]);
 
