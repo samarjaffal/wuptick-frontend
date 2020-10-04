@@ -41,4 +41,5 @@ Info.propTypes = {
     time: PropTypes.string,
     image: PropTypes.string,
     description: PropTypes.string,
+    profileUrl: PropTypes.string,
 };

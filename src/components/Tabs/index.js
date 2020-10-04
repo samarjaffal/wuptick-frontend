@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TabsContainer } from './styles';
 
 export const Tabs = ({ children }) => {
@@ -9,4 +10,8 @@ export const Tabs = ({ children }) => {
             </div>
         </TabsContainer>
     );
+};
+
+Tabs.propTypes = {
+    children: PropTypes.any,
 };

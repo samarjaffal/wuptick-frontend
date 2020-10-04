@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Modal } from '../../index';
 import { ChangePasswordMutation } from '../../../../requests/ChangePasswordMutation';
@@ -97,4 +98,8 @@ export const ChangePasswordModal = ({ modalRef }) => {
             }}
         </ChangePasswordMutation>
     );
+};
+
+ChangePasswordModal.propTypes = {
+    modalRef: PropTypes.any,
 };

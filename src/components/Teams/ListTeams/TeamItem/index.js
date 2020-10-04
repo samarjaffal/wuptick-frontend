@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from '@reach/router';
 import { useUser } from '../../../../hooks/useUser';
@@ -116,4 +117,12 @@ export const TeamItem = ({ team }) => {
             </OutsideClick>
         </DropdownContextProvider>
     );
+};
+
+TeamDropDown.propTypes = {
+    openDrop: PropTypes.bool,
+};
+
+TeamItem.propTypes = {
+    team: PropTypes.object,
 };

@@ -26,4 +26,6 @@ ButtonHome.propTypes = {
     color: PropTypes.string,
     url: PropTypes.string,
     onClicked: PropTypes.func,
+    margin: PropTypes.string,
+    children: PropTypes.any,
 };

@@ -13,7 +13,7 @@ import { Me } from '../Me/index';
 import { SkeletonAvatar } from '../Loaders/SkeletonAvatar/index';
 import { LightSkeleton } from '../Loaders/SkeletonGeneral/index';
 import { Logout } from '../Logout/index';
-import { navigate } from '@reach/router';
+
 import {
     Header,
     NavContainer,

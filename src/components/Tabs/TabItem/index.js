@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from './styles';
 
 export const TabItem = ({ text, currenTab, tab, url }) => {
@@ -7,4 +8,11 @@ export const TabItem = ({ text, currenTab, tab, url }) => {
             {text}
         </Tab>
     );
+};
+
+TabItem.propTypes = {
+    text: PropTypes.string,
+    currenTab: PropTypes.string,
+    tab: PropTypes.string,
+    url: PropTypes.string,
 };

@@ -162,3 +162,7 @@ export const ProjectItem = ({ project }) => {
 ProjectItem.propTypes = {
     project: PropTypes.object,
 };
+
+ProjectDropDown.propTypes = {
+    openDrop: PropTypes.bool,
+};

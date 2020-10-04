@@ -30,4 +30,5 @@ Image.propTypes = {
     onClicked: PropTypes.func,
     margin: PropTypes.string,
     description: PropTypes.string,
+    radius: PropTypes.string,
 };

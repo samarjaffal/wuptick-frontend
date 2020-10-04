@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProjectItem } from '../ProjectItem';
 import { Title, DropDownContainer, Button, Collapsed } from './styles';
@@ -30,4 +31,9 @@ export const ListProjects = ({ teams }) => {
             </DropDown>
         );
     });
+};
+
+DropDown.propTypes = {
+    children: PropTypes.any,
+    title: PropTypes.string,
 };

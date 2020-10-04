@@ -1,4 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
@@ -53,3 +54,8 @@ const Modal = forwardRef(({ children, title }, ref) => {
 Modal.displayName = 'Modal';
 
 export { Modal };
+
+Modal.propTypes = {
+    children: PropTypes.any,
+    title: PropTypes.string,
+};

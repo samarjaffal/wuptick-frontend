@@ -32,6 +32,7 @@ export const DropdownItem = ({
 
 DropdownItem.propTypes = {
     goToMenu: PropTypes.string,
+    goToURL: PropTypes.string,
     leftIcon: PropTypes.any,
     rightIcon: PropTypes.any,
     onClicked: PropTypes.func,

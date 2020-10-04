@@ -24,4 +24,5 @@ Avatar.propTypes = {
     src: PropTypes.string,
     onClicked: PropTypes.func,
     margin: PropTypes.string,
+    hide: PropTypes.bool,
 };

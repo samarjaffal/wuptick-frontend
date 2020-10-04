@@ -25,4 +25,5 @@ export const Dropdown = ({ open, children }) => {
 
 Dropdown.propTypes = {
     children: PropTypes.node.isRequired,
+    open: PropTypes.bool,
 };
