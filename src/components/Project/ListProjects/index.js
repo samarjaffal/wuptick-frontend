@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProjectItem } from '../ProjectItem';
+import { NoData } from '../../NoData/index';
 import { Title, DropDownContainer, Button, Collapsed } from './styles';
 
 const DropDown = ({ title, children }) => {
@@ -22,15 +23,21 @@ const DropDown = ({ title, children }) => {
 };
 
 export const ListProjects = ({ teams }) => {
-    return teams.map((team, index) => {
-        return (
-            <DropDown key={index} title={`Team: ${team.name}`}>
-                {team.projects.map((project, index) => (
-                    <ProjectItem key={index} project={project} />
-                ))}
-            </DropDown>
+    {
+        return teams.length > 0 ? (
+            teams.map((team, index) => {
+                return (
+                    <DropDown key={index} title={`Team: ${team.name}`}>
+                        {team.projects.map((project, index) => (
+                            <ProjectItem key={index} project={project} />
+                        ))}
+                    </DropDown>
+                );
+            })
+        ) : (
+            <NoData message="This user has no projects yet." />
         );
-    });
+    }
 };
 
 DropDown.propTypes = {

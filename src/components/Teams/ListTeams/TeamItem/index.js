@@ -42,7 +42,7 @@ const TeamDropDown = ({ openDrop }) => {
                     leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
                     onClicked={() => console.log('clicked 2')}
                 >
-                    Leave Project
+                    Leave Team
                 </DropdownItem>
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
