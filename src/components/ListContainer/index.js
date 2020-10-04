@@ -39,6 +39,6 @@ ListContainer.propTypes = {
     button: PropTypes.bool,
     onClicked: PropTypes.func,
     shadow: PropTypes.bool,
-    hover: PropTypes.bool,
+    hover: PropTypes.string,
     cursor: PropTypes.string,
 };

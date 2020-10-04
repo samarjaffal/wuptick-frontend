@@ -51,9 +51,9 @@ export const Profile = ({ location, username }) => {
                 {({ data }) => {
                     const { getUser: user } = data;
                     return currentTab == undefined ? (
-                        <ListProjects teams={user.teams} />
+                        <ListProjects teams={user.teams} userId={userId} />
                     ) : (
-                        <ListTeams teams={user.teams} />
+                        <ListTeams teams={user.teams} userId={userId} />
                     );
                 }}
             </GetUserQuery>

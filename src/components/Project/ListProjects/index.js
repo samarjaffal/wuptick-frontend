@@ -22,14 +22,18 @@ const DropDown = ({ title, children }) => {
     );
 };
 
-export const ListProjects = ({ teams }) => {
+export const ListProjects = ({ teams, userId }) => {
     {
         return teams.length > 0 ? (
             teams.map((team, index) => {
                 return (
                     <DropDown key={index} title={`Team: ${team.name}`}>
                         {team.projects.map((project, index) => (
-                            <ProjectItem key={index} project={project} />
+                            <ProjectItem
+                                key={index}
+                                project={project}
+                                userId={userId}
+                            />
                         ))}
                     </DropDown>
                 );

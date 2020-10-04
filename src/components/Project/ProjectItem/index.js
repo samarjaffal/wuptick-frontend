@@ -62,9 +62,9 @@ const ProjectDropDown = ({ openDrop }) => {
     );
 };
 
-export const ProjectItem = ({ project }) => {
+export const ProjectItem = ({ project, userId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const { generateProfileUrl } = useUser();
+    const { generateProfileUrl, currentUser } = useUser();
 
     let date = dayjs(project.created_at);
     dayjs.extend(relativeTime);
@@ -135,22 +135,23 @@ export const ProjectItem = ({ project }) => {
                                     );
                                 })}
                             </div>
-
-                            <ActionContainer>
-                                <ButtonContainer>
-                                    <OptionsButton
-                                        onClick={() =>
-                                            setOpenDropDown(!openDropDown)
-                                        }
-                                    >
-                                        <FontAwesomeIcon
-                                            icon="ellipsis-h"
-                                            color={Colors.gray}
-                                        />
-                                    </OptionsButton>
-                                </ButtonContainer>
-                                <ProjectDropDown openDrop={openDropDown} />
-                            </ActionContainer>
+                            {currentUser._id == userId && (
+                                <ActionContainer>
+                                    <ButtonContainer>
+                                        <OptionsButton
+                                            onClick={() =>
+                                                setOpenDropDown(!openDropDown)
+                                            }
+                                        >
+                                            <FontAwesomeIcon
+                                                icon="ellipsis-h"
+                                                color={Colors.gray}
+                                            />
+                                        </OptionsButton>
+                                    </ButtonContainer>
+                                    <ProjectDropDown openDrop={openDropDown} />
+                                </ActionContainer>
+                            )}
                         </MembersContainer>
                     </Container>
                 </ListContainer>

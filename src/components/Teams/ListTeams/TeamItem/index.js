@@ -55,9 +55,9 @@ const TeamDropDown = ({ openDrop }) => {
     );
 };
 
-export const TeamItem = ({ team }) => {
+export const TeamItem = ({ team, userId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const { generateProfileUrl } = useUser();
+    const { generateProfileUrl, currentUser } = useUser();
     return (
         <DropdownContextProvider>
             <OutsideClick>
@@ -96,21 +96,23 @@ export const TeamItem = ({ team }) => {
                                     );
                                 })}
                             </div>
-                            <ActionContainer>
-                                <ButtonContainer>
-                                    <OptionsButton
-                                        onClick={() =>
-                                            setOpenDropDown(!openDropDown)
-                                        }
-                                    >
-                                        <FontAwesomeIcon
-                                            icon="ellipsis-h"
-                                            color={Colors.gray}
-                                        />
-                                    </OptionsButton>
-                                </ButtonContainer>
-                                <TeamDropDown openDrop={openDropDown} />
-                            </ActionContainer>
+                            {currentUser._id == userId && (
+                                <ActionContainer>
+                                    <ButtonContainer>
+                                        <OptionsButton
+                                            onClick={() =>
+                                                setOpenDropDown(!openDropDown)
+                                            }
+                                        >
+                                            <FontAwesomeIcon
+                                                icon="ellipsis-h"
+                                                color={Colors.gray}
+                                            />
+                                        </OptionsButton>
+                                    </ButtonContainer>
+                                    <TeamDropDown openDrop={openDropDown} />
+                                </ActionContainer>
+                            )}
                         </MembersContainer>
                     </Container>
                 </ListContainer>
