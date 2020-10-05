@@ -39,23 +39,3 @@ export const MembersContainer = styled.div`
 export const MembersList = styled.div`
     margin-top: 1em;
 `;
-
-export const TabsContainer = styled.div`
-    margin: 1em 0;
-`;
-
-export const TabItem = styled(Link)`
-    margin-left: 2em;
-    text-decoration: none;
-    padding: 0.5em;
-    ${description};
-    border-radius: ${borderRadius};
-    :hover {
-        background-color: ${Colors.hover};
-    }
-    &:first-child {
-        margin-left: 0;
-    }
-    ${({ active }) => active == 1 && `background-color: ${Colors.hover};`}
-    ${TransitionSecondary}
-`;

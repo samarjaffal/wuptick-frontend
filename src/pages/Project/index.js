@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -8,9 +9,11 @@ import { Image } from '../../components/Image';
 import { Avatar } from '../../components/Avatar';
 import { ButtonHome } from '../../components/ButtonHome';
 import { ListModules } from '../../components/Module/ListModules';
+import { Tabs } from '../../components/Tabs/index';
+import { TabItem } from '../../components/Tabs/TabItem';
+
 import { Colors } from '../../assets/css/colors';
 import {
-    TabItem,
     Container,
     InfoContainer,
     ProjectInfoContainer,
@@ -18,11 +21,18 @@ import {
     ProjectDescription,
     MembersContainer,
     MembersList,
-    TabsContainer,
 } from './styles';
 
 export const Project = ({ id, location }) => {
+    const path = useLocation();
+    const currentURL = path.pathname;
+    const [currentTab, setCurrentTab] = useState(null);
     const { tab } = queryString.parse(location.search);
+
+    useEffect(() => {
+        setCurrentTab(tab);
+    }, [tab, id]);
+
     return (
         <LoggedLayout>
             <Helmet>
@@ -73,40 +83,33 @@ export const Project = ({ id, location }) => {
                                     </ButtonHome>
                                 </MembersContainer>
                             </div>
-                            <TabsContainer>
-                                <div className="Tabs">
-                                    <nav>
-                                        <TabItem
-                                            to="/project/5ef7fe59db26218144f3f705"
-                                            active={
-                                                tab == undefined || null ? 1 : 0
-                                            }
-                                        >
-                                            Modules
-                                        </TabItem>
-                                        <TabItem
-                                            to="/project/5ef7fe59db26218144f3f705?tab=priority-tasks"
-                                            active={
-                                                tab == 'priority-tasks' ? 1 : 0
-                                            }
-                                        >
-                                            Priority Tasks
-                                        </TabItem>
-                                        <TabItem
-                                            to="/project/5ef7fe59db26218144f3f705?tab=topics"
-                                            active={tab == 'topics' ? 1 : 0}
-                                        >
-                                            Topics
-                                        </TabItem>
-                                        <TabItem
-                                            to="/project/5ef7fe59db26218144f3f705?tab=files"
-                                            active={tab == 'files' ? 1 : 0}
-                                        >
-                                            Files
-                                        </TabItem>
-                                    </nav>
-                                </div>
-                            </TabsContainer>
+
+                            <Tabs>
+                                <TabItem
+                                    text="Modules"
+                                    url={`${currentURL}`}
+                                    currenTab={currentTab}
+                                    tab={undefined}
+                                />
+                                <TabItem
+                                    text="Priority Tasks"
+                                    url={`${currentURL}?tab=priority-tasks`}
+                                    currenTab={currentTab}
+                                    tab="priority-tasks"
+                                />
+                                <TabItem
+                                    text="Topics"
+                                    url={`${currentURL}?tab=topics`}
+                                    currenTab={currentTab}
+                                    tab="topics"
+                                />
+                                <TabItem
+                                    text="Files"
+                                    url={`${currentURL}?tab=files`}
+                                    currenTab={currentTab}
+                                    tab="files"
+                                />
+                            </Tabs>
                             <ListModules />
                         </Container>
                     );
