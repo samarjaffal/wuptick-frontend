@@ -11,7 +11,7 @@ import { ButtonHome } from '../../components/ButtonHome';
 import { ListModules } from '../../components/Module/ListModules';
 import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
-
+import { MembersList } from '../../components/MembersList/index';
 import { Colors } from '../../assets/css/colors';
 import {
     Container,
@@ -20,7 +20,6 @@ import {
     ProjectName,
     ProjectDescription,
     MembersContainer,
-    MembersList,
 } from './styles';
 
 export const Project = ({ id, location }) => {
@@ -62,17 +61,7 @@ export const Project = ({ id, location }) => {
                                     </InfoContainer>
                                 </ProjectInfoContainer>
                                 <MembersContainer>
-                                    <MembersList>
-                                        {Array(6)
-                                            .fill()
-                                            .map((item, index) => (
-                                                <Avatar
-                                                    margin="0 4px"
-                                                    key={index}
-                                                    size={28}
-                                                />
-                                            ))}
-                                    </MembersList>
+                                    <MembersList />
                                     <ButtonHome
                                         url="/"
                                         icon="plus"

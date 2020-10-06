@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import { Colors } from '../../assets/css/colors';
-import { TransitionSecondary } from '../../assets/css/shared-styles';
-import { description, title, info, borderRadius } from '../../assets/css/theme';
-import { Link } from '@reach/router';
+import { title, info } from '../../assets/css/theme';
 
 export const Container = styled.div`
     /*     margin-top: 20px; */
@@ -34,8 +31,4 @@ export const ProjectDescription = styled.p`
 export const MembersContainer = styled.div`
     display: flex;
     align-items: center;
-`;
-
-export const MembersList = styled.div`
-    margin-top: 1em;
 `;
