@@ -11,6 +11,7 @@ import { ListModules } from '../../components/Module/ListModules';
 import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
+import { ListTopics } from '../../components/Topics/ListTopics/index';
 import { Colors } from '../../assets/css/colors';
 import {
     Container,
@@ -62,6 +63,10 @@ export const Project = ({ id, location }) => {
         setCurrentTab(tab);
     }, [tab, id]);
 
+    const renderTabComponent = () => {
+        return currentTab == undefined ? <ListModules /> : <ListTopics />;
+    };
+
     return (
         <LoggedLayout>
             <Helmet>
@@ -106,7 +111,7 @@ export const Project = ({ id, location }) => {
                                 currentTab={currentTab}
                                 currentURL={currentURL}
                             />
-                            <ListModules />
+                            {renderTabComponent()}
                         </Container>
                     );
                 }}
