@@ -6,7 +6,6 @@ import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout';
 import { GetProjectQuery } from '../../requests/project/getProjectQuery';
 import { Image } from '../../components/Image';
-import { Avatar } from '../../components/Avatar';
 import { ButtonHome } from '../../components/ButtonHome';
 import { ListModules } from '../../components/Module/ListModules';
 import { Tabs } from '../../components/Tabs/index';
@@ -21,6 +20,37 @@ import {
     ProjectDescription,
     MembersContainer,
 } from './styles';
+
+const ProjectTabs = ({ currentURL, currentTab }) => {
+    return (
+        <Tabs>
+            <TabItem
+                text="Modules"
+                url={`${currentURL}`}
+                currenTab={currentTab}
+                tab={undefined}
+            />
+            <TabItem
+                text="Priority Tasks"
+                url={`${currentURL}?tab=priority-tasks`}
+                currenTab={currentTab}
+                tab="priority-tasks"
+            />
+            <TabItem
+                text="Topics"
+                url={`${currentURL}?tab=topics`}
+                currenTab={currentTab}
+                tab="topics"
+            />
+            <TabItem
+                text="Files"
+                url={`${currentURL}?tab=files`}
+                currenTab={currentTab}
+                tab="files"
+            />
+        </Tabs>
+    );
+};
 
 export const Project = ({ id, location }) => {
     const path = useLocation();
@@ -72,33 +102,10 @@ export const Project = ({ id, location }) => {
                                     </ButtonHome>
                                 </MembersContainer>
                             </div>
-
-                            <Tabs>
-                                <TabItem
-                                    text="Modules"
-                                    url={`${currentURL}`}
-                                    currenTab={currentTab}
-                                    tab={undefined}
-                                />
-                                <TabItem
-                                    text="Priority Tasks"
-                                    url={`${currentURL}?tab=priority-tasks`}
-                                    currenTab={currentTab}
-                                    tab="priority-tasks"
-                                />
-                                <TabItem
-                                    text="Topics"
-                                    url={`${currentURL}?tab=topics`}
-                                    currenTab={currentTab}
-                                    tab="topics"
-                                />
-                                <TabItem
-                                    text="Files"
-                                    url={`${currentURL}?tab=files`}
-                                    currenTab={currentTab}
-                                    tab="files"
-                                />
-                            </Tabs>
+                            <ProjectTabs
+                                currentTab={currentTab}
+                                currentURL={currentURL}
+                            />
                             <ListModules />
                         </Container>
                     );
@@ -110,4 +117,10 @@ export const Project = ({ id, location }) => {
 
 Project.propTypes = {
     id: PropTypes.string,
+    location: PropTypes.object,
+};
+
+ProjectTabs.propTypes = {
+    currentURL: PropTypes.string,
+    currentTab: PropTypes.string,
 };

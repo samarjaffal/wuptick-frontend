@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 
-export const MembersList = styled.div`
-    margin-top: 1em;
-`;
-
 export const List = styled.ul`
     list-style: none;
-    display: flex;
     padding: 0;
-    margin: 0.5em 0;
+    margin-top: 1.5em;
 `;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from '@reach/router';
 import { ListContainer } from '../../ListContainer';
-import { ModuleContainer, Name, Status } from './styles';
+import { Status } from '../../Status/index';
+import { ModuleContainer, Name } from './styles';
+
 export const ModuleItem = () => {
     return (
         <ListContainer>
