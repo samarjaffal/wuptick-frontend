@@ -1,4 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import {
     faFolderOpen,
     faUsers,
@@ -30,5 +31,6 @@ library.add(
     faCaretRight,
     faEllipsisH,
     faSignOutAlt,
-    faTimes
+    faTimes,
+    faStarRegular
 );

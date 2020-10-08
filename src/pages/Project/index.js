@@ -12,6 +12,7 @@ import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
+/* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { Colors } from '../../assets/css/colors';
 import {
     Container,
@@ -30,12 +31,6 @@ const ProjectTabs = ({ currentURL, currentTab }) => {
                 url={`${currentURL}`}
                 currenTab={currentTab}
                 tab={undefined}
-            />
-            <TabItem
-                text="Priority Tasks"
-                url={`${currentURL}?tab=priority-tasks`}
-                currenTab={currentTab}
-                tab="priority-tasks"
             />
             <TabItem
                 text="Topics"
@@ -64,7 +59,12 @@ export const Project = ({ id, location }) => {
     }, [tab, id]);
 
     const renderTabComponent = () => {
-        return currentTab == undefined ? <ListModules /> : <ListTopics />;
+        return (
+            (currentTab == undefined && <ListModules />) ||
+            (currentTab == 'topics' && <ListTopics />) ||
+            /*  (currentTab == 'priority-tasks' && <TaskItem />) || */
+            null
+        );
     };
 
     return (
