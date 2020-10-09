@@ -8,7 +8,7 @@ export const Container = styled.div`
     padding: 1em;
     border-radius: ${borderRadius};
     font-size: 14px;
-    margin-bottom: 1em;
+    margin-bottom: ${({ margin }) => margin || '1em'};
     ${({ shadow }) => (shadow == true ? Shadow : '')};
     cursor: ${({ cursor }) => cursor};
     :hover {

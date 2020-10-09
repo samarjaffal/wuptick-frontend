@@ -11,3 +11,7 @@ export const Name = styled(Link)`
     ${description};
     text-decoration: none;
 `;
+
+export const Container = styled.div`
+    margin-bottom: 1em;
+`;

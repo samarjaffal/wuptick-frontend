@@ -1,15 +1,26 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import { ListContainer } from '../../ListContainer';
 import { Status } from '../../Status/index';
-import { ModuleContainer, Name } from './styles';
+import { Container, ModuleContainer, Name } from './styles';
 
-export const ModuleItem = () => {
+export const ModuleItem = ({ index, id }) => {
     return (
-        <ListContainer>
-            <ModuleContainer>
-                <Name to="/">Fronted</Name>
-                <Status>Active</Status>
-            </ModuleContainer>
-        </ListContainer>
+        <Draggable draggableId={`draggable-${String(id)}`} index={index}>
+            {(provided) => (
+                <Container
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <ListContainer margin="0">
+                        <ModuleContainer>
+                            <Name to="/">Fronted</Name>
+                            <Status>Active</Status>
+                        </ModuleContainer>
+                    </ListContainer>
+                </Container>
+            )}
+        </Draggable>
     );
 };

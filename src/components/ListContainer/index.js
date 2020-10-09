@@ -9,6 +9,7 @@ export const ListContainer = ({
     icon,
     color,
     button = false,
+    margin,
     onClicked,
     shadow = false,
     hover = null,
@@ -16,7 +17,12 @@ export const ListContainer = ({
     children,
 }) => {
     return (
-        <Container shadow={shadow} hover={hover} cursor={cursor}>
+        <Container
+            shadow={shadow}
+            hover={hover}
+            cursor={cursor}
+            margin={margin}
+        >
             <TitleContainer>
                 {icon && <Icon icon={icon} color={color} />}
                 {title && <Title>{title}</Title>}
