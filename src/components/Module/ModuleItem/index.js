@@ -4,9 +4,9 @@ import { ListContainer } from '../../ListContainer';
 import { Status } from '../../Status/index';
 import { Container, ModuleContainer, Name } from './styles';
 
-export const ModuleItem = ({ index, id }) => {
+export const ModuleItem = ({ index, module }) => {
     return (
-        <Draggable draggableId={`draggable-${String(id)}`} index={index}>
+        <Draggable draggableId={module._id} index={index}>
             {(provided) => (
                 <Container
                     ref={provided.innerRef}
@@ -15,7 +15,7 @@ export const ModuleItem = ({ index, id }) => {
                 >
                     <ListContainer margin="0">
                         <ModuleContainer>
-                            <Name to="/">Fronted</Name>
+                            <Name to="/">{module.name}</Name>
                             <Status>Active</Status>
                         </ModuleContainer>
                     </ListContainer>

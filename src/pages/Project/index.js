@@ -12,6 +12,7 @@ import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
+import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { Colors } from '../../assets/css/colors';
 import {
@@ -60,7 +61,13 @@ export const Project = ({ id, location }) => {
 
     const renderTabComponent = () => {
         return (
-            (currentTab == undefined && <ListModules />) ||
+            (currentTab == undefined && (
+                <GetProjectModules projectId={id}>
+                    {({ data }) => (
+                        <ListModules modules={data.getProjectModules} />
+                    )}
+                </GetProjectModules>
+            )) ||
             (currentTab == 'topics' && <ListTopics />) ||
             /*  (currentTab == 'priority-tasks' && <TaskItem />) || */
             null
