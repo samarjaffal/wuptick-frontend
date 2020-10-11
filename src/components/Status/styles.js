@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
 import { info } from '../../assets/css/theme';
 
-export const Status = styled.span`
-    ${info};
+export const Status = styled.div`
     font-size: 10px;
     padding: 0px 15px;
     color: ${Colors.white};

@@ -1,9 +1,10 @@
 import React from 'react';
 import { ListContainer } from '../../ListContainer/index';
 import { Avatar } from '../../Avatar/index';
+import { Status } from '../../Status/index';
 import {
     HeaderContainer,
-    NotificationContainer,
+    ModuleContainer,
     Notification,
     Title,
     Info,
@@ -18,9 +19,11 @@ export const TopicItem = () => {
                     <Title>Topic 1 About Something.</Title> <br />
                     <Info>Samar Jaffal -</Info> <Info>13/05/2020 11:00pm</Info>
                 </div>
-                <NotificationContainer>
-                    <Notification>3</Notification>
-                </NotificationContainer>
+                <Notification>3</Notification>
+                <ModuleContainer>
+                    {/*  */}
+                    <Status>Frontend</Status>
+                </ModuleContainer>
             </HeaderContainer>
             <div className="DescriptionContainer">
                 <Description>
