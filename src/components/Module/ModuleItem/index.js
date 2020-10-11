@@ -13,7 +13,7 @@ export const ModuleItem = ({ index, module }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <ListContainer margin="0">
+                    <ListContainer margin="0" cursor="pointer">
                         <ModuleContainer>
                             <Name to="/">{module.name}</Name>
                             <Status>Active</Status>
