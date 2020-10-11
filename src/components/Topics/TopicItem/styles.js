@@ -36,6 +36,7 @@ export const Title = styled.span`
 export const Description = styled.p`
     ${description};
     font-weight: ${regular};
+    margin-left: 2.3em;
 `;
 
 export const Info = styled.span`

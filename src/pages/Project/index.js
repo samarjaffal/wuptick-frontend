@@ -13,6 +13,7 @@ import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
 import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
+import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { Colors } from '../../assets/css/colors';
 import {
@@ -68,7 +69,13 @@ export const Project = ({ id, location }) => {
                     )}
                 </GetProjectModules>
             )) ||
-            (currentTab == 'topics' && <ListTopics />) ||
+            (currentTab == 'topics' && (
+                <GetProjectTopics projectId={id}>
+                    {({ data }) => (
+                        <ListTopics topics={data.getProjectTopics} />
+                    )}
+                </GetProjectTopics>
+            )) ||
             /*  (currentTab == 'priority-tasks' && <TaskItem />) || */
             null
         );

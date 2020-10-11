@@ -1,4 +1,6 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import PropTypes from 'prop-types';
 import { ListContainer } from '../../ListContainer/index';
 import { Avatar } from '../../Avatar/index';
 import { Status } from '../../Status/index';
@@ -10,32 +12,39 @@ import {
     Info,
     Description,
 } from './styles';
-export const TopicItem = () => {
+export const TopicItem = ({ topic }) => {
+    const formatDate = (_date) => {
+        return dayjs(_date).format('MM/DD/YYYY h:mm A');
+    };
+
     return (
         <ListContainer>
             <HeaderContainer>
-                <Avatar size={25} margin="0 0.5em 0 0" />
+                <Avatar
+                    size={25}
+                    src={topic.owner.avatar}
+                    margin="0 0.5em 0 0"
+                />
                 <div className="TitleContainer">
-                    <Title>Topic 1 About Something.</Title> <br />
-                    <Info>Samar Jaffal -</Info> <Info>13/05/2020 11:00pm</Info>
+                    <Title>{topic.name}</Title> <br />
+                    <Info>
+                        {topic.owner.name} {topic.owner.last_name} -
+                    </Info>{' '}
+                    <Info>{formatDate(topic.created_at)}</Info>
                 </div>
-                <Notification>3</Notification>
+                {/* <Notification>3</Notification> */}
                 <ModuleContainer>
                     {/*  */}
-                    <Status>Frontend</Status>
+                    <Status>{topic.module.name}</Status>
                 </ModuleContainer>
             </HeaderContainer>
             <div className="DescriptionContainer">
-                <Description>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Expedita, sunt autem reprehenderit culpa quis, sequi rem
-                    suscipit aperiam ducimus amet distinctio, enim voluptatum
-                    officiis praesentium inventore at quae recusandae quo ad
-                    quod repellendus cumque? Ex, voluptatum. Iure incidunt
-                    reprehenderit eos dicta placeat inventore maiores accusamus
-                    cumque, sunt quae saepe beatae?
-                </Description>
+                <Description>{topic.description}</Description>
             </div>
         </ListContainer>
     );
+};
+
+TopicItem.propTypes = {
+    topic: PropTypes.object,
 };

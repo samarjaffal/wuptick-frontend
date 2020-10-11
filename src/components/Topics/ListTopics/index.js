@@ -3,17 +3,15 @@ import { AddNew } from '../../AddNew/index';
 import { TopicItem } from '../TopicItem/index';
 import { List } from './styles';
 
-export const ListTopics = () => {
+export const ListTopics = ({ topics = [] }) => {
     return (
         <div className="Container">
             <List>
-                {Array(4)
-                    .fill()
-                    .map((item, index) => (
-                        <li key={index}>
-                            <TopicItem />
-                        </li>
-                    ))}
+                {topics.map((topic, index) => (
+                    <li key={index}>
+                        <TopicItem topic={topic} />
+                    </li>
+                ))}
                 <AddNew text="Add new topic" />
             </List>
         </div>
