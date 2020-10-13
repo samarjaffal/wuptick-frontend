@@ -6,11 +6,11 @@ const marginDefault = '0';
 const sizeDefault = '50';
 
 export const ImageStyled = styled.img`
-      ${({ size }) =>
-          `width: ${size || sizeDefault}px; 
-        height: ${size || sizeDefault}px;`}
+    width: ${({ size }) => (size ? `${size}px` : `${sizeDefault}px`)};
+    height: ${({ size }) => (size ? `${size}px` : `${sizeDefault}px`)};
     ${({ margin }) => `margin: ${margin || marginDefault};`}
-    ${({ radius }) => `border-radius: ${radius || borderRadius};`}
+    ${({ radius }) =>
+        `border-radius: ${radius || borderRadius};`}
     object-fit: cover;
     object-position: center;
     ${Shadow};
