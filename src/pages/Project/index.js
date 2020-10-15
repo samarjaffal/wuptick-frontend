@@ -66,7 +66,10 @@ export const Project = ({ id, location }) => {
             (currentTab == undefined && (
                 <GetProjectModules projectId={id}>
                     {({ data }) => (
-                        <ListModules modules={data.getProjectModules} />
+                        <ListModules
+                            modules={data.getProjectModules}
+                            projectId={id}
+                        />
                     )}
                 </GetProjectModules>
             )) ||
