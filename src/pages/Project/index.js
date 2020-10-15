@@ -94,6 +94,9 @@ export const Project = ({ id, location }) => {
             <GetProjectQuery projectId={id}>
                 {({ data }) => {
                     const { getProject: project } = data;
+                    const members = project.members.map(
+                        (member) => member.user
+                    );
                     return (
                         <Container>
                             <div>
@@ -115,7 +118,7 @@ export const Project = ({ id, location }) => {
                                     </InfoContainer>
                                 </ProjectInfoContainer>
                                 <MembersContainer>
-                                    <MembersList />
+                                    <MembersList members={members} />
                                     <ButtonHome
                                         url="/"
                                         icon="plus"

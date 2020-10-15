@@ -7,6 +7,14 @@ export const gqlGetProject = gql`
             name
             description
             image
+            members {
+                user {
+                    _id
+                    avatar
+                    name
+                    last_name
+                }
+            }
         }
     }
 `;
