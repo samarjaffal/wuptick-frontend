@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export const GetProjectModules = ({ children, projectId }) => {
     const { error, loading, data } = useQuery(gqlGetProjectModules, {
         variables: { projectId },
+        fetchPolicy: 'cache-and-network',
         onCompleted: (data) => {
             console.log(data, 'data getProjectModules');
         },

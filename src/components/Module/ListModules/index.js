@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ModuleItem } from '../ModuleItem';
 import { AddNew } from '../../AddNew/index';
 import { SaveModulesOrderMutation } from '../../../requests/Module/SaveModulesOrderMutation';
 import { useDragDrop } from '../../../hooks/useDragDrop';
 import { List, Placeholder } from './styles';
+import { CreateModuleMutation } from '../../../requests/Module/CreateModuleMutation';
 export const ListModules = ({ modules = [], projectId }) => {
     const _columns = ['modules'];
     const _items = [...modules];
+
+    const newModuleInput = {
+        name: '',
+        project: {
+            _id: projectId,
+        },
+    };
+
+    const SetModuleName = (value) => {
+        newModuleInput.name = value;
+    };
 
     return (
         <SaveModulesOrderMutation>
@@ -67,8 +79,26 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                             }
                                                         />
                                                     )}
-
-                                                <AddNew text="Add new module" />
+                                                <CreateModuleMutation>
+                                                    {({ doCreateModule }) => {
+                                                        const addNewModule = () => {
+                                                            doCreateModule(
+                                                                newModuleInput
+                                                            );
+                                                        };
+                                                        return (
+                                                            <AddNew
+                                                                text="Add new module"
+                                                                doFunction={
+                                                                    addNewModule
+                                                                }
+                                                                setValue={
+                                                                    SetModuleName
+                                                                }
+                                                            />
+                                                        );
+                                                    }}
+                                                </CreateModuleMutation>
                                             </List>
                                         )}
                                     </Droppable>

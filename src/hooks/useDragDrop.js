@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useDragDrop = (_columns, _items, _onDragEndCallBack) => {
     const [columns, setColumns] = useState(_columns);
@@ -6,6 +6,10 @@ export const useDragDrop = (_columns, _items, _onDragEndCallBack) => {
     const [onDragEndCallBack] = useState(_onDragEndCallBack);
     const [placeholderProps, setPlaceholderProps] = useState({});
     const queryAttr = 'data-rbd-drag-handle-draggable-id';
+
+    useEffect(() => {
+        setItems(_items);
+    }, [_items]);
 
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;
@@ -18,7 +22,6 @@ export const useDragDrop = (_columns, _items, _onDragEndCallBack) => {
         );
         setItems(orderedItems);
         const arrayIds = orderedItems.map((item) => item._id);
-        console.log(arrayIds, 'arrayIds');
         onDragEndCallBack(arrayIds);
         setPlaceholderProps({});
     });
