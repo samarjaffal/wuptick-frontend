@@ -8,7 +8,7 @@ import { Image } from '../../Image/index';
 import { Avatar } from '../../Avatar';
 import { Colors } from '../../../assets/css/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Dropdown } from '../../Dropdrown/styles';
+import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
@@ -66,12 +66,16 @@ export const ProjectItem = ({ project, userId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
     const { generateProfileUrl, currentUser } = useUser();
 
+    const handleDropDown = (value) => {
+        setOpenDropDown(value);
+    };
+
     let date = dayjs(project.created_at);
     dayjs.extend(relativeTime);
 
     return (
         <DropdownContextProvider>
-            <OutsideClick>
+            <OutsideClick setLocalDropDownState={handleDropDown}>
                 <ListContainer hover={Colors.hover} cursor="pointer">
                     <Container>
                         <ProjectContainer>
@@ -162,6 +166,7 @@ export const ProjectItem = ({ project, userId }) => {
 
 ProjectItem.propTypes = {
     project: PropTypes.object,
+    userId: PropTypes.string,
 };
 
 ProjectDropDown.propTypes = {

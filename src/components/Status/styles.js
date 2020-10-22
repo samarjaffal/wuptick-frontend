@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-import { info } from '../../assets/css/theme';
+import { bold, borderRadius } from '../../assets/css/theme';
 
 export const Status = styled.div`
-    font-size: 10px;
+    font-size: 13px;
     padding: 0px 15px;
-    color: ${Colors.white};
-    background: ${({ background }) =>
-        background ? background : Colors.primary};
+    font-weight: ${bold};
+    color: ${({ color }) => (color ? color : Colors.black)};
+    background: ${Colors.white};
     border-radius: 20px;
+    border: 1px solid ${({ color }) => (color ? color : Colors.black)};
     line-height: 2;
 `;

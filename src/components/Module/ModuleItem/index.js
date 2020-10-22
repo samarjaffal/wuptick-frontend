@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
-import { ListContainer } from '../../ListContainer';
 import { Status } from '../../Status/index';
-import { Container, ModuleContainer, Name } from './styles';
+import { Container, ModuleContainer, Module, Name } from './styles';
 
 export const ModuleItem = ({ index, module }) => {
     return (
@@ -13,14 +13,19 @@ export const ModuleItem = ({ index, module }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <ListContainer margin="0" cursor="pointer">
+                    <Module>
                         <ModuleContainer>
                             <Name to="/">{module.name}</Name>
-                            <Status>Active</Status>
+                            <Status />
                         </ModuleContainer>
-                    </ListContainer>
+                    </Module>
                 </Container>
             )}
         </Draggable>
     );
+};
+
+ModuleItem.propTypes = {
+    index: PropTypes.number,
+    module: PropTypes.object,
 };

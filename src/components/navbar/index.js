@@ -35,6 +35,10 @@ export const Navbar = () => {
     const { open, setOpen } = useDropdown();
     const { match, screen, setMatch } = useSmallScreen();
 
+    const handleDropDown = (value) => {
+        setOpen(value);
+    };
+
     useEffect(() => {
         setMatch(screen.matches);
         if (open && match) {
@@ -98,7 +102,7 @@ export const Navbar = () => {
                         )}
                     </NavUl>
                 </Nav>
-                <OutsideClick>
+                <OutsideClick setLocalDropDownState={handleDropDown}>
                     <AvatarContainer>
                         <Me loader={SkeletonAvatar} loaderProps={{ qty: 1 }}>
                             {({ avatar }) => (

@@ -2,12 +2,13 @@ import React, { useRef } from 'react';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import PropTypes from 'prop-types';
 
-export const OutsideClick = (props) => {
+export const OutsideClick = ({ setLocalDropDownState, children }) => {
     const wrapperRef = useRef(null);
-    useOutsideClick(wrapperRef);
-    return <div ref={wrapperRef}>{props.children}</div>;
+    useOutsideClick(setLocalDropDownState, wrapperRef);
+    return <div ref={wrapperRef}>{children}</div>;
 };
 
 OutsideClick.propTypes = {
     children: PropTypes.element.isRequired,
+    setLocalDropDownState: PropTypes.func,
 };

@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useDropdown } from './useDropdown';
-export const useOutsideClick = (ref) => {
+export const useOutsideClick = (setLocalDropDownState, ref) => {
     const { open, setOpen } = useDropdown();
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target) && open) {
                 setOpen(false);
+                setLocalDropDownState(false);
             }
         }
         // Bind the event listener

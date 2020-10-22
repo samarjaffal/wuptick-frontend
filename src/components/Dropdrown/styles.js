@@ -11,15 +11,16 @@ export const Dropdown = styled.div`
         transform
             ? `transform: translateX(${transform});`
             : `transform: translateX(-45%);`};
-    background-color: ${Colors.backgroud};
+    background-color: ${({ bg }) => (bg ? bg : Colors.backgroud)};
     border: 1px solid ${Colors.white};
     border-radius: ${borderRadius};
-    padding: 14px;
+    padding: ${({ open }) => (open == true ? '14px' : 0)};
     overflow: hidden;
     ${ShadowSecondary};
     opacity: ${({ open }) => (open == true ? 1 : 0)};
     visibility: ${({ open }) => (open == true ? 'visible' : 'hidden')};
-    transition: height 500ms ease, all 0.2s ease 0s;
+    height: ${({ open }) => (open == true ? 'auto' : 0)};
+    transition: all 0.1s ease-in-out 0s, height 0.3s ease;
     z-index: 99;
 
     @media (max-width: 424px) {
