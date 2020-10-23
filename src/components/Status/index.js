@@ -12,20 +12,26 @@ import PropTypes from 'prop-types';
 
 const OPTIONS = [
     {
-        status: '☀️ Active',
-        color: '#2AE581',
+        status: 'Active',
+        value: 'active',
+        icon: '☀️',
+        color: Colors.blue,
     },
     {
-        status: '🌙 Inactive',
-        color: '#FB7B7F',
+        status: 'Inactive',
+        value: 'inactive',
+        icon: '🌙',
+        color: Colors.black,
     },
     {
-        status: '🌤️ On Hold',
-        color: '#FFC53A',
+        status: 'On Hold',
+        value: 'on_hold',
+        icon: '🌤️',
+        color: Colors.orange,
     },
 ];
 
-const OptionsDropDown = ({ openDrop }) => {
+const OptionsDropDown = ({ openDrop, setStatus }) => {
     const { open, setOpen } = useDropdown();
 
     useEffect(() => {
@@ -44,8 +50,9 @@ const OptionsDropDown = ({ openDrop }) => {
                 {OPTIONS.map((option, index) => (
                     <DropdownItem
                         key={index}
-                        onClicked={() => console.log('clicked 1')}
+                        onClicked={() => setStatus(option)}
                     >
+                        {option.icon !== null && `${option.icon} `}{' '}
                         {option.status}
                     </DropdownItem>
                 ))}
@@ -54,14 +61,38 @@ const OptionsDropDown = ({ openDrop }) => {
     );
 };
 
-export const Status = () => {
-    const [options, setOptions] = useState(OPTIONS);
+export const Status = ({ status, doUpdate, elemId }) => {
+    const [options] = useState(OPTIONS);
     const [currentOption, setCurrentOption] = useState(options[0].status);
     const [currentColor, setCurrentColor] = useState(options[0].color);
+    const [currentIcon, setcurrentIcon] = useState(options[0].icon);
     const [openDropDown, setOpenDropDown] = useState(false);
+
+    useEffect(() => {
+        const option = options.find(
+            (option) => option.value.toLowerCase() == status.toLowerCase()
+        );
+        if (typeof option !== undefined && status !== null) {
+            setCurrentOption(option.status);
+            setCurrentColor(option.color);
+            setcurrentIcon(option.icon);
+        }
+    }, [status]);
 
     const handleDropDown = (value) => {
         setOpenDropDown(value);
+    };
+
+    const setStatus = (status) => {
+        setCurrentOption(status.status);
+        setCurrentColor(status.color);
+        setcurrentIcon(status.icon);
+
+        const data = {
+            moduleId: elemId,
+            input: { status: status.value.toLowerCase() },
+        };
+        doUpdate(data);
     };
 
     return (
@@ -72,12 +103,18 @@ export const Status = () => {
                         color={currentColor}
                         onClick={() => setOpenDropDown(!openDropDown)}
                     >
-                        <span>{currentOption}</span>{' '}
+                        <span>
+                            {currentIcon !== null && `${currentIcon} `}
+                            {currentOption}
+                        </span>{' '}
                         <FontAwesomeIcon
                             icon="caret-down"
                             color={currentColor}
                         />
-                        <OptionsDropDown openDrop={openDropDown} />
+                        <OptionsDropDown
+                            openDrop={openDropDown}
+                            setStatus={setStatus}
+                        />
                     </StatusStyled>
                 </OutsideClick>
             </DropdownContextProvider>
@@ -87,8 +124,12 @@ export const Status = () => {
 
 Status.propTypes = {
     children: PropTypes.any,
+    status: PropTypes.string,
+    doUpdate: PropTypes.func,
+    elemId: PropTypes.string,
 };
 
 OptionsDropDown.propTypes = {
     openDrop: PropTypes.bool,
+    setStatus: PropTypes.func,
 };

@@ -114,9 +114,6 @@ export const Navbar = () => {
                                 />
                             )}
                         </Me>
-                        {/*  {open && (
-                           
-                        )} */}
                         <Dropdown open={open}>
                             <DropdownMenu menu="main" classMenu="menu-primary">
                                 <DropdownItem

@@ -1,7 +1,8 @@
 export const Colors = {
     primary: '#5271ff',
-    orange: '#FFC53A',
-
+    orange: '#FFA23A',
+    blue: '#05B1FB',
+    green: '#00E36A',
     /* yellow: '#FFE53A', */
     yellow: '#FFDE0B',
     black: '#413F4A',

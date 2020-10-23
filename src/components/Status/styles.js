@@ -11,4 +11,5 @@ export const Status = styled.div`
     border-radius: 20px;
     border: 1px solid ${({ color }) => (color ? color : Colors.black)};
     line-height: 2;
+    width: 81px;
 `;

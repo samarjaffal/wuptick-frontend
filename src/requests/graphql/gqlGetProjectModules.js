@@ -5,6 +5,7 @@ export const gqlGetProjectModules = gql`
         getProjectModules(projectId: $projectId) {
             _id
             name
+            status
         }
     }
 `;
