@@ -12,7 +12,6 @@ export const ListTopics = ({ topics = [] }) => {
                         <TopicItem topic={topic} />
                     </li>
                 ))}
-                <AddNew text="Add new topic" />
             </List>
         </div>
     );

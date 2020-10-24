@@ -7,6 +7,8 @@ import { useUser } from '../../hooks/useUser';
 import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
 import { ListContainer } from '../ListContainer/index';
+import { Label } from '../Label/index';
+import { Colors } from '../../assets/css/colors';
 import {
     Container,
     ImageContainer,
@@ -112,9 +114,14 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                         <div>
                             <Divider />
                             <div>
-                                <AnchorProject to="/project/123">
+                                <Label
+                                    color={Colors.primary}
+                                    name={body.project.name}
+                                    width="max-content"
+                                />
+                                {/*  <AnchorProject to="/project/123">
                                     {body.project.name}
-                                </AnchorProject>
+                                </AnchorProject> */}
                             </div>
                         </div>
                     )}
