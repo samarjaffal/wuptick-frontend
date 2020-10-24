@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { ListContainer } from '../../ListContainer/index';
 import { Avatar } from '../../Avatar/index';
-import { Status } from '../../Status/index';
+import { Label } from '../../Label/index';
 import {
     HeaderContainer,
     ModuleContainer,
@@ -12,6 +12,7 @@ import {
     Info,
     Description,
 } from './styles';
+import { Colors } from '../../../assets/css/colors';
 export const TopicItem = ({ topic }) => {
     const formatDate = (_date) => {
         return dayjs(_date).format('MM/DD/YYYY h:mm A');
@@ -34,8 +35,11 @@ export const TopicItem = ({ topic }) => {
                 </div>
                 {/* <Notification>3</Notification> */}
                 <ModuleContainer>
-                    {/*  */}
-                    <Status>{topic.module.name}</Status>
+                    <Label
+                        color={Colors.primary}
+                        name={topic.module.name}
+                        width="auto"
+                    />
                 </ModuleContainer>
             </HeaderContainer>
             <div className="DescriptionContainer">

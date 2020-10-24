@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Colors } from '../../assets/css/colors';
+import { Label } from '../Label/index';
 import { Dropdown } from '../Dropdrown/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
 import { OutsideClick } from '../OutsideClick/index';
 import { useDropdown } from '../../hooks/useDropdown';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Status as StatusStyled } from './styles';
 import PropTypes from 'prop-types';
 
 const OPTIONS = [
@@ -79,7 +78,8 @@ export const Status = ({ status, doUpdate, elemId }) => {
         }
     }, [status]);
 
-    const handleDropDown = (value) => {
+    const handleDropDown = (value = null) => {
+        value = value == null ? !openDropDown : value;
         setOpenDropDown(value);
     };
 
@@ -99,23 +99,18 @@ export const Status = ({ status, doUpdate, elemId }) => {
         <>
             <DropdownContextProvider>
                 <OutsideClick setLocalDropDownState={handleDropDown}>
-                    <StatusStyled
+                    <Label
                         color={currentColor}
-                        onClick={() => setOpenDropDown(!openDropDown)}
+                        icon={currentIcon}
+                        name={currentOption}
+                        showCaret={true}
+                        onClicked={handleDropDown}
                     >
-                        <span>
-                            {currentIcon !== null && `${currentIcon} `}
-                            {currentOption}
-                        </span>{' '}
-                        <FontAwesomeIcon
-                            icon="caret-down"
-                            color={currentColor}
-                        />
                         <OptionsDropDown
                             openDrop={openDropDown}
                             setStatus={setStatus}
                         />
-                    </StatusStyled>
+                    </Label>
                 </OutsideClick>
             </DropdownContextProvider>
         </>

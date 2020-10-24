@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-import { bold, borderRadius } from '../../assets/css/theme';
+import { bold } from '../../assets/css/theme';
 
-export const Status = styled.div`
+export const Label = styled.div`
     font-size: 13px;
     padding: 0px 15px;
     font-weight: ${bold};
@@ -11,5 +11,5 @@ export const Status = styled.div`
     border-radius: 20px;
     border: 1px solid ${({ color }) => (color ? color : Colors.black)};
     line-height: 2;
-    width: 81px;
+    width: ${({ width }) => (width ? width : '81px')};
 `;
