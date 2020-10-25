@@ -13,6 +13,15 @@ export const gqlGetProject = gql`
                     avatar
                     name
                     last_name
+                    email
+                }
+                role {
+                    _id
+                    name
+                }
+                team {
+                    _id
+                    name
                 }
             }
         }
