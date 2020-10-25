@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { navigate } from '@reach/router';
 import { Avatar } from '../Avatar/index';
 import { useUser } from '../../hooks/useUser';
+import { ButtonHome } from '../ButtonHome/index';
+import { MemberModal } from '../Modal/templates/MembersModal/index';
+import { Colors } from '../../assets/css/colors';
 import { MembersList as MembersListStyled, List } from './styles';
 
 export const MembersList = ({ members = [] }) => {
     const { generateProfileUrl } = useUser();
+    const modalRef = useRef();
     return (
         <MembersListStyled>
             <List>
@@ -27,7 +31,16 @@ export const MembersList = ({ members = [] }) => {
                         />
                     </li>
                 ))}
+                <ButtonHome
+                    url=""
+                    icon="plus"
+                    color={Colors.primary}
+                    onClicked={() => modalRef.current.openModal()}
+                >
+                    Add
+                </ButtonHome>
             </List>
+            <MemberModal modalRef={modalRef} />
         </MembersListStyled>
     );
 };

@@ -6,7 +6,6 @@ import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout';
 import { GetProjectQuery } from '../../requests/project/getProjectQuery';
 import { Image } from '../../components/Image';
-import { ButtonHome } from '../../components/ButtonHome';
 import { ListModules } from '../../components/Module/ListModules';
 import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
@@ -16,7 +15,6 @@ import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { ListFiles } from '../../components/File/ListFiles/index';
-import { Colors } from '../../assets/css/colors';
 import {
     Container,
     InfoContainer,
@@ -119,14 +117,6 @@ export const Project = ({ id, location }) => {
                                 </ProjectInfoContainer>
                                 <MembersContainer>
                                     <MembersList members={members} />
-                                    <ButtonHome
-                                        url="/"
-                                        icon="plus"
-                                        color={Colors.primary}
-                                        margin="0.5em 0 0 0.5em"
-                                    >
-                                        Add
-                                    </ButtonHome>
                                 </MembersContainer>
                             </div>
                             <ProjectTabs

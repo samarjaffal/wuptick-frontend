@@ -14,6 +14,8 @@ export const useUser = () => {
         setLoading,
         currentUser,
         setCurrentUser,
+        currentProject,
+        setCurrentProject,
     } = useContext(Context);
 
     const activateAuth = useCallback(
@@ -74,6 +76,8 @@ export const useUser = () => {
         currentUser,
         setCurrentUser,
         profileURL,
+        currentProject,
+        setCurrentProject,
         getAge,
         generateProfileUrl,
     };

@@ -10,8 +10,18 @@ export const ButtonHome = ({
     margin,
     children,
 }) => {
+    const handleClick = () => {
+        if (onClicked == null) return;
+        onClicked();
+    };
+
     return (
-        <Anchor to={url} margin={margin} color={color}>
+        <Anchor
+            to={url}
+            margin={margin}
+            color={color}
+            onClick={() => handleClick()}
+        >
             <Button>
                 <Icon icon={icon} color={color} style={{ margin: 'auto' }} />{' '}
                 {''}
