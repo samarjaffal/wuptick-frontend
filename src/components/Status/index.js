@@ -38,13 +38,7 @@ const OptionsDropDown = ({ openDrop, setStatus }) => {
     }, [openDrop]);
 
     return (
-        <Dropdown
-            open={open}
-            transform="-58%"
-            width="200px"
-            top="46px"
-            bg={Colors.whitePrimary}
-        >
+        <Dropdown open={open} width="200px" top="46px" bg={Colors.whitePrimary}>
             <DropdownMenu menu="main" classMenu="menu-primary">
                 {OPTIONS.map((option, index) => (
                     <DropdownItem
@@ -105,6 +99,8 @@ export const Status = ({ status, doUpdate, elemId }) => {
                         name={currentOption}
                         showCaret={true}
                         onClicked={handleDropDown}
+                        width="81px"
+                        pointer={true}
                     >
                         <OptionsDropDown
                             openDrop={openDropDown}

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
 import { Avatar } from '../../../Avatar/index';
-import { Label } from '../../../Label/index';
 import { Modal } from '../../index';
 import { Input } from '../../../Forms/Input/index';
+import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
 import { Colors } from '../../../../assets/css/colors';
 import { Subtitle, MemberName, MemberEmail, Empty, Hr } from './styles';
@@ -17,6 +16,7 @@ const MembersList = ({ members }) => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                position: 'relative',
             }}
         >
             <div
@@ -36,12 +36,7 @@ const MembersList = ({ members }) => {
             </div>
 
             <div>
-                <Label
-                    name="Member"
-                    color={Colors.primary}
-                    showCaret={true}
-                    width="max-content"
-                />
+                <RolesSelect role={member.role} />
             </div>
         </div>
     ));

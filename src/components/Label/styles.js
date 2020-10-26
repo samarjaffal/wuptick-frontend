@@ -11,5 +11,8 @@ export const Label = styled.div`
     border-radius: 20px;
     border: 1px solid ${({ color }) => (color ? color : Colors.black)};
     line-height: 2;
-    width: ${({ width }) => (width ? width : '81px')};
+    width: ${({ width }) => (width ? width : '60px')};
+    min-width: 60px;
+    text-align: center;
+    cursor: ${({ pointer }) => (pointer == true ? 'pointer' : 'default')};
 `;

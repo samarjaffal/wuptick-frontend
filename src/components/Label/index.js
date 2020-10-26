@@ -10,6 +10,7 @@ export const Label = ({
     icon = null,
     showCaret = false,
     width,
+    pointer = false,
     children,
 }) => {
     const handleClick = () => {
@@ -17,7 +18,12 @@ export const Label = ({
         onClicked();
     };
     return (
-        <LabelStyled color={color} onClick={() => handleClick()} width={width}>
+        <LabelStyled
+            color={color}
+            onClick={() => handleClick()}
+            width={width}
+            pointer={pointer}
+        >
             <span>
                 {icon !== null && `${icon} `}
                 {name}
@@ -35,5 +41,6 @@ Label.propTypes = {
     icon: PropTypes.string,
     showCaret: PropTypes.bool,
     width: PropTypes.string,
+    pointer: PropTypes.bool,
     children: PropTypes.any,
 };
