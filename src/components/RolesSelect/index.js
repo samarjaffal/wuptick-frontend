@@ -9,6 +9,10 @@ import { useDropdown } from '../../hooks/useDropdown';
 import { Label } from '../Label/index';
 import { Colors } from '../../assets/css/colors';
 
+const setFirstLetterUpperCase = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const OptionsDropDown = ({ openDrop, setOption }) => {
     const { open, setOpen } = useDropdown();
 
@@ -33,9 +37,9 @@ const OptionsDropDown = ({ openDrop, setOption }) => {
                             {options.map((option, index) => (
                                 <DropdownItem
                                     key={option._id}
-                                    onClicked={() => setOption(option.name)}
+                                    onClicked={() => setOption(option)}
                                 >
-                                    {option.name}
+                                    {setFirstLetterUpperCase(option.name)}
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>
@@ -46,9 +50,9 @@ const OptionsDropDown = ({ openDrop, setOption }) => {
     );
 };
 
-export const RolesSelect = ({ role }) => {
+export const RolesSelect = ({ role, doUpdate, projectId, userId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const [currentOption, setCurrentOption] = useState(null);
+    const [currentOption, setCurrentOption] = useState({});
 
     const handleDropDown = (value = null) => {
         value = value == null ? !openDropDown : value;
@@ -57,12 +61,17 @@ export const RolesSelect = ({ role }) => {
     };
 
     const setOption = (value) => {
-        setCurrentOption(value);
+        const roleTemp = { ...value };
+        roleTemp.name = setFirstLetterUpperCase(roleTemp.name);
+        setCurrentOption(roleTemp);
+        doUpdate(projectId, userId, value._id.toLowerCase());
     };
 
     useEffect(() => {
         if (role) {
-            setCurrentOption(role.name);
+            const roleTemp = { ...role };
+            roleTemp.name = setFirstLetterUpperCase(roleTemp.name);
+            setCurrentOption(roleTemp);
         }
     }, [role]);
 
@@ -70,7 +79,7 @@ export const RolesSelect = ({ role }) => {
         <DropdownContextProvider>
             <OutsideClick setLocalDropDownState={handleDropDown}>
                 <Label
-                    name={currentOption}
+                    name={currentOption.name}
                     color={Colors.primary}
                     showCaret={true}
                     width="max-content"

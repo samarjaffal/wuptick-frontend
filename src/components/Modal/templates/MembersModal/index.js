@@ -5,10 +5,12 @@ import { Modal } from '../../index';
 import { Input } from '../../../Forms/Input/index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
+import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { Colors } from '../../../../assets/css/colors';
 import { Subtitle, MemberName, MemberEmail, Empty, Hr } from './styles';
 
 const MembersList = ({ members }) => {
+    const { currentProject } = useUser();
     return members.map((member, index) => (
         <div
             key={index}
@@ -36,7 +38,16 @@ const MembersList = ({ members }) => {
             </div>
 
             <div>
-                <RolesSelect role={member.role} />
+                <UpdateMemberRoleMutation>
+                    {({ doUpdateRole }) => (
+                        <RolesSelect
+                            role={member.role}
+                            doUpdate={doUpdateRole}
+                            projectId={currentProject._id}
+                            userId={member.user._id}
+                        />
+                    )}
+                </UpdateMemberRoleMutation>
             </div>
         </div>
     ));
