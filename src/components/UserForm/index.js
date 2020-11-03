@@ -1,4 +1,5 @@
 import React, { Fragment, useRef } from 'react';
+import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import {
     Title,
@@ -14,12 +15,20 @@ import { FormAlert } from '../FormAlert/index';
 import { useForm } from 'react-hook-form';
 import { useFormAlert } from '../../hooks/useFormAlert';
 
-export const UserForm = ({ title, onSubmit, loading, error, data }) => {
+export const UserForm = ({
+    location,
+    title,
+    onSubmit,
+    loading,
+    error,
+    data,
+}) => {
     const type = title.toLowerCase();
     const { register, handleSubmit, errors, watch } = useForm();
     const { message } = useFormAlert(data, type);
     const password = useRef({});
     password.current = watch('password', '');
+    const { token } = queryString.parse(location.search);
 
     const anchorText =
         type == 'login'
@@ -30,9 +39,11 @@ export const UserForm = ({ title, onSubmit, loading, error, data }) => {
     const anchorTitle = anchorURL.charAt(0).toUpperCase() + anchorURL.slice(1);
 
     const onFormSubmited = (formData) => {
+        console.log(token, 'token');
         const newFormData = {
             email: formData.email,
             password: formData.password,
+            token: token,
         };
         onSubmit(newFormData);
     };

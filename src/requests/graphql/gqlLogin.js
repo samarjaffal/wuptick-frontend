@@ -6,6 +6,9 @@ export const gqlLogin = gql`
             ... on AuthUserError {
                 message
             }
+            ... on AuthUserNotConfirmedError {
+                message
+            }
             ... on Error {
                 message
             }

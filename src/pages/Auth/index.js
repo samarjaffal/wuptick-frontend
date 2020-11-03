@@ -4,7 +4,7 @@ import { UserForm } from '../../components/UserForm';
 import { RegisterMutation } from '../../requests/RegisterMutation';
 import { LoginQuery } from '../../requests/LoginQuery';
 
-export const Auth = ({ type }) => {
+export const Auth = ({ type, ...rest }) => {
     return (
         <Fragment>
             {type == 'login' ? (
@@ -16,6 +16,7 @@ export const Auth = ({ type }) => {
                             loading={loading}
                             onSubmit={doLogin}
                             data={data}
+                            {...rest}
                         />
                     )}
                 </LoginQuery>
@@ -28,6 +29,7 @@ export const Auth = ({ type }) => {
                             loading={loading}
                             onSubmit={doRegister}
                             data={data}
+                            {...rest}
                         />
                     )}
                 </RegisterMutation>

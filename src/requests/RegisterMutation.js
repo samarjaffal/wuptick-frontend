@@ -15,6 +15,7 @@ export const RegisterMutation = ({ children }) => {
             variables: {
                 email: input.email,
                 password: input.password,
+                token: input.token,
             },
         });
     });
