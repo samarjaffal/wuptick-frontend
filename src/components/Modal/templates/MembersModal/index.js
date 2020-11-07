@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Autosuggest from 'react-autosuggest';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
 import { Input } from '../../../Forms/Input/index';
@@ -54,8 +55,10 @@ const MembersList = ({ members }) => {
 };
 
 export const MemberModal = ({ modalRef }) => {
-    const { currentProject } = useUser();
+    const { currentProject, teamSelected } = useUser();
     const [members, setMembers] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
+    const [member, setMember] = useState('');
 
     const handleMembersList = () => {
         if (members.length > 0) {
@@ -77,6 +80,21 @@ export const MemberModal = ({ modalRef }) => {
         }
     }, [currentProject]);
 
+    const getSuggestions = (value) => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+
+        let membersList = teamSelected.members;
+
+        return inputLength === 0
+            ? []
+            : membersList.filter(
+                  (member) =>
+                      member.name.toLowerCase().slice(0, inputLength) ===
+                      inputValue
+              );
+    };
+
     return (
         <Modal
             ref={modalRef}
@@ -89,7 +107,36 @@ export const MemberModal = ({ modalRef }) => {
             <Hr />
             <div className="invite-container">
                 <Subtitle>Invite members to your project</Subtitle>
-                <Input placeholder="Email address or name" bg={Colors.white} />
+                {/* <Input placeholder="Email address or name" bg={Colors.white} /> */}
+
+                <Autosuggest
+                    inputProps={{
+                        placeholder: 'Email address or name',
+                        autoComplete: 'abcd',
+                        name: 'member-search',
+                        id: 'member-search',
+                        value: member,
+                        onChange: (_event, { newValue }) => {
+                            setMember(newValue);
+                        },
+                    }}
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={async ({ value }) => {
+                        if (!value) {
+                            setSuggestions([]);
+                            return;
+                        }
+                        setSuggestions(getSuggestions(value));
+                    }}
+                    onSuggestionsClearRequested={() => {
+                        setSuggestions([]);
+                    }}
+                    getSuggestionValue={(suggestion) => suggestion.name}
+                    renderSuggestion={(suggestion) => (
+                        <div>{suggestion.name}</div>
+                    )}
+                />
+
                 {/*                 <div className="invited-members" style={{ marginTop: '0.5em' }}>
                     {Array(1)
                         .fill()

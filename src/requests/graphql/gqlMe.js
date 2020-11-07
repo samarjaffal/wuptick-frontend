@@ -39,6 +39,13 @@ export const gqlMe = gql`
                         last_name
                     }
                 }
+                members {
+                    _id
+                    name
+                    last_name
+                    email
+                    avatar
+                }
             }
         }
     }
