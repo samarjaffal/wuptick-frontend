@@ -54,7 +54,7 @@ const MembersList = ({ members }) => {
     ));
 };
 
-export const MemberModal = ({ modalRef }) => {
+export const MemberModal = ({ modalRef, doInvitation, data }) => {
     const { currentProject, teamSelected } = useUser();
     const [members, setMembers] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
@@ -112,7 +112,7 @@ export const MemberModal = ({ modalRef }) => {
                 <Autosuggest
                     inputProps={{
                         placeholder: 'Email address or name',
-                        autoComplete: 'abcd',
+                        autoComplete: 'off',
                         name: 'member-search',
                         id: 'member-search',
                         value: member,
@@ -127,6 +127,32 @@ export const MemberModal = ({ modalRef }) => {
                             return;
                         }
                         setSuggestions(getSuggestions(value));
+                    }}
+                    onSuggestionSelected={(_event, { suggestion, method }) => {
+                        console.log(suggestion, 'onSuggestionSelected');
+
+                        const memberExist = currentProject.members.some(
+                            (member) => member.user._id == suggestion._id
+                        );
+                        if (memberExist) return;
+
+                        let memberObject = {
+                            user: { ...suggestion },
+                            role: {},
+                        };
+
+                        let newProjectMembers = [
+                            ...currentProject.members,
+                            { ...memberObject },
+                        ];
+
+                        currentProject.members = newProjectMembers;
+                        let input = {
+                            email: suggestion.email,
+                            projectId: currentProject._id,
+                            teamId: teamSelected._id,
+                        };
+                        doInvitation(input);
                     }}
                     onSuggestionsClearRequested={() => {
                         setSuggestions([]);

@@ -70,8 +70,12 @@ export const RolesSelect = ({ role, doUpdate, projectId, userId }) => {
     useEffect(() => {
         if (role) {
             const roleTemp = { ...role };
-            roleTemp.name = setFirstLetterUpperCase(roleTemp.name);
-            setCurrentOption(roleTemp);
+            if (Object.keys(role).length > 0) {
+                roleTemp.name = setFirstLetterUpperCase(roleTemp.name);
+                setCurrentOption(roleTemp);
+            } else {
+                setCurrentOption({ name: 'Member' });
+            }
         }
     }, [role]);
 
