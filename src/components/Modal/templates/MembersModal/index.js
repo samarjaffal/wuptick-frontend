@@ -6,7 +6,9 @@ import { Modal } from '../../index';
 import { Input } from '../../../Forms/Input/index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
+import { Label } from '../../../Label/index';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
+import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { Colors } from '../../../../assets/css/colors';
 import { Subtitle, MemberName, MemberEmail, Empty, Hr } from './styles';
 
@@ -163,48 +165,57 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
                     )}
                 />
 
-                {/*                 <div className="invited-members" style={{ marginTop: '0.5em' }}>
-                    {Array(1)
-                        .fill()
-                        .map((member, index) => (
-                            <div
-                                key={index}
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                }}
-                            >
+                <div className="invited-members" style={{ marginTop: '0.5em' }}>
+                    <GetInvitationsForProjectQuery
+                        projectId={currentProject._id}
+                    >
+                        {({ data }) => {
+                            const {
+                                getInvitationsForProject: invitations,
+                            } = data;
+                            return invitations.map((invitation, index) => (
                                 <div
+                                    key={index}
                                     style={{
                                         display: 'flex',
+                                        justifyContent: 'space-between',
                                         alignItems: 'center',
-                                        marginBottom: '0.5em',
                                     }}
                                 >
-                                    <Avatar size={30} />
                                     <div
-                                        className="user-info"
-                                        style={{ marginLeft: '0.5em' }}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            margin: '0.5em 0',
+                                        }}
                                     >
-                                        <MemberName>Peter Will</MemberName>
-                                        <MemberEmail>
-                                            peterwill@gmail.com
-                                        </MemberEmail>
+                                        <Avatar size={30} />
+                                        <div
+                                            className="user-info"
+                                            style={{ marginLeft: '0.5em' }}
+                                        >
+                                            <MemberName>
+                                                {invitation.email}
+                                            </MemberName>
+                                            <MemberEmail>
+                                                {invitation.email}
+                                            </MemberEmail>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <Label
+                                            name="Waiting for confirmation"
+                                            color={Colors.yellow}
+                                            showCaret={true}
+                                            width="max-content"
+                                        />
                                     </div>
                                 </div>
-
-                                <div>
-                                    <Label
-                                        name="Waiting for confirmation"
-                                        color={Colors.yellow}
-                                        showCaret={true}
-                                        width="max-content"
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                </div> */}
+                            ));
+                        }}
+                    </GetInvitationsForProjectQuery>
+                </div>
             </div>
         </Modal>
     );
