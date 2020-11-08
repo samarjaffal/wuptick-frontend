@@ -8,6 +8,23 @@ import {
     info,
 } from '../../../../assets/css/theme';
 
+export const FlexSpaceBetween = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ${({ customProps }) => customProps};
+`;
+
+export const FlexCenter = styled.div`
+    display: flex;
+    align-items: center;
+    ${({ customProps }) => customProps};
+`;
+
+export const Div = styled.div`
+    ${({ customProps }) => customProps};
+`;
+
 export const Subtitle = styled.h4`
     ${subtitle};
     font-weight: ${bold};

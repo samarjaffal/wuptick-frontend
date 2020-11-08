@@ -10,37 +10,32 @@ import { Label } from '../../../Label/index';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { Colors } from '../../../../assets/css/colors';
-import { Subtitle, MemberName, MemberEmail, Empty, Hr } from './styles';
+import {
+    Div,
+    FlexSpaceBetween,
+    FlexCenter,
+    Subtitle,
+    MemberName,
+    MemberEmail,
+    Empty,
+    Hr,
+} from './styles';
 
 const MembersList = ({ members }) => {
     const { currentProject } = useUser();
     return members.map((member, index) => (
-        <div
-            key={index}
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                position: 'relative',
-            }}
-        >
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '0.5em',
-                }}
-            >
+        <FlexSpaceBetween key={index} customProps="position: relative">
+            <FlexCenter customProps="margin-bottom: 0.5em;">
                 <Avatar size={30} src={member.user.avatar} />
-                <div className="user-info" style={{ marginLeft: '0.5em' }}>
+                <Div customProps="margin-left: 0.5em;">
                     <MemberName>
                         {member.user.name} {member.user.last_name}
                     </MemberName>
                     <MemberEmail>{member.user.email}</MemberEmail>
-                </div>
-            </div>
+                </Div>
+            </FlexCenter>
 
-            <div>
+            <Div>
                 <UpdateMemberRoleMutation>
                     {({ doUpdateRole }) => (
                         <RolesSelect
@@ -51,8 +46,31 @@ const MembersList = ({ members }) => {
                         />
                     )}
                 </UpdateMemberRoleMutation>
-            </div>
-        </div>
+            </Div>
+        </FlexSpaceBetween>
+    ));
+};
+
+const InvitationList = ({ members }) => {
+    return members.map((member, index) => (
+        <FlexSpaceBetween key={index} customProps="position: relative">
+            <FlexCenter customProps="margin-bottom: 0.5em;">
+                <Avatar size={30} />
+                <Div customProps="margin-left: 0.5em;">
+                    <MemberName>{member.email}</MemberName>
+                    <MemberEmail>{member.email}</MemberEmail>
+                </Div>
+            </FlexCenter>
+
+            <Div>
+                <Label
+                    name="Waiting for confirmation"
+                    color={Colors.yellow}
+                    showCaret={true}
+                    width="max-content"
+                />
+            </Div>
+        </FlexSpaceBetween>
     ));
 };
 
@@ -190,46 +208,7 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
                             const {
                                 getInvitationsForProject: invitations,
                             } = data;
-                            return invitations.map((invitation, index) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            margin: '0.5em 0',
-                                        }}
-                                    >
-                                        <Avatar size={30} />
-                                        <div
-                                            className="user-info"
-                                            style={{ marginLeft: '0.5em' }}
-                                        >
-                                            <MemberName>
-                                                {invitation.email}
-                                            </MemberName>
-                                            <MemberEmail>
-                                                {invitation.email}
-                                            </MemberEmail>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <Label
-                                            name="Waiting for confirmation"
-                                            color={Colors.yellow}
-                                            showCaret={true}
-                                            width="max-content"
-                                        />
-                                    </div>
-                                </div>
-                            ));
+                            return <InvitationList members={invitations} />;
                         }}
                     </GetInvitationsForProjectQuery>
                 </div>
