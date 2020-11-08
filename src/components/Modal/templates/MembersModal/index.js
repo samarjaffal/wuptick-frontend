@@ -7,8 +7,10 @@ import { Input } from '../../../Forms/Input/index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
 import { Label } from '../../../Label/index';
+import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/index';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
+import { RegisterUserByInvitationMutation } from '../../../../requests/User/RegisterUserByInvitationMutation';
 import { Colors } from '../../../../assets/css/colors';
 import {
     Div,
@@ -74,11 +76,9 @@ const InvitationList = ({ members }) => {
     ));
 };
 
-export const MemberModal = ({ modalRef, doInvitation, data }) => {
-    const { currentProject, teamSelected } = useUser();
+export const MemberModal = ({ modalRef }) => {
+    const { currentProject } = useUser();
     const [members, setMembers] = useState([]);
-    const [suggestions, setSuggestions] = useState([]);
-    const [member, setMember] = useState('');
 
     const handleMembersList = () => {
         if (members.length > 0) {
@@ -100,25 +100,6 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
         }
     }, [currentProject]);
 
-    const getSuggestions = (value) => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-
-        let membersList = teamSelected.members;
-
-        return inputLength === 0
-            ? []
-            : membersList.filter(
-                  (member) =>
-                      member.name.toLowerCase().slice(0, inputLength) ===
-                      inputValue
-              );
-    };
-
-    const validateEmail = (email) => {
-        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    };
     return (
         <Modal
             ref={modalRef}
@@ -132,73 +113,13 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
             <div className="invite-container">
                 <Subtitle>Invite members to your project</Subtitle>
                 {/* <Input placeholder="Email address or name" bg={Colors.white} /> */}
-
-                <Autosuggest
-                    inputProps={{
-                        placeholder: 'Email address or name',
-                        autoComplete: 'off',
-                        name: 'member-search',
-                        id: 'member-search',
-                        value: member,
-                        onChange: (_event, { newValue }) => {
-                            setMember(newValue);
-                        },
-                        onKeyDown: (event) => {
-                            const { keyCode } = event;
-                            if (keyCode === 13 && suggestions.length <= 0) {
-                                if (member === null || member === '') return;
-                                if (!validateEmail(member)) return;
-                                let input = {
-                                    email: member,
-                                    projectId: currentProject._id,
-                                    teamId: teamSelected._id,
-                                };
-                                doInvitation(input);
-                            }
-                        },
-                    }}
-                    suggestions={suggestions}
-                    onSuggestionsFetchRequested={async ({ value }) => {
-                        if (!value) {
-                            setSuggestions([]);
-                            return;
-                        }
-                        setSuggestions(getSuggestions(value));
-                    }}
-                    onSuggestionSelected={(_event, { suggestion }) => {
-                        console.log(suggestion, 'onSuggestionSelected');
-
-                        const memberExist = currentProject.members.some(
-                            (member) => member.user._id == suggestion._id
-                        );
-                        if (memberExist) return;
-
-                        let memberObject = {
-                            user: { ...suggestion },
-                            role: {},
-                        };
-
-                        let newProjectMembers = [
-                            ...currentProject.members,
-                            { ...memberObject },
-                        ];
-
-                        currentProject.members = newProjectMembers;
-                        let input = {
-                            email: suggestion.email,
-                            projectId: currentProject._id,
-                            teamId: teamSelected._id,
-                        };
-                        doInvitation(input);
-                    }}
-                    onSuggestionsClearRequested={() => {
-                        setSuggestions([]);
-                    }}
-                    getSuggestionValue={(suggestion) => suggestion.name}
-                    renderSuggestion={(suggestion) => (
-                        <div>{suggestion.name}</div>
+                <RegisterUserByInvitationMutation>
+                    {({ doRegisterInvitation }) => (
+                        <MembersInputSearch
+                            doInvitation={doRegisterInvitation}
+                        />
                     )}
-                />
+                </RegisterUserByInvitationMutation>
 
                 <div className="invited-members" style={{ marginTop: '0.5em' }}>
                     <GetInvitationsForProjectQuery

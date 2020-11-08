@@ -4,7 +4,6 @@ import { Avatar } from '../Avatar/index';
 import { useUser } from '../../hooks/useUser';
 import { ButtonHome } from '../ButtonHome/index';
 import { MemberModal } from '../Modal/templates/MembersModal/index';
-import { RegisterUserByInvitationMutation } from '../../requests/User/RegisterUserByInvitationMutation';
 import { Colors } from '../../assets/css/colors';
 import { MembersList as MembersListStyled, List } from './styles';
 
@@ -41,15 +40,7 @@ export const MembersList = ({ members = [] }) => {
                     Add
                 </ButtonHome>
             </List>
-            <RegisterUserByInvitationMutation>
-                {({ doRegisterInvitation, data }) => (
-                    <MemberModal
-                        modalRef={modalRef}
-                        doInvitation={doRegisterInvitation}
-                        data={data}
-                    />
-                )}
-            </RegisterUserByInvitationMutation>
+            <MemberModal modalRef={modalRef} />
         </MembersListStyled>
     );
 };
