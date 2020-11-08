@@ -4,6 +4,7 @@ import { Colors } from '../../assets/css/colors';
 import { Container, Text, Icon, Input } from './styles';
 export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
     const [isEditing, setEditing] = useState(false);
+    const [isFocused, SetFocus] = useState(false);
     const inputEl = useInputValue('');
     const inputRef = useRef(null);
 
@@ -17,13 +18,15 @@ export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
         }
 
         if (event.keyCode === 13) {
-            console.log('item added');
-            setValue(inputRef.current.value);
-            inputRef.current.value = '';
-            if (doFunction) {
-                doFunction();
+            if (isFocused) {
+                console.log('item added');
+                setValue(inputRef.current.value);
+                inputRef.current.value = '';
+                if (doFunction) {
+                    doFunction();
+                }
+                setEditing(false);
             }
-            setEditing(false);
         }
     };
 
@@ -36,6 +39,7 @@ export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
             inputRef.current.focus();
         }
         document.addEventListener('keydown', handleKeys, false);
+        SetFocus(inputRef.current !== document.activeElement);
         return () => {
             document.removeEventListener('keydown', handleKeys, false);
         };

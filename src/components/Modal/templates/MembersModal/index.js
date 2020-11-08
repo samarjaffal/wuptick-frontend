@@ -97,6 +97,10 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
               );
     };
 
+    const validateEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
     return (
         <Modal
             ref={modalRef}
@@ -121,6 +125,19 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
                         onChange: (_event, { newValue }) => {
                             setMember(newValue);
                         },
+                        onKeyDown: (event) => {
+                            const { keyCode } = event;
+                            if (keyCode === 13 && suggestions.length <= 0) {
+                                if (member === null || member === '') return;
+                                if (!validateEmail(member)) return;
+                                let input = {
+                                    email: member,
+                                    projectId: currentProject._id,
+                                    teamId: teamSelected._id,
+                                };
+                                doInvitation(input);
+                            }
+                        },
                     }}
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={async ({ value }) => {
@@ -130,7 +147,7 @@ export const MemberModal = ({ modalRef, doInvitation, data }) => {
                         }
                         setSuggestions(getSuggestions(value));
                     }}
-                    onSuggestionSelected={(_event, { suggestion, method }) => {
+                    onSuggestionSelected={(_event, { suggestion }) => {
                         console.log(suggestion, 'onSuggestionSelected');
 
                         const memberExist = currentProject.members.some(

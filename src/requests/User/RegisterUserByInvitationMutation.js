@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlRegisterUserByInvitation } from '../graphql/gqlRegisterUserByInvitationMutation';
+import { gqlGetInvitationsForProject } from '../graphql/gqlGetInvitationsForProject';
 import PropTypes from 'prop-types';
 
 export const RegisterUserByInvitationMutation = ({ children }) => {
@@ -18,6 +19,23 @@ export const RegisterUserByInvitationMutation = ({ children }) => {
                 email: input.email,
                 projectId: input.projectId,
                 teamId: input.teamId,
+            },
+            update: (store, { data }) => {
+                const invitationsData = store.readQuery({
+                    query: gqlGetInvitationsForProject,
+                    variables: { projectId: input.projectId },
+                });
+                console.log(invitationsData, 'invitationsData');
+                store.writeQuery({
+                    query: gqlGetInvitationsForProject,
+                    variables: { projectId: input.projectId },
+                    data: {
+                        getInvitationsForProject: [
+                            ...invitationsData.getInvitationsForProject,
+                            data.registerUserByInvitation,
+                        ],
+                    },
+                });
             },
         });
     });
