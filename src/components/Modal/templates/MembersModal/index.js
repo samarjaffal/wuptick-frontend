@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Autosuggest from 'react-autosuggest';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
 import { Input } from '../../../Forms/Input/index';
@@ -82,7 +81,7 @@ export const MemberModal = ({ modalRef }) => {
 
     const handleMembersList = () => {
         if (members.length > 0) {
-            return <MembersList members={currentProject.members} />;
+            return <MembersList members={members} />;
         } else {
             return (
                 <Empty>
@@ -98,7 +97,7 @@ export const MemberModal = ({ modalRef }) => {
         if (Object.keys(currentProject).length > 0) {
             setMembers(currentProject.members);
         }
-    }, [currentProject]);
+    }, [currentProject, members]);
 
     return (
         <Modal
@@ -110,18 +109,19 @@ export const MemberModal = ({ modalRef }) => {
             {handleMembersList()}
 
             <Hr />
-            <div className="invite-container">
+            <Div>
                 <Subtitle>Invite members to your project</Subtitle>
                 {/* <Input placeholder="Email address or name" bg={Colors.white} /> */}
                 <RegisterUserByInvitationMutation>
                     {({ doRegisterInvitation }) => (
                         <MembersInputSearch
                             doInvitation={doRegisterInvitation}
+                            setMembers={setMembers}
                         />
                     )}
                 </RegisterUserByInvitationMutation>
 
-                <div className="invited-members" style={{ marginTop: '0.5em' }}>
+                <Div customProps="margin-top:0.5em;">
                     <GetInvitationsForProjectQuery
                         projectId={currentProject._id}
                     >
@@ -132,8 +132,8 @@ export const MemberModal = ({ modalRef }) => {
                             return <InvitationList members={invitations} />;
                         }}
                     </GetInvitationsForProjectQuery>
-                </div>
-            </div>
+                </Div>
+            </Div>
         </Modal>
     );
 };

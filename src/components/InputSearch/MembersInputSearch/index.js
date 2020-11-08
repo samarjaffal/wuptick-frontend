@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useUser } from '../../../hooks/useUser';
 import Autosuggest from 'react-autosuggest';
 
-export const MembersInputSearch = ({ doInvitation }) => {
+export const MembersInputSearch = ({ doInvitation, setMembers }) => {
     const { currentProject, teamSelected } = useUser();
     const [suggestions, setSuggestions] = useState([]);
     const [member, setMember] = useState('');
@@ -64,12 +64,12 @@ export const MembersInputSearch = ({ doInvitation }) => {
             role: {},
         };
 
-        let newProjectMembers = [
-            ...currentProject.members,
-            { ...memberObject },
-        ];
+        let newProjectMembers = [...currentProject.members, memberObject];
 
         currentProject.members = newProjectMembers;
+
+        setMembers(newProjectMembers);
+
         let input = {
             email: suggestion.email,
             projectId: currentProject._id,

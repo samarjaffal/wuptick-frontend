@@ -10,7 +10,7 @@ export const GetInvitationsForProjectQuery = ({ children, projectId }) => {
         },
     });
     if (loading || !data) {
-        return 'loading...';
+        return null;
     }
 
     if (error) {

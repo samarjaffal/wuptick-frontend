@@ -11,10 +11,10 @@ export const gqlRegisterUserByInvitation = gql`
             projectId: $projectId
             teamId: $teamId
         ) {
-            ... on User {
-                _id
-                name
-                last_name
+            ... on Member {
+                user
+                role
+                team
             }
             ... on Invitation {
                 _id
