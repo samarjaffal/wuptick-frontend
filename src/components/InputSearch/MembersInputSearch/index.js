@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
-import { useUser } from '../../../hooks/useUser';
 import Autosuggest from 'react-autosuggest';
+import PropTypes from 'prop-types';
+import { useUser } from '../../../hooks/useUser';
+import { Avatar } from '../../Avatar/index';
+import {
+    Div,
+    FlexCenter,
+    FlexSpaceBetween,
+    MemberEmail,
+    MemberName,
+} from './styles';
 
 export const MembersInputSearch = ({ doInvitation, setMembers }) => {
     const { currentProject, teamSelected } = useUser();
@@ -58,7 +67,10 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
         const memberExist = currentProject.members.some(
             (member) => member.user._id == suggestion._id
         );
-        if (memberExist) return;
+        if (memberExist) {
+            setMember('');
+            return;
+        }
 
         let memberObject = {
             user: { ...suggestion },
@@ -85,8 +97,25 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
         setSuggestions([]);
     };
 
-    const getSuggestionValue = (suggestion) => suggestion.name;
-    const renderSuggestion = (suggestion) => <div>{suggestion.name}</div>;
+    const MemberElement = ({ suggestion }) => (
+        <FlexSpaceBetween>
+            <FlexCenter customProps="margin-bottom: 0.5em;">
+                <Avatar size={30} src={suggestion.avatar} />
+                <Div customProps="margin-left: 0.5em;">
+                    <MemberName>
+                        {suggestion.name} {suggestion.last_name}
+                    </MemberName>
+                    <MemberEmail>{suggestion.email}</MemberEmail>
+                </Div>
+            </FlexCenter>
+        </FlexSpaceBetween>
+    );
+
+    const getSuggestionValue = (suggestion) =>
+        `${suggestion.name} ${suggestion.last_name}`;
+    const renderSuggestion = (suggestion) => (
+        <MemberElement suggestion={suggestion} />
+    );
 
     return (
         <Autosuggest
@@ -109,4 +138,9 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
             renderSuggestion={renderSuggestion}
         />
     );
+};
+
+MembersInputSearch.propTypes = {
+    doInvitation: PropTypes.func,
+    setMembers: PropTypes.func,
 };

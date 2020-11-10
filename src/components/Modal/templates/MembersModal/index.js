@@ -163,9 +163,9 @@ MemberModal.propTypes = {
 };
 
 InvitationList.propTypes = {
-    members: PropTypes.object,
+    members: PropTypes.array,
 };
 
 MembersList.propTypes = {
-    members: PropTypes.object,
+    members: PropTypes.array,
 };
