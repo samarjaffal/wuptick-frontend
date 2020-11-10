@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-
+import { borderRadius, bold, description } from './theme';
+import { ShadowSecondary, TransitionSecondary } from './shared-styles';
 let resizeTimer;
 window.addEventListener('resize', () => {
     document.body.classList.add('resize-animation-stopper');
@@ -53,14 +54,29 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .react-autosuggest__input {
-  width: 100%;
-  padding: 10px 20px;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: ${Colors.white};
+    padding: 20px;
+    border-radius: ${borderRadius};
+    margin-bottom: 10px;
+    ${description};
+    :focus {
+        outline: none;
+        border: 1px solid ${Colors.primary};
+        border-radius: ${borderRadius};
+    }
+    ::placeholder,
+    ::-webkit-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
+    }
+    :-ms-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
+    }
 }
 
 .react-autosuggest__input--focused {
@@ -80,15 +96,12 @@ export const GlobalStyle = createGlobalStyle`
   display: block;
   position: absolute;
   top: 51px;
-  width: 280px;
-  border: 1px solid #aaa;
+  width: 100%;
   background-color: #fff;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  ${description};
+  border-radius: ${borderRadius};
   z-index: 2;
+  ${ShadowSecondary};
 }
 
 .react-autosuggest__suggestions-list {
@@ -103,9 +116,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 .react-autosuggest__suggestion--highlighted {
-  background-color: #ddd;
+  background-color: ${Colors.hover};
+  ${TransitionSecondary};
 }
-
-
-
 `;

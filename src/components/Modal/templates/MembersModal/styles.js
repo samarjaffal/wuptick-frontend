@@ -47,3 +47,12 @@ export const Hr = styled.hr`
     border: solid 1px ${Colors.hover};
     opacity: 0.6;
 `;
+
+export const SmallMessage = styled.small`
+    ${info};
+`;
+
+export const Ul = styled.ul`
+    list-style: none;
+    padding: 0 10px;
+`;

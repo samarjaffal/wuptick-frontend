@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
-import { Input } from '../../../Forms/Input/index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
 import { Label } from '../../../Label/index';
@@ -20,59 +19,73 @@ import {
     MemberEmail,
     Empty,
     Hr,
+    Ul,
+    SmallMessage,
 } from './styles';
 
 const MembersList = ({ members }) => {
     const { currentProject } = useUser();
-    return members.map((member, index) => (
-        <FlexSpaceBetween key={index} customProps="position: relative">
-            <FlexCenter customProps="margin-bottom: 0.5em;">
-                <Avatar size={30} src={member.user.avatar} />
-                <Div customProps="margin-left: 0.5em;">
-                    <MemberName>
-                        {member.user.name} {member.user.last_name}
-                    </MemberName>
-                    <MemberEmail>{member.user.email}</MemberEmail>
-                </Div>
-            </FlexCenter>
+    return (
+        <Ul>
+            {members.map((member, index) => (
+                <li key={index}>
+                    <FlexSpaceBetween customProps="position: relative">
+                        <FlexCenter customProps="margin-bottom: 0.5em;">
+                            <Avatar size={30} src={member.user.avatar} />
+                            <Div customProps="margin-left: 0.5em;">
+                                <MemberName>
+                                    {member.user.name} {member.user.last_name}
+                                </MemberName>
+                                <MemberEmail>{member.user.email}</MemberEmail>
+                            </Div>
+                        </FlexCenter>
 
-            <Div>
-                <UpdateMemberRoleMutation>
-                    {({ doUpdateRole }) => (
-                        <RolesSelect
-                            role={member.role}
-                            doUpdate={doUpdateRole}
-                            projectId={currentProject._id}
-                            userId={member.user._id}
-                        />
-                    )}
-                </UpdateMemberRoleMutation>
-            </Div>
-        </FlexSpaceBetween>
-    ));
+                        <Div>
+                            <UpdateMemberRoleMutation>
+                                {({ doUpdateRole }) => (
+                                    <RolesSelect
+                                        role={member.role}
+                                        doUpdate={doUpdateRole}
+                                        projectId={currentProject._id}
+                                        userId={member.user._id}
+                                    />
+                                )}
+                            </UpdateMemberRoleMutation>
+                        </Div>
+                    </FlexSpaceBetween>
+                </li>
+            ))}
+        </Ul>
+    );
 };
 
 const InvitationList = ({ members }) => {
-    return members.map((member, index) => (
-        <FlexSpaceBetween key={index} customProps="position: relative">
-            <FlexCenter customProps="margin-bottom: 0.5em;">
-                <Avatar size={30} />
-                <Div customProps="margin-left: 0.5em;">
-                    <MemberName>{member.email}</MemberName>
-                    <MemberEmail>{member.email}</MemberEmail>
-                </Div>
-            </FlexCenter>
+    return (
+        <Ul>
+            {members.map((member, index) => (
+                <li key={index}>
+                    <FlexSpaceBetween customProps="position: relative;">
+                        <FlexCenter customProps="margin-bottom: 0.5em;">
+                            <Avatar size={30} />
+                            <Div customProps="margin-left: 0.5em;">
+                                <MemberName>{member.email}</MemberName>
+                                <MemberEmail>{member.email}</MemberEmail>
+                            </Div>
+                        </FlexCenter>
 
-            <Div>
-                <Label
-                    name="Waiting for confirmation"
-                    color={Colors.yellow}
-                    showCaret={true}
-                    width="max-content"
-                />
-            </Div>
-        </FlexSpaceBetween>
-    ));
+                        <Div>
+                            <Label
+                                name="Invitation Sent"
+                                color={Colors.yellow}
+                                showCaret={true}
+                                width="max-content"
+                            />
+                        </Div>
+                    </FlexSpaceBetween>
+                </li>
+            ))}
+        </Ul>
+    );
 };
 
 export const MemberModal = ({ modalRef }) => {
@@ -105,22 +118,9 @@ export const MemberModal = ({ modalRef }) => {
             title={`${currentProject ? `${currentProject.name}:` : ''} Members`}
         >
             <Subtitle>Current members of the project</Subtitle>
-
-            {handleMembersList()}
-
-            <Hr />
-            <Div>
-                <Subtitle>Invite members to your project</Subtitle>
-                {/* <Input placeholder="Email address or name" bg={Colors.white} /> */}
-                <RegisterUserByInvitationMutation>
-                    {({ doRegisterInvitation }) => (
-                        <MembersInputSearch
-                            doInvitation={doRegisterInvitation}
-                            setMembers={setMembers}
-                        />
-                    )}
-                </RegisterUserByInvitationMutation>
-
+            <Div customProps="max-height: 220px; overflow-y: auto;">
+                {handleMembersList()}
+                <Hr />
                 <Div customProps="margin-top:0.5em;">
                     <GetInvitationsForProjectQuery
                         projectId={currentProject._id}
@@ -134,10 +134,38 @@ export const MemberModal = ({ modalRef }) => {
                     </GetInvitationsForProjectQuery>
                 </Div>
             </Div>
+
+            <Div>
+                <Subtitle>Invite members to your project</Subtitle>
+                <RegisterUserByInvitationMutation>
+                    {({ doRegisterInvitation }) => (
+                        <>
+                            <MembersInputSearch
+                                doInvitation={doRegisterInvitation}
+                                setMembers={setMembers}
+                            />
+                            <Div customProps="width:100%; padding: 0 0.5em;">
+                                <SmallMessage>
+                                    If you don&apos;t see any suggestions, press
+                                    enter to create a new invitation
+                                </SmallMessage>
+                            </Div>
+                        </>
+                    )}
+                </RegisterUserByInvitationMutation>
+            </Div>
         </Modal>
     );
 };
 
 MemberModal.propTypes = {
     modalRef: PropTypes.any,
+};
+
+InvitationList.propTypes = {
+    members: PropTypes.object,
+};
+
+MembersList.propTypes = {
+    members: PropTypes.object,
 };

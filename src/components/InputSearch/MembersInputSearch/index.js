@@ -41,6 +41,7 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
             if (doInvitation) {
                 doInvitation(input);
             }
+            setMember('');
         }
     };
 
