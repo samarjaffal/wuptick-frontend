@@ -11,6 +11,10 @@ import {
     MemberName,
 } from './styles';
 
+function escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 export const MembersInputSearch = ({ doInvitation, setMembers }) => {
     const { currentProject, teamSelected } = useUser();
     const [suggestions, setSuggestions] = useState([]);
@@ -24,15 +28,17 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
     const getSuggestions = (value) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-
+        const escapedValue = escapeRegexCharacters(inputValue);
+        const regex = new RegExp('^' + escapedValue, 'i');
         let membersList = teamSelected.members;
 
         return inputLength === 0
             ? []
             : membersList.filter(
                   (member) =>
-                      member.name.toLowerCase().slice(0, inputLength) ===
-                      inputValue
+                      regex.test(member.name) ||
+                      regex.test(member.last_name) ||
+                      regex.test(member.email)
               );
     };
 
@@ -46,7 +52,7 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
                 projectId: currentProject._id,
                 teamId: teamSelected._id,
             };
-            console.log(doInvitation, 'doInvitation');
+
             if (doInvitation) {
                 doInvitation(input);
             }
