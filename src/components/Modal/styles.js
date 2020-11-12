@@ -35,7 +35,7 @@ export const ModalBox = styled.div`
     ${Shadow};
     z-index: 101;
     border-radius: ${borderRadius};
-    overflow-y: auto;
+    /* overflow-y: auto; */
     padding: 40px;
 
     @media (max-width: 768px) {
