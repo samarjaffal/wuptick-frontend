@@ -11,8 +11,8 @@ const setFirstLetterUpperCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const OptionsDropDown = ({ openDrop, setOption, position }) => {
-    const { open, setOpen } = useDropdown();
+export const OptionsDropDown = ({ openDrop, setOption }) => {
+    const { open, setOpen, position } = useDropdown();
 
     useEffect(() => {
         setOpen(openDrop);
@@ -50,7 +50,7 @@ export const OptionsDropDown = ({ openDrop, setOption, position }) => {
 };
 
 OptionsDropDown.propTypes = {
-    openDrop: PropTypes.func,
+    openDrop: PropTypes.bool,
     setOption: PropTypes.func,
     position: PropTypes.object,
 };

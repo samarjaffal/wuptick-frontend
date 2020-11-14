@@ -9,12 +9,27 @@ export const useDropdown = () => {
         setMenuHeight,
         activeMenu,
         setActiveMenu,
+        currentElemRef,
+        setPosition,
+        position,
     } = useContext(Context);
 
     const calcHeight = useCallback((el) => {
         const height = el.offsetHeight;
         setMenuHeight(height);
     });
+
+    const setRef = (ref) => {
+        currentElemRef.current = ref.current;
+    };
+
+    const setPositionDropDown = (position) => {
+        setPosition(position);
+    };
+
+    const openDropCallBack = (value) => {
+        setOpen(value);
+    };
 
     return {
         open,
@@ -25,5 +40,10 @@ export const useDropdown = () => {
         menuHeight,
         setMenuHeight,
         calcHeight,
+        currentElemRef,
+        setRef,
+        position,
+        setPositionDropDown,
+        openDropCallBack,
     };
 };

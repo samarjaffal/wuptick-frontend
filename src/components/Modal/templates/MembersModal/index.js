@@ -5,6 +5,7 @@ import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
+import { useDropdown } from '../../../../hooks/useDropdown';
 import { Label } from '../../../Label/index';
 import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/index';
 import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
@@ -28,77 +29,58 @@ import {
 
 const MembersList = ({ members }) => {
     const { currentProject } = useUser();
-    const [open, setOpen] = useState(false);
-    const [position, setPosition] = useState({});
-
-    let currentSelectRef = useRef(null);
-
-    const openDropCallBack = (open) => {
-        setOpen(open);
-    };
+    const {
+        setRef,
+        currentElemRef,
+        setPositionDropDown,
+        openDropCallBack,
+    } = useDropdown();
 
     const setOption = (value) => {
-        currentSelectRef.current.setOption(value);
-    };
-
-    const setRef = (ref) => {
-        currentSelectRef.current = ref.current;
-    };
-
-    const setPositionDropDown = (position) => {
-        setPosition(position);
+        currentElemRef.current.setOption(value);
     };
 
     return (
-        <DropdownContextProvider>
-            <Ul>
-                {members.map((member, index) => (
-                    <li key={index}>
-                        <FlexSpaceBetween customProps="">
-                            <FlexCenter customProps="margin-bottom: 0.5em;">
-                                <Avatar size={30} src={member.user.avatar} />
-                                <Div customProps="margin-left: 0.5em;">
-                                    <MemberName>
-                                        {member.user.name}{' '}
-                                        {member.user.last_name}
-                                    </MemberName>
-                                    <MemberEmail>
-                                        {member.user.email}
-                                    </MemberEmail>
-                                </Div>
-                            </FlexCenter>
-
-                            <Div>
-                                <UpdateMemberRoleMutation>
-                                    {({ doUpdateRole }) => (
-                                        <RolesSelect
-                                            role={member.role}
-                                            doUpdate={doUpdateRole}
-                                            projectId={currentProject._id}
-                                            userId={member.user._id}
-                                            openDropCallBack={openDropCallBack}
-                                            setRef={setRef}
-                                            ref={currentSelectRef}
-                                            setPositionCallBack={
-                                                setPositionDropDown
-                                            }
-                                        />
-                                    )}
-                                </UpdateMemberRoleMutation>
+        <Ul>
+            {members.map((member, index) => (
+                <li key={index}>
+                    <FlexSpaceBetween customProps="">
+                        <FlexCenter customProps="margin-bottom: 0.5em;">
+                            <Avatar size={30} src={member.user.avatar} />
+                            <Div customProps="margin-left: 0.5em;">
+                                <MemberName>
+                                    {member.user.name} {member.user.last_name}
+                                </MemberName>
+                                <MemberEmail>{member.user.email}</MemberEmail>
                             </Div>
-                        </FlexSpaceBetween>
-                    </li>
-                ))}
-                {ReactDom.createPortal(
-                    <RoleDropDown
-                        openDrop={open}
-                        setOption={setOption}
-                        position={position}
-                    />,
-                    document.getElementById('dropwdown-app')
-                )}
-            </Ul>
-        </DropdownContextProvider>
+                        </FlexCenter>
+
+                        <Div>
+                            <UpdateMemberRoleMutation>
+                                {({ doUpdateRole }) => (
+                                    <RolesSelect
+                                        role={member.role}
+                                        doUpdate={doUpdateRole}
+                                        projectId={currentProject._id}
+                                        userId={member.user._id}
+                                        openDropCallBack={openDropCallBack}
+                                        setRef={setRef}
+                                        ref={currentElemRef}
+                                        setPositionCallBack={
+                                            setPositionDropDown
+                                        }
+                                    />
+                                )}
+                            </UpdateMemberRoleMutation>
+                        </Div>
+                    </FlexSpaceBetween>
+                </li>
+            ))}
+            {ReactDom.createPortal(
+                <RoleDropDown setOption={setOption} />,
+                document.getElementById('dropwdown-app')
+            )}
+        </Ul>
     );
 };
 
@@ -162,7 +144,9 @@ export const MemberModal = ({ modalRef }) => {
         >
             <Subtitle>Current members of the project</Subtitle>
             <Div customProps="max-height: 220px; overflow-y: auto;">
-                {handleMembersList()}
+                <DropdownContextProvider>
+                    {handleMembersList()}
+                </DropdownContextProvider>
                 <Hr />
                 <Div customProps="margin-top:0.5em;">
                     <GetInvitationsForProjectQuery

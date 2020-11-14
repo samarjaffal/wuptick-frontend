@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { Colors } from '../../assets/css/colors';
 import { TransitionSecondary } from '../../assets/css/shared-styles';
-import { semiBold, borderRadius } from '../../assets/css/theme';
+import { semiBold, borderRadius, description } from '../../assets/css/theme';
 
 export const MenuItem = styled(Link)`
     /* height: 50px; */
@@ -12,9 +12,7 @@ export const MenuItem = styled(Link)`
     ${TransitionSecondary};
     /* padding: 7px; */
     text-decoration: none;
-    font-size: 1em;
-    font-weight: ${semiBold};
-    color: ${Colors.black};
+    ${description};
     :hover {
         background: ${Colors.hover};
     }
