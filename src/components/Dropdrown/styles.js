@@ -6,6 +6,7 @@ import { borderRadius } from '../../assets/css/theme';
 export const Dropdown = styled.div`
     position: absolute;
     top: ${({ top }) => (top ? top : '40px')};
+    left: ${({ left }) => (left ? left : 'unset')};
     width: ${({ width }) => (width ? width : '300px')};
     ${({ transform }) =>
         transform

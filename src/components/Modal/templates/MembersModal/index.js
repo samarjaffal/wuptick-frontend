@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import ReactDom from 'react-dom';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
 import { RolesSelect } from '../../../RolesSelect/index';
@@ -28,6 +29,8 @@ import {
 const MembersList = ({ members }) => {
     const { currentProject } = useUser();
     const [open, setOpen] = useState(false);
+    const [position, setPosition] = useState({});
+
     let currentSelectRef = useRef(null);
 
     const openDropCallBack = (open) => {
@@ -42,12 +45,16 @@ const MembersList = ({ members }) => {
         currentSelectRef.current = ref.current;
     };
 
+    const setPositionDropDown = (position) => {
+        setPosition(position);
+    };
+
     return (
         <DropdownContextProvider>
             <Ul>
                 {members.map((member, index) => (
                     <li key={index}>
-                        <FlexSpaceBetween customProps="position: relative">
+                        <FlexSpaceBetween customProps="">
                             <FlexCenter customProps="margin-bottom: 0.5em;">
                                 <Avatar size={30} src={member.user.avatar} />
                                 <Div customProps="margin-left: 0.5em;">
@@ -72,6 +79,9 @@ const MembersList = ({ members }) => {
                                             openDropCallBack={openDropCallBack}
                                             setRef={setRef}
                                             ref={currentSelectRef}
+                                            setPositionCallBack={
+                                                setPositionDropDown
+                                            }
                                         />
                                     )}
                                 </UpdateMemberRoleMutation>
@@ -79,7 +89,14 @@ const MembersList = ({ members }) => {
                         </FlexSpaceBetween>
                     </li>
                 ))}
-                <RoleDropDown openDrop={open} setOption={setOption} />
+                {ReactDom.createPortal(
+                    <RoleDropDown
+                        openDrop={open}
+                        setOption={setOption}
+                        position={position}
+                    />,
+                    document.getElementById('dropwdown-app')
+                )}
             </Ul>
         </DropdownContextProvider>
     );

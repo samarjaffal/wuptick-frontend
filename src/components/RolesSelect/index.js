@@ -14,10 +14,22 @@ const setFirstLetterUpperCase = (string) => {
 };
 
 export const RolesSelect = forwardRef(
-    ({ role, doUpdate, projectId, userId, openDropCallBack, setRef }, ref) => {
+    (
+        {
+            role,
+            doUpdate,
+            projectId,
+            userId,
+            openDropCallBack,
+            setPositionCallBack,
+            setRef,
+        },
+        ref
+    ) => {
         const [openDropDown, setOpenDropDown] = useState(false);
         const [currentOption, setCurrentOption] = useState({});
         const selectRef = useRef(null);
+        const labelRef = useRef(null);
 
         useImperativeHandle(selectRef, () => {
             return {
@@ -32,6 +44,7 @@ export const RolesSelect = forwardRef(
             if (value) {
                 setRef(selectRef);
             }
+            setPositionCallBack(labelRef.current.getBoundingClientRect());
         };
 
         const setOption = (value) => {
@@ -63,6 +76,7 @@ export const RolesSelect = forwardRef(
                         width="max-content"
                         onClicked={handleDropDown}
                         pointer={true}
+                        ref={labelRef}
                     ></Label>
                 </OutsideClick>
             </div>
@@ -76,5 +90,6 @@ RolesSelect.propTypes = {
     projectId: PropTypes.string,
     userId: PropTypes.string,
     openDropCallBack: PropTypes.func,
+    setPositionCallBack: PropTypes.func,
     setRef: PropTypes.func,
 };
