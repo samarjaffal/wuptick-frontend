@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import ReactDom from 'react-dom';
 import { GetRolesQuery } from '../../../requests/Role/GetRolesQuery';
 import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
@@ -18,32 +18,38 @@ export const OptionsDropDown = ({ openDrop, setOption }) => {
         setOpen(openDrop);
     }, [openDrop]);
 
-    return (
-        <GetRolesQuery>
-            {({ data }) => {
-                const { getRoles: options } = data;
+    return open
+        ? ReactDom.createPortal(
+              <GetRolesQuery>
+                  {({ data }) => {
+                      const { getRoles: options } = data;
 
-                return (
-                    <Dropdown
-                        open={open}
-                        transform="-66%"
-                        width="200px"
-                        top="46px"
-                        bg={Colors.whitePrimary}
-                    >
-                        <DropdownMenu menu="main" classMenu="menu-primary">
-                            {options.map((option, index) => (
-                                <DropdownItem
-                                    key={option._id}
-                                    onClicked={() => setOption(option)}
-                                >
-                                    {setFirstLetterUpperCase(option.name)}
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>
-                    </Dropdown>
-                );
-            }}
-        </GetRolesQuery>
-    );
+                      return (
+                          <Dropdown
+                              open={open}
+                              transform="-66%"
+                              width="200px"
+                              top="46px"
+                              bg={Colors.whitePrimary}
+                          >
+                              <DropdownMenu
+                                  menu="main"
+                                  classMenu="menu-primary"
+                              >
+                                  {options.map((option) => (
+                                      <DropdownItem
+                                          key={option._id}
+                                          onClicked={() => setOption(option)}
+                                      >
+                                          {setFirstLetterUpperCase(option.name)}
+                                      </DropdownItem>
+                                  ))}
+                              </DropdownMenu>
+                          </Dropdown>
+                      );
+                  }}
+              </GetRolesQuery>,
+              document.getElementById('dropwdown-app')
+          )
+        : null;
 };
