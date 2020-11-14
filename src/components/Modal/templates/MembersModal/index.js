@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
@@ -6,6 +6,8 @@ import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
 import { Label } from '../../../Label/index';
 import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/index';
+import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
+import { DropdownContextProvider } from '../../../../context/DropdownContext';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { RegisterUserByInvitationMutation } from '../../../../requests/User/RegisterUserByInvitationMutation';
@@ -25,37 +27,61 @@ import {
 
 const MembersList = ({ members }) => {
     const { currentProject } = useUser();
-    return (
-        <Ul>
-            {members.map((member, index) => (
-                <li key={index}>
-                    <FlexSpaceBetween customProps="position: relative">
-                        <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar size={30} src={member.user.avatar} />
-                            <Div customProps="margin-left: 0.5em;">
-                                <MemberName>
-                                    {member.user.name} {member.user.last_name}
-                                </MemberName>
-                                <MemberEmail>{member.user.email}</MemberEmail>
-                            </Div>
-                        </FlexCenter>
+    const [open, setOpen] = useState(false);
+    let currentSelectRef = useRef(null);
 
-                        <Div>
-                            <UpdateMemberRoleMutation>
-                                {({ doUpdateRole }) => (
-                                    <RolesSelect
-                                        role={member.role}
-                                        doUpdate={doUpdateRole}
-                                        projectId={currentProject._id}
-                                        userId={member.user._id}
-                                    />
-                                )}
-                            </UpdateMemberRoleMutation>
-                        </Div>
-                    </FlexSpaceBetween>
-                </li>
-            ))}
-        </Ul>
+    const openDropCallBack = (open) => {
+        setOpen(open);
+    };
+
+    const setOption = (value) => {
+        currentSelectRef.current.setOption(value);
+    };
+
+    const setRef = (ref) => {
+        currentSelectRef.current = ref.current;
+    };
+
+    return (
+        <DropdownContextProvider>
+            <Ul>
+                {members.map((member, index) => (
+                    <li key={index}>
+                        <FlexSpaceBetween customProps="position: relative">
+                            <FlexCenter customProps="margin-bottom: 0.5em;">
+                                <Avatar size={30} src={member.user.avatar} />
+                                <Div customProps="margin-left: 0.5em;">
+                                    <MemberName>
+                                        {member.user.name}{' '}
+                                        {member.user.last_name}
+                                    </MemberName>
+                                    <MemberEmail>
+                                        {member.user.email}
+                                    </MemberEmail>
+                                </Div>
+                            </FlexCenter>
+
+                            <Div>
+                                <UpdateMemberRoleMutation>
+                                    {({ doUpdateRole }) => (
+                                        <RolesSelect
+                                            role={member.role}
+                                            doUpdate={doUpdateRole}
+                                            projectId={currentProject._id}
+                                            userId={member.user._id}
+                                            openDropCallBack={openDropCallBack}
+                                            setRef={setRef}
+                                            ref={currentSelectRef}
+                                        />
+                                    )}
+                                </UpdateMemberRoleMutation>
+                            </Div>
+                        </FlexSpaceBetween>
+                    </li>
+                ))}
+                <RoleDropDown openDrop={open} setOption={setOption} />
+            </Ul>
+        </DropdownContextProvider>
     );
 };
 
