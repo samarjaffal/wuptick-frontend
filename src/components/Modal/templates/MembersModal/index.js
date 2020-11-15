@@ -6,9 +6,10 @@ import { Modal } from '../../index';
 import { RolesSelect } from '../../../RolesSelect/index';
 import { useUser } from '../../../../hooks/useUser';
 import { useDropdown } from '../../../../hooks/useDropdown';
-import { Label } from '../../../Label/index';
+import { InvitationSelect } from '../../../Selects/InvitationSelect/index';
 import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/index';
 import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
+import { OptionsDropDown as InvitationDropDown } from '../../../Selects/InvitationSelect/OptionsDropDown/index';
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { RemoveMemberMutation } from '../../../../requests/project/RemoveMemberMutation';
@@ -105,6 +106,18 @@ const MembersList = ({ members }) => {
 };
 
 const InvitationList = ({ members }) => {
+    const [selectedUser, setSelectedUser] = useState();
+    const {
+        setRef,
+        currentElemRef,
+        setPositionDropDown,
+        openDropCallBack,
+    } = useDropdown();
+
+    const setUserCallBack = (user) => {
+        setSelectedUser(user);
+    };
+
     return (
         <Ul>
             {members.map((member, index) => (
@@ -119,16 +132,23 @@ const InvitationList = ({ members }) => {
                         </FlexCenter>
 
                         <Div>
-                            <Label
-                                name="Invitation Sent"
+                            <InvitationSelect
                                 color={Colors.yellow}
-                                showCaret={true}
-                                width="max-content"
+                                ref={currentElemRef}
+                                setRef={setRef}
+                                setPositionCallBack={setPositionDropDown}
+                                openDropCallBack={openDropCallBack}
+                                setUserCallBack={setUserCallBack}
+                                userId={member._id}
                             />
                         </Div>
                     </FlexSpaceBetween>
                 </li>
             ))}
+            {ReactDom.createPortal(
+                <InvitationDropDown userId={selectedUser} />,
+                document.getElementById('dropwdown-app')
+            )}
         </Ul>
     );
 };
@@ -176,7 +196,11 @@ export const MemberModal = ({ modalRef }) => {
                             const {
                                 getInvitationsForProject: invitations,
                             } = data;
-                            return <InvitationList members={invitations} />;
+                            return (
+                                <DropdownContextProvider>
+                                    <InvitationList members={invitations} />
+                                </DropdownContextProvider>
+                            );
                         }}
                     </GetInvitationsForProjectQuery>
                 </Div>
