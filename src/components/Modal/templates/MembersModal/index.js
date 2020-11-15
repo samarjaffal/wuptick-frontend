@@ -13,6 +13,7 @@ import { OptionsDropDown as InvitationDropDown } from '../../../Selects/Invitati
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { RemoveMemberMutation } from '../../../../requests/project/RemoveMemberMutation';
+import { RemoveInvitationMutation } from '../../../../requests/project/RemoveInvitationMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { RegisterUserByInvitationMutation } from '../../../../requests/User/RegisterUserByInvitationMutation';
 import { Colors } from '../../../../assets/css/colors';
@@ -146,7 +147,14 @@ const InvitationList = ({ members }) => {
                 </li>
             ))}
             {ReactDom.createPortal(
-                <InvitationDropDown userId={selectedUser} />,
+                <RemoveInvitationMutation>
+                    {({ doRemoveInvitation }) => (
+                        <InvitationDropDown
+                            userId={selectedUser}
+                            doRemoveInvitation={doRemoveInvitation}
+                        />
+                    )}
+                </RemoveInvitationMutation>,
                 document.getElementById('dropwdown-app')
             )}
         </Ul>
