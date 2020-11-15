@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { Avatar } from '../../../Avatar/index';
@@ -11,6 +11,7 @@ import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/inde
 import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
+import { RemoveMemberMutation } from '../../../../requests/project/RemoveMemberMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { RegisterUserByInvitationMutation } from '../../../../requests/User/RegisterUserByInvitationMutation';
 import { Colors } from '../../../../assets/css/colors';
@@ -28,6 +29,8 @@ import {
 } from './styles';
 
 const MembersList = ({ members }) => {
+    const [_members, setMembers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState();
     const { currentProject } = useUser();
     const {
         setRef,
@@ -36,13 +39,21 @@ const MembersList = ({ members }) => {
         openDropCallBack,
     } = useDropdown();
 
+    useEffect(() => {
+        setMembers(members);
+    }, [members]);
+
     const setOption = (value) => {
         currentElemRef.current.setOption(value);
     };
 
+    const setUserCallBack = (user) => {
+        setSelectedUser(user);
+    };
+
     return (
         <Ul>
-            {members.map((member, index) => (
+            {_members.map((member, index) => (
                 <li key={index}>
                     <FlexSpaceBetween customProps="">
                         <FlexCenter customProps="margin-bottom: 0.5em;">
@@ -69,6 +80,7 @@ const MembersList = ({ members }) => {
                                         setPositionCallBack={
                                             setPositionDropDown
                                         }
+                                        setUserCallBack={setUserCallBack}
                                     />
                                 )}
                             </UpdateMemberRoleMutation>
@@ -77,7 +89,15 @@ const MembersList = ({ members }) => {
                 </li>
             ))}
             {ReactDom.createPortal(
-                <RoleDropDown setOption={setOption} />,
+                <RemoveMemberMutation>
+                    {({ doRemoveMember }) => (
+                        <RoleDropDown
+                            setOption={setOption}
+                            doRemoveMember={doRemoveMember}
+                            userId={selectedUser}
+                        />
+                    )}
+                </RemoveMemberMutation>,
                 document.getElementById('dropwdown-app')
             )}
         </Ul>
@@ -135,7 +155,7 @@ export const MemberModal = ({ modalRef }) => {
         if (Object.keys(currentProject).length > 0) {
             setMembers(currentProject.members);
         }
-    }, [currentProject, members]);
+    }, [currentProject.members]);
 
     return (
         <Modal

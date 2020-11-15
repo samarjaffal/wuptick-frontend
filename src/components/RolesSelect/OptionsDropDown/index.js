@@ -5,18 +5,23 @@ import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { useUser } from '../../../hooks/useUser';
 import { Colors } from '../../../assets/css/colors';
 
 const setFirstLetterUpperCase = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const OptionsDropDown = ({ openDrop, setOption }) => {
-    const { open, setOpen, position } = useDropdown();
+export const OptionsDropDown = ({ setOption, doRemoveMember, userId }) => {
+    const { open, position } = useDropdown();
+    const { currentProject } = useUser();
 
-    useEffect(() => {
-        setOpen(openDrop);
-    }, [openDrop]);
+    const handleRemoveMember = () => {
+        let members = [...currentProject.members];
+        let newMembers = members.filter((member) => member.user._id !== userId);
+        currentProject.members = newMembers;
+        doRemoveMember(currentProject._id, userId);
+    };
 
     return (
         <GetRolesQuery>
@@ -41,6 +46,13 @@ export const OptionsDropDown = ({ openDrop, setOption }) => {
                                     {setFirstLetterUpperCase(option.name)}
                                 </DropdownItem>
                             ))}
+                            <DropdownItem
+                                onClicked={() => handleRemoveMember()}
+                            >
+                                <span style={{ color: Colors.red }}>
+                                    Remove Member
+                                </span>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 );
@@ -53,4 +65,6 @@ OptionsDropDown.propTypes = {
     openDrop: PropTypes.bool,
     setOption: PropTypes.func,
     position: PropTypes.object,
+    doRemoveMember: PropTypes.func,
+    userId: PropTypes.string,
 };

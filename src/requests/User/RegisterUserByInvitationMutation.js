@@ -46,6 +46,12 @@ export const RegisterUserByInvitationMutation = ({ children }) => {
                     });
                 }
             },
+            refetchQueries: [
+                {
+                    query: gqlGetProject,
+                    variables: { projectId: input.projectId },
+                },
+            ],
         });
     });
 

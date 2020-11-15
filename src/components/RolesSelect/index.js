@@ -22,6 +22,7 @@ export const RolesSelect = forwardRef(
             userId,
             openDropCallBack,
             setPositionCallBack,
+            setUserCallBack,
             setRef,
         },
         ref
@@ -44,6 +45,7 @@ export const RolesSelect = forwardRef(
             if (value) {
                 setRef(selectRef);
                 setPositionCallBack(labelRef.current.getBoundingClientRect());
+                setUserCallBack(userId);
             }
         };
 
@@ -91,5 +93,6 @@ RolesSelect.propTypes = {
     userId: PropTypes.string,
     openDropCallBack: PropTypes.func,
     setPositionCallBack: PropTypes.func,
+    setUserCallBack: PropTypes.func,
     setRef: PropTypes.func,
 };
