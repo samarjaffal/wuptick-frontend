@@ -5,7 +5,7 @@ import { Status } from '../../Status/index';
 import { UpdateModuleStatusMutation } from '../../../requests/Module/UpdateModuleStatusMutation';
 import { Container, ModuleContainer, Module, Name } from './styles';
 
-export const ModuleItem = ({ index, module }) => {
+export const ModuleItem = ({ index, module, setModuleCallback }) => {
     return (
         <Draggable draggableId={module._id} index={index}>
             {(provided) => (
@@ -23,6 +23,7 @@ export const ModuleItem = ({ index, module }) => {
                                         status={module.status}
                                         doUpdate={doUpdateModule}
                                         elemId={module._id}
+                                        setModuleCallback={setModuleCallback}
                                     />
                                 )}
                             </UpdateModuleStatusMutation>

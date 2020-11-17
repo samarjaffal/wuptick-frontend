@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
+import ReactDom from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ModuleItem } from '../ModuleItem';
 import { AddNew } from '../../AddNew/index';
+import { OptionsDropDown as StatusDropDown } from '../../Status/index';
 import { SaveModulesOrderMutation } from '../../../requests/Module/SaveModulesOrderMutation';
 import { useDragDrop } from '../../../hooks/useDragDrop';
-import { List, Placeholder } from './styles';
+import { useDropdown } from '../../../hooks/useDropdown';
 import { CreateModuleMutation } from '../../../requests/Module/CreateModuleMutation';
+import { List, Placeholder } from './styles';
 export const ListModules = ({ modules = [], projectId }) => {
+    const [selectedModule, setSelectedModule] = useState();
+    const { currentElemRef } = useDropdown();
+
     const _columns = ['modules'];
     const _items = [...modules];
+
+    const setStatus = (value) => {
+        currentElemRef.current.setStatus(value);
+    };
+
+    const setModuleCallback = (module) => {
+        setSelectedModule(module);
+    };
 
     const newModuleInput = {
         name: '',
@@ -54,6 +68,9 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         <ModuleItem
                                                             index={index}
                                                             module={module}
+                                                            setModuleCallback={
+                                                                setModuleCallback
+                                                            }
                                                         />
                                                     </li>
                                                 ))}
@@ -103,6 +120,14 @@ export const ListModules = ({ modules = [], projectId }) => {
                                         )}
                                     </Droppable>
                                 ))}
+
+                            {ReactDom.createPortal(
+                                <StatusDropDown
+                                    setStatus={setStatus}
+                                    moduleId={selectedModule}
+                                />,
+                                document.getElementById('dropwdown-app')
+                            )}
                         </div>
                     </DragDropContext>
                 );

@@ -15,6 +15,7 @@ import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { ListFiles } from '../../components/File/ListFiles/index';
+import { DropdownContextProvider } from '../../context/DropdownContext';
 import {
     Container,
     InfoContainer,
@@ -64,10 +65,12 @@ export const Project = ({ id, location }) => {
             (currentTab == undefined && (
                 <GetProjectModules projectId={id}>
                     {({ data }) => (
-                        <ListModules
-                            modules={data.getProjectModules}
-                            projectId={id}
-                        />
+                        <DropdownContextProvider>
+                            <ListModules
+                                modules={data.getProjectModules}
+                                projectId={id}
+                            />
+                        </DropdownContextProvider>
                     )}
                 </GetProjectModules>
             )) ||
