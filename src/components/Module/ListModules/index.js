@@ -8,6 +8,7 @@ import { SaveModulesOrderMutation } from '../../../requests/Module/SaveModulesOr
 import { useDragDrop } from '../../../hooks/useDragDrop';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { CreateModuleMutation } from '../../../requests/Module/CreateModuleMutation';
+import { DeleteModuleMutation } from '../../../requests/Module/DeleteModuleMutation';
 import { List, Placeholder } from './styles';
 export const ListModules = ({ modules = [], projectId }) => {
     const [selectedModule, setSelectedModule] = useState();
@@ -122,10 +123,15 @@ export const ListModules = ({ modules = [], projectId }) => {
                                 ))}
 
                             {ReactDom.createPortal(
-                                <StatusDropDown
-                                    setStatus={setStatus}
-                                    moduleId={selectedModule}
-                                />,
+                                <DeleteModuleMutation>
+                                    {({ doDeleteModule }) => (
+                                        <StatusDropDown
+                                            setStatus={setStatus}
+                                            moduleId={selectedModule}
+                                            doDeleteModule={doDeleteModule}
+                                        />
+                                    )}
+                                </DeleteModuleMutation>,
                                 document.getElementById('dropwdown-app')
                             )}
                         </div>

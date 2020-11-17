@@ -5,6 +5,7 @@ import { Dropdown } from '../Dropdrown/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
 import { OutsideClick } from '../OutsideClick/index';
+import { useUser } from '../../hooks/useUser';
 import { useDropdown } from '../../hooks/useDropdown';
 import PropTypes from 'prop-types';
 
@@ -29,9 +30,9 @@ const OPTIONS = [
     },
 ];
 
-export const OptionsDropDown = ({ setStatus }) => {
+export const OptionsDropDown = ({ setStatus, moduleId, doDeleteModule }) => {
     const { open, position } = useDropdown();
-
+    const { currentProject } = useUser();
     return (
         <Dropdown
             open={open}
@@ -51,6 +52,13 @@ export const OptionsDropDown = ({ setStatus }) => {
                         {option.status}
                     </DropdownItem>
                 ))}
+                <DropdownItem
+                    onClicked={() =>
+                        doDeleteModule(moduleId, currentProject._id)
+                    }
+                >
+                    <span style={{ color: Colors.red }}>Delete</span>
+                </DropdownItem>
             </DropdownMenu>
         </Dropdown>
     );
@@ -90,7 +98,7 @@ export const Status = ({ status, doUpdate, elemId, setModuleCallback }) => {
         if (value) {
             setRef(selectRef);
             setPositionDropDown(labelRef.current.getBoundingClientRect());
-            setModuleCallback(module._id);
+            setModuleCallback(elemId);
         }
     };
 
