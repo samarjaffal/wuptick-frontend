@@ -46,20 +46,29 @@ export const useDragDrop = (_columns, _items, _onDragEndCallBack) => {
             return;
         }
 
+        const sourceIndex = event.source.index;
+        const childrenArray = [...draggedDOM.parentNode.children];
+
+        const movedItem = childrenArray[sourceIndex];
+        childrenArray.splice(sourceIndex, 1);
+
+        const updatedArray = [
+            ...childrenArray.slice(0, destinationIndex),
+            movedItem,
+            ...childrenArray.slice(destinationIndex + 1),
+        ];
+
         const { clientHeight, clientWidth } = draggedDOM;
 
         const clientY =
             parseFloat(
                 window.getComputedStyle(draggedDOM.parentNode).paddingTop
             ) +
-            [...draggedDOM.parentNode.children]
-                .slice(0, destinationIndex)
-                .reduce((total, curr) => {
-                    const style =
-                        curr.currentStyle || window.getComputedStyle(curr);
-                    const marginBottom = parseFloat(style.marginBottom);
-                    return total + curr.clientHeight + marginBottom;
-                }, 0);
+            updatedArray.slice(0, destinationIndex).reduce((total, curr) => {
+                const style = window.getComputedStyle(curr);
+                const marginBottom = parseFloat(style.marginBottom);
+                return total + curr.clientHeight + marginBottom;
+            }, 0);
 
         setPlaceholderProps({
             clientHeight,

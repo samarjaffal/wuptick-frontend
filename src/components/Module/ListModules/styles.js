@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Colors } from '../../../assets/css/colors';
 import { borderRadius } from '../../../assets/css/theme';
 
-export const List = styled.ul`
+export const List = styled.div`
     list-style: none;
     padding: 0;
     margin-top: 1.5em;

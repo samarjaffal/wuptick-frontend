@@ -65,15 +65,14 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                 ref={provided.innerRef}
                                             >
                                                 {items.map((module, index) => (
-                                                    <li key={module._id}>
-                                                        <ModuleItem
-                                                            index={index}
-                                                            module={module}
-                                                            setModuleCallback={
-                                                                setModuleCallback
-                                                            }
-                                                        />
-                                                    </li>
+                                                    <ModuleItem
+                                                        key={module._id}
+                                                        index={index}
+                                                        module={module}
+                                                        setModuleCallback={
+                                                            setModuleCallback
+                                                        }
+                                                    />
                                                 ))}
                                                 {provided.placeholder}
                                                 {Object.keys(placeholderProps)
