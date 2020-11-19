@@ -1,12 +1,4 @@
-import React from 'react';
-import {
-    Container,
-    HeaderContainer,
-    Wrapper,
-    Title,
-    ProjectsContainer,
-    ActivityContainer,
-} from './styles';
+import React, { useRef } from 'react';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { Info } from '../../components/Info/index';
 import { ListContainer } from '../../components/ListContainer/index';
@@ -16,16 +8,32 @@ import { Colors } from '../../assets/css/colors';
 import { LastActivity } from '../../components/LastActivity/index';
 import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 import { ButtonHome } from '../../components/ButtonHome/index';
+import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
+import {
+    Container,
+    HeaderContainer,
+    Wrapper,
+    Title,
+    ProjectsContainer,
+    ActivityContainer,
+} from './styles';
 
 export const Home = () => {
     const { teamSelected, generateProfileUrl } = useUser();
+    const modalRef = useRef();
+
     return (
         <LoggedLayout>
             <Container>
                 <HeaderContainer>
                     <Title>Activity </Title>
                     <div>
-                        <ButtonHome url="/" icon="plus" color={Colors.primary}>
+                        <ButtonHome
+                            url="/"
+                            icon="plus"
+                            color={Colors.primary}
+                            onClicked={() => modalRef.current.openModal()}
+                        >
                             New Project
                         </ButtonHome>
                         <ButtonHome
@@ -119,6 +127,7 @@ export const Home = () => {
                         <LastActivity />
                     </ActivityContainer>
                 </Wrapper>
+                <AddProjectModal modalRef={modalRef} />
             </Container>
         </LoggedLayout>
     );
