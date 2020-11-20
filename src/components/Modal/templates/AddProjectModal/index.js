@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../../Forms/Input/index';
 import { TextArea } from '../../../Forms/TextArea/index';
 import { Modal } from '../../index';
+import { ColorPicker } from '../../../ColorPicker/index';
 import { ListContainer } from '../../../ListContainer/index';
 import { Colors } from '../../../../assets/css/colors';
 import { ErrorMessage, ButtonContainer, SaveButton, Label } from './styles';
-import { Div, Ul, FlexSpaceBetween } from '../../../SharedComponents/styles';
+import { Div, FlexSpaceBetween } from '../../../SharedComponents/styles';
 
 export const AddProjectModal = ({ modalRef }) => {
+    const [colorSelected, setColorSelected] = useState(null);
     const { register, handleSubmit, errors } = useForm();
+
+    const getColorSelected = (value) => {
+        setColorSelected(value);
+    };
 
     return (
         <Modal ref={modalRef} title="New Project">
@@ -43,27 +49,17 @@ export const AddProjectModal = ({ modalRef }) => {
                         <ListContainer>
                             <FlexSpaceBetween>
                                 <Label>Select Color</Label>
-                                <Div>
-                                    <Ul customProps="display:flex;">
-                                        {Array(6)
-                                            .fill()
-                                            .map((element, index) => (
-                                                <li
-                                                    key={index}
-                                                    style={{
-                                                        margin: '0 0.5em',
-                                                    }}
-                                                >
-                                                    <Div customProps="width:25px; height:25px; border-radius:50%; background-color: #BFCAFF;"></Div>
-                                                </li>
-                                            ))}
-                                    </Ul>
-                                </Div>
+                                <ColorPicker
+                                    getColorSelected={getColorSelected}
+                                />
                             </FlexSpaceBetween>
                         </ListContainer>
                     </Div>
                     <ButtonContainer>
-                        <SaveButton width="100%" onClick={console.log('hello')}>
+                        <SaveButton
+                            width="100%"
+                            onClick={() => console.log('hello')}
+                        >
                             Save
                         </SaveButton>
                     </ButtonContainer>
@@ -71,4 +67,8 @@ export const AddProjectModal = ({ modalRef }) => {
             </form>
         </Modal>
     );
+};
+
+AddProjectModal.propTypes = {
+    modalRef: PropTypes.any,
 };
