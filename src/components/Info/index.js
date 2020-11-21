@@ -19,7 +19,7 @@ export const Info = ({ name, owner, time, image, description, profileUrl }) => {
 
     return (
         <Container>
-            {image && <Image src={image} description={description} />}
+            <Image src={image} description={description} />
             <DetailsContainer>
                 <Title>{name || 'Lorem ipsum dolor'}</Title>
                 <OwnerAnchor to={profileUrl}>

@@ -9,6 +9,7 @@ import { LastActivity } from '../../components/LastActivity/index';
 import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 import { ButtonHome } from '../../components/ButtonHome/index';
 import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
+import { CreateProjectMutation } from '../../requests/project/CreateProjectMutation';
 import {
     Container,
     HeaderContainer,
@@ -127,7 +128,15 @@ export const Home = () => {
                         <LastActivity />
                     </ActivityContainer>
                 </Wrapper>
-                <AddProjectModal modalRef={modalRef} />
+                <CreateProjectMutation modalRef={modalRef}>
+                    {({ doCreateProject, loading }) => (
+                        <AddProjectModal
+                            modalRef={modalRef}
+                            doCreateProject={doCreateProject}
+                            loading={loading}
+                        />
+                    )}
+                </CreateProjectMutation>
             </Container>
         </LoggedLayout>
     );

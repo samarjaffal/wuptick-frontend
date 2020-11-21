@@ -7,6 +7,7 @@ import { Modal } from '../../index';
 import { ColorPicker } from '../../../ColorPicker/index';
 import { PrivacyRadioButtons } from '../../../PrivacyRadioButtons/index';
 import { ListContainer } from '../../../ListContainer/index';
+import { useUser } from '../../../../hooks/useUser';
 import { Colors } from '../../../../assets/css/colors';
 import { ButtonContainer, Label } from './styles';
 import {
@@ -16,9 +17,10 @@ import {
     Button,
 } from '../../../SharedComponents/styles';
 
-export const AddProjectModal = ({ modalRef }) => {
+export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
     const [colorSelected, setColorSelected] = useState(null);
     const [privacySelected, setPrivacySelected] = useState(null);
+    const { currentUser, teamSelected } = useUser();
     const { register, handleSubmit, errors } = useForm();
 
     const getColorSelected = (value) => {
@@ -27,6 +29,24 @@ export const AddProjectModal = ({ modalRef }) => {
 
     const getPrivacy = (value) => {
         setPrivacySelected(value);
+    };
+
+    const onFormSubmited = (formData) => {
+        const input = {
+            name: formData.name,
+            description: formData.description,
+            color: colorSelected,
+            privacy: privacySelected,
+            owner: {
+                _id: currentUser._id,
+            },
+            team_owner: {
+                _id: teamSelected._id,
+            },
+        };
+
+        console.log(input, 'input');
+        doCreateProject(input);
     };
 
     return (
@@ -72,9 +92,9 @@ export const AddProjectModal = ({ modalRef }) => {
                     <ButtonContainer>
                         <Button
                             width="100%"
-                            onClick={() => console.log('hello')}
+                            onClick={handleSubmit(onFormSubmited)}
                         >
-                            Save
+                            {loading ? 'Loading...' : 'Save'}
                         </Button>
                     </ButtonContainer>
                 </Div>
