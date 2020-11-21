@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
@@ -11,11 +11,13 @@ import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
+import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
 import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { ListFiles } from '../../components/File/ListFiles/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
+import { FlexCenter } from '../../components/SharedComponents/styles';
 import {
     Container,
     InfoContainer,
@@ -23,6 +25,8 @@ import {
     ProjectName,
     ProjectDescription,
     MembersContainer,
+    EditIcon,
+    EditButton,
 } from './styles';
 
 const ProjectTabs = ({ currentURL, currentTab }) => {
@@ -55,6 +59,7 @@ export const Project = ({ id, location }) => {
     const currentURL = path.pathname;
     const [currentTab, setCurrentTab] = useState(null);
     const { tab } = queryString.parse(location.search);
+    const modalRef = useRef();
 
     useEffect(() => {
         setCurrentTab(tab);
@@ -108,10 +113,19 @@ export const Project = ({ id, location }) => {
                                         src={project.image}
                                     />
                                     <InfoContainer>
-                                        <ProjectName>
-                                            {project.name ||
-                                                'Add a project name'}
-                                        </ProjectName>
+                                        <FlexCenter>
+                                            <ProjectName>
+                                                {project.name ||
+                                                    'Add a project name'}
+                                            </ProjectName>
+                                            <EditButton
+                                                onClick={() =>
+                                                    modalRef.current.openModal()
+                                                }
+                                            >
+                                                <EditIcon icon="edit" />
+                                            </EditButton>
+                                        </FlexCenter>
                                         <ProjectDescription>
                                             {project.description ||
                                                 'Add a new description'}
@@ -131,6 +145,7 @@ export const Project = ({ id, location }) => {
                     );
                 }}
             </GetProjectQuery>
+            <AddProjectModal modalRef={modalRef} />
         </LoggedLayout>
     );
 };
