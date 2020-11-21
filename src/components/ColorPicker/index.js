@@ -33,6 +33,7 @@ export const ColorPicker = ({ getColorSelected }) => {
                 >
                     <RadioButton
                         color={color}
+                        value={color}
                         currentChecked={currentChecked}
                         changeValue={changeValue}
                     />

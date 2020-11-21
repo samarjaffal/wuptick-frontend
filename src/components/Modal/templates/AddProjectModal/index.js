@@ -5,17 +5,28 @@ import { Input } from '../../../Forms/Input/index';
 import { TextArea } from '../../../Forms/TextArea/index';
 import { Modal } from '../../index';
 import { ColorPicker } from '../../../ColorPicker/index';
+import { PrivacyRadioButtons } from '../../../PrivacyRadioButtons/index';
 import { ListContainer } from '../../../ListContainer/index';
 import { Colors } from '../../../../assets/css/colors';
-import { ErrorMessage, ButtonContainer, SaveButton, Label } from './styles';
-import { Div, FlexSpaceBetween } from '../../../SharedComponents/styles';
+import { ButtonContainer, Label } from './styles';
+import {
+    Div,
+    FlexSpaceBetween,
+    ErrorMessage,
+    Button,
+} from '../../../SharedComponents/styles';
 
 export const AddProjectModal = ({ modalRef }) => {
     const [colorSelected, setColorSelected] = useState(null);
+    const [privacySelected, setPrivacySelected] = useState(null);
     const { register, handleSubmit, errors } = useForm();
 
     const getColorSelected = (value) => {
         setColorSelected(value);
+    };
+
+    const getPrivacy = (value) => {
+        setPrivacySelected(value);
     };
 
     return (
@@ -55,13 +66,16 @@ export const AddProjectModal = ({ modalRef }) => {
                             </FlexSpaceBetween>
                         </ListContainer>
                     </Div>
+                    <Div customProps="display:flex;">
+                        <PrivacyRadioButtons getPrivacyCallBack={getPrivacy} />
+                    </Div>
                     <ButtonContainer>
-                        <SaveButton
+                        <Button
                             width="100%"
                             onClick={() => console.log('hello')}
                         >
                             Save
-                        </SaveButton>
+                        </Button>
                     </ButtonContainer>
                 </Div>
             </form>

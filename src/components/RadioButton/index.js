@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { RadioButton as RadioButtonStyled } from './styles';
-export const RadioButton = ({ color, currentChecked, changeValue }) => {
+export const RadioButton = ({ value, color, currentChecked, changeValue }) => {
     const [checked, SetChecked] = useState(false);
 
     useEffect(() => {
-        if (currentChecked == color) {
+        if (currentChecked == value) {
             SetChecked(true);
         } else {
             SetChecked(false);
@@ -16,13 +16,14 @@ export const RadioButton = ({ color, currentChecked, changeValue }) => {
         <RadioButtonStyled
             checked={checked}
             color={color}
-            onClick={() => changeValue(color)}
+            onClick={() => changeValue(value)}
         />
     );
 };
 
 RadioButton.propTypes = {
     color: PropTypes.string,
+    value: PropTypes.string,
     currentChecked: PropTypes.string,
     changeValue: PropTypes.func,
 };
