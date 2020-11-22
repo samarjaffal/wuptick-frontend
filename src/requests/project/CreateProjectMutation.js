@@ -15,7 +15,7 @@ export const CreateProjectMutation = ({ children, modalRef }) => {
                 modalRef.current.closeModal();
                 addNotification(
                     customTitles.success,
-                    'Project Created',
+                    'Project Created 👏',
                     customTypes.success
                 );
             },

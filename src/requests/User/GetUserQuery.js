@@ -11,7 +11,7 @@ export const GetUserQuery = ({
     loaderProps,
 }) => {
     const [getUser, { error, loading, data }] = useLazyQuery(gqlGetUser, {
-        fetchPolicy: 'no-cache',
+        fetchPolicy: 'cache-and-network',
         onCompleted: (data) => {
             console.log(data, 'data GetUserQuery');
         },

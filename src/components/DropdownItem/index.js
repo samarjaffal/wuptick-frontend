@@ -22,7 +22,7 @@ export const DropdownItem = ({
     };
 
     return (
-        <MenuItem to={goToURL || '#'} onClick={() => handleClick()}>
+        <MenuItem to={goToURL || ''} onClick={() => handleClick()}>
             <IconButton>{leftIcon}</IconButton>
             {children}
             <IconRight>{rightIcon}</IconRight>

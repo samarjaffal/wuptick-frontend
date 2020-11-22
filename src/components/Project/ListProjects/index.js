@@ -33,6 +33,7 @@ export const ListProjects = ({ teams, userId }) => {
                                 key={index}
                                 project={project}
                                 userId={userId}
+                                teamId={team._id}
                             />
                         ))}
                     </DropDown>

@@ -12,6 +12,7 @@ import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
+import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
 import { OutsideClick } from '../../OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
@@ -29,7 +30,7 @@ import {
     Clock,
 } from './styles';
 
-const ProjectDropDown = ({ openDrop }) => {
+const ProjectDropDown = ({ openDrop, projectId, teamId }) => {
     const { open, setOpen } = useDropdown();
 
     useEffect(() => {
@@ -51,18 +52,22 @@ const ProjectDropDown = ({ openDrop }) => {
                 >
                     Leave Project
                 </DropdownItem>
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                    onClicked={() => console.log('clicked 3')}
-                >
-                    Delete
-                </DropdownItem>
+                <DeleteProjectMutation>
+                    {({ doDeleteProject, loading }) => (
+                        <DropdownItem
+                            leftIcon={<FontAwesomeIcon icon="trash-alt" />}
+                            onClicked={() => doDeleteProject(projectId, teamId)}
+                        >
+                            {loading ? 'Loading...' : 'Delete'}
+                        </DropdownItem>
+                    )}
+                </DeleteProjectMutation>
             </DropdownMenu>
         </Dropdown>
     );
 };
 
-export const ProjectItem = ({ project, userId }) => {
+export const ProjectItem = ({ project, userId, teamId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
     const { generateProfileUrl, currentUser } = useUser();
 
@@ -153,7 +158,11 @@ export const ProjectItem = ({ project, userId }) => {
                                             />
                                         </OptionsButton>
                                     </ButtonContainer>
-                                    <ProjectDropDown openDrop={openDropDown} />
+                                    <ProjectDropDown
+                                        openDrop={openDropDown}
+                                        projectId={project._id}
+                                        teamId={teamId}
+                                    />
                                 </ActionContainer>
                             )}
                         </MembersContainer>
