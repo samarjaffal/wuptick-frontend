@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
 import { info, borderRadius } from '../../assets/css/theme';
-import { Shadow, Transition } from '../../assets/css/shared-styles';
+import {
+    ShadowSecondary,
+    TransitionSecondary,
+} from '../../assets/css/shared-styles';
 
 export const FlexSpaceBetween = styled.div`
     display: flex;
@@ -40,17 +43,19 @@ export const ErrorMessage = styled.p`
 
 export const Button = styled.button`
     border: none;
-    background: ${Colors.primary};
+    background: ${({ bg }) => (bg ? bg : Colors.primary)};
     padding: 10px 30px;
     border-radius: ${borderRadius};
     text-decoration: none;
     ${info};
-    color: ${Colors.white};
+    font-weight: 400;
+    color: ${({ color }) => (color ? color : Colors.white)};
     width: ${({ width }) => (width ? width : 'auto')};
+    margin: ${({ margin }) => (margin ? margin : 'auto')};
     cursor: pointer;
     :hover {
-        ${Shadow};
-        ${Transition};
+        ${ShadowSecondary};
+        ${TransitionSecondary};
     }
     opacity: ${({ disabled }) => (disabled == true ? 0.6 : 1)};
     @media (max-width: 768px) {

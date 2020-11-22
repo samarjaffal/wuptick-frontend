@@ -25,10 +25,10 @@ export const ModalBackdrop = styled.div`
 
 export const ModalBox = styled.div`
     position: relative;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-height: 30%;
+    min-height: 25%;
     width: 35%;
     max-width: 60%;
     background-color: ${Colors.whitePrimary};

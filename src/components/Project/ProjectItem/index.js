@@ -30,7 +30,7 @@ import {
     Clock,
 } from './styles';
 
-const ProjectDropDown = ({ openDrop, projectId, teamId }) => {
+const ProjectDropDown = ({ openDrop, projectId, teamId, openDeleteModal }) => {
     const { open, setOpen } = useDropdown();
 
     useEffect(() => {
@@ -52,22 +52,24 @@ const ProjectDropDown = ({ openDrop, projectId, teamId }) => {
                 >
                     Leave Project
                 </DropdownItem>
-                <DeleteProjectMutation>
-                    {({ doDeleteProject, loading }) => (
-                        <DropdownItem
-                            leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                            onClicked={() => doDeleteProject(projectId, teamId)}
-                        >
-                            {loading ? 'Loading...' : 'Delete'}
-                        </DropdownItem>
-                    )}
-                </DeleteProjectMutation>
+                <DropdownItem
+                    leftIcon={<FontAwesomeIcon icon="trash-alt" />}
+                    onClicked={() => openDeleteModal()}
+                >
+                    Delete
+                </DropdownItem>
             </DropdownMenu>
         </Dropdown>
     );
 };
 
-export const ProjectItem = ({ project, userId, teamId }) => {
+export const ProjectItem = ({
+    project,
+    userId,
+    teamId,
+    openDeleteModal,
+    setProjectAndTeam,
+}) => {
     const [openDropDown, setOpenDropDown] = useState(false);
     const { generateProfileUrl, currentUser } = useUser();
 
@@ -148,9 +150,13 @@ export const ProjectItem = ({ project, userId, teamId }) => {
                                 <ActionContainer>
                                     <ButtonContainer>
                                         <OptionsButton
-                                            onClick={() =>
-                                                setOpenDropDown(!openDropDown)
-                                            }
+                                            onClick={() => {
+                                                setOpenDropDown(!openDropDown);
+                                                setProjectAndTeam(
+                                                    project,
+                                                    teamId
+                                                );
+                                            }}
                                         >
                                             <FontAwesomeIcon
                                                 icon="ellipsis-h"
@@ -162,6 +168,7 @@ export const ProjectItem = ({ project, userId, teamId }) => {
                                         openDrop={openDropDown}
                                         projectId={project._id}
                                         teamId={teamId}
+                                        openDeleteModal={openDeleteModal}
                                     />
                                 </ActionContainer>
                             )}
