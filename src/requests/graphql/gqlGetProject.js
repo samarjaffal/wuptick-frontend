@@ -7,6 +7,8 @@ export const gqlGetProject = gql`
             name
             description
             image
+            color
+            privacy
             members {
                 user {
                     _id

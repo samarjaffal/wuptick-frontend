@@ -4,12 +4,19 @@ import { LabeledRadioButton } from '../LabeledRadioButton/index';
 import { setFirstLetterUpperCase } from '../../shared/functions';
 import { Colors } from '../../assets/css/colors';
 
-export const PrivacyRadioButtons = ({ getPrivacyCallBack }) => {
+export const PrivacyRadioButtons = ({
+    getPrivacyCallBack,
+    defaultValue = null,
+}) => {
     const [privacy] = useState(['private', 'team']);
     const [currentChecked, setCurrentChecked] = useState('team');
 
     useEffect(() => {
-        getPrivacyCallBack('team');
+        if (defaultValue !== null) {
+            changeValue(defaultValue);
+        } else {
+            getPrivacyCallBack('team');
+        }
     }, []);
 
     const changeValue = (value) => {

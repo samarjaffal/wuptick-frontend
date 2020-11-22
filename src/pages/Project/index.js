@@ -12,6 +12,7 @@ import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
 import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
+import { EditProjectMutation } from '../../requests/project/EditProjectMutation';
 import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 /* import { TaskItem } from '../../components/Task/TaskItem/index'; */
@@ -145,7 +146,16 @@ export const Project = ({ id, location }) => {
                     );
                 }}
             </GetProjectQuery>
-            <AddProjectModal modalRef={modalRef} />
+            <EditProjectMutation modalRef={modalRef}>
+                {({ doEditProject, loading }) => (
+                    <AddProjectModal
+                        modalRef={modalRef}
+                        action="update"
+                        loading={loading}
+                        doFunction={doEditProject}
+                    />
+                )}
+            </EditProjectMutation>
         </LoggedLayout>
     );
 };

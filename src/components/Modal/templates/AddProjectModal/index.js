@@ -17,10 +17,15 @@ import {
     Button,
 } from '../../../SharedComponents/styles';
 
-export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
+export const AddProjectModal = ({
+    modalRef,
+    doFunction,
+    loading,
+    action = 'save',
+}) => {
     const [colorSelected, setColorSelected] = useState(null);
     const [privacySelected, setPrivacySelected] = useState(null);
-    const { currentUser, teamSelected } = useUser();
+    const { currentUser, teamSelected, currentProject } = useUser();
     const { register, handleSubmit, errors } = useForm();
 
     const getColorSelected = (value) => {
@@ -32,21 +37,31 @@ export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
     };
 
     const onFormSubmited = (formData) => {
-        const input = {
-            name: formData.name,
-            description: formData.description,
-            color: colorSelected,
-            privacy: privacySelected,
-            owner: {
-                _id: currentUser._id,
-            },
-            team_owner: {
-                _id: teamSelected._id,
-            },
-        };
-
-        console.log(input, 'input');
-        doCreateProject(input);
+        let input;
+        if (action == 'update') {
+            input = {
+                name: formData.name,
+                description: formData.description,
+                color: colorSelected,
+                privacy: privacySelected,
+            };
+            doFunction(currentProject._id, input);
+        } else {
+            input = {
+                name: formData.name,
+                description: formData.description,
+                color: colorSelected,
+                privacy: privacySelected,
+                owner: {
+                    _id: currentUser._id,
+                },
+                team_owner: {
+                    _id: teamSelected._id,
+                },
+            };
+            doFunction(input);
+        }
+        /*         console.log(input, 'input'); */
     };
 
     return (
@@ -62,11 +77,12 @@ export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
                             required: 'You must specify a name',
                         })}
                         bg={Colors.white}
+                        defaultValue={
+                            action == 'update' ? currentProject.name : ''
+                        }
                     />
                     {errors.name && (
-                        <ErrorMessage>
-                            {errors.old_password.message}
-                        </ErrorMessage>
+                        <ErrorMessage>{errors.name.message}</ErrorMessage>
                     )}
                     <TextArea
                         type="text"
@@ -75,6 +91,9 @@ export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
                         width="100%"
                         refEl={register()}
                         bg={Colors.white}
+                        defaultValue={
+                            action == 'update' ? currentProject.description : ''
+                        }
                     />
                     <Div>
                         <ListContainer>
@@ -82,19 +101,35 @@ export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
                                 <Label>Select Color</Label>
                                 <ColorPicker
                                     getColorSelected={getColorSelected}
+                                    defaultValue={
+                                        action == 'update'
+                                            ? currentProject.color
+                                            : null
+                                    }
                                 />
                             </FlexSpaceBetween>
                         </ListContainer>
                     </Div>
                     <Div customProps="display:flex;">
-                        <PrivacyRadioButtons getPrivacyCallBack={getPrivacy} />
+                        <PrivacyRadioButtons
+                            getPrivacyCallBack={getPrivacy}
+                            defaultValue={
+                                action == 'update'
+                                    ? currentProject.privacy
+                                    : null
+                            }
+                        />
                     </Div>
                     <ButtonContainer>
                         <Button
                             width="100%"
                             onClick={handleSubmit(onFormSubmited)}
                         >
-                            {loading ? 'Loading...' : 'Save'}
+                            {loading
+                                ? 'Loading...'
+                                : action == 'update'
+                                ? 'Update'
+                                : 'Save'}
                         </Button>
                     </ButtonContainer>
                 </Div>
@@ -105,4 +140,7 @@ export const AddProjectModal = ({ modalRef, doCreateProject, loading }) => {
 
 AddProjectModal.propTypes = {
     modalRef: PropTypes.any,
+    doFunction: PropTypes.func,
+    loading: PropTypes.bool,
+    action: PropTypes.string,
 };

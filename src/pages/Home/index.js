@@ -132,7 +132,7 @@ export const Home = () => {
                     {({ doCreateProject, loading }) => (
                         <AddProjectModal
                             modalRef={modalRef}
-                            doCreateProject={doCreateProject}
+                            doFunction={doCreateProject}
                             loading={loading}
                         />
                     )}

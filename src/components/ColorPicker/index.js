@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Ul } from '../SharedComponents/styles';
 import { RadioButton } from '../RadioButton/index';
@@ -14,8 +14,14 @@ const colors = [
     Colors.secondary,
 ];
 
-export const ColorPicker = ({ getColorSelected }) => {
+export const ColorPicker = ({ getColorSelected, defaultValue = null }) => {
     const [currentChecked, setCurrentChecked] = useState(Colors.primary);
+
+    useEffect(() => {
+        if (defaultValue !== null) {
+            changeValue(defaultValue);
+        }
+    }, []);
 
     const changeValue = (value) => {
         setCurrentChecked(value);
@@ -45,4 +51,5 @@ export const ColorPicker = ({ getColorSelected }) => {
 
 ColorPicker.propTypes = {
     getColorSelected: PropTypes.func,
+    defaultValue: PropTypes.string,
 };
