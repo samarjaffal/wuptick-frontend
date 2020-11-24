@@ -62,6 +62,11 @@ export const useUser = () => {
         return url;
     };
 
+    const generateProjectUrl = (projedId) => {
+        const url = `/project/${projedId}`;
+        return url;
+    };
+
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
 
@@ -80,5 +85,6 @@ export const useUser = () => {
         setCurrentProject,
         getAge,
         generateProfileUrl,
+        generateProjectUrl,
     };
 };

@@ -12,7 +12,7 @@ import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
-import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
+import { RemoveMemberMutation } from '../../../requests/project/RemoveMemberMutation';
 import { OutsideClick } from '../../OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
@@ -32,7 +32,7 @@ import {
 
 const ProjectDropDown = ({ openDrop, projectId, teamId, openDeleteModal }) => {
     const { open, setOpen } = useDropdown();
-
+    const { generateProjectUrl, currentUser } = useUser();
     useEffect(() => {
         setOpen(openDrop);
     }, [openDrop]);
@@ -42,16 +42,23 @@ const ProjectDropDown = ({ openDrop, projectId, teamId, openDeleteModal }) => {
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="edit" />}
-                    onClicked={() => console.log('clicked 1')}
+                    onClicked={() => navigate(generateProjectUrl(projectId))}
                 >
                     Edit
                 </DropdownItem>
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
-                    onClicked={() => console.log('clicked 2')}
-                >
-                    Leave Project
-                </DropdownItem>
+                <RemoveMemberMutation>
+                    {({ doRemoveMember }) => (
+                        <DropdownItem
+                            leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
+                            onClicked={() =>
+                                doRemoveMember(projectId, currentUser._id)
+                            }
+                        >
+                            Leave Project
+                        </DropdownItem>
+                    )}
+                </RemoveMemberMutation>
+
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
                     onClicked={() => openDeleteModal()}
@@ -71,7 +78,7 @@ export const ProjectItem = ({
     setProjectAndTeam,
 }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const { generateProfileUrl, currentUser } = useUser();
+    const { generateProfileUrl, generateProjectUrl, currentUser } = useUser();
 
     const handleDropDown = (value) => {
         setOpenDropDown(value);
@@ -92,11 +99,18 @@ export const ProjectItem = ({
                                     margin="0 1em 0 0"
                                     description="Project Image"
                                     src={project.image}
+                                    onClicked={() =>
+                                        navigate(
+                                            generateProjectUrl(project._id)
+                                        )
+                                    }
                                 />
                             </div>
 
                             <DetailsContainer>
-                                <Name to="/">{project.name}</Name>
+                                <Name to={generateProjectUrl(project._id)}>
+                                    {project.name}
+                                </Name>
                                 <OwnerAnchor
                                     to={generateProfileUrl(
                                         project.owner.name,
