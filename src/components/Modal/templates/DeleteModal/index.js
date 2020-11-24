@@ -5,13 +5,23 @@ import { Div, Button } from '../../../SharedComponents/styles';
 import { Colors } from '../../../../assets/css/colors';
 import { Message } from './styles';
 
-export const DeleteModal = ({ modalRef, title, doFunc, loading }) => {
+export const DeleteModal = ({
+    modalRef,
+    title,
+    doFunc,
+    loading,
+    showMessage = true,
+    ButtonText = 'Delete',
+}) => {
     return (
         <Modal ref={modalRef} title={title}>
-            <Message>
-                ⚠️This is a permanent action and you will not recover the info
-                again
-            </Message>
+            {showMessage && (
+                <Message>
+                    ⚠️This is a permanent action and you will not recover the
+                    info again
+                </Message>
+            )}
+
             <Div customProps="text-align: end; margin-top: 40px;">
                 <Button
                     bg={Colors.white}
@@ -26,7 +36,7 @@ export const DeleteModal = ({ modalRef, title, doFunc, loading }) => {
                     onClick={() => doFunc()}
                     disabled={loading}
                 >
-                    {loading ? 'Loading...' : 'Delete'}
+                    {loading ? 'Loading...' : ButtonText}
                 </Button>
             </Div>
         </Modal>

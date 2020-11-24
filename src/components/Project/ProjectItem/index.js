@@ -46,22 +46,16 @@ const ProjectDropDown = ({ openDrop, projectId, teamId, openDeleteModal }) => {
                 >
                     Edit
                 </DropdownItem>
-                <RemoveMemberMutation>
-                    {({ doRemoveMember }) => (
-                        <DropdownItem
-                            leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
-                            onClicked={() =>
-                                doRemoveMember(projectId, currentUser._id)
-                            }
-                        >
-                            Leave Project
-                        </DropdownItem>
-                    )}
-                </RemoveMemberMutation>
+                <DropdownItem
+                    leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
+                    onClicked={() => openDeleteModal('leave')}
+                >
+                    Leave Project
+                </DropdownItem>
 
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                    onClicked={() => openDeleteModal()}
+                    onClicked={() => openDeleteModal('delete')}
                 >
                     Delete
                 </DropdownItem>

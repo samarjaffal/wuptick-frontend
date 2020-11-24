@@ -13,9 +13,12 @@ export const RemoveMemberMutation = ({ children, modalRef }) => {
         {
             onCompleted: (data) => {
                 console.log('RemoveMemberMutation', data);
+                if (modalRef) {
+                    modalRef.current.closeModal();
+                }
                 addNotification(
                     customTitles.success,
-                    'Removed Member Successfuly ✅',
+                    'Removed Member successfully ✅',
                     customTypes.success
                 );
             },

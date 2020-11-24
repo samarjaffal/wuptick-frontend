@@ -5,6 +5,8 @@ import { ProjectItem } from '../ProjectItem';
 import { NoData } from '../../NoData/index';
 import { DeleteModal } from '../../Modal/templates/DeleteModal/index';
 import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
+import { RemoveMemberMutation } from '../../../requests/project/RemoveMemberMutation';
+import { useUser } from '../../../hooks/useUser';
 import { Title, DropDownContainer, Button, Collapsed } from './styles';
 
 const DropDown = ({ title, children }) => {
@@ -27,11 +29,19 @@ const DropDown = ({ title, children }) => {
 export const ListProjects = ({ teams, userId }) => {
     const [projectClicked, setProjectClicked] = useState({});
     const [teamClicked, setTeamClicked] = useState({});
+    const [action, setAction] = useState('');
+    const { currentUser } = useUser();
 
     const modalRef = useRef();
+    const leaveModalRef = useRef();
 
-    const openDeleteModal = () => {
-        modalRef.current.openModal();
+    const openDeleteModal = (action) => {
+        setAction(action);
+        if (action == 'delete') {
+            modalRef.current.openModal();
+        } else if (action == 'leave') {
+            leaveModalRef.current.openModal();
+        }
     };
 
     const setProjectAndTeam = (project, team) => {
@@ -76,6 +86,24 @@ export const ListProjects = ({ teams, userId }) => {
                     );
                 }}
             </DeleteProjectMutation>
+            <RemoveMemberMutation modalRef={leaveModalRef}>
+                {({ doRemoveMember, loading }) => {
+                    const doFunc = () => {
+                        doRemoveMember(projectClicked._id, currentUser._id);
+                    };
+
+                    return (
+                        <DeleteModal
+                            modalRef={leaveModalRef}
+                            title={`Are you sure do you want to leave this project?`}
+                            doFunc={doFunc}
+                            loading={loading}
+                            ButtonText={'Leave Project'}
+                            showMessage={false}
+                        />
+                    );
+                }}
+            </RemoveMemberMutation>
         </div>
     );
 };
