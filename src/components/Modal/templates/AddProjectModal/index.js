@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../../Forms/Input/index';
@@ -7,12 +7,14 @@ import { Modal } from '../../index';
 import { ColorPicker } from '../../../ColorPicker/index';
 import { PrivacyRadioButtons } from '../../../PrivacyRadioButtons/index';
 import { ListContainer } from '../../../ListContainer/index';
+import { Label } from '../../../Label/index';
 import { useUser } from '../../../../hooks/useUser';
 import { Colors } from '../../../../assets/css/colors';
-import { ButtonContainer, Label } from './styles';
+import { ButtonContainer, Label as LabelButton, TeamLabel } from './styles';
 import {
     Div,
     FlexSpaceBetween,
+    FlexCenter,
     ErrorMessage,
     Button,
 } from '../../../SharedComponents/styles';
@@ -21,12 +23,20 @@ export const AddProjectModal = ({
     modalRef,
     doFunction,
     loading,
+    newTeam = {},
     action = 'save',
 }) => {
-    const [colorSelected, setColorSelected] = useState(null);
-    const [privacySelected, setPrivacySelected] = useState(null);
     const { currentUser, teamSelected, currentProject } = useUser();
     const { register, handleSubmit, errors } = useForm();
+    const [colorSelected, setColorSelected] = useState(null);
+    const [privacySelected, setPrivacySelected] = useState(null);
+    const [team, setTeam] = useState(teamSelected);
+
+    useEffect(() => {
+        if (Object.keys(newTeam).length > 0) {
+            setTeam(newTeam);
+        }
+    }, [newTeam]);
 
     const getColorSelected = (value) => {
         setColorSelected(value);
@@ -56,17 +66,27 @@ export const AddProjectModal = ({
                     _id: currentUser._id,
                 },
                 team_owner: {
-                    _id: teamSelected._id,
+                    _id: team._id,
                 },
             };
             doFunction(input);
         }
-        /*         console.log(input, 'input'); */
     };
 
     return (
         <Modal ref={modalRef} title="New Project">
-            <form onSubmit={(e) => e.preventDefault()}>
+            <FlexCenter>
+                <TeamLabel>Team:</TeamLabel>
+                <Label
+                    color={Colors.primary}
+                    name={team.name}
+                    width="max-content"
+                />
+            </FlexCenter>
+            <form
+                onSubmit={(e) => e.preventDefault()}
+                style={{ marginTop: '1em' }}
+            >
                 <Div style={{ width: '100%' }}>
                     <Input
                         type="text"
@@ -98,7 +118,7 @@ export const AddProjectModal = ({
                     <Div>
                         <ListContainer>
                             <FlexSpaceBetween>
-                                <Label>Select Color</Label>
+                                <LabelButton>Select Color</LabelButton>
                                 <ColorPicker
                                     getColorSelected={getColorSelected}
                                     defaultValue={
@@ -143,4 +163,5 @@ AddProjectModal.propTypes = {
     doFunction: PropTypes.func,
     loading: PropTypes.bool,
     action: PropTypes.string,
+    newTeam: PropTypes.object,
 };

@@ -21,6 +21,7 @@ export const Title = styled.h4`
     ${subtitle};
     font-weight: ${bold};
     margin: 0;
+    margin-right: 0.5em;
 `;
 
 export const Collapsed = styled.div`

@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProjectItem } from '../ProjectItem';
 import { NoData } from '../../NoData/index';
+import { ButtonHome } from '../../ButtonHome/index';
 import { DeleteModal } from '../../Modal/templates/DeleteModal/index';
+import { AddProjectModal } from '../../Modal/templates/AddProjectModal/index';
 import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
 import { RemoveMemberMutation } from '../../../requests/project/RemoveMemberMutation';
+import { CreateProjectMutation } from '../../../requests/project/CreateProjectMutation';
 import { useUser } from '../../../hooks/useUser';
+import { Colors } from '../../../assets/css/colors';
+import { FlexCenter } from '../../SharedComponents/styles';
 import { Title, DropDownContainer, Button, Collapsed } from './styles';
 
-const DropDown = ({ title, children }) => {
+const DropDown = ({ title, children, teamId, userId, openAddProjectModal }) => {
     const [isOpen, setOpen] = useState(true);
+    const { currentUser } = useUser();
+
     return (
         <div>
             <DropDownContainer>
@@ -19,7 +26,20 @@ const DropDown = ({ title, children }) => {
                         icon={isOpen ? 'caret-down' : 'caret-right'}
                     />
                 </Button>
-                <Title>{title}</Title>
+
+                <FlexCenter>
+                    <Title>{title}</Title>
+                    {currentUser._id == userId && (
+                        <ButtonHome
+                            url=""
+                            icon="plus"
+                            color={Colors.primary}
+                            onClicked={() => openAddProjectModal(teamId)}
+                        >
+                            New Project
+                        </ButtonHome>
+                    )}
+                </FlexCenter>
             </DropDownContainer>
             <Collapsed open={isOpen}>{children}</Collapsed>
         </div>
@@ -34,6 +54,7 @@ export const ListProjects = ({ teams, userId }) => {
 
     const modalRef = useRef();
     const leaveModalRef = useRef();
+    const addProjectRef = useRef();
 
     const openDeleteModal = (action) => {
         setAction(action);
@@ -44,9 +65,16 @@ export const ListProjects = ({ teams, userId }) => {
         }
     };
 
-    const setProjectAndTeam = (project, team) => {
+    const setProjectAndTeam = (project, teamId) => {
         setProjectClicked(project);
+        let team = teams.find((_team) => String(_team._id) == String(teamId));
         setTeamClicked(team);
+    };
+
+    const openAddProjectModal = (teamId) => {
+        let team = teams.find((_team) => String(_team._id) == String(teamId));
+        setTeamClicked(team);
+        addProjectRef.current.openModal();
     };
 
     return (
@@ -54,7 +82,13 @@ export const ListProjects = ({ teams, userId }) => {
             {teams.length > 0 ? (
                 teams.map((team, index) => {
                     return (
-                        <DropDown key={index} title={`Team: ${team.name}`}>
+                        <DropDown
+                            key={index}
+                            title={`Team: ${team.name}`}
+                            teamId={team._id}
+                            userId={userId}
+                            openAddProjectModal={openAddProjectModal}
+                        >
                             {team.projects.map((project, index) => (
                                 <ProjectItem
                                     key={index}
@@ -74,7 +108,7 @@ export const ListProjects = ({ teams, userId }) => {
             <DeleteProjectMutation modalRef={modalRef}>
                 {({ doDeleteProject, loading }) => {
                     const doFunc = () => {
-                        doDeleteProject(projectClicked._id, teamClicked);
+                        doDeleteProject(projectClicked._id, teamClicked._id);
                     };
                     return (
                         <DeleteModal
@@ -104,6 +138,16 @@ export const ListProjects = ({ teams, userId }) => {
                     );
                 }}
             </RemoveMemberMutation>
+            <CreateProjectMutation modalRef={addProjectRef}>
+                {({ doCreateProject, loading }) => (
+                    <AddProjectModal
+                        modalRef={addProjectRef}
+                        doFunction={doCreateProject}
+                        loading={loading}
+                        newTeam={teamClicked}
+                    />
+                )}
+            </CreateProjectMutation>
         </div>
     );
 };
@@ -114,4 +158,7 @@ ListProjects.propTypes = {
 DropDown.propTypes = {
     children: PropTypes.any,
     title: PropTypes.string,
+    addProjectRef: PropTypes.any,
+    teamId: PropTypes.string,
+    openAddProjectModal: PropTypes.func,
 };

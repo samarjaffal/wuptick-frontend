@@ -30,7 +30,7 @@ import {
     Clock,
 } from './styles';
 
-const ProjectDropDown = ({ openDrop, projectId, teamId, openDeleteModal }) => {
+const ProjectDropDown = ({ openDrop, projectId, openDeleteModal }) => {
     const { open, setOpen } = useDropdown();
     const { generateProjectUrl, currentUser } = useUser();
     useEffect(() => {
@@ -175,7 +175,6 @@ export const ProjectItem = ({
                                     <ProjectDropDown
                                         openDrop={openDropDown}
                                         projectId={project._id}
-                                        teamId={teamId}
                                         openDeleteModal={openDeleteModal}
                                     />
                                 </ActionContainer>
@@ -191,8 +190,13 @@ export const ProjectItem = ({
 ProjectItem.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.string,
+    teamId: PropTypes.string,
+    setProjectAndTeam: PropTypes.func,
+    openDeleteModal: PropTypes.func,
 };
 
 ProjectDropDown.propTypes = {
     openDrop: PropTypes.bool,
+    projectId: PropTypes.string,
+    openDeleteModal: PropTypes.func,
 };

@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlCreateProject } from '../graphql/gqlCreateProject';
 import { gqlMe } from '../graphql/gqlMe';
+import { gqlGetUser } from '../graphql/gqlGetUser';
 import { Notification } from '../../shared/Notification';
 import PropTypes from 'prop-types';
 
@@ -30,6 +31,12 @@ export const CreateProjectMutation = ({ children, modalRef }) => {
             refetchQueries: [
                 {
                     query: gqlMe,
+                },
+                {
+                    query: gqlGetUser,
+                    variables: {
+                        userId: input.owner._id,
+                    },
                 },
             ],
             /*   update: (store, { data }) => {

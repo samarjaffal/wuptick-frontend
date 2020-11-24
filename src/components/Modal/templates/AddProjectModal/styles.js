@@ -20,3 +20,9 @@ export const Label = styled.div`
     font-weight: ${bold};
     color: ${Colors.gray};
 `;
+
+export const TeamLabel = styled.span`
+    ${description};
+    font-weight: ${bold};
+    margin-right: 0.5em;
+`;
