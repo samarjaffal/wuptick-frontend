@@ -12,6 +12,7 @@ import { DeleteModuleMutation } from '../../../requests/Module/DeleteModuleMutat
 import { List, Placeholder } from './styles';
 export const ListModules = ({ modules = [], projectId }) => {
     const [selectedModule, setSelectedModule] = useState();
+    const [editModuleId, setEditModuleId] = useState(null);
     const { currentElemRef } = useDropdown();
 
     const _columns = ['modules'];
@@ -34,6 +35,10 @@ export const ListModules = ({ modules = [], projectId }) => {
 
     const SetModuleName = (value) => {
         newModuleInput.name = value;
+    };
+
+    const editModuleIdCallBack = (id) => {
+        setEditModuleId(id);
     };
 
     return (
@@ -71,6 +76,12 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         module={module}
                                                         setModuleCallback={
                                                             setModuleCallback
+                                                        }
+                                                        editModuleId={
+                                                            editModuleId
+                                                        }
+                                                        setEditModuleId={
+                                                            setEditModuleId
                                                         }
                                                     />
                                                 ))}
@@ -128,6 +139,9 @@ export const ListModules = ({ modules = [], projectId }) => {
                                             setStatus={setStatus}
                                             moduleId={selectedModule}
                                             doDeleteModule={doDeleteModule}
+                                            editModuleIdCallBack={
+                                                editModuleIdCallBack
+                                            }
                                         />
                                     )}
                                 </DeleteModuleMutation>,

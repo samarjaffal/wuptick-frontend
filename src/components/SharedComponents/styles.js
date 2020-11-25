@@ -3,6 +3,7 @@ import { Colors } from '../../assets/css/colors';
 import { info, borderRadius } from '../../assets/css/theme';
 import {
     ShadowSecondary,
+    Shadow,
     TransitionSecondary,
 } from '../../assets/css/shared-styles';
 
@@ -54,8 +55,9 @@ export const Button = styled.button`
     margin: ${({ margin }) => (margin ? margin : 'auto')};
     cursor: pointer;
     :hover {
-        ${ShadowSecondary};
+        ${Shadow};
         ${TransitionSecondary};
+        opacity: 0.8;
     }
     opacity: ${({ disabled }) => (disabled == true ? 0.6 : 1)};
     @media (max-width: 768px) {

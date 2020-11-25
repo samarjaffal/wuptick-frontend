@@ -30,7 +30,12 @@ const OPTIONS = [
     },
 ];
 
-export const OptionsDropDown = ({ setStatus, moduleId, doDeleteModule }) => {
+export const OptionsDropDown = ({
+    setStatus,
+    moduleId,
+    doDeleteModule,
+    editModuleIdCallBack,
+}) => {
     const { open, position } = useDropdown();
     const { currentProject } = useUser();
     return (
@@ -52,6 +57,9 @@ export const OptionsDropDown = ({ setStatus, moduleId, doDeleteModule }) => {
                         {option.status}
                     </DropdownItem>
                 ))}
+                <DropdownItem onClicked={() => editModuleIdCallBack(moduleId)}>
+                    <span>Edit</span>
+                </DropdownItem>
                 <DropdownItem
                     onClicked={() =>
                         doDeleteModule(moduleId, currentProject._id)
