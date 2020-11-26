@@ -58,7 +58,7 @@ export const OptionsDropDown = ({
                     </DropdownItem>
                 ))}
                 <DropdownItem onClicked={() => editModuleIdCallBack(moduleId)}>
-                    <span>Edit</span>
+                    <span>Rename</span>
                 </DropdownItem>
                 <DropdownItem
                     onClicked={() =>
@@ -151,4 +151,7 @@ Status.propTypes = {
 OptionsDropDown.propTypes = {
     openDrop: PropTypes.bool,
     setStatus: PropTypes.func,
+    moduleId: PropTypes.string,
+    doDeleteModule: PropTypes.func,
+    editModuleIdCallBack: PropTypes.func,
 };

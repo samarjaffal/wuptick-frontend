@@ -11,10 +11,13 @@ export const ModuleItem = ({
     setModuleCallback,
     editModuleId,
     setEditModuleId,
+    doUpdateModule,
 }) => {
     const [isEditing, setEditing] = useState(false);
     const [isFocused, SetFocus] = useState(false);
     const inputRef = useRef(null);
+
+    const isCurrentElement = () => module._id == editModuleId;
 
     useEffect(() => {
         if (isEditing) {
@@ -23,9 +26,8 @@ export const ModuleItem = ({
         document.addEventListener('keydown', handleKeys, false);
         SetFocus(inputRef.current !== document.activeElement);
 
-        if (editModuleId && module._id == editModuleId) {
+        if (editModuleId && isCurrentElement()) {
             setEditing(true);
-            console.log('input and focus');
         }
         return () => {
             document.removeEventListener('keydown', handleKeys, false);
@@ -42,14 +44,17 @@ export const ModuleItem = ({
         }
 
         if (event.keyCode === 13) {
-            if (isFocused) {
-                console.log('enter pressed');
-                /*  setValue(inputRef.current.value); */
-                /* inputRef.current.value = ''; */
-                /*                if (doFunction) {
-                    doFunction();
-                } */
-                setEditing(false);
+            if (isFocused && isCurrentElement()) {
+                if (doUpdateModule) {
+                    let input = {
+                        moduleId: module._id,
+                        input: {
+                            name: inputRef.current.value,
+                        },
+                    };
+                    doUpdateModule(input);
+                }
+                escFunction();
             }
         }
     };
@@ -101,4 +106,8 @@ export const ModuleItem = ({
 ModuleItem.propTypes = {
     index: PropTypes.number,
     module: PropTypes.object,
+    setModuleCallback: PropTypes.func,
+    editModuleId: PropTypes.string,
+    setEditModuleId: PropTypes.func,
+    doUpdateModule: PropTypes.func,
 };
