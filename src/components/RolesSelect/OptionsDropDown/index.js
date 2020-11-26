@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { GetRolesQuery } from '../../../requests/Role/GetRolesQuery';
 import { Dropdown } from '../../Dropdrown/index';
@@ -13,7 +13,7 @@ const setFirstLetterUpperCase = (string) => {
 };
 
 export const OptionsDropDown = ({ setOption, doRemoveMember, userId }) => {
-    const { open, position } = useDropdown();
+    const { open, position, setOpen } = useDropdown();
     const { currentProject } = useUser();
 
     const handleRemoveMember = () => {
@@ -23,41 +23,61 @@ export const OptionsDropDown = ({ setOption, doRemoveMember, userId }) => {
         doRemoveMember(currentProject._id, userId);
     };
 
-    return (
-        <GetRolesQuery>
-            {({ data }) => {
-                const { getRoles: options } = data;
-
-                return (
-                    <Dropdown
-                        open={open}
-                        transform="-66%"
-                        width="200px"
-                        top={`${Math.round(position.top + 30)}px`}
-                        left={`${position.left}px`}
-                        bg={Colors.whitePrimary}
-                    >
-                        <DropdownMenu menu="main" classMenu="menu-primary">
+    const MenuChangeRole = () => {
+        return (
+            <GetRolesQuery>
+                {({ data }) => {
+                    const { getRoles: options } = data;
+                    return (
+                        <DropdownMenu
+                            menu="change-role"
+                            classMenu="menu-secondary"
+                        >
                             {options.map((option) => (
                                 <DropdownItem
                                     key={option._id}
-                                    onClicked={() => setOption(option)}
+                                    onClicked={() => {
+                                        setOption(option);
+                                        setOpen(false);
+                                    }}
                                 >
                                     {setFirstLetterUpperCase(option.name)}
                                 </DropdownItem>
                             ))}
                             <DropdownItem
-                                onClicked={() => handleRemoveMember()}
+                                goToMenu="main"
+                                onClicked={() => setOpen(true)}
                             >
-                                <span style={{ color: Colors.red }}>
-                                    Remove Member
-                                </span>
+                                <span>Go back</span>
                             </DropdownItem>
                         </DropdownMenu>
-                    </Dropdown>
-                );
-            }}
-        </GetRolesQuery>
+                    );
+                }}
+            </GetRolesQuery>
+        );
+    };
+
+    return (
+        <Dropdown
+            open={open}
+            width="200px"
+            top={`${Math.round(position.top + 30)}px`}
+            left={`${position.left}px`}
+            bg={Colors.whitePrimary}
+        >
+            <DropdownMenu menu="main" classMenu="menu-primary">
+                <DropdownItem
+                    goToMenu="change-role"
+                    onClicked={() => setOpen(true)}
+                >
+                    <span>Change Role</span>
+                </DropdownItem>
+                <DropdownItem onClicked={() => handleRemoveMember()}>
+                    <span style={{ color: Colors.red }}>Remove Member</span>
+                </DropdownItem>
+            </DropdownMenu>
+            {MenuChangeRole()}
+        </Dropdown>
     );
 };
 

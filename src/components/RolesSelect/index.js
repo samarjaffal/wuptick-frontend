@@ -27,7 +27,6 @@ export const RolesSelect = forwardRef(
         },
         ref
     ) => {
-        const [openDropDown, setOpenDropDown] = useState(false);
         const [currentOption, setCurrentOption] = useState({});
         const selectRef = useRef(null);
         const labelRef = useRef(null);
@@ -40,7 +39,6 @@ export const RolesSelect = forwardRef(
 
         const handleDropDown = (value = null) => {
             value = value == null ? true : value;
-            setOpenDropDown(value);
             openDropCallBack(value);
             if (value) {
                 setRef(selectRef);
@@ -70,17 +68,15 @@ export const RolesSelect = forwardRef(
 
         return (
             <div ref={selectRef}>
-                <OutsideClick setLocalDropDownState={handleDropDown}>
-                    <Label
-                        name={currentOption.name}
-                        color={Colors.primary}
-                        showCaret={true}
-                        width="max-content"
-                        onClicked={handleDropDown}
-                        pointer={true}
-                        ref={labelRef}
-                    ></Label>
-                </OutsideClick>
+                <Label
+                    name={currentOption.name}
+                    color={Colors.primary}
+                    showCaret={true}
+                    width="max-content"
+                    onClicked={handleDropDown}
+                    pointer={true}
+                    ref={labelRef}
+                ></Label>
             </div>
         );
     }

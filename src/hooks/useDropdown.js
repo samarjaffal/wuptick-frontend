@@ -29,6 +29,9 @@ export const useDropdown = () => {
 
     const openDropCallBack = (value) => {
         setOpen(value);
+        if (value == false) {
+            setActiveMenu('main');
+        }
     };
 
     return {

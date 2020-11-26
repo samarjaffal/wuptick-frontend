@@ -11,6 +11,7 @@ import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/inde
 import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
 import { OptionsDropDown as InvitationDropDown } from '../../../Selects/InvitationSelect/OptionsDropDown/index';
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
+import { OutsideClick } from '../../../OutsideClick/index';
 import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
 import { RemoveMemberMutation } from '../../../../requests/project/RemoveMemberMutation';
 import { RemoveInvitationMutation } from '../../../../requests/project/RemoveInvitationMutation';
@@ -53,6 +54,11 @@ const MembersList = ({ members }) => {
         setSelectedUser(user);
     };
 
+    const handleDropDown = (value = null) => {
+        value = value == null ? true : value;
+        openDropCallBack(value);
+    };
+
     return (
         <Ul>
             {_members.map((member, index) => (
@@ -76,7 +82,7 @@ const MembersList = ({ members }) => {
                                         doUpdate={doUpdateRole}
                                         projectId={currentProject._id}
                                         userId={member.user._id}
-                                        openDropCallBack={openDropCallBack}
+                                        openDropCallBack={handleDropDown}
                                         setRef={setRef}
                                         ref={currentElemRef}
                                         setPositionCallBack={
@@ -91,15 +97,17 @@ const MembersList = ({ members }) => {
                 </li>
             ))}
             {ReactDom.createPortal(
-                <RemoveMemberMutation>
-                    {({ doRemoveMember }) => (
-                        <RoleDropDown
-                            setOption={setOption}
-                            doRemoveMember={doRemoveMember}
-                            userId={selectedUser}
-                        />
-                    )}
-                </RemoveMemberMutation>,
+                <OutsideClick setLocalDropDownState={handleDropDown}>
+                    <RemoveMemberMutation>
+                        {({ doRemoveMember }) => (
+                            <RoleDropDown
+                                setOption={setOption}
+                                doRemoveMember={doRemoveMember}
+                                userId={selectedUser}
+                            />
+                        )}
+                    </RemoveMemberMutation>
+                </OutsideClick>,
                 document.getElementById('dropwdown-app')
             )}
         </Ul>

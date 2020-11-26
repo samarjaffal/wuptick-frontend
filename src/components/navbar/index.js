@@ -134,6 +134,9 @@ export const Navbar = () => {
                                 >
                                     My Profile
                                 </DropdownItem>
+                                <DropdownItem goToMenu="settings" leftIcon="🧡">
+                                    <h2>Test</h2>
+                                </DropdownItem>
                                 <Logout>
                                     {({ doLogout }) => (
                                         <DropdownItem
@@ -144,26 +147,22 @@ export const Navbar = () => {
                                     )}
                                 </Logout>
                             </DropdownMenu>
-                            {/*   <DropdownMenu
-                                    menu="settings"
-                                    classMenu="menu-secondary"
-                                >
-                                    <DropdownItem goToMenu="main" leftIcon="🧡">
-                                        <h2>My Tutorial</h2>
-                                    </DropdownItem>
-                                    <DropdownItem leftIcon="🧡">
-                                        HTML
-                                    </DropdownItem>
-                                    <DropdownItem leftIcon="🧡">
-                                        CSS
-                                    </DropdownItem>
-                                    <DropdownItem leftIcon="🧡">
-                                        JavaScript
-                                    </DropdownItem>
-                                    <DropdownItem leftIcon="🧡">
-                                        Awesome!
-                                    </DropdownItem>
-                                </DropdownMenu> */}
+                            <DropdownMenu
+                                menu="settings"
+                                classMenu="menu-secondary"
+                            >
+                                <DropdownItem goToMenu="main" leftIcon="🧡">
+                                    <h2>My Tutorial</h2>
+                                </DropdownItem>
+                                <DropdownItem leftIcon="🧡">HTML</DropdownItem>
+                                <DropdownItem leftIcon="🧡">CSS</DropdownItem>
+                                <DropdownItem leftIcon="🧡">
+                                    JavaScript
+                                </DropdownItem>
+                                <DropdownItem leftIcon="🧡">
+                                    Awesome!
+                                </DropdownItem>
+                            </DropdownMenu>
                         </Dropdown>
                     </AvatarContainer>
                 </OutsideClick>

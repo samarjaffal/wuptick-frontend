@@ -13,8 +13,14 @@ export const DropdownItem = ({
 }) => {
     const { setActiveMenu } = useDropdown();
 
+    const customGotToMenu = () => {
+        onClicked();
+        setActiveMenu(goToMenu);
+    };
+
     const handleClick = () => {
         return (
+            (onClicked && goToMenu && customGotToMenu()) ||
             (onClicked && onClicked()) ||
             (goToMenu && setActiveMenu(goToMenu)) ||
             null
