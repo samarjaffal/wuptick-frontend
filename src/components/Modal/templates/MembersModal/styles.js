@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../../../assets/css/colors';
-import {
-    subtitle,
-    bold,
-    regular,
-    description,
-    info,
-} from '../../../../assets/css/theme';
+import { subtitle, bold, info } from '../../../../assets/css/theme';
 
 export const FlexSpaceBetween = styled.div`
     display: flex;
@@ -28,16 +22,6 @@ export const Div = styled.div`
 export const Subtitle = styled.h4`
     ${subtitle};
     font-weight: ${bold};
-`;
-
-export const MemberName = styled.div`
-    ${description};
-    font-weight: ${bold};
-`;
-
-export const MemberEmail = styled.div`
-    ${description};
-    font-weight: ${regular};
 `;
 
 export const Empty = styled.span`

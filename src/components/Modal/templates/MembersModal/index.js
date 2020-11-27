@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { Avatar } from '../../../Avatar/index';
 import { Modal } from '../../index';
-import { RolesSelect } from '../../../RolesSelect/index';
+import { MembersList } from './MembersList/index';
 import { useUser } from '../../../../hooks/useUser';
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { InvitationSelect } from '../../../Selects/InvitationSelect/index';
 import { MembersInputSearch } from '../../../InputSearch/MembersInputSearch/index';
-import { OptionsDropDown as RoleDropDown } from '../../../RolesSelect/OptionsDropDown/index';
 import { OptionsDropDown as InvitationDropDown } from '../../../Selects/InvitationSelect/OptionsDropDown/index';
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
-import { OutsideClick } from '../../../OutsideClick/index';
-import { UpdateMemberRoleMutation } from '../../../../requests/project/UpdateMemberRoleMutation';
-import { RemoveMemberMutation } from '../../../../requests/project/RemoveMemberMutation';
 import { RemoveInvitationMutation } from '../../../../requests/project/RemoveInvitationMutation';
 import { GetInvitationsForProjectQuery } from '../../../../requests/project/GetInvitationsForProjectQuery';
 import { RegisterUserByInvitationMutation } from '../../../../requests/User/RegisterUserByInvitationMutation';
@@ -23,96 +19,11 @@ import {
     FlexSpaceBetween,
     FlexCenter,
     Subtitle,
-    MemberName,
-    MemberEmail,
     Empty,
     Hr,
     Ul,
     SmallMessage,
 } from './styles';
-
-const MembersList = ({ members }) => {
-    const [_members, setMembers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState();
-    const { currentProject } = useUser();
-    const {
-        setRef,
-        currentElemRef,
-        setPositionDropDown,
-        openDropCallBack,
-    } = useDropdown();
-
-    useEffect(() => {
-        setMembers(members);
-    }, [members]);
-
-    const setOption = (value) => {
-        currentElemRef.current.setOption(value);
-    };
-
-    const setUserCallBack = (user) => {
-        setSelectedUser(user);
-    };
-
-    const handleDropDown = (value = null) => {
-        value = value == null ? true : value;
-        openDropCallBack(value);
-    };
-
-    return (
-        <Ul>
-            {_members.map((member, index) => (
-                <li key={index}>
-                    <FlexSpaceBetween customProps="">
-                        <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar size={30} src={member.user.avatar} />
-                            <Div customProps="margin-left: 0.5em;">
-                                <MemberName>
-                                    {member.user.name} {member.user.last_name}
-                                </MemberName>
-                                <MemberEmail>{member.user.email}</MemberEmail>
-                            </Div>
-                        </FlexCenter>
-
-                        <Div>
-                            <UpdateMemberRoleMutation>
-                                {({ doUpdateRole }) => (
-                                    <RolesSelect
-                                        role={member.role}
-                                        doUpdate={doUpdateRole}
-                                        projectId={currentProject._id}
-                                        userId={member.user._id}
-                                        openDropCallBack={handleDropDown}
-                                        setRef={setRef}
-                                        ref={currentElemRef}
-                                        setPositionCallBack={
-                                            setPositionDropDown
-                                        }
-                                        setUserCallBack={setUserCallBack}
-                                    />
-                                )}
-                            </UpdateMemberRoleMutation>
-                        </Div>
-                    </FlexSpaceBetween>
-                </li>
-            ))}
-            {ReactDom.createPortal(
-                <OutsideClick setLocalDropDownState={handleDropDown}>
-                    <RemoveMemberMutation>
-                        {({ doRemoveMember }) => (
-                            <RoleDropDown
-                                setOption={setOption}
-                                doRemoveMember={doRemoveMember}
-                                userId={selectedUser}
-                            />
-                        )}
-                    </RemoveMemberMutation>
-                </OutsideClick>,
-                document.getElementById('dropwdown-app')
-            )}
-        </Ul>
-    );
-};
 
 const InvitationList = ({ members }) => {
     const [selectedUser, setSelectedUser] = useState();
@@ -250,9 +161,5 @@ MemberModal.propTypes = {
 };
 
 InvitationList.propTypes = {
-    members: PropTypes.array,
-};
-
-MembersList.propTypes = {
     members: PropTypes.array,
 };
