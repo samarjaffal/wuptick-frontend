@@ -15,6 +15,7 @@ import {
     faEllipsisH,
     faSignOutAlt,
     faTimes,
+    faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -32,5 +33,6 @@ library.add(
     faEllipsisH,
     faSignOutAlt,
     faTimes,
-    faStarRegular
+    faStarRegular,
+    faAngleLeft
 );

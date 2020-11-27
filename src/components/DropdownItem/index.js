@@ -28,10 +28,14 @@ export const DropdownItem = ({
     };
 
     return (
-        <MenuItem to={goToURL || ''} onClick={() => handleClick()}>
-            <IconButton>{leftIcon}</IconButton>
+        <MenuItem
+            to={goToURL || ''}
+            onClick={() => handleClick()}
+            icon={leftIcon}
+        >
+            {leftIcon && <IconButton>{leftIcon}</IconButton>}
             {children}
-            <IconRight>{rightIcon}</IconRight>
+            {rightIcon && <IconRight>{rightIcon}</IconRight>}
         </MenuItem>
     );
 };

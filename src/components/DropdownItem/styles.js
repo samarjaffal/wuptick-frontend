@@ -13,6 +13,7 @@ export const MenuItem = styled(Link)`
     /* padding: 7px; */
     text-decoration: none;
     ${description};
+    padding: ${({ icon }) => (icon ? 0 : '0.5em')};
     :hover {
         background: ${Colors.hover};
     }
@@ -23,7 +24,6 @@ export const IconButton = styled.span`
     height: 30px;
     background-color: ${Colors.background};
     border-radius: 50%;
-    padding: 5px;
     margin: 2px;
     display: flex;
     align-items: center;

@@ -6,7 +6,6 @@ import React, {
     useImperativeHandle,
 } from 'react';
 import PropTypes from 'prop-types';
-import { OutsideClick } from '../OutsideClick/index';
 import { Label } from '../Label/index';
 import { Colors } from '../../assets/css/colors';
 const setFirstLetterUpperCase = (string) => {
