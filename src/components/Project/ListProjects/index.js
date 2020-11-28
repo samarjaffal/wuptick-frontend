@@ -9,6 +9,7 @@ import { AddProjectModal } from '../../Modal/templates/AddProjectModal/index';
 import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
 import { RemoveMemberMutation } from '../../../requests/project/RemoveMemberMutation';
 import { CreateProjectMutation } from '../../../requests/project/CreateProjectMutation';
+import { EditProjectMutation } from '../../../requests/project/EditProjectMutation';
 import { useUser } from '../../../hooks/useUser';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
@@ -34,7 +35,9 @@ const DropDown = ({ title, children, teamId, userId, openAddProjectModal }) => {
                             url=""
                             icon="plus"
                             color={Colors.primary}
-                            onClicked={() => openAddProjectModal(teamId)}
+                            onClicked={() =>
+                                openAddProjectModal(teamId, 'save')
+                            }
                         >
                             New Project
                         </ButtonHome>
@@ -49,15 +52,14 @@ const DropDown = ({ title, children, teamId, userId, openAddProjectModal }) => {
 export const ListProjects = ({ teams, userId }) => {
     const [projectClicked, setProjectClicked] = useState({});
     const [teamClicked, setTeamClicked] = useState({});
-    const [action, setAction] = useState('');
     const { currentUser } = useUser();
 
     const modalRef = useRef();
     const leaveModalRef = useRef();
     const addProjectRef = useRef();
+    const editProjectRef = useRef();
 
     const openDeleteModal = (action) => {
-        setAction(action);
         if (action == 'delete') {
             modalRef.current.openModal();
         } else if (action == 'leave') {
@@ -71,10 +73,14 @@ export const ListProjects = ({ teams, userId }) => {
         setTeamClicked(team);
     };
 
-    const openAddProjectModal = (teamId) => {
+    const openAddProjectModal = (teamId, action) => {
         let team = teams.find((_team) => String(_team._id) == String(teamId));
         setTeamClicked(team);
-        addProjectRef.current.openModal();
+        if (action == 'save') {
+            addProjectRef.current.openModal();
+        } else if (action == 'update') {
+            editProjectRef.current.openModal();
+        }
     };
 
     return (
@@ -96,6 +102,7 @@ export const ListProjects = ({ teams, userId }) => {
                                     userId={userId}
                                     teamId={team._id}
                                     openDeleteModal={openDeleteModal}
+                                    openAddProjectModal={openAddProjectModal}
                                     setProjectAndTeam={setProjectAndTeam}
                                 />
                             ))}
@@ -145,9 +152,22 @@ export const ListProjects = ({ teams, userId }) => {
                         doFunction={doCreateProject}
                         loading={loading}
                         newTeam={teamClicked}
+                        action="save"
                     />
                 )}
             </CreateProjectMutation>
+            <EditProjectMutation modalRef={editProjectRef}>
+                {({ doEditProject, loading }) => (
+                    <AddProjectModal
+                        modalRef={editProjectRef}
+                        action="update"
+                        loading={loading}
+                        doFunction={doEditProject}
+                        newTeam={teamClicked}
+                        _project={projectClicked}
+                    />
+                )}
+            </EditProjectMutation>
         </div>
     );
 };
@@ -160,5 +180,6 @@ DropDown.propTypes = {
     title: PropTypes.string,
     addProjectRef: PropTypes.any,
     teamId: PropTypes.string,
+    userId: PropTypes.string,
     openAddProjectModal: PropTypes.func,
 };

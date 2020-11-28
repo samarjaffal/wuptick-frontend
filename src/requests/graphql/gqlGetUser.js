@@ -22,8 +22,11 @@ export const gqlGetUser = gql`
                 projects {
                     _id
                     name
+                    description
                     image
                     created_at
+                    color
+                    privacy
                     owner {
                         _id
                         name

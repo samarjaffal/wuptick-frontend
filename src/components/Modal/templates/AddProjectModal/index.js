@@ -24,6 +24,7 @@ export const AddProjectModal = ({
     doFunction,
     loading,
     newTeam = {},
+    _project = {},
     action = 'save',
 }) => {
     const { currentUser, teamSelected, currentProject } = useUser();
@@ -31,12 +32,15 @@ export const AddProjectModal = ({
     const [colorSelected, setColorSelected] = useState(null);
     const [privacySelected, setPrivacySelected] = useState(null);
     const [team, setTeam] = useState(teamSelected);
+    const [project, setProject] = useState(currentProject);
 
     useEffect(() => {
-        if (Object.keys(newTeam).length > 0) {
-            setTeam(newTeam);
-        }
-    }, [newTeam]);
+        let team = Object.keys(newTeam).length > 0 ? newTeam : teamSelected;
+        let project =
+            Object.keys(_project).length > 0 ? _project : currentProject;
+        setTeam(team);
+        setProject(project);
+    }, [newTeam, _project]);
 
     const getColorSelected = (value) => {
         setColorSelected(value);
@@ -55,7 +59,7 @@ export const AddProjectModal = ({
                 color: colorSelected,
                 privacy: privacySelected,
             };
-            doFunction(currentProject._id, input);
+            doFunction(project._id, input);
         } else {
             input = {
                 name: formData.name,
@@ -66,7 +70,7 @@ export const AddProjectModal = ({
                     _id: currentUser._id,
                 },
                 team_owner: {
-                    _id: team._id,
+                    _id: project._id,
                 },
             };
             doFunction(input);
@@ -97,9 +101,7 @@ export const AddProjectModal = ({
                             required: 'You must specify a name',
                         })}
                         bg={Colors.white}
-                        defaultValue={
-                            action == 'update' ? currentProject.name : ''
-                        }
+                        defaultValue={action == 'update' ? project.name : ''}
                     />
                     {errors.name && (
                         <ErrorMessage>{errors.name.message}</ErrorMessage>
@@ -112,7 +114,7 @@ export const AddProjectModal = ({
                         refEl={register()}
                         bg={Colors.white}
                         defaultValue={
-                            action == 'update' ? currentProject.description : ''
+                            action == 'update' ? project.description : ''
                         }
                     />
                     <Div>
@@ -123,7 +125,7 @@ export const AddProjectModal = ({
                                     getColorSelected={getColorSelected}
                                     defaultValue={
                                         action == 'update'
-                                            ? currentProject.color
+                                            ? project.color
                                             : null
                                     }
                                 />
@@ -134,9 +136,7 @@ export const AddProjectModal = ({
                         <PrivacyRadioButtons
                             getPrivacyCallBack={getPrivacy}
                             defaultValue={
-                                action == 'update'
-                                    ? currentProject.privacy
-                                    : null
+                                action == 'update' ? project.privacy : null
                             }
                         />
                     </Div>
@@ -164,4 +164,5 @@ AddProjectModal.propTypes = {
     loading: PropTypes.bool,
     action: PropTypes.string,
     newTeam: PropTypes.object,
+    _project: PropTypes.object,
 };

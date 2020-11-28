@@ -30,7 +30,13 @@ import {
     Clock,
 } from './styles';
 
-const ProjectDropDown = ({ openDrop, projectId, openDeleteModal }) => {
+const ProjectDropDown = ({
+    openDrop,
+    projectId,
+    teamId,
+    openDeleteModal,
+    openAddProjectModal,
+}) => {
     const { open, setOpen } = useDropdown();
     const { generateProjectUrl, currentUser } = useUser();
     useEffect(() => {
@@ -42,7 +48,7 @@ const ProjectDropDown = ({ openDrop, projectId, openDeleteModal }) => {
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="edit" />}
-                    onClicked={() => navigate(generateProjectUrl(projectId))}
+                    onClicked={() => openAddProjectModal(teamId, 'update')}
                 >
                     Edit
                 </DropdownItem>
@@ -69,6 +75,7 @@ export const ProjectItem = ({
     userId,
     teamId,
     openDeleteModal,
+    openAddProjectModal,
     setProjectAndTeam,
 }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -175,7 +182,11 @@ export const ProjectItem = ({
                                     <ProjectDropDown
                                         openDrop={openDropDown}
                                         projectId={project._id}
+                                        teamId={teamId}
                                         openDeleteModal={openDeleteModal}
+                                        openAddProjectModal={
+                                            openAddProjectModal
+                                        }
                                     />
                                 </ActionContainer>
                             )}

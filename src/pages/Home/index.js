@@ -90,7 +90,7 @@ export const Home = () => {
                             title="Recent Projects"
                             icon="folder-open"
                             color={Colors.primary}
-                            button={true}
+                            button={false}
                         >
                             <Me loader={SkeletonCardItem}>
                                 {({ teams, loading }) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import { LoggedLayout } from '../Layouts/LoggedLayout';
@@ -127,4 +128,9 @@ export const Profile = ({ location, username }) => {
             </div>
         </LoggedLayout>
     );
+};
+
+Profile.propTypes = {
+    location: PropTypes.object,
+    username: PropTypes.any,
 };
