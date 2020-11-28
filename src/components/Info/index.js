@@ -13,7 +13,15 @@ import {
     Clock,
 } from './styles';
 
-export const Info = ({ name, owner, time, image, description, profileUrl }) => {
+export const Info = ({
+    name,
+    owner,
+    time,
+    image,
+    description,
+    profileUrl,
+    projectUrl,
+}) => {
     let date = dayjs(time);
     dayjs.extend(relativeTime);
 
@@ -21,7 +29,9 @@ export const Info = ({ name, owner, time, image, description, profileUrl }) => {
         <Container>
             <Image src={image} description={description} />
             <DetailsContainer>
-                <Title>{name || 'Lorem ipsum dolor'}</Title>
+                <Title to={projectUrl || ''}>
+                    {name || 'Lorem ipsum dolor'}
+                </Title>
                 <OwnerAnchor to={profileUrl}>
                     Owner:{' '}
                     <span style={{ color: Colors.primary }}>{owner}</span>

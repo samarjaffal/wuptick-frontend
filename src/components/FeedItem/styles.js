@@ -82,8 +82,10 @@ export const Action = styled.span`
     color: ${Colors.gray};
 `;
 
-export const Item = styled.span`
+export const Item = styled(Link)`
     ${description};
+    text-decoration: none;
+    ${Transition};
     color: ${Colors.primary};
 `;
 export const Time = styled.span`

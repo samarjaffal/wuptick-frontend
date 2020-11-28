@@ -20,7 +20,7 @@ import {
 } from './styles';
 
 export const Home = () => {
-    const { teamSelected, generateProfileUrl } = useUser();
+    const { teamSelected, generateProfileUrl, generateProjectUrl } = useUser();
     const modalRef = useRef();
 
     return (
@@ -76,6 +76,9 @@ export const Home = () => {
                                                 project.owner.last_name,
                                                 project.owner._id
                                             )}
+                                            projectUrl={generateProjectUrl(
+                                                project._id
+                                            )}
                                             owner={`${project.owner.name} ${project.owner.last_name}`}
                                             time={project.created_at}
                                             image={project.image}
@@ -111,6 +114,9 @@ export const Home = () => {
                                                         project.owner.name,
                                                         project.owner.last_name,
                                                         project.owner._id
+                                                    )}
+                                                    projectUrl={generateProjectUrl(
+                                                        project._id
                                                     )}
                                                     owner={`${project.owner.name} ${project.owner.last_name}`}
                                                     time={project.created_at}

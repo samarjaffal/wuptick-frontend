@@ -34,10 +34,12 @@ export const DetailsContainer = styled.div`
     margin-left: 1em;
 `;
 
-export const Title = styled.h5`
+export const Title = styled(Link)`
     margin: 0;
     ${description};
     ${Transition};
+    text-decoration: none;
+    display: block;
     ${Container}:hover & {
         color: ${Colors.primary};
     }

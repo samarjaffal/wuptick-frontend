@@ -31,7 +31,7 @@ import {
 } from './styles';
 
 export const FeedItem = ({ type, dateFilter, user, body }) => {
-    const { generateProfileUrl } = useUser();
+    const { generateProfileUrl, generateProjectUrl } = useUser();
 
     const formatDate = (_date) => {
         dayjs.extend(calendar);
@@ -70,7 +70,19 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                             {user.name}
                         </User>{' '}
                         <Action>{body.description}: </Action>{' '}
-                        <Item>{body.name}</Item>
+                        {type == 'project' ? (
+                            <Item
+                                to={
+                                    generateProjectUrl(
+                                        body.project.projectId
+                                    ) || ''
+                                }
+                            >
+                                {body.name}
+                            </Item>
+                        ) : (
+                            <Item to={''}>{body.name}</Item>
+                        )}
                     </UserInfo>
                     <TimeInfo>
                         <Time>{formatDate(dateFilter)}</Time>
