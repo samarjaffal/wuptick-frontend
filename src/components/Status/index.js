@@ -4,6 +4,7 @@ import { Label } from '../Label/index';
 import { Dropdown } from '../Dropdrown/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
+import { ChangeStatusDropDown } from './ChangeStatusDropDown';
 import { useUser } from '../../hooks/useUser';
 import { useDropdown } from '../../hooks/useDropdown';
 import PropTypes from 'prop-types';
@@ -47,18 +48,12 @@ export const OptionsDropDown = ({
             left={`${position.left}px`}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">
-                {OPTIONS.map((option, index) => (
-                    <DropdownItem
-                        key={index}
-                        onClicked={() => {
-                            setStatus(option);
-                            setOpen(false);
-                        }}
-                    >
-                        {option.icon !== null && `${option.icon} `}{' '}
-                        {option.status}
-                    </DropdownItem>
-                ))}
+                <DropdownItem
+                    goToMenu="change-status"
+                    onClicked={() => setOpen(true)}
+                >
+                    <span>Change Status</span>
+                </DropdownItem>
                 <DropdownItem onClicked={() => editModuleIdCallBack(moduleId)}>
                     <span>Rename</span>
                 </DropdownItem>
@@ -70,6 +65,7 @@ export const OptionsDropDown = ({
                     <span style={{ color: Colors.red }}>Delete</span>
                 </DropdownItem>
             </DropdownMenu>
+            <ChangeStatusDropDown options={OPTIONS} setStatus={setStatus} />
         </Dropdown>
     );
 };
