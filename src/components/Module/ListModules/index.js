@@ -7,6 +7,7 @@ import { AddNew } from '../../AddNew/index';
 import { OptionsDropDown as StatusDropDown } from '../../Status/index';
 import { useDragDrop } from '../../../hooks/useDragDrop';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { OutsideClick } from '../../OutsideClick/index';
 import { CreateModuleMutation } from '../../../requests/Module/CreateModuleMutation';
 import { DeleteModuleMutation } from '../../../requests/Module/DeleteModuleMutation';
 import { SaveModulesOrderMutation } from '../../../requests/Module/SaveModulesOrderMutation';
@@ -16,7 +17,7 @@ import { List, Placeholder } from './styles';
 export const ListModules = ({ modules = [], projectId }) => {
     const [selectedModule, setSelectedModule] = useState();
     const [editModuleId, setEditModuleId] = useState(null);
-    const { currentElemRef } = useDropdown();
+    const { currentElemRef, openDropCallBack } = useDropdown();
 
     const _columns = ['modules'];
     const _items = [...modules];
@@ -42,6 +43,11 @@ export const ListModules = ({ modules = [], projectId }) => {
 
     const editModuleIdCallBack = (id) => {
         setEditModuleId(id);
+    };
+
+    const handleDropDown = (value = null) => {
+        value = value == null ? true : value;
+        openDropCallBack(value);
     };
 
     return (
@@ -158,18 +164,22 @@ export const ListModules = ({ modules = [], projectId }) => {
                             )}
 
                             {ReactDom.createPortal(
-                                <DeleteModuleMutation>
-                                    {({ doDeleteModule }) => (
-                                        <StatusDropDown
-                                            setStatus={setStatus}
-                                            moduleId={selectedModule}
-                                            doDeleteModule={doDeleteModule}
-                                            editModuleIdCallBack={
-                                                editModuleIdCallBack
-                                            }
-                                        />
-                                    )}
-                                </DeleteModuleMutation>,
+                                <OutsideClick
+                                    setLocalDropDownState={handleDropDown}
+                                >
+                                    <DeleteModuleMutation>
+                                        {({ doDeleteModule }) => (
+                                            <StatusDropDown
+                                                setStatus={setStatus}
+                                                moduleId={selectedModule}
+                                                doDeleteModule={doDeleteModule}
+                                                editModuleIdCallBack={
+                                                    editModuleIdCallBack
+                                                }
+                                            />
+                                        )}
+                                    </DeleteModuleMutation>
+                                </OutsideClick>,
                                 document.getElementById('dropwdown-app')
                             )}
                         </div>

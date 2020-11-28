@@ -4,7 +4,6 @@ import { Label } from '../Label/index';
 import { Dropdown } from '../Dropdrown/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
-import { OutsideClick } from '../OutsideClick/index';
 import { useUser } from '../../hooks/useUser';
 import { useDropdown } from '../../hooks/useDropdown';
 import PropTypes from 'prop-types';
@@ -36,7 +35,7 @@ export const OptionsDropDown = ({
     doDeleteModule,
     editModuleIdCallBack,
 }) => {
-    const { open, position } = useDropdown();
+    const { open, position, setOpen } = useDropdown();
     const { currentProject } = useUser();
     return (
         <Dropdown
@@ -51,7 +50,10 @@ export const OptionsDropDown = ({
                 {OPTIONS.map((option, index) => (
                     <DropdownItem
                         key={index}
-                        onClicked={() => setStatus(option)}
+                        onClicked={() => {
+                            setStatus(option);
+                            setOpen(false);
+                        }}
                     >
                         {option.icon !== null && `${option.icon} `}{' '}
                         {option.status}
@@ -77,7 +79,6 @@ export const Status = ({ status, doUpdate, elemId, setModuleCallback }) => {
     const [currentOption, setCurrentOption] = useState(options[0].status);
     const [currentColor, setCurrentColor] = useState(options[0].color);
     const [currentIcon, setcurrentIcon] = useState(options[0].icon);
-    const [openDropDown, setOpenDropDown] = useState(false);
     const { setRef, setPositionDropDown, openDropCallBack } = useDropdown();
     const selectRef = useRef(null);
     const labelRef = useRef(null);
@@ -101,7 +102,6 @@ export const Status = ({ status, doUpdate, elemId, setModuleCallback }) => {
 
     const handleDropDown = (value = null) => {
         value = value == null ? true : value;
-        setOpenDropDown(value);
         openDropCallBack(value);
         if (value) {
             setRef(selectRef);
@@ -124,18 +124,16 @@ export const Status = ({ status, doUpdate, elemId, setModuleCallback }) => {
 
     return (
         <div ref={selectRef}>
-            <OutsideClick setLocalDropDownState={handleDropDown}>
-                <Label
-                    color={currentColor}
-                    icon={currentIcon}
-                    name={currentOption}
-                    showCaret={true}
-                    onClicked={handleDropDown}
-                    width="81px"
-                    pointer={true}
-                    ref={labelRef}
-                ></Label>
-            </OutsideClick>
+            <Label
+                color={currentColor}
+                icon={currentIcon}
+                name={currentOption}
+                showCaret={true}
+                onClicked={handleDropDown}
+                width="81px"
+                pointer={true}
+                ref={labelRef}
+            ></Label>
         </div>
     );
 };
