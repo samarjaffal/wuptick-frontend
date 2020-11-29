@@ -32,9 +32,9 @@ export const InvitationList = ({ members }) => {
         <Ul>
             {members.map((member, index) => (
                 <li key={index}>
-                    <FlexSpaceBetween customProps="position: relative;">
+                    <FlexSpaceBetween customProps="position: relative;flex-wrap:wrap">
                         <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar size={30} />
+                            <Avatar size={30} hide={false} />
                             <Div customProps="margin-left: 0.5em;">
                                 <MemberName>{member.email}</MemberName>
                                 <MemberEmail>{member.email}</MemberEmail>

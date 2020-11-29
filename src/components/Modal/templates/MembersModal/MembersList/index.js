@@ -49,9 +49,13 @@ export const MembersList = ({ members }) => {
         <Ul>
             {_members.map((member, index) => (
                 <li key={index}>
-                    <FlexSpaceBetween customProps="">
+                    <FlexSpaceBetween customProps="flex-wrap:wrap">
                         <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar size={30} src={member.user.avatar} />
+                            <Avatar
+                                size={30}
+                                src={member.user.avatar}
+                                hide={false}
+                            />
                             <Div customProps="margin-left: 0.5em;">
                                 <MemberName>
                                     {member.user.name} {member.user.last_name}
