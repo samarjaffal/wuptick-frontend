@@ -28,6 +28,8 @@ import {
     MembersContainer,
     EditIcon,
     EditButton,
+    ImageContainer,
+    ProjectNameContainer,
 } from './styles';
 
 const ProjectTabs = ({ currentURL, currentTab }) => {
@@ -108,13 +110,16 @@ export const Project = ({ id, location }) => {
                         <Container>
                             <div>
                                 <ProjectInfoContainer>
-                                    <Image
-                                        size={100}
-                                        description="Project Image"
-                                        src={project.image}
-                                    />
+                                    <ImageContainer>
+                                        <Image
+                                            size={100}
+                                            description="Project Image"
+                                            src={project.image}
+                                        />
+                                    </ImageContainer>
+
                                     <InfoContainer>
-                                        <FlexCenter>
+                                        <ProjectNameContainer>
                                             <ProjectName>
                                                 {project.name ||
                                                     'Add a project name'}
@@ -126,7 +131,7 @@ export const Project = ({ id, location }) => {
                                             >
                                                 <EditIcon icon="edit" />
                                             </EditButton>
-                                        </FlexCenter>
+                                        </ProjectNameContainer>
                                         <ProjectDescription>
                                             {project.description ||
                                                 'Add a new description'}

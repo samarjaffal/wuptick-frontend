@@ -19,6 +19,7 @@ export const MembersList = ({ members = [] }) => {
                             src={member.avatar}
                             margin="0 4px"
                             size={28}
+                            hide={false}
                             onClicked={() =>
                                 navigate(
                                     generateProfileUrl(

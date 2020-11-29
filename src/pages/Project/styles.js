@@ -10,6 +10,22 @@ export const Container = styled.div`
 
 export const ProjectInfoContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
+`;
+
+export const ProjectNameContainer = styled.div`
+    display: flex;
+    align-items: center;
+    @media (max-width: 768px) {
+        justify-content: center;
+    }
+`;
+
+export const ImageContainer = styled.div`
+    @media (max-width: 768px) {
+        margin: auto;
+        margin-bottom: 1em;
+    }
 `;
 
 export const InfoContainer = styled.div`
