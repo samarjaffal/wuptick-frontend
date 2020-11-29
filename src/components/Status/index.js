@@ -54,13 +54,19 @@ export const OptionsDropDown = ({
                 >
                     <span>Change Status</span>
                 </DropdownItem>
-                <DropdownItem onClicked={() => editModuleIdCallBack(moduleId)}>
+                <DropdownItem
+                    onClicked={() => {
+                        editModuleIdCallBack(moduleId);
+                        setOpen(false);
+                    }}
+                >
                     <span>Rename</span>
                 </DropdownItem>
                 <DropdownItem
-                    onClicked={() =>
-                        doDeleteModule(moduleId, currentProject._id)
-                    }
+                    onClicked={() => {
+                        setOpen(false);
+                        doDeleteModule(moduleId, currentProject._id);
+                    }}
                 >
                     <span style={{ color: Colors.red }}>Delete</span>
                 </DropdownItem>

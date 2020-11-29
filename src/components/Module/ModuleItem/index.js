@@ -26,9 +26,11 @@ export const ModuleItem = ({
         document.addEventListener('keydown', handleKeys, false);
         SetFocus(inputRef.current !== document.activeElement);
 
-        if (editModuleId && isCurrentElement()) {
+        if (editModuleId && isCurrentElement() && !isEditing) {
             setEditing(true);
+            console.log('set editing');
         }
+
         return () => {
             document.removeEventListener('keydown', handleKeys, false);
         };
@@ -60,8 +62,8 @@ export const ModuleItem = ({
     };
 
     const escFunction = () => {
-        setEditing(false);
         setEditModuleId(null);
+        setEditing(false);
     };
 
     return (
