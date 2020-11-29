@@ -9,6 +9,7 @@ export const gqlGetProject = gql`
             image
             color
             privacy
+            modules_order
             members {
                 user {
                     _id

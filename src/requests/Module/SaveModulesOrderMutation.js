@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlSaveModulesOrder } from '../graphql/gqlSaveModulesOrder';
+import { gqlGetProjectModules } from '../graphql/gqlGetProjectModules';
+import { gqlGetProject } from '../graphql/gqlGetProject';
 import PropTypes from 'prop-types';
 
 export const SaveModulesOrderMutation = ({ children }) => {
@@ -18,6 +20,28 @@ export const SaveModulesOrderMutation = ({ children }) => {
             variables: {
                 moduleIds,
                 projectId,
+            },
+            update: (store) => {
+                const modulesData = store.readQuery({
+                    query: gqlGetProjectModules,
+                    variables: { projectId },
+                });
+
+                let newModulesOrder = modulesData.getProjectModules.sort(
+                    function (a, b) {
+                        return (
+                            moduleIds.indexOf(a._id) - moduleIds.indexOf(b._id)
+                        );
+                    }
+                );
+
+                store.writeQuery({
+                    query: gqlGetProjectModules,
+                    variables: { projectId },
+                    data: {
+                        getProjectModules: [...newModulesOrder],
+                    },
+                });
             },
         });
     });
