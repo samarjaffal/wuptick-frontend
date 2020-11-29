@@ -34,6 +34,7 @@ export const NavContainer = styled.div`
     @media (max-width: 767px) {
         padding-bottom: 1em;
         flex-wrap: nowrap;
+        height: 20px;
     }
 `;
 
@@ -76,6 +77,8 @@ export const Anchor = styled(Link)`
     :hover {
         color: ${Colors.primary};
     }
+    z-index: 4;
+    margin-left: 60px;
     @media (max-width: 767px) {
         order: 0;
         width: 100%;
@@ -83,6 +86,7 @@ export const Anchor = styled(Link)`
         position: relative;
         z-index: 1;
         font-size: 1.3em;
+        margin-left: 0;
     }
 `;
 
@@ -106,7 +110,7 @@ export const AnchorTeam = styled(Link)`
     padding: 0px 15px;
     background: ${Colors.primary};
     border-radius: ${borderRadius};
-    margin-left: 20px;
+    margin-left: 110px;
     ${ShadowSecondary}
     ${Transition}
     :hover {
@@ -166,5 +170,23 @@ export const LogoutButton = styled.button`
         transition-duration: 0.5s;
         transition-property: all;
         cursor: pointer;
+    }
+`;
+
+export const LogoContainer = styled.div`
+    @media (max-width: 767px) {
+        width: 100%;
+        text-align: center;
+        height: 48px;
+    }
+`;
+
+export const LogoImg = styled.img`
+    width: 96px;
+    position: absolute;
+    top: -5px;
+    @media (max-width: 767px) {
+        text-align: center;
+        position: relative;
     }
 `;

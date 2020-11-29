@@ -7,12 +7,14 @@ import { NavItem } from '../NavItem/index';
 import { DropdownMenu } from '../DropdownMenu/index';
 import { DropdownItem } from '../DropdownItem/index';
 import { useDropdown } from '../../hooks/useDropdown';
+import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
 import { OutsideClick } from '../OutsideClick/index';
 import { Me } from '../Me/index';
 import { SkeletonAvatar } from '../Loaders/SkeletonAvatar/index';
 import { LightSkeleton } from '../Loaders/SkeletonGeneral/index';
 import { Logout } from '../Logout/index';
+import Logo from '../../assets/images/logo.png';
 
 import {
     Header,
@@ -27,6 +29,8 @@ import {
     HamburguerMenuContainer,
     NavLinkLogout,
     LogoutButton,
+    LogoContainer,
+    LogoImg,
 } from './styles';
 
 export const Navbar = () => {
@@ -60,7 +64,12 @@ export const Navbar = () => {
                 <HamburguerMenuContainer ref={burguerButton}>
                     <HamburguerMenu icon="bars" />
                 </HamburguerMenuContainer>
-                <Anchor to="/">Wuptick</Anchor>
+                <LogoContainer>
+                    <Anchor to="/">
+                        <LogoImg src={Logo} alt="Wuptick Logo" />
+                    </Anchor>
+                </LogoContainer>
+
                 <TeamContainer>
                     {/*  <AnchorTeam to="/">{teamSelected.name}</AnchorTeam> */}
                     {handleTeamInfo()}
