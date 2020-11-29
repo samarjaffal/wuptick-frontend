@@ -80,13 +80,13 @@ export const Navbar = () => {
                         <NavItem
                             title="Projects"
                             option="projects"
-                            url="/project/5ef7fe59db26218144f3f705"
+                            url={`/${profileURL}?tab=projects`}
                             icon="folder-open"
                         />
                         <NavItem
                             title="Teams"
                             option="teams"
-                            url="/test"
+                            url={`/${profileURL}?tab=teams`}
                             icon="users"
                         />
                         <NavItem

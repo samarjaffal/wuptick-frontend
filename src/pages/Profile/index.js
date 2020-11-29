@@ -51,7 +51,8 @@ export const Profile = ({ location, username }) => {
             >
                 {({ data }) => {
                     const { getUser: user } = data;
-                    return currentTab == undefined ? (
+                    return currentTab == undefined ||
+                        currentTab == 'projects' ? (
                         <ListProjects teams={user.teams} userId={userId} />
                     ) : (
                         <ListTeams teams={user.teams} userId={userId} />
@@ -113,9 +114,10 @@ export const Profile = ({ location, username }) => {
                 <Tabs>
                     <TabItem
                         text="Projects"
-                        url={`${currentURL}`}
+                        url={`${currentURL}?tab=projects`}
                         currenTab={currentTab}
-                        tab={undefined}
+                        tab="projects"
+                        altTab="/"
                     />
                     <TabItem
                         text="Teams"
