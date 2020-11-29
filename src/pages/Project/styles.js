@@ -10,7 +10,10 @@ export const Container = styled.div`
 
 export const ProjectInfoContainer = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 `;
 
 export const ProjectNameContainer = styled.div`

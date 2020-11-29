@@ -40,6 +40,7 @@ export const ModalBox = styled.div`
 
     @media (max-width: 768px) {
         width: 60%;
+        top: 50%;
     }
 `;
 
@@ -65,4 +66,15 @@ export const CloseButton = styled.div`
 
 export const Title = styled.h2`
     color: ${Colors.black};
+`;
+
+export const Container = styled.div`
+    @media (max-width: 425px) {
+        max-height: 445px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    @media (max-width: 350px) {
+        max-height: 400px;
+    }
 `;

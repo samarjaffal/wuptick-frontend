@@ -9,6 +9,7 @@ import {
     ModalBox,
     CloseButton,
     Title,
+    Container,
 } from './styles';
 
 const Modal = forwardRef(({ children, title }, ref) => {
@@ -42,7 +43,7 @@ const Modal = forwardRef(({ children, title }, ref) => {
                               />
                           </CloseButton>
                           <Title>{title || ''}</Title>
-                          {children}
+                          <Container>{children}</Container>
                       </ModalBox>
                   </ModalWrapper>,
                   document.getElementById('modal-app')

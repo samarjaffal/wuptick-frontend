@@ -119,7 +119,7 @@ export const AddProjectModal = ({
                     />
                     <Div>
                         <ListContainer>
-                            <FlexSpaceBetween>
+                            <FlexSpaceBetween customProps="flex-wrap:wrap;">
                                 <LabelButton>Select Color</LabelButton>
                                 <ColorPicker
                                     getColorSelected={getColorSelected}

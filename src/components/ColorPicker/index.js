@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Ul } from '../SharedComponents/styles';
 import { RadioButton } from '../RadioButton/index';
 import { Colors } from '../../assets/css/colors';
+import { Li } from './styles';
 
 const colors = [
     Colors.blue,
@@ -29,21 +30,16 @@ export const ColorPicker = ({ getColorSelected, defaultValue = null }) => {
     };
 
     return (
-        <Ul customProps="display:flex;">
+        <Ul customProps="display:flex; flex-wrap:wrap;">
             {colors.map((color, index) => (
-                <li
-                    key={index}
-                    style={{
-                        margin: '0 0.5em',
-                    }}
-                >
+                <Li key={index}>
                     <RadioButton
                         color={color}
                         value={color}
                         currentChecked={currentChecked}
                         changeValue={changeValue}
                     />
-                </li>
+                </Li>
             ))}
         </Ul>
     );
