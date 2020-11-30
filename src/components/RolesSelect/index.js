@@ -75,6 +75,7 @@ export const RolesSelect = forwardRef(
                     onClicked={handleDropDown}
                     pointer={true}
                     ref={labelRef}
+                    fullWidth="80%"
                 ></Label>
             </div>
         );

@@ -24,9 +24,8 @@ export const Dropdown = styled.div`
     transition: all 0.2s ease-in-out 0.02s, height 0.3s ease, top 0ms;
     z-index: 200;
 
-    @media (max-width: 424px) {
+    @media (max-width: 425px) {
         transform: none;
         right: 0;
-        top: 30px;
     }
 `;

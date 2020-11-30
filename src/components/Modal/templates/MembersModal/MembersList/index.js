@@ -49,7 +49,7 @@ export const MembersList = ({ members }) => {
         <Ul>
             {_members.map((member, index) => (
                 <li key={index}>
-                    <FlexSpaceBetween customProps="flex-wrap:wrap">
+                    <FlexSpaceBetween customProps="@media (max-width: 425px) {flex-wrap:wrap}">
                         <FlexCenter customProps="margin-bottom: 0.5em;">
                             <Avatar
                                 size={30}
@@ -64,7 +64,7 @@ export const MembersList = ({ members }) => {
                             </Div>
                         </FlexCenter>
 
-                        <Div>
+                        <Div customProps="@media (max-width: 425px) {width:100%;}">
                             <UpdateMemberRoleMutation>
                                 {({ doUpdateRole }) => (
                                     <RolesSelect

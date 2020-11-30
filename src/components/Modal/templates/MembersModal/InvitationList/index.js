@@ -32,7 +32,7 @@ export const InvitationList = ({ members }) => {
         <Ul>
             {members.map((member, index) => (
                 <li key={index}>
-                    <FlexSpaceBetween customProps="position: relative;flex-wrap:wrap">
+                    <FlexSpaceBetween customProps="position: relative; @media (max-width: 425px) {flex-wrap:wrap}">
                         <FlexCenter customProps="margin-bottom: 0.5em;">
                             <Avatar size={30} hide={false} />
                             <Div customProps="margin-left: 0.5em;">
@@ -41,7 +41,7 @@ export const InvitationList = ({ members }) => {
                             </Div>
                         </FlexCenter>
 
-                        <Div>
+                        <Div customProps=" @media (max-width: 425px) {width:100%;}">
                             <InvitationSelect
                                 color={Colors.yellow}
                                 ref={currentElemRef}

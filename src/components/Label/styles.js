@@ -15,4 +15,7 @@ export const Label = styled.div`
     min-width: 60px;
     text-align: center;
     cursor: ${({ pointer }) => (pointer == true ? 'pointer' : 'default')};
+    @media (max-width: 425px) {
+        width: ${({ fullWidth, width }) => (fullWidth ? fullWidth : width)};
+    }
 `;

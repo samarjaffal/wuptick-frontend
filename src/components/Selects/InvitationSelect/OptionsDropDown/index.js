@@ -14,10 +14,9 @@ export const OptionsDropDown = ({ userId, doRemoveInvitation }) => {
     return (
         <Dropdown
             open={open}
-            transform="-66%"
             width="200px"
             top={`${Math.round(position.top + 30)}px`}
-            left={`${position.left + 40}px`}
+            left={`${position.left}px`}
             bg={Colors.whitePrimary}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">

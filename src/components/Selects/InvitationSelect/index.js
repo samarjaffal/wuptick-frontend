@@ -43,6 +43,7 @@ export const InvitationSelect = forwardRef(
                         ref={labelRef}
                         pointer={true}
                         onClicked={handleDropDown}
+                        fullWidth="80%"
                     />
                 </OutsideClick>
             </div>

@@ -13,6 +13,7 @@ export const Label = forwardRef(
             showCaret = false,
             width,
             pointer = false,
+            fullWidth,
             children,
         },
         ref
@@ -28,6 +29,7 @@ export const Label = forwardRef(
                 width={width}
                 pointer={pointer}
                 ref={ref}
+                fullWidth={fullWidth}
             >
                 <span>
                     {icon !== null && `${icon} `}
