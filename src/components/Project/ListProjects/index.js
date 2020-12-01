@@ -1,16 +1,20 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import ReactDom from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ProjectItem } from '../ProjectItem';
 import { NoData } from '../../NoData/index';
 import { ButtonHome } from '../../ButtonHome/index';
 import { DeleteModal } from '../../Modal/templates/DeleteModal/index';
 import { AddProjectModal } from '../../Modal/templates/AddProjectModal/index';
+import { OutsideClick } from '../../OutsideClick/index';
+import { ProjectDropDown } from '../ProjectDropDown/index';
 import { DeleteProjectMutation } from '../../../requests/project/DeleteProjectMutation';
 import { RemoveMemberMutation } from '../../../requests/project/RemoveMemberMutation';
 import { CreateProjectMutation } from '../../../requests/project/CreateProjectMutation';
 import { EditProjectMutation } from '../../../requests/project/EditProjectMutation';
 import { useUser } from '../../../hooks/useUser';
+import { useDropdown } from '../../../hooks/useDropdown';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Title, DropDownContainer, Button, Collapsed } from './styles';
@@ -53,6 +57,7 @@ export const ListProjects = ({ teams, userId }) => {
     const [projectClicked, setProjectClicked] = useState({});
     const [teamClicked, setTeamClicked] = useState({});
     const { currentUser } = useUser();
+    const { openDropCallBack } = useDropdown();
 
     const modalRef = useRef();
     const leaveModalRef = useRef();
@@ -81,6 +86,11 @@ export const ListProjects = ({ teams, userId }) => {
         } else if (action == 'update') {
             editProjectRef.current.openModal();
         }
+    };
+
+    const handleDropDown = (value = null) => {
+        value = value == null ? true : value;
+        openDropCallBack(value);
     };
 
     return (
@@ -112,6 +122,20 @@ export const ListProjects = ({ teams, userId }) => {
             ) : (
                 <NoData message="This user has no projects yet." />
             )}
+
+            {currentUser._id == userId &&
+                ReactDom.createPortal(
+                    <OutsideClick setLocalDropDownState={handleDropDown}>
+                        <ProjectDropDown
+                            projectId={projectClicked._id}
+                            teamId={teamClicked._id}
+                            openDeleteModal={openDeleteModal}
+                            openAddProjectModal={openAddProjectModal}
+                        />
+                    </OutsideClick>,
+                    document.getElementById('dropwdown-app')
+                )}
+
             <DeleteProjectMutation modalRef={modalRef}>
                 {({ doDeleteProject, loading }) => {
                     const doFunc = () => {

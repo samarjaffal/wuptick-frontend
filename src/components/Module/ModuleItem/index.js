@@ -36,8 +36,8 @@ export const ModuleItem = ({
         };
     }, [isEditing, editModuleId]);
 
-    const toggleEditing = () => {
-        setEditing(true);
+    const toggleEditing = (value) => {
+        setEditing(value);
     };
 
     const handleKeys = (event) => {
@@ -93,7 +93,6 @@ export const ModuleItem = ({
                                         doUpdate={doUpdateModule}
                                         elemId={module._id}
                                         setModuleCallback={setModuleCallback}
-                                        toggleEditing={toggleEditing}
                                     />
                                 )}
                             </UpdateModuleStatusMutation>

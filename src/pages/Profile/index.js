@@ -8,6 +8,7 @@ import { Tabs } from '../../components/Tabs';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { ListProjects } from '../../components/Project/ListProjects/';
 import { ListTeams } from '../../components/Teams/ListTeams/index';
+import { DropdownContextProvider } from '../../context/DropdownContext';
 import { GetUserQuery } from '../../requests/User/GetUserQuery';
 import { useUser } from '../../hooks/useUser';
 import { SkeletonInfoProfile } from '../../components/Loaders/SkeletonInfoProfile/index';
@@ -53,7 +54,9 @@ export const Profile = ({ location, username }) => {
                     const { getUser: user } = data;
                     return currentTab == undefined ||
                         currentTab == 'projects' ? (
-                        <ListProjects teams={user.teams} userId={userId} />
+                        <DropdownContextProvider>
+                            <ListProjects teams={user.teams} userId={userId} />{' '}
+                        </DropdownContextProvider>
                     ) : (
                         <ListTeams teams={user.teams} userId={userId} />
                     );
