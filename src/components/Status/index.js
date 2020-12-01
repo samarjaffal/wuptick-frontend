@@ -42,7 +42,7 @@ export const OptionsDropDown = ({
         <Dropdown
             open={open}
             width="200px"
-            transform="-66%"
+            transform="-45%"
             bg={Colors.whitePrimary}
             top={`${Math.round(position.top + 30)}px`}
             left={`${position.left}px`}

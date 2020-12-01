@@ -25,7 +25,9 @@ export const Dropdown = styled.div`
     z-index: 200;
 
     @media (max-width: 425px) {
-        transform: none;
+        transform: ${({ transform }) =>
+            transform ? `translateX(${transform})` : 'none'};
         right: 0;
+        width: 150px;
     }
 `;

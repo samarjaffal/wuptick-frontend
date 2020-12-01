@@ -78,7 +78,6 @@ export const Anchor = styled(Link)`
         color: ${Colors.primary};
     }
     z-index: 4;
-    margin-left: 60px;
     @media (max-width: 767px) {
         order: 0;
         width: 100%;

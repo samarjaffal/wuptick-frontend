@@ -132,7 +132,7 @@ export const AddProjectModal = ({
                             </FlexSpaceBetween>
                         </ListContainer>
                     </Div>
-                    <Div customProps="display:flex;">
+                    <Div customProps="display:flex; @media (max-width: 425px) {display:none}">
                         <PrivacyRadioButtons
                             getPrivacyCallBack={getPrivacy}
                             defaultValue={
