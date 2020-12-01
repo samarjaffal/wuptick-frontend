@@ -10,6 +10,7 @@ export const gqlMe = gql`
             email
             occupation
             birthday
+            user_attempts
             favorite_projects {
                 _id
                 name

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../../assets/images/logo-responsive.png';
+import { navigate } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
-import { Avatar } from '../../components/Avatar/index';
 import { Input } from '../../components/Forms/Input/index';
+import { useForm } from 'react-hook-form';
+import { useUser } from '../../hooks/useUser';
+import { EditUserMutation } from '../../requests/User/EditUserMutation';
 import { Colors } from '../../assets/css/colors';
 import {
     FlexSpaceBetween,
@@ -13,6 +16,15 @@ import {
 import { Title } from './styles';
 
 export const SetupProfile = () => {
+    const { register, handleSubmit } = useForm();
+    const { currentUser } = useUser();
+
+    useEffect(() => {
+        if (currentUser.user_attempts >= 1) {
+            navigate('/');
+        }
+    }, [currentUser]);
+
     return (
         <LoggedLayout showNavbar={false}>
             <Helmet>
@@ -25,57 +37,83 @@ export const SetupProfile = () => {
 
                 <div>
                     <Title style={{ margin: 0 }}>Setup your profile</Title>
-                    <div className="FormContainer" style={{ marginTop: '3em' }}>
-                        <form action="">
-                            <div style={{ width: '50%', margin: 'auto' }}>
-                                {/*   <div style={{ marginBottom: '0.5em' }}>
-                                    <Avatar hide={false} size={120} />
-                                    <div>
-                                        <a href="#">Add picture</a>
-                                    </div>
-                                </div> */}
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Name"
-                                    width="100%"
-                                    bg={Colors.backgroud}
-                                />
-                                <Input
-                                    type="text"
-                                    name="last_name"
-                                    placeholder="Last Name"
-                                    width="100%"
-                                    bg={Colors.backgroud}
-                                />
-                                <FlexSpaceBetween>
-                                    <Input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        width="48%"
-                                        bg={Colors.backgroud}
-                                    />
-                                    <Input
-                                        type="text"
-                                        name="birthday"
-                                        placeholder="Birthday"
-                                        width="48%"
-                                        bg={Colors.backgroud}
-                                    />
-                                </FlexSpaceBetween>
-                                <div style={{ marginTop: '1em' }}>
-                                    <Button
-                                        width="100%"
-                                        fontWeight="bold"
-                                        fontSize="16px"
-                                    >
-                                        Save and continue 🚀
-                                    </Button>
+                    <EditUserMutation>
+                        {({ doEditUser, loading }) => {
+                            const onFormSubmited = (formData) => {
+                                const input = { ...formData };
+                                doEditUser(input);
+                            };
+
+                            return (
+                                <div
+                                    className="FormContainer"
+                                    style={{ marginTop: '3em' }}
+                                >
+                                    <form onSubmit={(e) => e.preventDefault()}>
+                                        <div
+                                            style={{
+                                                width: '50%',
+                                                margin: 'auto',
+                                            }}
+                                        >
+                                            <Input
+                                                type="text"
+                                                name="name"
+                                                placeholder="Name"
+                                                width="100%"
+                                                refInput={register()}
+                                                bg={Colors.backgroud}
+                                            />
+                                            <Input
+                                                type="text"
+                                                name="last_name"
+                                                placeholder="Last Name"
+                                                width="100%"
+                                                refInput={register()}
+                                                bg={Colors.backgroud}
+                                            />
+                                            <FlexSpaceBetween>
+                                                <Input
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="Email"
+                                                    width="48%"
+                                                    refInput={register()}
+                                                    defaultValue={
+                                                        currentUser.email
+                                                    }
+                                                    bg={Colors.backgroud}
+                                                />
+                                                <Input
+                                                    type="text"
+                                                    name="birthday"
+                                                    placeholder="Birthday (yyyy-mm-dd)"
+                                                    width="48%"
+                                                    bg={Colors.backgroud}
+                                                    refInput={register()}
+                                                />
+                                            </FlexSpaceBetween>
+                                            <div style={{ marginTop: '1em' }}>
+                                                <Button
+                                                    width="100%"
+                                                    fontWeight="bold"
+                                                    fontSize="16px"
+                                                    disabled={loading}
+                                                    onClick={handleSubmit(
+                                                        onFormSubmited
+                                                    )}
+                                                >
+                                                    {loading
+                                                        ? 'Loading...'
+                                                        : ' Save and continue 🚀'}
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            );
+                        }}
+                    </EditUserMutation>
                 </div>
             </div>
         </LoggedLayout>

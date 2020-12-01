@@ -16,6 +16,7 @@ export const gqlLogin = gql`
                 _id
                 token
                 tokenExpiration
+                userAttempts
             }
         }
     }

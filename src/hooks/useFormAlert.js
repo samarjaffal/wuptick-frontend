@@ -17,8 +17,15 @@ export const useFormAlert = (data, type) => {
         } else if (typename !== null && typename !== undefined) {
             setShowAlert(false);
             setMessage('');
-            navigate('/');
             if ('token' in data[type]) activateAuth(data[type].token);
+            if ('userAttempts' in data[type]) {
+                const attempts = idx(data, (d) => d[type].userAttempts);
+                if (attempts < 1) {
+                    navigate('/setup-profile');
+                } else {
+                    navigate('/');
+                }
+            }
         }
     }, [data]);
 

@@ -33,6 +33,8 @@ export const useUser = () => {
             _id: decodedToken._id,
             name: decodedToken.name,
             last_name: decodedToken.last_name,
+            email: decodedToken.email,
+            user_attempts: decodedToken.user_attempts,
         });
     });
 
