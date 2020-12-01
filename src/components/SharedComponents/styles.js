@@ -48,8 +48,8 @@ export const Button = styled.button`
     padding: 10px 30px;
     border-radius: ${borderRadius};
     text-decoration: none;
-    ${info};
-    font-weight: 400;
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '12px')};
+    font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : 400)};
     color: ${({ color }) => (color ? color : Colors.white)};
     width: ${({ width }) => (width ? width : 'auto')};
     margin: ${({ margin }) => (margin ? margin : 'auto')};
