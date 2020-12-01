@@ -64,12 +64,11 @@ export const Navbar = () => {
                 <HamburguerMenuContainer ref={burguerButton}>
                     <HamburguerMenu icon="bars" />
                 </HamburguerMenuContainer>
-                <LogoContainer>
-                    <Anchor to="/">
+                <Anchor to="/">
+                    <LogoContainer>
                         <LogoImg src={Logo} alt="Wuptick Logo" />
-                    </Anchor>
-                </LogoContainer>
-
+                    </LogoContainer>
+                </Anchor>
                 <TeamContainer>
                     {/*  <AnchorTeam to="/">{teamSelected.name}</AnchorTeam> */}
                     {handleTeamInfo()}

@@ -77,7 +77,7 @@ export const Anchor = styled(Link)`
     :hover {
         color: ${Colors.primary};
     }
-    z-index: 4;
+    z-index: 6;
     @media (max-width: 767px) {
         order: 0;
         width: 100%;

@@ -93,8 +93,13 @@ export const Time = styled.span`
     margin-right: 1em;
 `;
 
-export const Title = styled.div`
+export const Title = styled(Link)`
     ${description};
+    text-decoration: none;
+    ${Transition};
+    :hover {
+        color: ${Colors.primary};
+    }
 `;
 
 export const ItemContainer = styled.div`

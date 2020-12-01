@@ -99,8 +99,19 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                         ) : (
                             ''
                         )}
-
-                        <Title>{body.name}</Title>
+                        {type == 'project' ? (
+                            <Title
+                                to={
+                                    generateProjectUrl(
+                                        body.project.projectId
+                                    ) || ''
+                                }
+                            >
+                                {body.name}
+                            </Title>
+                        ) : (
+                            <Title to={''}>{body.name}</Title>
+                        )}
                     </ItemContainer>
 
                     <Text>{body.info ? body.info : ''}</Text>
