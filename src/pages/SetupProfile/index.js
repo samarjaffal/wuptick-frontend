@@ -16,7 +16,7 @@ export const SetupProfile = () => {
     return (
         <LoggedLayout showNavbar={false}>
             <Helmet>
-                <title>Wuptick - Project</title>
+                <title>Setup your profile - Wuptick</title>
             </Helmet>
             <div style={{ textAlign: 'center' }}>
                 <div>
