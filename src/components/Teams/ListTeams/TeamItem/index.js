@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from '@reach/router';
+import { TeamDropDown } from '../../TeamDropDown/index';
 import { useUser } from '../../../../hooks/useUser';
-import { Dropdown } from '../../../Dropdrown/styles';
-import { DropdownMenu } from '../../../DropdownMenu/index';
-import { DropdownItem } from '../../../DropdownItem/index';
 import { DropdownContextProvider } from '../../../../context/DropdownContext';
-import { useDropdown } from '../../../../hooks/useDropdown';
 import { OutsideClick } from '../../../OutsideClick/index';
 import { ListContainer } from '../../../ListContainer/index';
 import { Avatar } from '../../../Avatar/index';
@@ -21,39 +18,6 @@ import {
     TeamContainer,
     OptionsButton,
 } from './styles';
-
-const TeamDropDown = ({ openDrop }) => {
-    const { open, setOpen } = useDropdown();
-
-    useEffect(() => {
-        setOpen(openDrop);
-    }, [openDrop]);
-
-    return (
-        <Dropdown open={open} transform="-91%" width="200px" top="30px">
-            <DropdownMenu menu="main" classMenu="menu-primary">
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="edit" />}
-                    onClicked={() => console.log('clicked 1')}
-                >
-                    Edit
-                </DropdownItem>
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
-                    onClicked={() => console.log('clicked 2')}
-                >
-                    Leave Team
-                </DropdownItem>
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                    onClicked={() => console.log('clicked 3')}
-                >
-                    Delete
-                </DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
-    );
-};
 
 export const TeamItem = ({ team, userId }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -119,10 +83,6 @@ export const TeamItem = ({ team, userId }) => {
             </OutsideClick>
         </DropdownContextProvider>
     );
-};
-
-TeamDropDown.propTypes = {
-    openDrop: PropTypes.bool,
 };
 
 TeamItem.propTypes = {
