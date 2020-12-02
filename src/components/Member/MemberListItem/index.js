@@ -7,12 +7,12 @@ import { MemberEmail, MemberName } from './styles';
 export const MemberListItem = ({ member }) => {
     return (
         <FlexCenter customProps="margin-bottom: 0.5em;">
-            <Avatar size={30} src={member.user.avatar} hide={false} />
+            <Avatar size={30} src={member.avatar} hide={false} />
             <Div customProps="margin-left: 0.5em;">
                 <MemberName>
-                    {member.user.name} {member.user.last_name}
+                    {member.name} {member.last_name}
                 </MemberName>
-                <MemberEmail>{member.user.email}</MemberEmail>
+                <MemberEmail>{member.email}</MemberEmail>
             </Div>
         </FlexCenter>
     );

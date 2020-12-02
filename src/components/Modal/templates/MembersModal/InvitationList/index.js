@@ -27,7 +27,7 @@ export const InvitationList = ({ members }) => {
             {members.map((member, index) => (
                 <li key={index}>
                     <FlexSpaceBetween customProps="position: relative; @media (max-width: 425px) {flex-wrap:wrap}">
-                        <MemberListItem member={member} />
+                        <MemberListItem member={member.user} />
                         <Div customProps=" @media (max-width: 425px) {width:100%;}">
                             <InvitationSelect
                                 color={Colors.yellow}

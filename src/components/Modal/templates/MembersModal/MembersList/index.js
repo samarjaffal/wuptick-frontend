@@ -44,7 +44,7 @@ export const MembersList = ({ members }) => {
             {_members.map((member, index) => (
                 <li key={index}>
                     <FlexSpaceBetween customProps="@media (max-width: 425px) {flex-wrap:wrap}">
-                        <MemberListItem member={member} />
+                        <MemberListItem member={member.user} />
                         <Div customProps="@media (max-width: 425px) {width:100%;}">
                             <UpdateMemberRoleMutation>
                                 {({ doUpdateRole }) => (

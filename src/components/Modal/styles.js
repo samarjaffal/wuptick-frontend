@@ -66,13 +66,15 @@ export const CloseButton = styled.div`
 
 export const Title = styled.h2`
     color: ${Colors.black};
+    margin: 0;
 `;
 
 export const Container = styled.div`
+    max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
     @media (max-width: 425px) {
         max-height: 445px;
-        overflow-y: auto;
-        overflow-x: hidden;
     }
     @media (max-width: 350px) {
         max-height: 400px;

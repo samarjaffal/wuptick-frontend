@@ -18,6 +18,7 @@ export const gqlGetUser = gql`
                     name
                     last_name
                     avatar
+                    email
                 }
                 projects {
                     _id
