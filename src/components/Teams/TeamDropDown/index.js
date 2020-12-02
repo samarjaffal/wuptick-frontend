@@ -6,7 +6,7 @@ import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 
-export const TeamDropDown = ({ teamId }) => {
+export const TeamDropDown = ({ teamId, openMembersModal }) => {
     const { open, position } = useDropdown();
 
     return (
@@ -20,7 +20,7 @@ export const TeamDropDown = ({ teamId }) => {
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="edit" />}
-                    onClicked={() => console.log('clicked 1', teamId)}
+                    onClicked={() => openMembersModal()}
                 >
                     Edit
                 </DropdownItem>
