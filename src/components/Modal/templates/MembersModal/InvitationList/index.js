@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
-import { Avatar } from '../../../../Avatar/index';
+import { MemberListItem } from '../../../../Member/MemberListItem/index';
 import { InvitationSelect } from '../../../../Selects/InvitationSelect/index';
 import { OptionsDropDown as InvitationDropDown } from '../../../../Selects/InvitationSelect/OptionsDropDown/index';
 import { useDropdown } from '../../../../../hooks/useDropdown';
 import { RemoveInvitationMutation } from '../../../../../requests/project/RemoveInvitationMutation';
 import { Colors } from '../../../../../assets/css/colors';
-import {
-    FlexSpaceBetween,
-    FlexCenter,
-    Div,
-    Ul,
-} from '../../../../SharedComponents/styles';
-import { MemberEmail, MemberName } from './styles';
+import { FlexSpaceBetween, Div, Ul } from '../../../../SharedComponents/styles';
 
 export const InvitationList = ({ members }) => {
     const [selectedUser, setSelectedUser] = useState();
@@ -33,14 +27,7 @@ export const InvitationList = ({ members }) => {
             {members.map((member, index) => (
                 <li key={index}>
                     <FlexSpaceBetween customProps="position: relative; @media (max-width: 425px) {flex-wrap:wrap}">
-                        <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar size={30} hide={false} />
-                            <Div customProps="margin-left: 0.5em;">
-                                <MemberName>{member.email}</MemberName>
-                                <MemberEmail>{member.email}</MemberEmail>
-                            </Div>
-                        </FlexCenter>
-
+                        <MemberListItem member={member} />
                         <Div customProps=" @media (max-width: 425px) {width:100%;}">
                             <InvitationSelect
                                 color={Colors.yellow}

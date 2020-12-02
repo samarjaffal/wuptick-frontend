@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
+import { MemberListItem } from '../../../../Member/MemberListItem/index';
 import { OptionsDropDown as RoleDropDown } from '../../../../RolesSelect/OptionsDropDown/index';
-import { Avatar } from '../../../../Avatar/index';
 import { RolesSelect } from '../../../../RolesSelect/index';
 import { useDropdown } from '../../../../../hooks/useDropdown';
 import { useUser } from '../../../../../hooks/useUser';
 import { OutsideClick } from '../../../../OutsideClick/index';
 import { RemoveMemberMutation } from '../../../../../requests/project/RemoveMemberMutation';
 import { UpdateMemberRoleMutation } from '../../../../../requests/project/UpdateMemberRoleMutation';
-import {
-    Div,
-    FlexCenter,
-    FlexSpaceBetween,
-    Ul,
-} from '../../../../SharedComponents/styles';
-import { MemberEmail, MemberName } from './styles';
+import { Div, FlexSpaceBetween, Ul } from '../../../../SharedComponents/styles';
 
 export const MembersList = ({ members }) => {
     const [_members, setMembers] = useState([]);
@@ -50,20 +44,7 @@ export const MembersList = ({ members }) => {
             {_members.map((member, index) => (
                 <li key={index}>
                     <FlexSpaceBetween customProps="@media (max-width: 425px) {flex-wrap:wrap}">
-                        <FlexCenter customProps="margin-bottom: 0.5em;">
-                            <Avatar
-                                size={30}
-                                src={member.user.avatar}
-                                hide={false}
-                            />
-                            <Div customProps="margin-left: 0.5em;">
-                                <MemberName>
-                                    {member.user.name} {member.user.last_name}
-                                </MemberName>
-                                <MemberEmail>{member.user.email}</MemberEmail>
-                            </Div>
-                        </FlexCenter>
-
+                        <MemberListItem member={member} />
                         <Div customProps="@media (max-width: 425px) {width:100%;}">
                             <UpdateMemberRoleMutation>
                                 {({ doUpdateRole }) => (
