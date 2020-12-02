@@ -4,7 +4,7 @@ import { Colors } from '../../assets/css/colors';
 import { TransitionSecondary } from '../../assets/css/shared-styles';
 import { semiBold, borderRadius, description } from '../../assets/css/theme';
 
-export const MenuItem = styled(Link)`
+export const MenuItemLink = styled(Link)`
     /* height: 50px; */
     display: flex;
     align-items: center;
@@ -14,6 +14,19 @@ export const MenuItem = styled(Link)`
     text-decoration: none;
     ${description};
     padding: ${({ icon }) => (icon ? 0 : '0.5em')};
+    :hover {
+        background: ${Colors.hover};
+    }
+`;
+
+export const MenuItem = styled.div`
+    display: flex;
+    align-items: center;
+    border-radius: ${borderRadius};
+    ${TransitionSecondary};
+    ${description};
+    padding: ${({ icon }) => (icon ? 0 : '0.5em')};
+    cursor: pointer;
     :hover {
         background: ${Colors.hover};
     }

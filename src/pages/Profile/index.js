@@ -58,7 +58,9 @@ export const Profile = ({ location, username }) => {
                             <ListProjects teams={user.teams} userId={userId} />{' '}
                         </DropdownContextProvider>
                     ) : (
-                        <ListTeams teams={user.teams} userId={userId} />
+                        <DropdownContextProvider>
+                            <ListTeams teams={user.teams} userId={userId} />
+                        </DropdownContextProvider>
                     );
                 }}
             </GetUserQuery>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, IconButton, IconRight } from './styles';
+import { MenuItem, MenuItemLink, IconButton, IconRight } from './styles';
 import { useDropdown } from '../../hooks/useDropdown';
 import PropTypes from 'prop-types';
 
@@ -27,12 +27,14 @@ export const DropdownItem = ({
         );
     };
 
-    return (
-        <MenuItem
-            to={goToURL || ''}
-            onClick={() => handleClick()}
-            icon={leftIcon}
-        >
+    return goToURL ? (
+        <MenuItemLink to={goToURL || '#'} icon={leftIcon}>
+            {leftIcon && <IconButton>{leftIcon}</IconButton>}
+            {children}
+            {rightIcon && <IconRight>{rightIcon}</IconRight>}
+        </MenuItemLink>
+    ) : (
+        <MenuItem onClick={() => handleClick()} icon={leftIcon}>
             {leftIcon && <IconButton>{leftIcon}</IconButton>}
             {children}
             {rightIcon && <IconRight>{rightIcon}</IconRight>}
