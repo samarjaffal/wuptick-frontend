@@ -5,9 +5,12 @@ import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { useUser } from '../../../hooks/useUser';
+import { RemoveMemberFromTeamMutation } from '../../../requests/Team/RemoveMemberFromTeamMutation';
 
 export const TeamDropDown = ({ teamId, openMembersModal }) => {
     const { open, position } = useDropdown();
+    const { currentUser } = useUser();
 
     return (
         <Dropdown
@@ -24,12 +27,19 @@ export const TeamDropDown = ({ teamId, openMembersModal }) => {
                 >
                     Edit
                 </DropdownItem>
-                <DropdownItem
-                    leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
-                    onClicked={() => console.log('clicked 2')}
-                >
-                    Leave Team
-                </DropdownItem>
+                <RemoveMemberFromTeamMutation>
+                    {({ doRemoveMember }) => (
+                        <DropdownItem
+                            leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
+                            onClicked={() =>
+                                doRemoveMember(teamId, currentUser._id)
+                            }
+                        >
+                            Leave Team
+                        </DropdownItem>
+                    )}
+                </RemoveMemberFromTeamMutation>
+
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
                     onClicked={() => console.log('clicked 3')}

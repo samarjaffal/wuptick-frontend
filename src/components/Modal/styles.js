@@ -70,9 +70,6 @@ export const Title = styled.h2`
 `;
 
 export const Container = styled.div`
-    max-height: 360px;
-    overflow-y: auto;
-    overflow-x: hidden;
     @media (max-width: 425px) {
         max-height: 445px;
     }

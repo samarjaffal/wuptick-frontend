@@ -3,15 +3,27 @@ import PropTypes from 'prop-types';
 import { Modal } from '../../index';
 import { MembersList } from './MembersList';
 import { useUser } from '../../../../hooks/useUser';
+import { RemoveMemberFromTeamMutation } from '../../../../requests/Team/RemoveMemberFromTeamMutation';
 import { Div } from '../../../SharedComponents/styles';
-import { Subtitle, Empty } from './styles';
+import { Subtitle, Empty, MembersContainer } from './styles';
 
 export const TeamMembersModal = ({ team, modalRef }) => {
     const [members, setMembers] = useState(team.members);
 
     const handleMembersList = () => {
         if (members) {
-            return <MembersList members={members} />;
+            return (
+                <RemoveMemberFromTeamMutation modalRef={modalRef}>
+                    {({ doRemoveMember, loading }) => (
+                        <MembersList
+                            members={members}
+                            doRemoveMember={doRemoveMember}
+                            loading={loading}
+                            team={team}
+                        />
+                    )}
+                </RemoveMemberFromTeamMutation>
+            );
         } else {
             return <Empty>You don&apos;t have members in this team yet.</Empty>;
         }
@@ -26,7 +38,7 @@ export const TeamMembersModal = ({ team, modalRef }) => {
     return (
         <Modal ref={modalRef} title={`${team ? `${team.name}` : ''}`}>
             <Subtitle>Current members</Subtitle>
-            <Div>{handleMembersList()}</Div>
+            <MembersContainer>{handleMembersList()}</MembersContainer>
         </Modal>
     );
 };

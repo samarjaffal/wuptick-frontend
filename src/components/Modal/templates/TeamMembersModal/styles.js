@@ -9,3 +9,9 @@ export const Subtitle = styled.h4`
 export const Empty = styled.span`
     ${info}
 `;
+
+export const MembersContainer = styled.div`
+    max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+`;

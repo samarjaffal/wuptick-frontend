@@ -99,9 +99,13 @@ export const GlobalStyle = createGlobalStyle`
   width: 100%;
   background-color: #fff;
   ${description};
-  border-radius: ${borderRadius};
+  border-bottom-left-radius: ${borderRadius};
+  border-bottom-right-radius: ${borderRadius};
   z-index: 2;
   ${ShadowSecondary};
+  max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .react-autosuggest__suggestions-list {
