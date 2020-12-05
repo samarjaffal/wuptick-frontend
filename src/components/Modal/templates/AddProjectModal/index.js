@@ -70,7 +70,7 @@ export const AddProjectModal = ({
                     _id: currentUser._id,
                 },
                 team_owner: {
-                    _id: project._id,
+                    _id: team._id,
                 },
             };
             doFunction(input);

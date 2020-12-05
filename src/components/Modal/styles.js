@@ -28,7 +28,7 @@ export const ModalBox = styled.div`
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-height: 25%;
+    min-height: 15%;
     width: 35%;
     max-width: 60%;
     background-color: ${Colors.whitePrimary};
@@ -70,6 +70,7 @@ export const Title = styled.h2`
 `;
 
 export const Container = styled.div`
+    margin-top: 0.5em;
     @media (max-width: 425px) {
         max-height: 445px;
     }

@@ -8,7 +8,7 @@ import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
 import { RemoveMemberFromTeamMutation } from '../../../requests/Team/RemoveMemberFromTeamMutation';
 
-export const TeamDropDown = ({ teamId, openMembersModal }) => {
+export const TeamDropDown = ({ teamId, openMembersModal, openDeleteModal }) => {
     const { open, position } = useDropdown();
     const { currentUser } = useUser();
 
@@ -27,22 +27,15 @@ export const TeamDropDown = ({ teamId, openMembersModal }) => {
                 >
                     Edit
                 </DropdownItem>
-                <RemoveMemberFromTeamMutation>
-                    {({ doRemoveMember }) => (
-                        <DropdownItem
-                            leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
-                            onClicked={() =>
-                                doRemoveMember(teamId, currentUser._id)
-                            }
-                        >
-                            Leave Team
-                        </DropdownItem>
-                    )}
-                </RemoveMemberFromTeamMutation>
-
+                <DropdownItem
+                    leftIcon={<FontAwesomeIcon icon="sign-out-alt" />}
+                    onClicked={() => openDeleteModal('leave')}
+                >
+                    Leave Team
+                </DropdownItem>
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                    onClicked={() => console.log('clicked 3')}
+                    onClicked={() => openDeleteModal('delete')}
                 >
                     Delete
                 </DropdownItem>
