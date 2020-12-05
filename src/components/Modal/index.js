@@ -12,7 +12,7 @@ import {
     Container,
 } from './styles';
 
-const Modal = forwardRef(({ children, title }, ref) => {
+const Modal = forwardRef(({ children, title, onCloseFunc = null }, ref) => {
     const [display, setDisplay] = useState(false);
 
     useImperativeHandle(ref, () => {
@@ -28,6 +28,9 @@ const Modal = forwardRef(({ children, title }, ref) => {
 
     const close = () => {
         setDisplay(false);
+        if (onCloseFunc) {
+            onCloseFunc();
+        }
     };
 
     {
@@ -59,4 +62,5 @@ export { Modal };
 Modal.propTypes = {
     children: PropTypes.any,
     title: PropTypes.string,
+    onCloseFunc: PropTypes.func,
 };

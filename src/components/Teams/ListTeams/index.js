@@ -9,6 +9,7 @@ import { useUser } from '../../../hooks/useUser';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { DeleteTeamMutation } from '../../../requests/Team/DeleteTeamMutation';
 import { RemoveMemberFromTeamMutation } from '../../../requests/Team/RemoveMemberFromTeamMutation';
+import { EditTeamMutation } from '../../../requests/Team/EditTeamMutation';
 import { TeamMembersModal } from '../../Modal/templates/TeamMembersModal/index';
 import { DeleteModal } from '../../Modal/templates/DeleteModal/index';
 
@@ -69,7 +70,16 @@ export const ListTeams = ({ teams, userId }) => {
                 )}
 
             {currentUser._id == userId && (
-                <TeamMembersModal modalRef={membersModalRef} team={team} />
+                <EditTeamMutation>
+                    {({ doEditTeam, loading }) => (
+                        <TeamMembersModal
+                            modalRef={membersModalRef}
+                            team={team}
+                            doFunc={doEditTeam}
+                            loading={loading}
+                        />
+                    )}
+                </EditTeamMutation>
             )}
 
             {currentUser._id == userId && (

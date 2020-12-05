@@ -15,3 +15,10 @@ export const MembersContainer = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
 `;
+
+export const ButtonContainer = styled.div`
+    margin-top: 0.5em;
+    @media (max-width: 768px) {
+        text-align: center;
+    }
+`;

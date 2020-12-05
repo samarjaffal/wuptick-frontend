@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 import { Modal } from '../../index';
 import { MembersList } from './MembersList';
+import { Input } from '../../../Forms/Input/index';
 import { useUser } from '../../../../hooks/useUser';
 import { RemoveMemberFromTeamMutation } from '../../../../requests/Team/RemoveMemberFromTeamMutation';
-import { Div } from '../../../SharedComponents/styles';
-import { Subtitle, Empty, MembersContainer } from './styles';
+import { Button, ErrorMessage } from '../../../SharedComponents/styles';
+import { Colors } from '../../../../assets/css/colors';
+import { Subtitle, Empty, MembersContainer, ButtonContainer } from './styles';
 
-export const TeamMembersModal = ({ team, modalRef }) => {
+export const TeamMembersModal = ({
+    team,
+    modalRef,
+    doFunc,
+    loading,
+    action = 'update',
+}) => {
+    const { register, handleSubmit, errors } = useForm();
     const [members, setMembers] = useState(team.members);
 
     const handleMembersList = () => {
@@ -28,6 +38,18 @@ export const TeamMembersModal = ({ team, modalRef }) => {
             return <Empty>You don&apos;t have members in this team yet.</Empty>;
         }
     };
+    const onFormSubmited = (formData) => {
+        let input;
+        if (action == 'update') {
+            input = {
+                name: formData.name,
+            };
+            doFunc(team._id, input);
+            console.log('update');
+        } else {
+            console.log('save');
+        }
+    };
 
     useEffect(() => {
         if (Object.keys(team).length > 0) {
@@ -36,7 +58,30 @@ export const TeamMembersModal = ({ team, modalRef }) => {
     }, [team]);
 
     return (
-        <Modal ref={modalRef} title={`${team ? `${team.name}` : ''}`}>
+        <Modal
+            ref={modalRef}
+            title={`Edit Team`}
+            onCloseFunc={handleSubmit(onFormSubmited)}
+        >
+            <Subtitle>Update Team info</Subtitle>
+            <div>
+                <form onSubmit={(e) => e.preventDefault()}>
+                    <Input
+                        type="text"
+                        name="name"
+                        placeholder="Team Name"
+                        width="100%"
+                        refInput={register({
+                            required: 'You must specify a name',
+                        })}
+                        bg={Colors.white}
+                        defaultValue={action == 'update' ? team.name : ''}
+                    />
+                    {errors.name && (
+                        <ErrorMessage>{errors.name.message}</ErrorMessage>
+                    )}
+                </form>
+            </div>
             <Subtitle>Current members</Subtitle>
             <MembersContainer>{handleMembersList()}</MembersContainer>
         </Modal>
