@@ -20,7 +20,7 @@ export const useFormAlert = (data, type) => {
             if ('token' in data[type]) activateAuth(data[type].token);
             if ('userAttempts' in data[type]) {
                 const attempts = idx(data, (d) => d[type].userAttempts);
-                if (attempts < 1) {
+                if (attempts <= 1) {
                     navigate('/setup-profile');
                 } else {
                     navigate('/');

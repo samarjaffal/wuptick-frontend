@@ -20,7 +20,7 @@ export const SetupProfile = () => {
     const { currentUser } = useUser();
 
     useEffect(() => {
-        if (currentUser.user_attempts >= 1) {
+        if (currentUser.user_attempts > 1) {
             navigate('/');
         }
     }, [currentUser]);

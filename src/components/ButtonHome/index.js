@@ -15,19 +15,19 @@ export const ButtonHome = ({
         onClicked();
     };
 
-    return (
-        <Anchor
-            to={url}
-            margin={margin}
-            color={color}
-            onClick={() => handleClick()}
-        >
+    return url ? (
+        <Anchor to={url} margin={margin} color={color}>
             <Button>
                 <Icon icon={icon} color={color} style={{ margin: 'auto' }} />{' '}
                 {''}
                 {children}
             </Button>
         </Anchor>
+    ) : (
+        <Button onClick={() => handleClick()}>
+            <Icon icon={icon} color={color} style={{ margin: 'auto' }} /> {''}
+            {children}
+        </Button>
     );
 };
 

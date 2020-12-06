@@ -16,6 +16,7 @@ export const Button = styled.small`
     font-weight: ${bold};
     padding: 4px ${borderRadius};
     border-radius: ${borderRadius};
+    cursor: pointer;
     ${TransitionSecondary}
     :hover {
         background: ${Colors.hover};

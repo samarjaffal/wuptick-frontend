@@ -24,24 +24,32 @@ export const InvitationList = ({ members }) => {
 
     return (
         <Ul>
-            {members.map((member, index) => (
-                <li key={index}>
-                    <FlexSpaceBetween customProps="position: relative; @media (max-width: 425px) {flex-wrap:wrap}">
-                        <MemberListItem member={member.user} />
-                        <Div customProps=" @media (max-width: 425px) {width:100%;}">
-                            <InvitationSelect
-                                color={Colors.yellow}
-                                ref={currentElemRef}
-                                setRef={setRef}
-                                setPositionCallBack={setPositionDropDown}
-                                openDropCallBack={openDropCallBack}
-                                setUserCallBack={setUserCallBack}
-                                userId={member._id}
-                            />
-                        </Div>
-                    </FlexSpaceBetween>
-                </li>
-            ))}
+            {members.map((member, index) => {
+                let _member = {
+                    name: member.email,
+                    last_name: null,
+                    avatar: null,
+                    email: member.email,
+                };
+                return (
+                    <li key={index}>
+                        <FlexSpaceBetween customProps="position: relative; @media (max-width: 425px) {flex-wrap:wrap}">
+                            <MemberListItem member={_member} />
+                            <Div customProps=" @media (max-width: 425px) {width:100%;}">
+                                <InvitationSelect
+                                    color={Colors.yellow}
+                                    ref={currentElemRef}
+                                    setRef={setRef}
+                                    setPositionCallBack={setPositionDropDown}
+                                    openDropCallBack={openDropCallBack}
+                                    setUserCallBack={setUserCallBack}
+                                    userId={member._id}
+                                />
+                            </Div>
+                        </FlexSpaceBetween>
+                    </li>
+                );
+            })}
             {ReactDom.createPortal(
                 <RemoveInvitationMutation>
                     {({ doRemoveInvitation }) => (

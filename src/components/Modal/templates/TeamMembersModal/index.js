@@ -4,11 +4,10 @@ import { useForm } from 'react-hook-form';
 import { Modal } from '../../index';
 import { MembersList } from './MembersList';
 import { Input } from '../../../Forms/Input/index';
-import { useUser } from '../../../../hooks/useUser';
 import { RemoveMemberFromTeamMutation } from '../../../../requests/Team/RemoveMemberFromTeamMutation';
-import { Button, ErrorMessage } from '../../../SharedComponents/styles';
+import { ErrorMessage } from '../../../SharedComponents/styles';
 import { Colors } from '../../../../assets/css/colors';
-import { Subtitle, Empty, MembersContainer, ButtonContainer } from './styles';
+import { Subtitle, Empty, MembersContainer } from './styles';
 
 export const TeamMembersModal = ({
     team,
@@ -46,8 +45,6 @@ export const TeamMembersModal = ({
             };
             doFunc(team._id, input);
             console.log('update');
-        } else {
-            console.log('save');
         }
     };
 
