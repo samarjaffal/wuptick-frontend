@@ -5,13 +5,17 @@ import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from './ModuleTabs';
-import { Div, FlexCenter } from '../../components/SharedComponents/styles';
+import { Div, FlexCenter, Ul } from '../../components/SharedComponents/styles';
 import {
     TopContainer,
     RightItemsContainer,
     Title,
     Filter,
     InputSearch,
+    TaskListTitle,
+    TaskList,
+    Task,
+    TaskText,
 } from './styles';
 export const Module = ({ id, location }) => {
     const path = useLocation();
@@ -52,6 +56,35 @@ export const Module = ({ id, location }) => {
                             currentTab={currentTab}
                             currentURL={currentURL}
                         />
+                    </div>
+
+                    <div className="TasksListContainer">
+                        <div className="TaskListContainer">
+                            <TaskList>
+                                <div className="TaskListTitleContainer">
+                                    <TaskListTitle>Frontend 🏆</TaskListTitle>
+                                </div>
+                                <div className="TaskListItems">
+                                    <Ul>
+                                        {Array(4)
+                                            .fill()
+                                            .map((item, index) => (
+                                                <li key={index}>
+                                                    <Task>
+                                                        <TaskText>
+                                                            Lorem Ipsum is
+                                                            simply. Lorem Ipsum
+                                                            is simply Lorem
+                                                            Ipsum is simple is
+                                                            ter...
+                                                        </TaskText>
+                                                    </Task>
+                                                </li>
+                                            ))}
+                                    </Ul>
+                                </div>
+                            </TaskList>
+                        </div>
                     </div>
                 </div>
             </div>
