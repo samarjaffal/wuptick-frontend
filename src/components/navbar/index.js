@@ -91,7 +91,7 @@ export const Navbar = () => {
                         <NavItem
                             title="Tasks"
                             option="tasks"
-                            url="/"
+                            url="/module/123456"
                             icon="tasks"
                         />
                         {isActive && match && (
