@@ -1,4 +1,5 @@
-const URL = 'http://localhost:27017/refresh_token';
+import { config } from '../../config/index';
+const URL = `${config.backUrl}refresh_token`;
 import { useState, useEffect } from 'react';
 import { useUser } from '../hooks/useUser';
 
