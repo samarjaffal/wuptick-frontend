@@ -1,6 +1,19 @@
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 var path = require('path');
+
+// call dotenv and it will return an Object with a parsed key
+const env = dotenv.config().parsed;
+
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
+
 var stylePathResolves =
     'includePaths[]=' +
     path.resolve('./') +
@@ -19,6 +32,7 @@ module.exports = {
             template: 'src/index.html',
             favicon: 'src/assets/images/favicon.ico',
         }),
+        new webpack.DefinePlugin(envKeys),
     ],
 
     devServer: {
@@ -52,5 +66,8 @@ module.exports = {
                 loader: 'url-loader?limit=100000',
             },
         ],
+    },
+    node: {
+        fs: 'empty',
     },
 };

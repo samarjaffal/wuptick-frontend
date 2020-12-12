@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { config } from '../config/index';
 /* import ApolloClient from 'apollo-boost'; */
 import { ApolloProvider } from 'react-apollo';
 import { App } from './App';
@@ -73,7 +74,7 @@ const client = new ApolloClient({
                 }
             },
             fetchAccessToken: () => {
-                return fetch('http://localhost:27017/refresh_token', {
+                return fetch(`${config.backUrl}refresh_token`, {
                     method: 'POST',
                     credentials: 'include',
                 });
@@ -104,7 +105,7 @@ const client = new ApolloClient({
         }),
         requestLink,
         new HttpLink({
-            uri: 'http://localhost:27017/graphql',
+            uri: `${config.backUrl}graphql`,
             credentials: 'include',
         }),
     ]),
