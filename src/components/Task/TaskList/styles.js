@@ -18,7 +18,6 @@ export const TaskListHeader = styled.div`
 export const TaskListTitle = styled.h3`
     ${subtitle}
     font-weight: ${bold};
-    margin-left: 0.5em;
 `;
 
 export const TaskListColumns = styled.div`

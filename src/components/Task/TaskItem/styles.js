@@ -7,7 +7,7 @@ export const Task = styled.div`
     border-left: none;
     margin-bottom: -1px;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     height: 40px;
 `;
@@ -22,6 +22,7 @@ export const TaskText = styled.p`
 
 export const TaskOptions = styled.div`
     display: flex;
+    margin-left: auto;
 `;
 
 export const OptionContainer = styled.div`
