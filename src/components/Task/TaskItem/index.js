@@ -1,83 +1,57 @@
 import React from 'react';
-import { ListContainer } from '../../ListContainer/index';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '../../Avatar/index';
-import { AddNew } from '../../AddNew/index';
+import { Colors } from '../../../assets/css/colors';
 import {
-    Container,
-    Wrapper,
-    Check,
-    Title,
-    Plus,
-    Star,
-    Element,
-    Deadline,
+    Task as TaskStyled,
+    TaskText,
+    TaskOptions,
+    OptionContainer,
+    AsigneeOption,
+    SetDate,
+    CenterContent,
 } from './styles';
 
 export const TaskItem = () => {
     return (
-        <>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">Lorem impsum dolor</Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
-
-                <Element>
-                    <Avatar size={22} hide={false} />
-                </Element>
-                <Element>
-                    <Star icon="star" />
-                </Element>
-                <Element>
-                    <Deadline>Oct. 6</Deadline>
-                </Element>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">
-                                Lorem impsum dolor. amet consectetur adipisicing
-                                elit.{' '}
-                            </Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
-                <Element>
-                    <Avatar size={22} hide={false} />
-                </Element>
-                <Element>
-                    <Star icon="star" />
-                </Element>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">
-                                Lorem ipsum dolor sit, amet consectetur
-                                adipisicing elit. Reiciendis suscipit...
-                            </Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <AddNew text="Add new task" />
-        </>
+        <div className="TaskContainer">
+            <TaskStyled>
+                <TaskText>
+                    Lorem Ipsum is simply. Lorem Ipsum is simply Lorem Ipsum is
+                    simple is ter...
+                </TaskText>
+                <TaskOptions>
+                    <OptionContainer>
+                        <AsigneeOption>
+                            <Avatar
+                                hide={false}
+                                size={25}
+                                src={`https://uifaces.co/our-content/donated/bUkmHPKs.jpg`}
+                            />
+                        </AsigneeOption>
+                    </OptionContainer>
+                    <OptionContainer>
+                        <CenterContent>
+                            <div className="DeadLineOption">
+                                <SetDate>Set Date</SetDate>
+                            </div>
+                        </CenterContent>
+                    </OptionContainer>
+                    <OptionContainer>
+                        <CenterContent>
+                            <div className="FavoriteOption">
+                                <FontAwesomeIcon
+                                    icon="star"
+                                    color={`${Colors.softGray}`}
+                                />
+                            </div>
+                        </CenterContent>
+                    </OptionContainer>
+                </TaskOptions>
+            </TaskStyled>
+        </div>
     );
 };
+
+TaskItem.propTypes = {};

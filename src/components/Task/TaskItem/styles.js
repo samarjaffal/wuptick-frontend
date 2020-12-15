@@ -1,79 +1,54 @@
 import styled from 'styled-components';
-import { Link } from '@reach/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Transition } from '../../../assets/css/shared-styles';
+import { description, info } from '../../../assets/css/theme';
 import { Colors } from '../../../assets/css/colors';
-import {
-    description,
-    bold,
-    borderRadius,
-    info,
-} from '../../../assets/css/theme';
 
-export const Container = styled.div`
+export const Task = styled.div`
+    border: 1px solid #dddee5;
+    border-left: none;
+    margin-bottom: -1px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
 `;
 
-export const Title = styled(Link)`
-    text-decoration: none;
-    font-weight: ${bold};
+export const TaskText = styled.p`
+    color: ${Colors.black};
     ${description};
-    color: ${Colors.gray};
+    font-weight: 400;
+    margin: 0;
+    margin-left: 10px;
 `;
 
-export const Wrapper = styled.div`
+export const TaskOptions = styled.div`
+    display: flex;
+`;
+
+export const OptionContainer = styled.div`
+    padding: 0 1em;
+    border-left: 1px solid #dddee5;
+    border-right: 1px solid #dddee5;
+    margin-right: -1px;
     display: flex;
     align-items: center;
+    height: 40px;
+    width: 65px;
 `;
-
-export const Check = styled.div`
-    width: 18px;
-    height: 18px;
-    background-color: #d6d7e0;
-    border-radius: 4px;
-    margin-right: 0.5em;
-`;
-
-export const Star = styled(FontAwesomeIcon)`
-    color: ${Colors.yellow};
-`;
-
-export const Element = styled.div`
-    margin-bottom: 1em;
-    border: ${({ dotted }) =>
-        dotted !== true ? `1px solid ${Colors.hover}` : 'none'};
+export const AsigneeOption = styled.div`
     display: flex;
-    align-items: center;
-    padding: 0.5em;
-    margin-left: 0.5em;
-    border-radius: ${borderRadius};
-    background-image: ${({ dotted }) =>
-        dotted !== true
-            ? 'none'
-            : `url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23EDF0FFFF' stroke-width='1.8' stroke-dasharray='5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")`};
-
-    opacity: ${({ displayOnHover }) => (displayOnHover == true ? 0 : 1)};
-    ${Container}:hover & {
-        opacity: 1;
-    }
-
-    :hover {
-        ${Transition};
-        background-color: ${Colors.hover};
-    }
+    justify-content: center;
+    width: 100%;
 `;
 
-export const Plus = styled(FontAwesomeIcon)`
-    color: ${Colors.hover};
-    ${Element}:hover & {
-        color: ${Colors.gray};
-    }
-`;
-
-export const Deadline = styled.span`
-    background-color: ${Colors.red};
-    padding: 0 0.5em;
+export const SetDate = styled.span`
+    background-color: ${Colors.white};
+    border-radius: 20px;
     ${info};
-    border-radius: ${borderRadius};
-    color: ${Colors.white};
+    padding: 2px 8px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23D6D7E0FF' stroke-width='1.5' stroke-dasharray='5' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+`;
+
+export const CenterContent = styled.div`
+    width: 100%;
+    text-align: center;
 `;

@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-import {
-    title,
-    subtitle,
-    description,
-    bold,
-    semiBold,
-    borderRadius,
-} from '../../assets/css/theme';
+import { title, description, bold, borderRadius } from '../../assets/css/theme';
 import { Colors } from '../../assets/css/colors';
 
 export const TopContainer = styled.div`
@@ -28,11 +21,6 @@ export const Filter = styled.span`
     ${description};
     font-weight: ${bold};
     margin-right: 20px;
-`;
-
-export const TaskListTitle = styled.h3`
-    ${subtitle}
-    font-weight: ${bold};
 `;
 
 export const InputSearch = styled.input`
@@ -58,23 +46,4 @@ export const InputSearch = styled.input`
         font-weight: ${bold};
         color: ${Colors.gray};
     }
-`;
-
-export const TaskList = styled.div`
-    margin-top: 2em;
-`;
-
-export const Task = styled.div`
-    border: 1px solid #dddee5;
-    padding: 10px;
-    border-left: none;
-    margin-bottom: -1px;
-`;
-
-export const TaskText = styled.p`
-    color: ${Colors.black};
-    ${description};
-    font-weight: 400;
-    margin: 0;
-    margin-left: 10px;
 `;
