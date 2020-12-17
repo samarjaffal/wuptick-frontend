@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useInputValue } from '../../hooks/useInputValue';
 import { Colors } from '../../assets/css/colors';
 import { Container, Text, Icon, Input } from './styles';
-export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
+export const AddNew = ({
+    text,
+    icon = true,
+    doFunction = null,
+    setValue,
+    ...rest
+}) => {
     const [isEditing, setEditing] = useState(false);
     const [isFocused, SetFocus] = useState(false);
-    const inputEl = useInputValue('');
     const inputRef = useRef(null);
 
     const toggleEditing = () => {
@@ -46,7 +52,11 @@ export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
     }, [isEditing]);
 
     return (
-        <Container onClick={() => toggleEditing()} isEditing={isEditing}>
+        <Container
+            onClick={() => toggleEditing()}
+            isEditing={isEditing}
+            {...rest}
+        >
             {!isEditing ? (
                 <div>
                     {icon && (
@@ -63,4 +73,12 @@ export const AddNew = ({ text, icon = true, doFunction = null, setValue }) => {
             )}
         </Container>
     );
+};
+
+AddNew.propTypes = {
+    text: PropTypes.string,
+    icon: PropTypes.bool,
+    doFunction: PropTypes.func,
+    setValue: PropTypes.func,
+    rest: PropTypes.object,
 };

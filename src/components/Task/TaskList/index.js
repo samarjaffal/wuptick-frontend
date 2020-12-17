@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TaskListItems } from '../TaskListItems';
+import { AddNew } from '../../AddNew/index';
 import {
     TaskList as TaskListStyled,
     TaskListHeader,
@@ -28,6 +29,12 @@ export const TaskList = () => {
                 </TaskListColumns>
             </TaskListHeader>
             <TaskListItems />
+            <AddNew
+                text="Add Task"
+                icon={true}
+                border={false}
+                bgColor="transparent"
+            />
         </TaskListStyled>
     );
 };
