@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { subtitle, bold, description } from '../../../assets/css/theme';
 
 export const TaskList = styled.div`
-    margin-top: 2em;
+    /*  margin-top: 2em; */
 `;
 
 export const TaskListHeader = styled.div`
