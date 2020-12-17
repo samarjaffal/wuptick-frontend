@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
-import { ModuleTabs } from './ModuleTabs';
+import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { TaskLists } from '../../components/Task/TaskLists/index';
+import { AddNew } from '../../components/AddNew/index';
+import { Sidebar } from '../../components/Sidebar/index';
+import { Image } from '../../components/Image/index';
+import { Colors } from '../../assets/css/colors';
 import {
+    Container,
     TopContainer,
     RightItemsContainer,
     Title,
     Filter,
     InputSearch,
+    ModuleContainer,
+    SidebarContainer,
 } from './styles';
 export const Module = ({ id, location }) => {
     const path = useLocation();
@@ -24,15 +32,41 @@ export const Module = ({ id, location }) => {
     }, [tab, id]);
 
     return (
-        <LoggedLayout>
+        <LoggedLayout styles={{ marginLeft: '20px' }}>
             <Helmet>
                 <title>Wuptick - Module</title>
             </Helmet>
 
-            <div className="Container">
-                <div className="Sidebar"></div>
+            <Container>
+                <SidebarContainer>
+                    <Sidebar>
+                        <div className="ProjectContainer">
+                            <div className="Project">
+                                <div
+                                    className="ProjectName"
+                                    style={{
+                                        display: 'flex',
+                                    }}
+                                >
+                                    <Image size={30} />
+                                    <div style={{ marginLeft: '0.5em' }}>
+                                        <span style={{ margin: '0 0.5em' }}>
+                                            Wuptick
+                                        </span>
+                                        <span className="FavoriteOption">
+                                            <FontAwesomeIcon
+                                                icon="star"
+                                                color={`${Colors.softGray}`}
+                                            />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Sidebar>
+                </SidebarContainer>
 
-                <div className="ModuleContainer">
+                <ModuleContainer>
                     <TopContainer>
                         <div className="TitleContainer">
                             <Title>#Frontend Module</Title>
@@ -48,7 +82,7 @@ export const Module = ({ id, location }) => {
                         </RightItemsContainer>
                     </TopContainer>
 
-                    <div className="SideBarContainer">
+                    <div className="TabsContainer">
                         <ModuleTabs
                             currentTab={currentTab}
                             currentURL={currentURL}
@@ -57,9 +91,10 @@ export const Module = ({ id, location }) => {
 
                     <div className="TasksLists">
                         <TaskLists />
+                        <AddNew text="Add List" icon={true} border={true} />
                     </div>
-                </div>
-            </div>
+                </ModuleContainer>
+            </Container>
         </LoggedLayout>
     );
 };

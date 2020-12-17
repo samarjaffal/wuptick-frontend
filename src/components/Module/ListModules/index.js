@@ -151,6 +151,9 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                                         setValue={
                                                                             SetModuleName
                                                                         }
+                                                                        border={
+                                                                            true
+                                                                        }
                                                                     />
                                                                 );
                                                             }}

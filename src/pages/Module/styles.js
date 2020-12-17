@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { title, description, bold, borderRadius } from '../../assets/css/theme';
 import { Colors } from '../../assets/css/colors';
 
+export const Container = styled.div`
+    display: flex;
+    justify-content: space-around;
+`;
+
 export const TopContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -46,4 +51,13 @@ export const InputSearch = styled.input`
         font-weight: ${bold};
         color: ${Colors.gray};
     }
+`;
+
+export const SidebarContainer = styled.div`
+    width: 25%;
+`;
+
+export const ModuleContainer = styled.div`
+    padding-bottom: 15px;
+    width: 85%;
 `;
