@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
@@ -9,8 +8,7 @@ import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { TaskLists } from '../../components/Task/TaskLists/index';
 import { AddNew } from '../../components/AddNew/index';
 import { Sidebar } from '../../components/Sidebar/index';
-import { Image } from '../../components/Image/index';
-import { Colors } from '../../assets/css/colors';
+import { ModuleSidebar } from './ModuleSidebar';
 import {
     Container,
     TopContainer,
@@ -21,6 +19,7 @@ import {
     ModuleContainer,
     SidebarContainer,
 } from './styles';
+
 export const Module = ({ id, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
@@ -40,29 +39,7 @@ export const Module = ({ id, location }) => {
             <Container>
                 <SidebarContainer>
                     <Sidebar>
-                        <div className="ProjectContainer">
-                            <div className="Project">
-                                <div
-                                    className="ProjectName"
-                                    style={{
-                                        display: 'flex',
-                                    }}
-                                >
-                                    <Image size={30} />
-                                    <div style={{ marginLeft: '0.5em' }}>
-                                        <span style={{ margin: '0 0.5em' }}>
-                                            Wuptick
-                                        </span>
-                                        <span className="FavoriteOption">
-                                            <FontAwesomeIcon
-                                                icon="star"
-                                                color={`${Colors.softGray}`}
-                                            />
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ModuleSidebar />
                     </Sidebar>
                 </SidebarContainer>
 

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { title, description, bold, borderRadius } from '../../assets/css/theme';
+import {
+    title,
+    subtitle,
+    description,
+    bold,
+    borderRadius,
+    regular,
+} from '../../assets/css/theme';
 import { Colors } from '../../assets/css/colors';
 
 export const Container = styled.div`
