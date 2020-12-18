@@ -18,11 +18,24 @@ export const TopContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 425px) {
+        flex-wrap: wrap;
+    }
 `;
 
 export const RightItemsContainer = styled.div`
     display: flex;
     align-items: center;
+    @media (max-width: 425px) {
+        width: 100%;
+    }
+`;
+
+export const TitleContainer = styled.div`
+    @media (max-width: 425px) {
+        width: 100%;
+        text-align: center;
+    }
 `;
 
 export const Title = styled.h1`
@@ -58,13 +71,29 @@ export const InputSearch = styled.input`
         font-weight: ${bold};
         color: ${Colors.gray};
     }
+    @media (max-width: 425px) {
+        width: 100%;
+    }
 `;
 
 export const SidebarContainer = styled.div`
     width: 25%;
+    @media (max-width: 1024px) {
+        width: 30%;
+    }
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export const ModuleContainer = styled.div`
     padding-bottom: 15px;
     width: 85%;
+    @media (max-width: 1024px) {
+        width: 70%;
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
+    }
 `;

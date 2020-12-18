@@ -18,6 +18,7 @@ import {
     InputSearch,
     ModuleContainer,
     SidebarContainer,
+    TitleContainer,
 } from './styles';
 
 export const Module = ({ id, location }) => {
@@ -45,17 +46,15 @@ export const Module = ({ id, location }) => {
 
                 <ModuleContainer>
                     <TopContainer>
-                        <div className="TitleContainer">
+                        <TitleContainer>
                             <Title>#Frontend Module</Title>
-                        </div>
+                        </TitleContainer>
 
                         <RightItemsContainer>
                             <div>
                                 <Filter>Filter</Filter>
                             </div>
-                            <div>
-                                <InputSearch type="text" placeholder="Search" />
-                            </div>
+                            <InputSearch type="text" placeholder="Search" />
                         </RightItemsContainer>
                     </TopContainer>
 

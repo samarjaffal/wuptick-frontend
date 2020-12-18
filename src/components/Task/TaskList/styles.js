@@ -22,6 +22,9 @@ export const TaskListTitle = styled.h3`
 
 export const TaskListColumns = styled.div`
     display: flex;
+    @media (max-width: 425px) {
+        display: none;
+    }
 `;
 
 export const ColumnHeader = styled.div`

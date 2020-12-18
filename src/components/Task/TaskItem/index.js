@@ -13,19 +13,20 @@ import {
     AsigneeOption,
     SetDate,
     CenterContent,
+    TextContainer,
 } from './styles';
 
 export const TaskItem = () => {
     return (
         <div className="TaskContainer">
             <TaskStyled>
-                <Div customProps="margin-left:30px; width:70%; display:flex;">
+                <TextContainer>
                     <TaskCheck />
                     <TaskText>
                         Lorem Ipsum is simply. Lorem Ipsum is simply Lorem Ipsum
                         is simple is ter...
                     </TaskText>
-                </Div>
+                </TextContainer>
 
                 <TaskOptions>
                     <OptionContainer>

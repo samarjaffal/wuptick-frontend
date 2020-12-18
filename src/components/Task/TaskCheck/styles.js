@@ -6,4 +6,7 @@ export const TaskCheck = styled.div`
     height: 20px;
     background: ${Colors.softGray};
     border-radius: 8px;
+    left: -15px;
+    bottom: 2px;
+    position: absolute;
 `;
