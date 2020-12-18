@@ -1,12 +1,32 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../../assets/css/colors';
 
 export const TaskCheck = styled.div`
-    width: 20px;
-    height: 20px;
-    background: ${Colors.softGray};
-    border-radius: 8px;
-    left: -15px;
-    bottom: 2px;
-    position: absolute;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+`;
+
+export const Square = styled(FontAwesomeIcon)`
+    color: ${Colors.gray};
+    ${TaskCheck}:hover & {
+        display: none;
+    }
+`;
+
+export const SquareHover = styled(FontAwesomeIcon)`
+    color: ${Colors.gray};
+    background-color: ${Colors.hover};
+    display: none;
+
+    ${TaskCheck}:hover & {
+        display: block;
+    }
+`;
+
+export const SquareChecked = styled(FontAwesomeIcon)`
+    color: ${Colors.green};
+    animation-name: beat;
+    animation-duration: 1000ms;
 `;

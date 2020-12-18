@@ -132,4 +132,27 @@ export const GlobalStyle = createGlobalStyle`
       transform:rotate(360deg) scale( 1 );
     } 
 }
+
+@keyframes beat {
+    0%
+  {
+    transform: scale( .75 );
+    opacity: 0.25;
+  }
+  20%
+  {
+    transform: scale( 1 );
+    opacity: 0.50;
+  }
+  40%
+  {
+    transform: scale( .75 );
+    opacity: 0.75;
+  }
+  60%
+  {
+    transform: scale( 1 );
+    opacity: 1;
+  }
+}
 `;
