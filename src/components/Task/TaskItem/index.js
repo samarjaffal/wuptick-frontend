@@ -5,6 +5,7 @@ import { Avatar } from '../../Avatar/index';
 import { TaskCheck } from '../TaskCheck/index';
 import { Colors } from '../../../assets/css/colors';
 import { Div } from '../../SharedComponents/styles';
+import { FavoriteButton } from '../../FavoriteButton/index';
 import {
     Task as TaskStyled,
     TaskText,
@@ -47,12 +48,7 @@ export const TaskItem = () => {
                     </OptionContainer>
                     <OptionContainer>
                         <CenterContent>
-                            <div className="FavoriteOption">
-                                <FontAwesomeIcon
-                                    icon="star"
-                                    color={`${Colors.softGray}`}
-                                />
-                            </div>
+                            <FavoriteButton />
                         </CenterContent>
                     </OptionContainer>
                 </TaskOptions>
