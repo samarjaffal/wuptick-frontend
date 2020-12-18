@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Colors } from '../../../assets/css/colors';
 import {
     subtitle,
     bold,
@@ -11,16 +12,19 @@ export const ProjectTitle = styled.span`
     font-size: 18px;
     font-weight: ${bold};
     margin: 0 0.5em;
+    color: ${Colors.white};
 `;
 
 export const TitleSection = styled.div`
     ${subtitle};
     font-weight: ${bold};
+    color: ${Colors.white};
 `;
 
 export const ModuleTitle = styled.div`
     ${description};
     font-weight: ${regular};
+    color: ${Colors.white};
 `;
 
 export const ModulesList = styled.ul`

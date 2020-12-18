@@ -32,7 +32,7 @@ export const Module = ({ id, location }) => {
     }, [tab, id]);
 
     return (
-        <LoggedLayout styles={{ marginLeft: '20px' }}>
+        <LoggedLayout styles={{ marginLeft: '0px' }}>
             <Helmet>
                 <title>Wuptick - Module</title>
             </Helmet>
