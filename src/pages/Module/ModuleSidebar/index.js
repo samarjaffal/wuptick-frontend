@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Image } from '../../../components/Image/index';
 import { MembersList } from '../../../components/MembersList/index';
-import { Colors } from '../../../assets/css/colors';
+import { FavoriteButton } from '../../../components/FavoriteButton/index';
 import { ModuleTitle, ModulesList, ProjectTitle, TitleSection } from './styles';
 
 const members = [
@@ -46,12 +45,7 @@ export const ModuleSidebar = () => {
                     <Image size={30} />
                     <div style={{ marginLeft: '0.5em' }}>
                         <ProjectTitle>Wuptick</ProjectTitle>
-                        <span className="FavoriteOption">
-                            <FontAwesomeIcon
-                                icon="star"
-                                color={`${Colors.softGray}`}
-                            />
-                        </span>
+                        <FavoriteButton />
                     </div>
                 </div>
                 <div
