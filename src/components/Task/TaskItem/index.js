@@ -2,6 +2,8 @@ import React from 'react';
 import { Avatar } from '../../Avatar/index';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
+import UserIcon from '../../../assets/images/user.svg';
+import { Colors } from '../../../assets/css/colors';
 import {
     Task as TaskStyled,
     TaskText,
@@ -11,6 +13,8 @@ import {
     SetDate,
     CenterContent,
     TextContainer,
+    NoAsignee,
+    UserIconSVG,
 } from './styles';
 
 export const TaskItem = ({ task = {} }) => {
@@ -33,7 +37,15 @@ export const TaskItem = ({ task = {} }) => {
                                     src={task.assigned.avatar}
                                 />
                             ) : (
-                                <Avatar hide={false} size={25} />
+                                <NoAsignee>
+                                    {/*  <img src={UserIcon} alt="Asignee Icon" /> */}
+                                    <UserIconSVG
+                                        width="14px"
+                                        height="14px"
+                                        viewBox="0 0 25 25"
+                                        fill={Colors.softGray}
+                                    />
+                                </NoAsignee>
                             )}
                         </AsigneeOption>
                     </OptionContainer>
