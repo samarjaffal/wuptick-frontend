@@ -11,11 +11,11 @@ import {
     TaskListColumns,
 } from './styles';
 
-export const TaskList = () => {
+export const TaskList = ({ list = {} }) => {
     return (
         <TaskListStyled>
             <TaskListHeader>
-                <TaskListTitle>Frontend 🏆</TaskListTitle>
+                <TaskListTitle>{list.name}</TaskListTitle>
                 <TaskListColumns>
                     <ColumnHeader>
                         <ColumnName>Asignee</ColumnName>
@@ -28,7 +28,7 @@ export const TaskList = () => {
                     </ColumnHeader>
                 </TaskListColumns>
             </TaskListHeader>
-            <TaskListItems />
+            <TaskListItems tasks={list.tasks} />
             <AddNew
                 text="Add Task"
                 icon={true}

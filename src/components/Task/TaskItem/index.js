@@ -13,26 +13,28 @@ import {
     TextContainer,
 } from './styles';
 
-export const TaskItem = () => {
+export const TaskItem = ({ task = {} }) => {
     return (
         <div className="TaskContainer">
             <TaskStyled>
                 <TextContainer>
                     <TaskCheck />
-                    <TaskText>
-                        Lorem Ipsum is simply. Lorem Ipsum is simply Lorem Ipsum
-                        is simple is ter...
-                    </TaskText>
+                    <TaskText>{task.name}</TaskText>
                 </TextContainer>
 
                 <TaskOptions>
                     <OptionContainer>
                         <AsigneeOption>
-                            <Avatar
-                                hide={false}
-                                size={25}
-                                src={`https://uifaces.co/our-content/donated/bUkmHPKs.jpg`}
-                            />
+                            {task.assigned !== null &&
+                            Object.keys(task.assigned).length > 0 ? (
+                                <Avatar
+                                    hide={false}
+                                    size={25}
+                                    src={task.assigned.avatar}
+                                />
+                            ) : (
+                                <Avatar hide={false} size={25} />
+                            )}
                         </AsigneeOption>
                     </OptionContainer>
                     <OptionContainer>

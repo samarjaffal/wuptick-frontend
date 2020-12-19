@@ -4,16 +4,14 @@ import { TaskList } from '../TaskList';
 import { Ul } from '../../SharedComponents/styles';
 import { Li } from './styles';
 
-export const TaskLists = () => {
+export const TaskLists = ({ lists = [] }) => {
     return (
         <Ul>
-            {Array(2)
-                .fill()
-                .map((item, index) => (
-                    <Li key={index}>
-                        <TaskList />
-                    </Li>
-                ))}
+            {lists.map((list, index) => (
+                <Li key={index}>
+                    <TaskList list={list} />
+                </Li>
+            ))}
         </Ul>
     );
 };

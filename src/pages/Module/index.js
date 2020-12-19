@@ -9,6 +9,8 @@ import { TaskLists } from '../../components/Task/TaskLists/index';
 import { AddNew } from '../../components/AddNew/index';
 import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
+import { useUser } from '../../hooks/useUser';
+import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
 import {
     Container,
     TopContainer,
@@ -44,32 +46,47 @@ export const Module = ({ id, location }) => {
                     </Sidebar>
                 </SidebarContainer>
 
-                <ModuleContainer>
-                    <TopContainer>
-                        <TitleContainer>
-                            <Title>#Frontend Module</Title>
-                        </TitleContainer>
+                <GetTaskListsAndTasksQuery moduleId={id}>
+                    {({ data }) => {
+                        const module = data.getModule;
 
-                        <RightItemsContainer>
-                            <div>
-                                <Filter>Filter</Filter>
-                            </div>
-                            <InputSearch type="text" placeholder="Search" />
-                        </RightItemsContainer>
-                    </TopContainer>
+                        return (
+                            <ModuleContainer>
+                                <TopContainer>
+                                    <TitleContainer>
+                                        <Title>{module.name}</Title>
+                                    </TitleContainer>
 
-                    <div className="TabsContainer">
-                        <ModuleTabs
-                            currentTab={currentTab}
-                            currentURL={currentURL}
-                        />
-                    </div>
+                                    <RightItemsContainer>
+                                        <div>
+                                            <Filter>Filter</Filter>
+                                        </div>
+                                        <InputSearch
+                                            type="text"
+                                            placeholder="Search"
+                                        />
+                                    </RightItemsContainer>
+                                </TopContainer>
 
-                    <div className="TasksLists">
-                        <TaskLists />
-                        <AddNew text="Add List" icon={true} border={true} />
-                    </div>
-                </ModuleContainer>
+                                <div className="TabsContainer">
+                                    <ModuleTabs
+                                        currentTab={currentTab}
+                                        currentURL={currentURL}
+                                    />
+                                </div>
+
+                                <div className="TasksLists">
+                                    <TaskLists lists={module.task_lists} />
+                                    <AddNew
+                                        text="Add List"
+                                        icon={true}
+                                        border={true}
+                                    />
+                                </div>
+                            </ModuleContainer>
+                        );
+                    }}
+                </GetTaskListsAndTasksQuery>
             </Container>
         </LoggedLayout>
     );

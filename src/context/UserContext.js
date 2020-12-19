@@ -8,6 +8,7 @@ export const UserContextProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState(initialAT);
     const [teamSelected, setTeamSelected] = useState({});
     const [currentProject, setCurrentProject] = useState({});
+    const [currentModule, setCurrentModule] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const value = {
         accessToken,
@@ -20,6 +21,8 @@ export const UserContextProvider = ({ children }) => {
         setCurrentUser,
         currentProject,
         setCurrentProject,
+        currentModule,
+        setCurrentModule,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;
