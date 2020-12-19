@@ -11,7 +11,7 @@ import { Colors } from '../../assets/css/colors';
 
 export const Container = styled.div`
     display: flex;
-    justify-content: space-around;
+    height: 100vh;
 `;
 
 export const TopContainer = styled.div`
@@ -77,7 +77,7 @@ export const InputSearch = styled.input`
 `;
 
 export const SidebarContainer = styled.div`
-    width: 25%;
+    width: 20%;
     @media (max-width: 1024px) {
         width: 30%;
     }
@@ -88,12 +88,16 @@ export const SidebarContainer = styled.div`
 
 export const ModuleContainer = styled.div`
     padding-bottom: 15px;
-    width: 85%;
+    width: 80%;
+    padding-left: 50px;
     @media (max-width: 1024px) {
         width: 70%;
     }
 
     @media (max-width: 768px) {
         width: 90%;
+    }
+    @media (max-width: 425px) {
+        padding-left: 0;
     }
 `;

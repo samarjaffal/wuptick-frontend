@@ -6,6 +6,6 @@ export const Divider = styled.div`
     height: 100%;
     position: relative;
     top: -11px;
-    margin-right: 50px;
     padding: 35px 20px;
+    left: 0px;
 `;

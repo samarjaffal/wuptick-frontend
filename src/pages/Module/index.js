@@ -42,16 +42,14 @@ export const Module = ({ projectId, moduleId, location }) => {
 
             <Container>
                 <SidebarContainer>
-                    <GetProjectSidebarQuery projectId={projectId}>
-                        {({ data }) => {
-                            const project = data.getProject;
-                            return (
-                                <Sidebar>
-                                    <ModuleSidebar project={project} />
-                                </Sidebar>
-                            );
-                        }}
-                    </GetProjectSidebarQuery>
+                    <Sidebar>
+                        <GetProjectSidebarQuery projectId={projectId}>
+                            {({ data }) => {
+                                const project = data.getProject;
+                                return <ModuleSidebar project={project} />;
+                            }}
+                        </GetProjectSidebarQuery>
+                    </Sidebar>
                 </SidebarContainer>
 
                 <GetTaskListsAndTasksQuery moduleId={moduleId}>
