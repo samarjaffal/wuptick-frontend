@@ -4,7 +4,7 @@ import { Auth } from '../Auth/index';
 import { Home } from '../Home/index';
 import { TestPage } from '../TestPage';
 import { Project } from '../Project/index';
-import {Module} from '../Module';
+import { Module } from '../Module';
 import { PrivateRoute } from '../../components/PrivateRoute/index';
 import { PublicRoute } from '../../components/PublicRoute/index';
 import { useUser } from '../../hooks/useUser';
@@ -19,7 +19,10 @@ const DefaultRoutes = () => {
             <PrivateRoute path="/home" component={Home} />
             <PrivateRoute path="test" component={TestPage} />
             <PrivateRoute path="/project/:id" component={Project} />
-            <PrivateRoute path="/module/:id" component={Module} />
+            <PrivateRoute
+                path="/project/:projectId/module/:moduleId"
+                component={Module}
+            />
             <PrivateRoute path="/profile/:username" component={Profile} />
             <PrivateRoute path={`${profileURL}/edit`} component={EditProfile} />
             <PrivateRoute path="/setup-profile" component={SetupProfile} />

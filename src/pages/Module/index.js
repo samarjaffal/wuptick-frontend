@@ -23,7 +23,7 @@ import {
     TitleContainer,
 } from './styles';
 
-export const Module = ({ id, location }) => {
+export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
     const [currentTab, setCurrentTab] = useState(null);
@@ -31,7 +31,7 @@ export const Module = ({ id, location }) => {
 
     useEffect(() => {
         setCurrentTab(tab);
-    }, [tab, id]);
+    }, [tab, moduleId]);
 
     return (
         <LoggedLayout styles={{ marginLeft: '0px' }}>
@@ -46,7 +46,7 @@ export const Module = ({ id, location }) => {
                     </Sidebar>
                 </SidebarContainer>
 
-                <GetTaskListsAndTasksQuery moduleId={id}>
+                <GetTaskListsAndTasksQuery moduleId={moduleId}>
                     {({ data }) => {
                         const module = data.getModule;
 
