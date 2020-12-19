@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar } from '../../Avatar/index';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
-import UserIcon from '../../../assets/images/user.svg';
-import { Colors } from '../../../assets/css/colors';
+import { AssignedUser } from '../../AssignedUser/index';
 import {
     Task as TaskStyled,
     TaskText,
@@ -13,8 +13,6 @@ import {
     SetDate,
     CenterContent,
     TextContainer,
-    NoAsignee,
-    UserIconSVG,
 } from './styles';
 
 export const TaskItem = ({ task = {} }) => {
@@ -37,15 +35,7 @@ export const TaskItem = ({ task = {} }) => {
                                     src={task.assigned.avatar}
                                 />
                             ) : (
-                                <NoAsignee>
-                                    {/*  <img src={UserIcon} alt="Asignee Icon" /> */}
-                                    <UserIconSVG
-                                        width="14px"
-                                        height="14px"
-                                        viewBox="0 0 25 25"
-                                        fill={Colors.softGray}
-                                    />
-                                </NoAsignee>
+                                <AssignedUser />
                             )}
                         </AsigneeOption>
                     </OptionContainer>
@@ -67,4 +57,6 @@ export const TaskItem = ({ task = {} }) => {
     );
 };
 
-TaskItem.propTypes = {};
+TaskItem.propTypes = {
+    task: PropTypes.object,
+};
