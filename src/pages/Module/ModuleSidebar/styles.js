@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Link } from '@reach/router';
 import { Colors } from '../../../assets/css/colors';
+import { TransitionSecondary } from '../../../assets/css/shared-styles';
 import {
     subtitle,
     bold,
@@ -21,10 +23,16 @@ export const TitleSection = styled.div`
     color: ${Colors.white};
 `;
 
-export const ModuleTitle = styled.div`
+export const ModuleTitle = styled(Link)`
     ${description};
     font-weight: ${regular};
     color: ${Colors.white};
+    cursor: pointer;
+    text-decoration: none;
+    ${TransitionSecondary};
+    :hover {
+        color: ${Colors.primary};
+    }
 `;
 
 export const ModulesList = styled.ul`

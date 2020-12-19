@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { Image } from '../../../components/Image/index';
 import { MembersList } from '../../../components/MembersList/index';
 import { FavoriteButton } from '../../../components/FavoriteButton/index';
+import { GetProjectModules } from '../../../requests/Module/getProjectModuleQuery';
 import { ModuleTitle, ModulesList, ProjectTitle, TitleSection } from './styles';
 
-const members = [
+/* const members = [
     {
         _id: 1,
         name: 'Sam',
@@ -30,9 +31,11 @@ const members = [
         last_name: 'Jaffal',
         avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
     },
-];
+]; */
 
-export const ModuleSidebar = () => {
+export const ModuleSidebar = ({ project = {} }) => {
+    console.log(project, 'project');
+    const members = project.members.map((member) => member.user);
     return (
         <div className="ProjectContainer">
             <div className="Project">
@@ -42,9 +45,9 @@ export const ModuleSidebar = () => {
                         display: 'flex',
                     }}
                 >
-                    <Image size={30} />
+                    <Image size={30} src={project.image} />
                     <div style={{ marginLeft: '0.5em' }}>
-                        <ProjectTitle>Wuptick</ProjectTitle>
+                        <ProjectTitle>{project.name}</ProjectTitle>
                         <FavoriteButton />
                     </div>
                 </div>
@@ -66,15 +69,18 @@ export const ModuleSidebar = () => {
                         <span>Modules</span>
                     </TitleSection>
                     <ModulesList>
-                        {Array(5)
-                            .fill()
-                            .map((item, index) => (
-                                <li key={index}>
-                                    <ModuleTitle>
-                                        Module {index + 1}
-                                    </ModuleTitle>
-                                </li>
-                            ))}
+                        <GetProjectModules projectId={project._id}>
+                            {({ data }) => {
+                                const modules = data.getProjectModules;
+                                return modules.map((module, index) => (
+                                    <li key={index}>
+                                        <ModuleTitle to="#">
+                                            {module.name}
+                                        </ModuleTitle>
+                                    </li>
+                                ));
+                            }}
+                        </GetProjectModules>
                     </ModulesList>
                 </div>
             </div>

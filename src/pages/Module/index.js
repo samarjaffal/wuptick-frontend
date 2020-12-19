@@ -11,6 +11,7 @@ import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { useUser } from '../../hooks/useUser';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
+import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
 import {
     Container,
     TopContainer,
@@ -41,9 +42,16 @@ export const Module = ({ projectId, moduleId, location }) => {
 
             <Container>
                 <SidebarContainer>
-                    <Sidebar>
-                        <ModuleSidebar />
-                    </Sidebar>
+                    <GetProjectSidebarQuery projectId={projectId}>
+                        {({ data }) => {
+                            const project = data.getProject;
+                            return (
+                                <Sidebar>
+                                    <ModuleSidebar project={project} />
+                                </Sidebar>
+                            );
+                        }}
+                    </GetProjectSidebarQuery>
                 </SidebarContainer>
 
                 <GetTaskListsAndTasksQuery moduleId={moduleId}>
