@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -15,12 +15,35 @@ import { UpdateModuleNameMutation } from '../../../requests/Module/UpdateModuleN
 import { List, Placeholder } from './styles';
 
 export const ListModules = ({ modules = [], projectId }) => {
+    const [columns, setColumns] = useState(['modules']);
     const [selectedModule, setSelectedModule] = useState();
     const [editModuleId, setEditModuleId] = useState(null);
     const { currentElemRef, openDropCallBack } = useDropdown();
+    let _items = [...modules];
 
-    const _columns = ['modules'];
-    const _items = [...modules];
+    const ModulesItems = ({
+        originalItems,
+        newItems,
+        setNewItems,
+        setModuleCallback,
+        doUpdateModule,
+    }) => {
+        useEffect(() => {
+            setNewItems(originalItems);
+        }, [originalItems]);
+
+        return newItems.map((module, index) => (
+            <ModuleItem
+                key={module._id}
+                index={index}
+                module={module}
+                setModuleCallback={setModuleCallback}
+                editModuleId={editModuleId}
+                setEditModuleId={setEditModuleId}
+                doUpdateModule={doUpdateModule}
+            />
+        ));
+    };
 
     const setStatus = (value) => {
         currentElemRef.current.setStatus(value);
@@ -58,12 +81,12 @@ export const ListModules = ({ modules = [], projectId }) => {
                     doSaveOrder(arrayIds, projectId);
                 };
                 const {
-                    columns,
                     items,
+                    setItems,
                     onDragEnd,
                     placeholderProps,
                     handleDragUpdate,
-                } = useDragDrop(_columns, _items, () => onDragEndCallBack);
+                } = useDragDrop(_items, () => onDragEndCallBack);
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}
@@ -83,33 +106,21 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         {...provided.droppableProps}
                                                         ref={provided.innerRef}
                                                     >
-                                                        {items.map(
-                                                            (module, index) => (
-                                                                <ModuleItem
-                                                                    key={
-                                                                        module._id
-                                                                    }
-                                                                    index={
-                                                                        index
-                                                                    }
-                                                                    module={
-                                                                        module
-                                                                    }
-                                                                    setModuleCallback={
-                                                                        setModuleCallback
-                                                                    }
-                                                                    editModuleId={
-                                                                        editModuleId
-                                                                    }
-                                                                    setEditModuleId={
-                                                                        setEditModuleId
-                                                                    }
-                                                                    doUpdateModule={
-                                                                        doUpdateModule
-                                                                    }
-                                                                />
-                                                            )
-                                                        )}
+                                                        <ModulesItems
+                                                            originalItems={
+                                                                _items
+                                                            }
+                                                            newItems={items}
+                                                            setNewItems={
+                                                                setItems
+                                                            }
+                                                            doUpdateModule={
+                                                                doUpdateModule
+                                                            }
+                                                            setModuleCallback={
+                                                                setModuleCallback
+                                                            }
+                                                        />
                                                         {provided.placeholder}
                                                         {Object.keys(
                                                             placeholderProps
