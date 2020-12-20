@@ -13,6 +13,7 @@ export const Task = styled.div`
     align-items: center;
     height: 40px;
     background-color: ${Colors.whitePrimary};
+    border-right: none;
     @media (max-width: 425px) {
         border-right: none;
     }
@@ -55,6 +56,9 @@ export const OptionContainer = styled.div`
     align-items: center;
     height: 40px;
     width: 65px;
+    &:last-child {
+        border-right: none;
+    }
     @media (max-width: 425px) {
         display: none;
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useDragDrop } from '../../../hooks/useDragDrop';
+import { Droppable } from 'react-beautiful-dnd';
+import { useDragDrop } from '../../../hooks/useDragDrop2';
 import { TaskListItems } from '../TaskListItems';
 import { AddNew } from '../../AddNew/index';
 import {
@@ -14,21 +14,7 @@ import {
     Placeholder,
 } from './styles';
 
-export const TaskList = ({ list = {} }) => {
-    const columns = ['tasks'];
-    const _items = [...list.tasks];
-
-    const onDragEndCallBack = () => {
-        console.log('onDragEndCallBack');
-    };
-    const {
-        items,
-        setItems,
-        onDragEnd,
-        placeholderProps,
-        handleDragUpdate,
-    } = useDragDrop(_items, onDragEndCallBack);
-
+export const TaskList = ({ list = {}, columnKey, columnId }) => {
     return (
         <TaskListStyled>
             <TaskListHeader>
@@ -45,56 +31,34 @@ export const TaskList = ({ list = {} }) => {
                     </ColumnHeader>
                 </TaskListColumns>
             </TaskListHeader>
-            <DragDropContext
-                onDragEnd={onDragEnd}
-                onDragUpdate={handleDragUpdate}
-            >
-                {columns.length > 0 &&
-                    columns.map((column, index) => (
-                        <Droppable
-                            droppableId={`${list._id}-${column}`}
-                            key={index}
-                        >
-                            {(provided, snapshot) => (
-                                <div
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                    style={{ position: 'relative' }}
-                                >
-                                    <TaskListItems
-                                        originalTasks={_items}
-                                        newTasks={items}
-                                        setNewTasks={setItems}
-                                    />
-                                    {provided.placeholder}
-                                    {Object.keys(placeholderProps).length !==
-                                        0 &&
-                                        snapshot.isDraggingOver && (
-                                            <Placeholder
-                                                top={placeholderProps.clientY}
-                                                left={placeholderProps.clientX}
-                                                height={
-                                                    placeholderProps.clientHeight
-                                                }
-                                                width={
-                                                    placeholderProps.clientWidth
-                                                }
-                                                isDragging={
-                                                    snapshot.isDraggingOver
-                                                }
-                                            />
-                                        )}
-                                </div>
-                            )}
-                        </Droppable>
-                    ))}
-                <AddNew
-                    text="Add Task"
-                    icon={true}
-                    border={false}
-                    bgColor="transparent"
-                />
-            </DragDropContext>
+            <Droppable droppableId={columnId} key={columnKey}>
+                {(provided, snapshot) => (
+                    <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{ position: 'relative' }}
+                    >
+                        <TaskListItems tasks={list.tasks} />
+                        {provided.placeholder}
+                        {/* {Object.keys(placeholderProps).length !== 0 &&
+                            snapshot.isDraggingOver && (
+                                <Placeholder
+                                    top={placeholderProps.clientY}
+                                    left={placeholderProps.clientX}
+                                    height={placeholderProps.clientHeight}
+                                    width={placeholderProps.clientWidth}
+                                    isDragging={snapshot.isDraggingOver}
+                                />
+                            )} */}
+                    </div>
+                )}
+            </Droppable>
+            <AddNew
+                text="Add Task"
+                icon={true}
+                border={false}
+                bgColor="transparent"
+            />
         </TaskListStyled>
     );
 };
