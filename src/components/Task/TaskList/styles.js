@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { subtitle, bold, description } from '../../../assets/css/theme';
+import {
+    subtitle,
+    bold,
+    description,
+    borderRadius,
+} from '../../../assets/css/theme';
+import { Colors } from '../../../assets/css/colors';
 
 export const TaskList = styled.div`
     /*  margin-top: 2em; */
@@ -39,4 +45,16 @@ export const ColumnName = styled.span`
     text-align: center;
     width: 100%;
     ${description};
+`;
+
+export const Placeholder = styled.div`
+    position: absolute;
+    border-radius: ${borderRadius};
+    background-color: ${Colors.hover};
+    opacity: ${({ isDragging }) => (isDragging == true ? 0.6 : 1)};
+    transition: opacity 0.5s ease 0s;
+    top: ${({ top }) => (top ? `${top}px` : '0')};
+    left: ${({ left }) => (left ? `${left}px` : '0')};
+    height: ${({ height }) => (height ? `${height}px` : '0')};
+    width: ${({ width }) => (width ? `${width}px` : '0')};
 `;

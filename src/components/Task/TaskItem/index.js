@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Draggable } from 'react-beautiful-dnd';
 import { Avatar } from '../../Avatar/index';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
@@ -15,45 +16,54 @@ import {
     TextContainer,
 } from './styles';
 
-export const TaskItem = ({ task = {} }) => {
+export const TaskItem = ({ task = {}, index }) => {
     return (
-        <div className="TaskContainer">
-            <TaskStyled>
-                <TextContainer>
-                    <TaskCheck />
-                    <TaskText>{task.name}</TaskText>
-                </TextContainer>
+        <Draggable draggableId={task._id} index={index}>
+            {(provided) => (
+                <div
+                    className="TaskContainer"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <TaskStyled>
+                        <TextContainer>
+                            <TaskCheck />
+                            <TaskText>{task.name}</TaskText>
+                        </TextContainer>
 
-                <TaskOptions>
-                    <OptionContainer>
-                        <AsigneeOption>
-                            {task.assigned !== null &&
-                            Object.keys(task.assigned).length > 0 ? (
-                                <Avatar
-                                    hide={false}
-                                    size={25}
-                                    src={task.assigned.avatar}
-                                />
-                            ) : (
-                                <AssignedUser />
-                            )}
-                        </AsigneeOption>
-                    </OptionContainer>
-                    <OptionContainer>
-                        <CenterContent>
-                            <div className="DeadLineOption">
-                                <SetDate>Set Date</SetDate>
-                            </div>
-                        </CenterContent>
-                    </OptionContainer>
-                    <OptionContainer>
-                        <CenterContent>
-                            <FavoriteButton />
-                        </CenterContent>
-                    </OptionContainer>
-                </TaskOptions>
-            </TaskStyled>
-        </div>
+                        <TaskOptions>
+                            <OptionContainer>
+                                <AsigneeOption>
+                                    {task.assigned !== null &&
+                                    Object.keys(task.assigned).length > 0 ? (
+                                        <Avatar
+                                            hide={false}
+                                            size={25}
+                                            src={task.assigned.avatar}
+                                        />
+                                    ) : (
+                                        <AssignedUser />
+                                    )}
+                                </AsigneeOption>
+                            </OptionContainer>
+                            <OptionContainer>
+                                <CenterContent>
+                                    <div className="DeadLineOption">
+                                        <SetDate>Set Date</SetDate>
+                                    </div>
+                                </CenterContent>
+                            </OptionContainer>
+                            <OptionContainer>
+                                <CenterContent>
+                                    <FavoriteButton />
+                                </CenterContent>
+                            </OptionContainer>
+                        </TaskOptions>
+                    </TaskStyled>
+                </div>
+            )}
+        </Draggable>
     );
 };
 

@@ -12,6 +12,7 @@ export const Task = styled.div`
     justify-content: left;
     align-items: center;
     height: 40px;
+    background-color: ${Colors.whitePrimary};
     @media (max-width: 425px) {
         border-right: none;
     }
