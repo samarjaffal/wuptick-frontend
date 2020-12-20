@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ModuleItem } from '../ModuleItem';
+import { ListModuleItems } from '../ListModuleItems';
 import { AddNew } from '../../AddNew/index';
 import { OptionsDropDown as StatusDropDown } from '../../Status/index';
 import { useDragDrop } from '../../../hooks/useDragDrop';
@@ -20,30 +21,6 @@ export const ListModules = ({ modules = [], projectId }) => {
     const [editModuleId, setEditModuleId] = useState(null);
     const { currentElemRef, openDropCallBack } = useDropdown();
     let _items = [...modules];
-
-    const ModulesItems = ({
-        originalItems,
-        newItems,
-        setNewItems,
-        setModuleCallback,
-        doUpdateModule,
-    }) => {
-        useEffect(() => {
-            setNewItems(originalItems);
-        }, [originalItems]);
-
-        return newItems.map((module, index) => (
-            <ModuleItem
-                key={module._id}
-                index={index}
-                module={module}
-                setModuleCallback={setModuleCallback}
-                editModuleId={editModuleId}
-                setEditModuleId={setEditModuleId}
-                doUpdateModule={doUpdateModule}
-            />
-        ));
-    };
 
     const setStatus = (value) => {
         currentElemRef.current.setStatus(value);
@@ -106,7 +83,7 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         {...provided.droppableProps}
                                                         ref={provided.innerRef}
                                                     >
-                                                        <ModulesItems
+                                                        <ListModuleItems
                                                             originalItems={
                                                                 _items
                                                             }
@@ -119,6 +96,12 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                             }
                                                             setModuleCallback={
                                                                 setModuleCallback
+                                                            }
+                                                            editModuleId={
+                                                                editModuleId
+                                                            }
+                                                            setEditModuleId={
+                                                                setEditModuleId
                                                             }
                                                         />
                                                         {provided.placeholder}
