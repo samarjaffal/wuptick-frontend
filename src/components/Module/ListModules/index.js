@@ -16,11 +16,12 @@ import { UpdateModuleNameMutation } from '../../../requests/Module/UpdateModuleN
 import { List, Placeholder } from './styles';
 
 export const ListModules = ({ modules = [], projectId }) => {
-    const [columns, setColumns] = useState(['modules']);
+    /*  const [columns, setColumns] = useState(['modules-column']); */
     const [selectedModule, setSelectedModule] = useState();
     const [editModuleId, setEditModuleId] = useState(null);
     const { currentElemRef, openDropCallBack } = useDropdown();
-    let _items = [...modules];
+
+    let _columns = [{ _id: 'modules_column_1', modules: [...modules] }];
 
     const setStatus = (value) => {
         currentElemRef.current.setStatus(value);
@@ -58,12 +59,11 @@ export const ListModules = ({ modules = [], projectId }) => {
                     doSaveOrder(arrayIds, projectId);
                 };
                 const {
-                    items,
-                    setItems,
+                    columns,
+                    handleDragUpdate,
                     onDragEnd,
                     placeholderProps,
-                    handleDragUpdate,
-                } = useDragDrop(_items, () => onDragEndCallBack);
+                } = useDragDrop(_columns, 'modules', () => onDragEndCallBack);
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}
@@ -75,7 +75,7 @@ export const ListModules = ({ modules = [], projectId }) => {
                                     {({ doUpdateModule }) =>
                                         columns.map((column, index) => (
                                             <Droppable
-                                                droppableId={column}
+                                                droppableId={column._id}
                                                 key={index}
                                             >
                                                 {(provided, snapshot) => (
@@ -84,12 +84,8 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         ref={provided.innerRef}
                                                     >
                                                         <ListModuleItems
-                                                            originalItems={
-                                                                _items
-                                                            }
-                                                            newItems={items}
-                                                            setNewItems={
-                                                                setItems
+                                                            modules={
+                                                                column.modules
                                                             }
                                                             doUpdateModule={
                                                                 doUpdateModule

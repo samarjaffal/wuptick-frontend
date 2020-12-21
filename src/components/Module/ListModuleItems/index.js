@@ -3,19 +3,17 @@ import { ModuleItem } from '../ModuleItem';
 import PropTypes from 'prop-types';
 
 export const ListModuleItems = ({
-    originalItems,
-    newItems,
-    setNewItems,
+    modules,
     setModuleCallback,
     doUpdateModule,
     editModuleId,
     setEditModuleId,
 }) => {
-    useEffect(() => {
+    /*     useEffect(() => {
         setNewItems(originalItems);
     }, [originalItems]);
-
-    return newItems.map((module, index) => (
+ */
+    return modules.map((module, index) => (
         <ModuleItem
             key={module._id}
             index={index}

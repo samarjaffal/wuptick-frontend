@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Droppable } from 'react-beautiful-dnd';
-import { useDragDrop } from '../../../hooks/useDragDrop2';
+import { useDragDrop } from '../../../hooks/useDragDrop';
 import { TaskListItems } from '../TaskListItems';
 import { AddNew } from '../../AddNew/index';
 import {
