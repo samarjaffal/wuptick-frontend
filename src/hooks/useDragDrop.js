@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useDragDrop = (
     _columns,
@@ -11,6 +11,10 @@ export const useDragDrop = (
     const [onDragEndCallBack] = useState(_onDragEndCallBack);
     const [placeholderProps, setPlaceholderProps] = useState({});
     const queryAttr = 'data-rbd-drag-handle-draggable-id';
+
+    useEffect(() => {
+        setColumns(_columns);
+    }, [_columns]);
 
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;

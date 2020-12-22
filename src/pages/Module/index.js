@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
@@ -11,6 +11,7 @@ import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
+import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
 import {
     Container,
     TopContainer,
@@ -26,8 +27,12 @@ import {
 export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
-
+    /* const [newList, setNewList] = useState(); */
     const { tab } = queryString.parse(location.search);
+    let newList = '';
+    const callBackNewList = (value) => {
+        newList = value;
+    };
 
     return (
         <LoggedLayout styles={{ marginLeft: '0px' }}>
@@ -82,11 +87,28 @@ export const Module = ({ projectId, moduleId, location }) => {
                                         lists={module.task_lists}
                                         moduleId={moduleId}
                                     />
-                                    <AddNew
-                                        text="Add List"
-                                        icon={true}
-                                        border={true}
-                                    />
+                                    <AddTaskListMutation>
+                                        {({ doCreateList }) => {
+                                            const createList = () => {
+                                                console.log(
+                                                    moduleId,
+                                                    newList,
+                                                    'testing'
+                                                );
+
+                                                doCreateList(moduleId, newList);
+                                            };
+                                            return (
+                                                <AddNew
+                                                    text="Add List"
+                                                    icon={true}
+                                                    border={true}
+                                                    setValue={callBackNewList}
+                                                    doFunction={createList}
+                                                />
+                                            );
+                                        }}
+                                    </AddTaskListMutation>
                                 </div>
                             </ModuleContainer>
                         );

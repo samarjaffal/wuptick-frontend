@@ -5,7 +5,9 @@ import { Divider } from './styles';
 export const Sidebar = ({ children }) => {
     return (
         <Divider>
-            <div className="Sidebar">{children}</div>
+            <div className="Sidebar" style={{ position: 'fixed' }}>
+                {children}
+            </div>
         </Divider>
     );
 };
