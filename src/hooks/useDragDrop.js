@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { ColumnHeader } from '../components/Task/TaskList/styles';
 
 export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
     const [columns, setColumns] = useState(_columns);
@@ -42,8 +41,8 @@ export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
             newColumns[index] = newColumn;
 
             setColumns(newColumns);
-            const arrayIds = orderedItems.map((item) => item._id);
-            if (onDragEndCallBack) onDragEndCallBack(arrayIds);
+
+            if (onDragEndCallBack) onDragEndCallBack(orderedItems);
             setPlaceholderProps({});
             return;
         }
@@ -79,6 +78,8 @@ export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
         newColumns[finishIndex] = newFinishColumn;
 
         setColumns(newColumns);
+
+        if (onDragEndCallBack) onDragEndCallBack(newColumns);
         setPlaceholderProps({});
     });
 

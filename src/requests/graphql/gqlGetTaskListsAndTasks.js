@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const gqlGetTaskListsAndTasks = gql`
     query getTaskListsAndTasks($moduleId: ID!) {
         getModule(moduleId: $moduleId) {
+            _id
             name
             task_lists {
                 _id
@@ -10,6 +11,9 @@ export const gqlGetTaskListsAndTasks = gql`
                 tasks {
                     _id
                     name
+                    owner {
+                        _id
+                    }
                     assigned {
                         _id
                         name
@@ -19,6 +23,7 @@ export const gqlGetTaskListsAndTasks = gql`
                     deadline
                     done
                     description
+                    created_at
                 }
             }
         }

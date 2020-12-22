@@ -54,7 +54,8 @@ export const ListModules = ({ modules = [], projectId }) => {
     return (
         <SaveModulesOrderMutation>
             {({ doSaveOrder }) => {
-                const onDragEndCallBack = (arrayIds) => {
+                const onDragEndCallBack = (items) => {
+                    const arrayIds = items.map((item) => item._id);
                     console.log('onDragEndCallBack', arrayIds, projectId);
                     doSaveOrder(arrayIds, projectId);
                 };

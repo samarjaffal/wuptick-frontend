@@ -99,7 +99,7 @@ const client = new ApolloClient({
             console.log(graphQLErrors);
             console.log(networkError);
             if (networkError) {
-                navigate('oops');
+                /*  navigate('/oops'); */
             }
         }),
         requestLink,

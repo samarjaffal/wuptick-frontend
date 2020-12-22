@@ -1,25 +1,28 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
-import { gqlSaveModulesOrder } from '../graphql/gqlSaveModulesOrder';
-import { gqlGetProjectModules } from '../graphql/gqlGetProjectModules';
-import { gqlGetProject } from '../graphql/gqlGetProject';
+import { gqlSaveTaskListsOrder } from '../graphql/gqlSaveTaskListsOrder';
 import PropTypes from 'prop-types';
 
-export const SaveModulesOrderMutation = ({ children }) => {
+export const SaveTaskListsOrderMutation = ({ children }) => {
     const [saveOrder, { error, loading, data }] = useMutation(
-        gqlSaveModulesOrder,
+        gqlSaveTaskListsOrder,
         {
             onCompleted: (data) => {
-                console.log('SaveModulesOrderMutation', data);
+                console.log('SaveTaskListsOrderMutation', data);
             },
         }
     );
 
-    const doSaveOrder = useCallback((moduleIds, projectId) => {
+    const doSaveOrder = useCallback((moduleId, taskLists) => {
+        const keyToDelete = '__typename';
+        taskLists.forEach((list) => {
+            delete list[keyToDelete];
+        });
+
         saveOrder({
             variables: {
-                moduleIds,
-                projectId,
+                moduleId,
+                taskLists,
             },
         });
     });
@@ -34,6 +37,6 @@ export const SaveModulesOrderMutation = ({ children }) => {
     return children({ doSaveOrder, loading, error, data });
 };
 
-SaveModulesOrderMutation.propTypes = {
+SaveTaskListsOrderMutation.propTypes = {
     children: PropTypes.any,
 };

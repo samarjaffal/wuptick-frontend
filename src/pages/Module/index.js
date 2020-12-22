@@ -82,7 +82,10 @@ export const Module = ({ projectId, moduleId, location }) => {
                                 </div>
 
                                 <div className="TasksLists">
-                                    <TaskLists lists={module.task_lists} />
+                                    <TaskLists
+                                        lists={module.task_lists}
+                                        moduleId={moduleId}
+                                    />
                                     <AddNew
                                         text="Add List"
                                         icon={true}
