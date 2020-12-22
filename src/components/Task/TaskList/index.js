@@ -14,7 +14,12 @@ import {
     Placeholder,
 } from './styles';
 
-export const TaskList = ({ list = {}, columnKey, columnId }) => {
+export const TaskList = ({
+    list = {},
+    columnKey,
+    columnId,
+    placeholderProps,
+}) => {
     return (
         <TaskListStyled>
             <TaskListHeader>
@@ -40,7 +45,7 @@ export const TaskList = ({ list = {}, columnKey, columnId }) => {
                     >
                         <TaskListItems tasks={list.tasks} />
                         {provided.placeholder}
-                        {/* {Object.keys(placeholderProps).length !== 0 &&
+                        {Object.keys(placeholderProps).length !== 0 &&
                             snapshot.isDraggingOver && (
                                 <Placeholder
                                     top={placeholderProps.clientY}
@@ -49,7 +54,7 @@ export const TaskList = ({ list = {}, columnKey, columnId }) => {
                                     width={placeholderProps.clientWidth}
                                     isDragging={snapshot.isDraggingOver}
                                 />
-                            )} */}
+                            )}
                     </div>
                 )}
             </Droppable>

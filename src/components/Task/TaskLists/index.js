@@ -21,11 +21,12 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                     console.log('onDragEndCallBack', taskLists);
                     doSaveOrder(moduleId, taskLists);
                 };
-                const { columns, onDragEnd, handleDragUpdate } = useDragDrop(
-                    _columns,
-                    'tasks',
-                    () => onDragEndCallBack
-                );
+                const {
+                    columns,
+                    onDragEnd,
+                    handleDragUpdate,
+                    placeholderProps,
+                } = useDragDrop(_columns, 'tasks', () => onDragEndCallBack);
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}
@@ -38,6 +39,7 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                                     key={index}
                                     columnKey={index}
                                     columnId={`${list._id}`}
+                                    placeholderProps={placeholderProps}
                                 />
                             ))}
                         </div>
