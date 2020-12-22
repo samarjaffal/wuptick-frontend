@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
@@ -9,7 +9,6 @@ import { TaskLists } from '../../components/Task/TaskLists/index';
 import { AddNew } from '../../components/AddNew/index';
 import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
-import { useUser } from '../../hooks/useUser';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
 import {
@@ -27,12 +26,8 @@ import {
 export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
-    const [currentTab, setCurrentTab] = useState(null);
-    const { tab } = queryString.parse(location.search);
 
-    useEffect(() => {
-        setCurrentTab(tab);
-    }, [tab, moduleId]);
+    const { tab } = queryString.parse(location.search);
 
     return (
         <LoggedLayout styles={{ marginLeft: '0px' }}>
@@ -76,8 +71,9 @@ export const Module = ({ projectId, moduleId, location }) => {
 
                                 <div className="TabsContainer">
                                     <ModuleTabs
-                                        currentTab={currentTab}
+                                        tab={tab}
                                         currentURL={currentURL}
+                                        moduleId={moduleId}
                                     />
                                 </div>
 

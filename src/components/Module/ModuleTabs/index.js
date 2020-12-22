@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from '../../Tabs/index';
 import { TabItem } from '../../Tabs/TabItem/index';
 
-export const ModuleTabs = ({ currentURL, currentTab }) => {
+export const ModuleTabs = ({ currentURL, tab, moduleId }) => {
+    const [currentTab, setCurrentTab] = useState(null);
+
+    useEffect(() => {
+        setCurrentTab(tab);
+    }, [tab, moduleId]);
+
     return (
         <Tabs>
             <TabItem

@@ -6,35 +6,7 @@ import { FavoriteButton } from '../../../components/FavoriteButton/index';
 import { GetProjectModules } from '../../../requests/Module/getProjectModuleQuery';
 import { ModuleTitle, ModulesList, ProjectTitle, TitleSection } from './styles';
 
-/* const members = [
-    {
-        _id: 1,
-        name: 'Sam',
-        last_name: 'Jaffal',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
-    },
-    {
-        _id: 2,
-        name: 'Sam',
-        last_name: 'Jaffal',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
-    },
-    {
-        _id: 3,
-        name: 'Sam',
-        last_name: 'Jaffal',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
-    },
-    {
-        _id: 4,
-        name: 'Sam',
-        last_name: 'Jaffal',
-        avatar: 'https://uifaces.co/our-content/donated/bUkmHPKs.jpg',
-    },
-]; */
-
 export const ModuleSidebar = ({ project = {} }) => {
-    console.log(project, 'project');
     const members = project.members.map((member) => member.user);
     return (
         <div className="ProjectContainer">
