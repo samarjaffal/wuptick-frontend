@@ -55,16 +55,21 @@ export const ListModules = ({ modules = [], projectId }) => {
         <SaveModulesOrderMutation>
             {({ doSaveOrder }) => {
                 const onDragEndCallBack = (items) => {
-                    const arrayIds = items.map((item) => item._id);
-                    console.log('onDragEndCallBack', arrayIds, projectId);
-                    doSaveOrder(arrayIds, projectId);
+                    const moduleIds = items.map((item) => item._id);
+                    console.log('onDragEndCallBack', moduleIds, projectId);
+                    doSaveOrder(moduleIds, projectId);
                 };
                 const {
                     columns,
                     handleDragUpdate,
                     onDragEnd,
                     placeholderProps,
-                } = useDragDrop(_columns, 'modules', () => onDragEndCallBack);
+                } = useDragDrop(
+                    _columns,
+                    'modules',
+                    false,
+                    () => onDragEndCallBack
+                );
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}

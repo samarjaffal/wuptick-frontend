@@ -16,23 +16,23 @@ import {
     TextContainer,
 } from './styles';
 
-export const TaskItem = ({ task = {}, index }) => {
+export const TaskItem = ({ task = {}, index, isDragging }) => {
     return (
         <Draggable draggableId={task._id} index={index}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <div
                     className="TaskContainer"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <TaskStyled>
+                    <TaskStyled isDragging={snapshot.isDragging}>
                         <TextContainer>
                             <TaskCheck />
                             <TaskText>{task.name}</TaskText>
                         </TextContainer>
 
-                        <TaskOptions>
+                        <TaskOptions isDragging={snapshot.isDragging}>
                             <OptionContainer>
                                 <AsigneeOption>
                                     {task.assigned !== null &&

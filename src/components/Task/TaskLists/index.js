@@ -26,7 +26,12 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                     onDragEnd,
                     handleDragUpdate,
                     placeholderProps,
-                } = useDragDrop(_columns, 'tasks', () => onDragEndCallBack);
+                } = useDragDrop(
+                    _columns,
+                    'tasks',
+                    true,
+                    () => onDragEndCallBack
+                );
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}

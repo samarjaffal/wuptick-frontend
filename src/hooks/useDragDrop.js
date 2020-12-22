@@ -1,6 +1,11 @@
 import { useState, useCallback } from 'react';
 
-export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
+export const useDragDrop = (
+    _columns,
+    key,
+    manyColumns = true,
+    _onDragEndCallBack = null
+) => {
     const [columns, setColumns] = useState(_columns);
     const [items, setItems] = useState([]);
     const [onDragEndCallBack] = useState(_onDragEndCallBack);
@@ -11,6 +16,8 @@ export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
         const { destination, source } = result;
 
         if (!destination) return;
+
+        console.log(source, destination, 'soure');
 
         const startColumn = columns.find(
             (column) => column._id == source.droppableId
@@ -42,7 +49,12 @@ export const useDragDrop = (_columns, key, _onDragEndCallBack = null) => {
 
             setColumns(newColumns);
 
-            if (onDragEndCallBack) onDragEndCallBack(orderedItems);
+            if (manyColumns) {
+                if (onDragEndCallBack) onDragEndCallBack(newColumns);
+            } else {
+                if (onDragEndCallBack) onDragEndCallBack(orderedItems);
+            }
+
             setPlaceholderProps({});
             return;
         }

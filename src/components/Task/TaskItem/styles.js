@@ -12,6 +12,7 @@ export const Task = styled.div`
     justify-content: left;
     align-items: center;
     height: 40px;
+    width: ${({ isDragging }) => (isDragging ? '70%' : '100%')};
     background-color: ${Colors.whitePrimary};
     border-right: none;
     @media (max-width: 425px) {
@@ -45,6 +46,7 @@ export const TaskText = styled.p`
 export const TaskOptions = styled.div`
     display: flex;
     margin-left: auto;
+    visibility: ${({ isDragging }) => (isDragging ? 'hidden' : 'visible')};
 `;
 
 export const OptionContainer = styled.div`
