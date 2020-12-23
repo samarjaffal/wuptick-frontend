@@ -1,3 +1,4 @@
+import idx from 'idx';
 import { useState, useEffect, useCallback } from 'react';
 
 export const useDragDrop = (
@@ -7,7 +8,6 @@ export const useDragDrop = (
     _onDragEndCallBack = null
 ) => {
     const [columns, setColumns] = useState(_columns);
-    const [items, setItems] = useState([]);
     const [onDragEndCallBack] = useState(_onDragEndCallBack);
     const [placeholderProps, setPlaceholderProps] = useState({});
     const queryAttr = 'data-rbd-drag-handle-draggable-id';
@@ -17,9 +17,24 @@ export const useDragDrop = (
     }, [_columns]);
 
     const onDragEnd = useCallback((result) => {
-        const { destination, source } = result;
+        const { destination, source, type } = result;
 
         if (!destination) return;
+
+        if (
+            destination.droppableId == source.droppableId &&
+            destination.index == source.index
+        )
+            return;
+
+        if (type == 'column') {
+            const newColumns = [...columns];
+            const [removed] = newColumns.splice(source.index, 1);
+            newColumns.splice(destination.index, 0, removed);
+            setColumns(newColumns);
+            setPlaceholderProps({});
+            return;
+        }
 
         console.log(source, destination, 'soure');
 
@@ -133,24 +148,28 @@ export const useDragDrop = (
 
         const { clientHeight, clientWidth } = draggedDOM;
 
-        const clientY =
-            parseFloat(
-                window.getComputedStyle(draggedDOM.parentNode).paddingTop
-            ) +
-            updatedArray.slice(0, destinationIndex).reduce((total, curr) => {
-                const style = window.getComputedStyle(curr);
-                const marginBottom = parseFloat(style.marginBottom);
-                return total + curr.clientHeight + marginBottom;
-            }, 0);
+        if (event.type == 'task') {
+            const clientY =
+                parseFloat(
+                    window.getComputedStyle(draggedDOM.parentNode).paddingTop
+                ) +
+                updatedArray
+                    .slice(0, destinationIndex)
+                    .reduce((total, curr) => {
+                        const style = window.getComputedStyle(curr);
+                        const marginBottom = parseFloat(style.marginBottom);
+                        return total + curr.clientHeight + marginBottom;
+                    }, 0);
 
-        setPlaceholderProps({
-            clientHeight,
-            clientWidth,
-            clientY,
-            clientX: parseFloat(
-                window.getComputedStyle(draggedDOM.parentNode).paddingLeft
-            ),
-        });
+            setPlaceholderProps({
+                clientHeight,
+                clientWidth,
+                clientY,
+                clientX: parseFloat(
+                    window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+                ),
+            });
+        }
     };
 
     const reorder = (list, startIndex, endIndex) => {
@@ -163,8 +182,6 @@ export const useDragDrop = (
     return {
         onDragEnd,
         columns,
-        items,
-        setItems,
         placeholderProps,
         setPlaceholderProps,
         handleDragUpdate,

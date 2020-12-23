@@ -4,6 +4,7 @@ import { Colors } from '../../../assets/css/colors';
 
 export const TaskList = styled.div`
     /*  margin-top: 2em; */
+    background-color: ${Colors.whitePrimary};
 `;
 
 export const TaskListHeader = styled.div`

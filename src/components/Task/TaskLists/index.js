@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useDragDrop } from '../../../hooks/useDragDrop';
 import { TaskList } from '../TaskList';
 import { SaveTaskListsOrderMutation } from '../../../requests/Module/SaveTaskListsOrderMutation';
@@ -37,17 +37,30 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                         onDragEnd={onDragEnd}
                         onDragUpdate={handleDragUpdate}
                     >
-                        <div className="Container">
-                            {columns.map((list, index) => (
-                                <TaskList
-                                    list={list}
-                                    key={index}
-                                    columnKey={index}
-                                    columnId={`${list._id}`}
-                                    placeholderProps={placeholderProps}
-                                />
-                            ))}
-                        </div>
+                        <Droppable
+                            droppableId="all-columns"
+                            direction="vertical"
+                            type="column"
+                        >
+                            {(provided) => (
+                                <div
+                                    className="Container"
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef}
+                                >
+                                    {columns.map((list, index) => (
+                                        <TaskList
+                                            list={list}
+                                            key={index}
+                                            columnKey={index}
+                                            columnId={`${list._id}`}
+                                            placeholderProps={placeholderProps}
+                                        />
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
                     </DragDropContext>
                 );
             }}
