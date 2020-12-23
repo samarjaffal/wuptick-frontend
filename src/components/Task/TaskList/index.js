@@ -12,6 +12,8 @@ import {
     ColumnName,
     TaskListColumns,
     Placeholder,
+    TaskListItemsContainer,
+    AddNewContainer,
 } from './styles';
 
 export const TaskList = ({
@@ -22,16 +24,20 @@ export const TaskList = ({
 }) => {
     return (
         <Draggable draggableId={`${columnId}-${columnKey}`} index={columnKey}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <TaskListStyled
                     {...provided.draggableProps}
                     ref={provided.innerRef}
+                    isDragging={snapshot.isDragging}
                 >
                     <TaskListHeader>
-                        <TaskListTitle {...provided.dragHandleProps}>
+                        <TaskListTitle
+                            isDragging={snapshot.isDragging}
+                            {...provided.dragHandleProps}
+                        >
                             {list.name}
                         </TaskListTitle>
-                        <TaskListColumns>
+                        <TaskListColumns isDragging={snapshot.isDragging}>
                             <ColumnHeader>
                                 <ColumnName>Asignee</ColumnName>
                             </ColumnHeader>
@@ -48,11 +54,11 @@ export const TaskList = ({
                         key={columnKey}
                         type="task"
                     >
-                        {(provided, snapshot) => (
-                            <div
+                        {(provided) => (
+                            <TaskListItemsContainer
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}
-                                style={{ position: 'relative' }}
+                                isDragging={snapshot.isDragging}
                             >
                                 <TaskListItems tasks={list.tasks} />
                                 {provided.placeholder}
@@ -68,15 +74,17 @@ export const TaskList = ({
                                             isDragging={snapshot.isDraggingOver}
                                         />
                                     )} */}
-                            </div>
+                            </TaskListItemsContainer>
                         )}
                     </Droppable>
-                    <AddNew
-                        text="Add Task"
-                        icon={true}
-                        border={false}
-                        bgColor="transparent"
-                    />
+                    <AddNewContainer isDragging={snapshot.isDragging}>
+                        <AddNew
+                            text="Add Task"
+                            icon={true}
+                            border={false}
+                            bgColor="transparent"
+                        />
+                    </AddNewContainer>
                 </TaskListStyled>
             )}
         </Draggable>

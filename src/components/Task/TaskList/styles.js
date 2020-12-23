@@ -1,10 +1,20 @@
 import styled from 'styled-components';
-import { subtitle, bold, description } from '../../../assets/css/theme';
+import {
+    subtitle,
+    bold,
+    description,
+    borderRadius,
+} from '../../../assets/css/theme';
 import { Colors } from '../../../assets/css/colors';
+import { ShadowSecondary } from '../../../assets/css/shared-styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const TaskList = styled.div`
     /*  margin-top: 2em; */
     background-color: ${Colors.whitePrimary};
+    border-radius: ${borderRadius};
+    height: ${({ isDragging }) => (isDragging ? '80px !important' : 'auto')};
+    ${({ isDragging }) => (isDragging ? ShadowSecondary : '')};
 `;
 
 export const TaskListHeader = styled.div`
@@ -15,15 +25,18 @@ export const TaskListHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 40px;
+    position: relative;
 `;
 
 export const TaskListTitle = styled.h3`
     ${subtitle}
     font-weight: ${bold};
+    margin-left: ${({ isDragging }) => (isDragging ? '1.5em' : '0')};
 `;
 
 export const TaskListColumns = styled.div`
     display: flex;
+    visibility: ${({ isDragging }) => (isDragging ? 'hidden' : 'visible')};
     @media (max-width: 425px) {
         display: none;
     }
@@ -52,4 +65,15 @@ export const Placeholder = styled.div`
     left: ${({ left }) => (left ? `${left}px` : '0')};
     height: ${({ height }) => (height ? `${height}px` : '0')};
     width: ${({ width }) => (width ? `${width}px` : '0')};
+`;
+
+export const TaskListItemsContainer = styled.div`
+    position: relative;
+    display: ${({ isDragging }) => (isDragging ? 'none' : 'block')};
+`;
+
+export const AddNewContainer = styled.div`
+    visibility: ${({ isDragging }) => (isDragging ? 'hidden' : 'visible')};
+    transition: 0ms;
+    opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
 `;
