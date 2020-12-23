@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { description, info } from '../../../assets/css/theme';
 import { Colors } from '../../../assets/css/colors';
-import { TransitionSecondary } from '../../../assets/css/shared-styles';
-import UserIcon from '../../../assets/images/user.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Task = styled.div`
     border: 1px solid #dddee5;
@@ -15,6 +14,7 @@ export const Task = styled.div`
     width: ${({ isDragging }) => (isDragging ? '70%' : '100%')};
     background-color: ${Colors.whitePrimary};
     border-right: none;
+    position: relative;
     @media (max-width: 425px) {
         border-right: none;
     }
@@ -82,4 +82,16 @@ export const SetDate = styled.span`
 export const CenterContent = styled.div`
     width: 100%;
     text-align: center;
+`;
+
+export const DragDropContainer = styled.div`
+    position: absolute;
+`;
+
+export const IconDragDrop = styled(FontAwesomeIcon)`
+    color: ${Colors.secondary};
+    visibility: hidden;
+    ${Task}:hover & {
+        visibility: visible;
+    }
 `;

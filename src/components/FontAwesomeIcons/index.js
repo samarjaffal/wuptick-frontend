@@ -21,6 +21,7 @@ import {
     faTimes,
     faAngleLeft,
     faCheckSquare as CheckedSquare,
+    faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -42,5 +43,6 @@ library.add(
     faAngleLeft,
     faSquare,
     faCheckSquare,
-    CheckedSquare
+    CheckedSquare,
+    faGripHorizontal
 );

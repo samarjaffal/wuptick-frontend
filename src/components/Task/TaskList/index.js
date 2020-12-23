@@ -56,7 +56,7 @@ export const TaskList = ({
                             >
                                 <TaskListItems tasks={list.tasks} />
                                 {provided.placeholder}
-                                {Object.keys(placeholderProps).length !== 0 &&
+                                {/*   {Object.keys(placeholderProps).length !== 0 &&
                                     snapshot.isDraggingOver && (
                                         <Placeholder
                                             top={placeholderProps.clientY}
@@ -67,7 +67,7 @@ export const TaskList = ({
                                             width={placeholderProps.clientWidth}
                                             isDragging={snapshot.isDraggingOver}
                                         />
-                                    )}
+                                    )} */}
                             </div>
                         )}
                     </Droppable>

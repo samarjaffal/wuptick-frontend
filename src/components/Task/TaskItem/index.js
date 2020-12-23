@@ -14,6 +14,8 @@ import {
     SetDate,
     CenterContent,
     TextContainer,
+    DragDropContainer,
+    IconDragDrop,
 } from './styles';
 
 export const TaskItem = ({ task = {}, index, isDragging }) => {
@@ -24,9 +26,11 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                     className="TaskContainer"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}
                 >
                     <TaskStyled isDragging={snapshot.isDragging}>
+                        <DragDropContainer {...provided.dragHandleProps}>
+                            <IconDragDrop icon="grip-horizontal" />
+                        </DragDropContainer>
                         <TextContainer>
                             <TaskCheck />
                             <TaskText>{task.name}</TaskText>
