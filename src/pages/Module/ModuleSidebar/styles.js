@@ -14,19 +14,19 @@ export const ProjectTitle = styled.span`
     font-size: 18px;
     font-weight: ${bold};
     margin: 0 0.5em;
-    color: ${Colors.white};
+    color: ${Colors.black};
 `;
 
 export const TitleSection = styled.div`
     ${subtitle};
     font-weight: ${bold};
-    color: ${Colors.white};
+    color: ${Colors.black};
 `;
 
 export const ModuleTitle = styled(Link)`
     ${description};
     font-weight: ${regular};
-    color: ${Colors.white};
+    color: ${Colors.black};
     cursor: pointer;
     text-decoration: none;
     ${TransitionSecondary};
