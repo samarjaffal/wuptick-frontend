@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { TaskItem } from '../TaskItem';
-import { Ul } from '../../SharedComponents/styles';
 
-export const TaskListItems = ({ tasks = [] }) => {
+const MemoTaskListItems = ({ tasks = [] }) => {
     return tasks.map((task, index) => (
         <TaskItem task={task} key={task._id} index={index} />
     ));
 };
 
-TaskListItems.propTypes = {};
+function areEqual(prevProps, nextProps) {
+    return prevProps.tasks === nextProps.tasks;
+}
+
+export const TaskListItems = React.memo(MemoTaskListItems, areEqual);
+
+MemoTaskListItems.propTypes = {
+    tasks: PropTypes.array,
+};

@@ -19,6 +19,7 @@ import {
 } from './styles';
 
 export const TaskItem = ({ task = {}, index, isDragging }) => {
+    console.log('rendered task');
     return (
         <Draggable draggableId={task._id} index={index}>
             {(provided, snapshot) => (

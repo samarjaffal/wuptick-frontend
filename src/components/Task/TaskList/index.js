@@ -16,12 +16,7 @@ import {
     AddNewContainer,
 } from './styles';
 
-export const TaskList = ({
-    list = {},
-    columnKey,
-    columnId,
-    placeholderProps,
-}) => {
+const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
     return (
         <Draggable draggableId={`${columnId}-${columnKey}`} index={columnKey}>
             {(provided, snapshot) => (
@@ -91,4 +86,16 @@ export const TaskList = ({
     );
 };
 
-TaskList.propTypes = {};
+MemoTaskList.propTypes = {
+    list: PropTypes.object,
+    columnKey: PropTypes.number,
+    columnId: PropTypes.string,
+    placeholderProps: PropTypes.object,
+};
+
+function areEqual(prevProps, nextProps) {
+    /*     console.log(prevProps.list === nextProps.list, 'comp'); */
+    return prevProps.list === nextProps.list;
+}
+
+export const TaskList = React.memo(MemoTaskList, areEqual);

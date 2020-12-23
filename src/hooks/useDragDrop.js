@@ -32,6 +32,7 @@ export const useDragDrop = (
             const [removed] = newColumns.splice(source.index, 1);
             newColumns.splice(destination.index, 0, removed);
             setColumns(newColumns);
+            if (onDragEndCallBack) onDragEndCallBack(newColumns);
             setPlaceholderProps({});
             return;
         }
