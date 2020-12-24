@@ -16,7 +16,7 @@ export const Dropdown = ({
     const { menuHeight, dropdownRef, setMenuHeight } = useDropdown();
 
     useEffect(() => {
-        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
+        setMenuHeight('auto');
     }, []);
 
     return (

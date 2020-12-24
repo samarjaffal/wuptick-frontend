@@ -9,6 +9,8 @@ import { TaskLists } from '../../components/Task/TaskLists/index';
 import { AddNew } from '../../components/AddNew/index';
 import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
+import { DropdownContextProvider } from '../../context/DropdownContext';
+import { ListUsersDropdown } from './ModuleDropDowns';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
 import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
@@ -83,10 +85,13 @@ export const Module = ({ projectId, moduleId, location }) => {
                                 </div>
 
                                 <div className="TasksLists">
-                                    <TaskLists
-                                        lists={module.task_lists}
-                                        moduleId={moduleId}
-                                    />
+                                    <DropdownContextProvider>
+                                        <TaskLists
+                                            lists={module.task_lists}
+                                            moduleId={moduleId}
+                                        />
+                                        <ListUsersDropdown />
+                                    </DropdownContextProvider>
                                     <AddTaskListMutation>
                                         {({ doCreateList }) => {
                                             const createList = () => {
