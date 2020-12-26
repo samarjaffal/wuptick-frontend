@@ -15,7 +15,6 @@ import { AddProjectModal } from '../../components/Modal/templates/AddProjectModa
 import { EditProjectMutation } from '../../requests/project/EditProjectMutation';
 import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
-/* import { TaskItem } from '../../components/Task/TaskItem/index'; */
 import { ListFiles } from '../../components/File/ListFiles/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
 import { FlexCenter } from '../../components/SharedComponents/styles';
@@ -90,7 +89,6 @@ export const Project = ({ id, location }) => {
                 </GetProjectTopics>
             )) ||
             (currentTab == 'files' && <ListFiles />) ||
-            /*  (currentTab == 'priority-tasks' && <TaskItem />) || */
             null
         );
     };

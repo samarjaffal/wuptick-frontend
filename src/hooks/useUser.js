@@ -16,6 +16,10 @@ export const useUser = () => {
         setCurrentUser,
         currentProject,
         setCurrentProject,
+        currentModule,
+        setCurrentModule,
+        currentTask,
+        setCurrentTask,
     } = useContext(Context);
 
     const activateAuth = useCallback(
@@ -85,6 +89,10 @@ export const useUser = () => {
         profileURL,
         currentProject,
         setCurrentProject,
+        currentModule,
+        setCurrentModule,
+        currentTask,
+        setCurrentTask,
         getAge,
         generateProfileUrl,
         generateProjectUrl,

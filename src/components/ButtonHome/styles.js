@@ -15,6 +15,7 @@ export const Button = styled.small`
     ${({ color }) => color || Colors.primary};
     font-weight: ${bold};
     padding: 4px ${borderRadius};
+    height: min-content;
     border-radius: ${borderRadius};
     cursor: pointer;
     ${TransitionSecondary}

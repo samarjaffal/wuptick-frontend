@@ -1,5 +1,9 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+import {
+    faStar as faStarRegular,
+    faSquare,
+    faCheckSquare,
+} from '@fortawesome/free-regular-svg-icons';
 import {
     faFolderOpen,
     faUsers,
@@ -16,6 +20,8 @@ import {
     faSignOutAlt,
     faTimes,
     faAngleLeft,
+    faCheckSquare as CheckedSquare,
+    faGripHorizontal,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -34,5 +40,9 @@ library.add(
     faSignOutAlt,
     faTimes,
     faStarRegular,
-    faAngleLeft
+    faAngleLeft,
+    faSquare,
+    faCheckSquare,
+    CheckedSquare,
+    faGripHorizontal
 );

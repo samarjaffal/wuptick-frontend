@@ -123,4 +123,36 @@ export const GlobalStyle = createGlobalStyle`
   background-color: ${Colors.hover};
   ${TransitionSecondary};
 }
+
+@keyframes spin {
+    0% {
+      transform:rotate(0deg) scale( .75 );
+    }
+    100% {
+      transform:rotate(360deg) scale( 1 );
+    } 
+}
+
+@keyframes beat {
+    0%
+  {
+    transform: scale( .75 );
+    opacity: 0.25;
+  }
+  20%
+  {
+    transform: scale( 1 );
+    opacity: 0.50;
+  }
+  40%
+  {
+    transform: scale( .75 );
+    opacity: 0.75;
+  }
+  60%
+  {
+    transform: scale( 1 );
+    opacity: 1;
+  }
+}
 `;

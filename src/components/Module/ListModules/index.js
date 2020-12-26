@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ModuleItem } from '../ModuleItem';
+import { ListModuleItems } from '../ListModuleItems';
 import { AddNew } from '../../AddNew/index';
 import { OptionsDropDown as StatusDropDown } from '../../Status/index';
 import { useDragDrop } from '../../../hooks/useDragDrop';
@@ -15,12 +16,12 @@ import { UpdateModuleNameMutation } from '../../../requests/Module/UpdateModuleN
 import { List, Placeholder } from './styles';
 
 export const ListModules = ({ modules = [], projectId }) => {
+    /*  const [columns, setColumns] = useState(['modules-column']); */
     const [selectedModule, setSelectedModule] = useState();
     const [editModuleId, setEditModuleId] = useState(null);
     const { currentElemRef, openDropCallBack } = useDropdown();
 
-    const _columns = ['modules'];
-    const _items = [...modules];
+    let _columns = [{ _id: 'modules_column_1', modules: [...modules] }];
 
     const setStatus = (value) => {
         currentElemRef.current.setStatus(value);
@@ -53,17 +54,22 @@ export const ListModules = ({ modules = [], projectId }) => {
     return (
         <SaveModulesOrderMutation>
             {({ doSaveOrder }) => {
-                const onDragEndCallBack = (arrayIds) => {
-                    console.log('onDragEndCallBack', arrayIds, projectId);
-                    doSaveOrder(arrayIds, projectId);
+                const onDragEndCallBack = (items) => {
+                    const moduleIds = items.map((item) => item._id);
+                    console.log('onDragEndCallBack', moduleIds, projectId);
+                    doSaveOrder(moduleIds, projectId);
                 };
                 const {
                     columns,
-                    items,
+                    handleDragUpdate,
                     onDragEnd,
                     placeholderProps,
-                    handleDragUpdate,
-                } = useDragDrop(_columns, _items, () => onDragEndCallBack);
+                } = useDragDrop(
+                    _columns,
+                    'modules',
+                    false,
+                    () => onDragEndCallBack
+                );
                 return (
                     <DragDropContext
                         onDragEnd={onDragEnd}
@@ -75,7 +81,7 @@ export const ListModules = ({ modules = [], projectId }) => {
                                     {({ doUpdateModule }) =>
                                         columns.map((column, index) => (
                                             <Droppable
-                                                droppableId={column}
+                                                droppableId={column._id}
                                                 key={index}
                                             >
                                                 {(provided, snapshot) => (
@@ -83,33 +89,23 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                         {...provided.droppableProps}
                                                         ref={provided.innerRef}
                                                     >
-                                                        {items.map(
-                                                            (module, index) => (
-                                                                <ModuleItem
-                                                                    key={
-                                                                        module._id
-                                                                    }
-                                                                    index={
-                                                                        index
-                                                                    }
-                                                                    module={
-                                                                        module
-                                                                    }
-                                                                    setModuleCallback={
-                                                                        setModuleCallback
-                                                                    }
-                                                                    editModuleId={
-                                                                        editModuleId
-                                                                    }
-                                                                    setEditModuleId={
-                                                                        setEditModuleId
-                                                                    }
-                                                                    doUpdateModule={
-                                                                        doUpdateModule
-                                                                    }
-                                                                />
-                                                            )
-                                                        )}
+                                                        <ListModuleItems
+                                                            modules={
+                                                                column.modules
+                                                            }
+                                                            doUpdateModule={
+                                                                doUpdateModule
+                                                            }
+                                                            setModuleCallback={
+                                                                setModuleCallback
+                                                            }
+                                                            editModuleId={
+                                                                editModuleId
+                                                            }
+                                                            setEditModuleId={
+                                                                setEditModuleId
+                                                            }
+                                                        />
                                                         {provided.placeholder}
                                                         {Object.keys(
                                                             placeholderProps
@@ -150,6 +146,9 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                                         }
                                                                         setValue={
                                                                             SetModuleName
+                                                                        }
+                                                                        border={
+                                                                            true
                                                                         }
                                                                     />
                                                                 );

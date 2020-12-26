@@ -16,16 +16,16 @@ export const Dropdown = ({
     const { menuHeight, dropdownRef, setMenuHeight } = useDropdown();
 
     useEffect(() => {
-        setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
+        setMenuHeight('auto');
     }, []);
 
     return (
         <DropdownContainer
-            style={{ height: open ? menuHeight : 0 }}
+            style={{ height: open ? menuHeight : menuHeight }}
             ref={dropdownRef}
             open={open}
             top={top}
-            left={left}
+            left={open ? left : '-100px'}
             width={width}
             transform={transform}
             bg={bg}

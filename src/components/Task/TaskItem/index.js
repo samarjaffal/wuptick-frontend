@@ -1,83 +1,71 @@
-import React from 'react';
-import { ListContainer } from '../../ListContainer/index';
-import { Avatar } from '../../Avatar/index';
-import { AddNew } from '../../AddNew/index';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Draggable } from 'react-beautiful-dnd';
+import { TaskCheck } from '../TaskCheck/index';
+import { FavoriteButton } from '../../FavoriteButton/index';
+import { AssignedUser } from '../../AssignedUser/index';
+import { ListUsersDropdown } from '../../../pages/Module/ModuleDropDowns/index';
 import {
-    Container,
-    Wrapper,
-    Check,
-    Title,
-    Plus,
-    Star,
-    Element,
-    Deadline,
+    Task as TaskStyled,
+    TaskText,
+    TaskOptions,
+    OptionContainer,
+    AsigneeOption,
+    SetDate,
+    CenterContent,
+    TextContainer,
+    DragDropContainer,
+    IconDragDrop,
 } from './styles';
 
-export const TaskItem = () => {
+export const TaskItem = ({ task = {}, index, isDragging }) => {
+    console.log('rendered task');
+
     return (
         <>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">Lorem impsum dolor</Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
+            <Draggable draggableId={task._id} index={index}>
+                {(provided, snapshot) => (
+                    <div
+                        className="TaskContainer"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                    >
+                        <TaskStyled isDragging={snapshot.isDragging}>
+                            <DragDropContainer {...provided.dragHandleProps}>
+                                <IconDragDrop icon="grip-horizontal" />
+                            </DragDropContainer>
+                            <TextContainer>
+                                <TaskCheck />
+                                <TaskText>{task.name}</TaskText>
+                            </TextContainer>
 
-                <Element>
-                    <Avatar size={22} hide={false} />
-                </Element>
-                <Element>
-                    <Star icon="star" />
-                </Element>
-                <Element>
-                    <Deadline>Oct. 6</Deadline>
-                </Element>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">
-                                Lorem impsum dolor. amet consectetur adipisicing
-                                elit.{' '}
-                            </Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
-                <Element>
-                    <Avatar size={22} hide={false} />
-                </Element>
-                <Element>
-                    <Star icon="star" />
-                </Element>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <Container>
-                <div style={{ width: '50%' }}>
-                    <ListContainer>
-                        <Wrapper>
-                            <Check></Check>
-                            <Title to="#">
-                                Lorem ipsum dolor sit, amet consectetur
-                                adipisicing elit. Reiciendis suscipit...
-                            </Title>
-                        </Wrapper>
-                    </ListContainer>
-                </div>
-                <Element dotted={true} displayOnHover={true}>
-                    <Plus icon="plus" />
-                </Element>
-            </Container>
-            <AddNew text="Add new task" />
+                            <TaskOptions isDragging={snapshot.isDragging}>
+                                <OptionContainer>
+                                    <AsigneeOption>
+                                        <AssignedUser task={task} />
+                                    </AsigneeOption>
+                                </OptionContainer>
+                                <OptionContainer>
+                                    <CenterContent>
+                                        <div className="DeadLineOption">
+                                            <SetDate>Set Date</SetDate>
+                                        </div>
+                                    </CenterContent>
+                                </OptionContainer>
+                                <OptionContainer>
+                                    <CenterContent>
+                                        <FavoriteButton />
+                                    </CenterContent>
+                                </OptionContainer>
+                            </TaskOptions>
+                        </TaskStyled>
+                    </div>
+                )}
+            </Draggable>
         </>
     );
+};
+
+TaskItem.propTypes = {
+    task: PropTypes.object,
 };

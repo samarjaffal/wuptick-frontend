@@ -21,28 +21,6 @@ export const SaveModulesOrderMutation = ({ children }) => {
                 moduleIds,
                 projectId,
             },
-            update: (store) => {
-                const modulesData = store.readQuery({
-                    query: gqlGetProjectModules,
-                    variables: { projectId },
-                });
-
-                let newModulesOrder = modulesData.getProjectModules.sort(
-                    function (a, b) {
-                        return (
-                            moduleIds.indexOf(a._id) - moduleIds.indexOf(b._id)
-                        );
-                    }
-                );
-
-                store.writeQuery({
-                    query: gqlGetProjectModules,
-                    variables: { projectId },
-                    data: {
-                        getProjectModules: [...newModulesOrder],
-                    },
-                });
-            },
         });
     });
     /* 

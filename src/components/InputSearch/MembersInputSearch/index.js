@@ -3,13 +3,8 @@ import Autosuggest from 'react-autosuggest';
 import PropTypes from 'prop-types';
 import { useUser } from '../../../hooks/useUser';
 import { Avatar } from '../../Avatar/index';
-import {
-    Div,
-    FlexCenter,
-    FlexSpaceBetween,
-    MemberEmail,
-    MemberName,
-} from './styles';
+import { MemberListElement } from '../../MemberListElement/index';
+import { FlexSpaceBetween } from './styles';
 
 function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -105,15 +100,7 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
 
     const MemberElement = ({ suggestion }) => (
         <FlexSpaceBetween>
-            <FlexCenter customProps="margin-bottom: 0.5em;">
-                <Avatar size={30} src={suggestion.avatar} />
-                <Div customProps="margin-left: 0.5em;">
-                    <MemberName>
-                        {suggestion.name} {suggestion.last_name}
-                    </MemberName>
-                    <MemberEmail>{suggestion.email}</MemberEmail>
-                </Div>
-            </FlexCenter>
+            <MemberListElement member={suggestion} />
         </FlexSpaceBetween>
     );
 

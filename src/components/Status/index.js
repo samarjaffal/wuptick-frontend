@@ -107,7 +107,7 @@ export const Status = ({ status, doUpdate, elemId, setModuleCallback }) => {
         openDropCallBack(value);
         if (value) {
             setRef(selectRef);
-            setPositionDropDown(labelRef.current.getBoundingClientRect());
+            setPositionDropDown(labelRef);
             setModuleCallback(elemId);
         }
     };
