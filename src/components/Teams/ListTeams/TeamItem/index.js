@@ -26,7 +26,7 @@ export const TeamItem = ({ team, userId, setTeamSelected }) => {
         value = value == null ? true : value;
         openDropCallBack(value);
         if (value) {
-            setPositionDropDown(elemRef.current.getBoundingClientRect());
+            setPositionDropDown(elemRef);
             setTeamSelected(team);
         }
     };

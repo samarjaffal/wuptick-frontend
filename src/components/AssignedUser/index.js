@@ -15,7 +15,7 @@ export const AssignedUser = ({ task }) => {
         openDropCallBack(value);
         if (value) {
             setRef(assignRef);
-            setPositionDropDown(assignRef.current.getBoundingClientRect());
+            setPositionDropDown(assignRef);
             setCurrentTask(task);
         }
     };

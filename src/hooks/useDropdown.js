@@ -23,7 +23,11 @@ export const useDropdown = () => {
         currentElemRef.current = ref.current;
     };
 
-    const setPositionDropDown = (position) => {
+    const setPositionDropDown = (elementRef) => {
+        const bodyRect = document.body.getBoundingClientRect();
+        const elemRect = elementRef.current.getBoundingClientRect();
+        const offset = elemRect.top - bodyRect.top;
+        const position = { top: offset, left: elemRect.left };
         setPosition(position);
     };
 

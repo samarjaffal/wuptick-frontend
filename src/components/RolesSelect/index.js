@@ -41,7 +41,7 @@ export const RolesSelect = forwardRef(
             openDropCallBack(value);
             if (value) {
                 setRef(selectRef);
-                setPositionCallBack(labelRef.current.getBoundingClientRect());
+                setPositionCallBack(labelRef);
                 setUserCallBack(userId);
             }
         };

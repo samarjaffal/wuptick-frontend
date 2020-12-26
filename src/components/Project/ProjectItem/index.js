@@ -41,7 +41,7 @@ export const ProjectItem = ({
         value = value == null ? true : value;
         openDropCallBack(value);
         if (value) {
-            setPositionDropDown(elemRef.current.getBoundingClientRect());
+            setPositionDropDown(elemRef);
             setProjectAndTeam(project, teamId);
         }
     };
