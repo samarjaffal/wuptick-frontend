@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import List from 'list.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dropdown } from '../../Dropdrown/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
@@ -8,7 +9,13 @@ import { MemberListElement } from '../../MemberListElement/index';
 import { AssignTaskMutation } from '../../../requests/Task/AssignTaskMutation';
 import { Colors } from '../../../assets/css/colors';
 import { Ul } from '../../SharedComponents/styles';
-import { InputSearch, MembersContainer, MemberItem } from './styles';
+import {
+    InputSearch,
+    MembersContainer,
+    MemberItem,
+    Span,
+    NotAssigned,
+} from './styles';
 
 export const ListUsersDropDown = () => {
     const { open, position, setOpen } = useDropdown();
@@ -26,6 +33,15 @@ export const ListUsersDropDown = () => {
                 <AssignTaskMutation>
                     {({ doAssignTask }) => (
                         <Ul className="list">
+                            <NotAssigned
+                                id="member-item"
+                                onClick={() => {
+                                    doAssignTask(currentTask._id, null);
+                                    setOpen(false);
+                                }}
+                            >
+                                <Span>Not assigned</Span>
+                            </NotAssigned>
                             {members.map((member, index) => (
                                 <MemberItem
                                     key={index}
