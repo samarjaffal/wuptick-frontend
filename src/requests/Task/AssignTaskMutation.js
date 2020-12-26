@@ -25,45 +25,6 @@ export const AssignTaskMutation = ({ children }) => {
                     variables: { moduleId: currentModule._id },
                 },
             ],
-            /*   update: (store) => {
-                const listsData = store.readQuery({
-                    query: gqlGetTaskListsAndTasks,
-                    variables: { moduleId: currentModule._id },
-                });
-                console.log(listsData, 'invitationsData');
-
-                let list = listsData.getModule.task_lists.find((list) =>
-                    list.tasks.find((task) => task._id == taskId)
-                );
-
-                list.tasks.forEach((task) => {
-                    if (task._id == taskId) {
-                        task.assigned = userId;
-                    }
-                });
-
-                console.log(list, 'list');
-
-                let tempListData = listsData.getModule;
-
-                let newLists = [
-                    ...new Map(
-                        tempListData.task_lists.map((item) => [item._id, item])
-                    ).values(),
-                ];
-
-                tempListData.task_lists = newLists;
-
-                store.writeQuery({
-                    query: gqlGetTaskListsAndTasks,
-                    variables: { moduleId: currentModule._id },
-                    data: {
-                        getModule: {
-                            ...tempListData,
-                        },
-                    },
-                });
-            }, */
         });
     });
 
