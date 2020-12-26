@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { Avatar } from '../Avatar/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UserIconContainer, UserIconSVG } from './styles';
 import { useUser } from '../../hooks/useUser';
@@ -21,9 +22,15 @@ export const AssignedUser = ({ task }) => {
 
     return (
         <UserIconContainer ref={assignRef} onClick={() => handleDropDown()}>
-            <UserIconSVG width="14px" height="14px" viewBox="0 0 25 25" />
+            {task.assigned !== null && Object.keys(task.assigned).length > 0 ? (
+                <Avatar hide={false} size={25} src={task.assigned.avatar} />
+            ) : (
+                <UserIconSVG width="14px" height="14px" viewBox="0 0 25 25" />
+            )}
         </UserIconContainer>
     );
 };
 
-AssignedUser.propTypes = {};
+AssignedUser.propTypes = {
+    task: PropTypes.object,
+};

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
-import { Avatar } from '../../Avatar/index';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
@@ -43,17 +42,7 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                             <TaskOptions isDragging={snapshot.isDragging}>
                                 <OptionContainer>
                                     <AsigneeOption>
-                                        {task.assigned !== null &&
-                                        Object.keys(task.assigned).length >
-                                            0 ? (
-                                            <Avatar
-                                                hide={false}
-                                                size={25}
-                                                src={task.assigned.avatar}
-                                            />
-                                        ) : (
-                                            <AssignedUser task={task} />
-                                        )}
+                                        <AssignedUser task={task} />
                                     </AsigneeOption>
                                 </OptionContainer>
                                 <OptionContainer>
