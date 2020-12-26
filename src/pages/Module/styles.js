@@ -12,6 +12,9 @@ import { Colors } from '../../assets/css/colors';
 export const Container = styled.div`
     display: flex;
     height: 100%;
+    @media (max-width: 425px) {
+        justify-content: center;
+    }
 `;
 
 export const TopContainer = styled.div`

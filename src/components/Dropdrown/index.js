@@ -21,11 +21,11 @@ export const Dropdown = ({
 
     return (
         <DropdownContainer
-            style={{ height: open ? menuHeight : 0 }}
+            style={{ height: open ? menuHeight : menuHeight }}
             ref={dropdownRef}
             open={open}
             top={top}
-            left={left}
+            left={open ? left : '-100px'}
             width={width}
             transform={transform}
             bg={bg}
