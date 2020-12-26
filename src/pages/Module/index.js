@@ -29,7 +29,6 @@ import {
 export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
-    /* const [newList, setNewList] = useState(); */
     const { tab } = queryString.parse(location.search);
     let newList = '';
     const callBackNewList = (value) => {

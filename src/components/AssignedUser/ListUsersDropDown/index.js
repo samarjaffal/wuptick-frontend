@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import List from 'list.js';
 import { Dropdown } from '../../Dropdrown/index';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { useUser } from '../../../hooks/useUser';
 import { Avatar } from '../../Avatar/index';
 import { MemberListElement } from '../../MemberListElement/index';
+import { AssignTaskMutation } from '../../../requests/Task/AssignTaskMutation';
 import { Colors } from '../../../assets/css/colors';
 import { Ul } from '../../SharedComponents/styles';
-import { useUser } from '../../../hooks/useUser';
-import PropTypes from 'prop-types';
-import { InputSearch, MembersContainer } from './styles';
+import { InputSearch, MembersContainer, MemberItem } from './styles';
 
 export const ListUsersDropDown = () => {
     const { open, position, setOpen } = useDropdown();
-    const { currentProject } = useUser();
+    const { currentProject, currentTask } = useUser();
     const [members, setMembers] = useState([]);
 
     const options = {
@@ -23,13 +23,27 @@ export const ListUsersDropDown = () => {
     const renderMemberList = (members) => {
         const memberList = (
             <MembersContainer>
-                <Ul className="list">
-                    {members.map((member, index) => (
-                        <li key={index} id="member-item">
-                            <MemberListElement member={member} />
-                        </li>
-                    ))}
-                </Ul>
+                <AssignTaskMutation>
+                    {({ doAssignTask }) => (
+                        <Ul className="list">
+                            {members.map((member, index) => (
+                                <MemberItem
+                                    key={index}
+                                    id="member-item"
+                                    onClick={() => {
+                                        doAssignTask(
+                                            currentTask._id,
+                                            member._id
+                                        );
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <MemberListElement member={member} />
+                                </MemberItem>
+                            ))}
+                        </Ul>
+                    )}
+                </AssignTaskMutation>
             </MembersContainer>
         );
         new List('members-list', options);
@@ -37,7 +51,7 @@ export const ListUsersDropDown = () => {
     };
 
     useEffect(() => {
-        if (currentProject.members.length > 0) {
+        if (Object.keys(currentProject).length > 0) {
             let newMembers = currentProject.members.map(
                 (member) => member.user
             );

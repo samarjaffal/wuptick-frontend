@@ -10,6 +10,7 @@ export const UserContextProvider = ({ children }) => {
     const [currentProject, setCurrentProject] = useState({});
     const [currentModule, setCurrentModule] = useState({});
     const [currentUser, setCurrentUser] = useState({});
+    const [currentTask, setCurrentTask] = useState({});
     const value = {
         accessToken,
         setAccessToken,
@@ -23,6 +24,8 @@ export const UserContextProvider = ({ children }) => {
         setCurrentProject,
         currentModule,
         setCurrentModule,
+        currentTask,
+        setCurrentTask,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

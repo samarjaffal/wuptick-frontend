@@ -2,9 +2,11 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UserIconContainer, UserIconSVG } from './styles';
+import { useUser } from '../../hooks/useUser';
 
-export const AssignedUser = () => {
+export const AssignedUser = ({ task }) => {
     const { setRef, setPositionDropDown, openDropCallBack } = useDropdown();
+    const { setCurrentTask } = useUser();
     const assignRef = useRef(null);
 
     const handleDropDown = (value = null) => {
@@ -13,7 +15,7 @@ export const AssignedUser = () => {
         if (value) {
             setRef(assignRef);
             setPositionDropDown(assignRef.current.getBoundingClientRect());
-            /* setModuleCallback(elemId); */
+            setCurrentTask(task);
         }
     };
 

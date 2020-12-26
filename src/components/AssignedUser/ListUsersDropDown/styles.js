@@ -32,3 +32,12 @@ export const MembersContainer = styled.div`
     max-height: 130px;
     overflow-y: auto;
 `;
+
+export const MemberItem = styled.li`
+    cursor: pointer;
+    padding: 0 0.5em;
+    border-radius: ${borderRadius};
+    :hover {
+        background-color: ${Colors.hover};
+    }
+`;

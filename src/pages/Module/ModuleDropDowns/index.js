@@ -5,7 +5,7 @@ import { OutsideClick } from '../../../components/OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import PropTypes from 'prop-types';
 
-export const ListUsersDropdown = () => {
+export const ListUsersDropdown = ({ taskId }) => {
     const { openDropCallBack } = useDropdown();
 
     const handleDropDown = (value = null) => {
@@ -15,7 +15,7 @@ export const ListUsersDropdown = () => {
 
     return ReactDom.createPortal(
         <OutsideClick setLocalDropDownState={handleDropDown}>
-            <ListUsersDropDown />
+            <ListUsersDropDown taskId={taskId} />
         </OutsideClick>,
         document.getElementById('dropwdown-app')
     );
