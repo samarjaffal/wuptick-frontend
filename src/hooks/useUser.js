@@ -73,6 +73,11 @@ export const useUser = () => {
         return url;
     };
 
+    const isFavoriteTask = (taskId, tasks) => {
+        let tasksIds = tasks.map((task) => task._id);
+        return tasksIds.includes(taskId);
+    };
+
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
 
@@ -96,5 +101,6 @@ export const useUser = () => {
         getAge,
         generateProfileUrl,
         generateProjectUrl,
+        isFavoriteTask,
     };
 };

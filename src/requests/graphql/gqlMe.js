@@ -22,6 +22,9 @@ export const gqlMe = gql`
                     last_name
                 }
             }
+            favorite_tasks {
+                _id
+            }
             teams {
                 _id
                 name

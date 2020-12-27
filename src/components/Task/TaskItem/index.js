@@ -54,7 +54,7 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                 </OptionContainer>
                                 <OptionContainer>
                                     <CenterContent>
-                                        <FavoriteButton />
+                                        <FavoriteButton taskId={task._id} />
                                     </CenterContent>
                                 </OptionContainer>
                             </TaskOptions>
