@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
-import { ListUsersDropdown } from '../../../pages/Module/ModuleDropDowns/index';
+import { MeQuery } from '../../../requests/MeQuery';
 import {
     Task as TaskStyled,
     TaskText,
@@ -54,7 +54,18 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                 </OptionContainer>
                                 <OptionContainer>
                                     <CenterContent>
-                                        <FavoriteButton taskId={task._id} />
+                                        <MeQuery>
+                                            {({ data }) => {
+                                                const favTasks =
+                                                    data.me.favorite_tasks;
+                                                return (
+                                                    <FavoriteButton
+                                                        taskId={task._id}
+                                                        favTasks={favTasks}
+                                                    />
+                                                );
+                                            }}
+                                        </MeQuery>
                                     </CenterContent>
                                 </OptionContainer>
                             </TaskOptions>
