@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
+import { DeadLinePicker } from '../../DeadLinePicker/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import {
     Task as TaskStyled,
@@ -11,7 +12,6 @@ import {
     TaskOptions,
     OptionContainer,
     AsigneeOption,
-    SetDate,
     CenterContent,
     TextContainer,
     DragDropContainer,
@@ -47,9 +47,7 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                 </OptionContainer>
                                 <OptionContainer>
                                     <CenterContent>
-                                        <div className="DeadLineOption">
-                                            <SetDate>Set Date</SetDate>
-                                        </div>
+                                        <DeadLinePicker task={task} />
                                     </CenterContent>
                                 </OptionContainer>
                                 <OptionContainer>
