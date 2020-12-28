@@ -6,6 +6,7 @@ import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
 import { MeQuery } from '../../../requests/MeQuery';
+import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
 import {
     Task as TaskStyled,
     TaskText,
@@ -47,7 +48,14 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                 </OptionContainer>
                                 <OptionContainer>
                                     <CenterContent>
-                                        <DeadLinePicker task={task} />
+                                        <AddDeadlineToTaskMutation>
+                                            {({ doAddDeadline }) => (
+                                                <DeadLinePicker
+                                                    task={task}
+                                                    saveDate={doAddDeadline}
+                                                />
+                                            )}
+                                        </AddDeadlineToTaskMutation>
                                     </CenterContent>
                                 </OptionContainer>
                                 <OptionContainer>
@@ -55,7 +63,8 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                         <MeQuery>
                                             {({ data }) => {
                                                 const favTasks =
-                                                    data.me.favorite_tasks;
+                                                    data.me.favorite_tasks ||
+                                                    [];
                                                 return (
                                                     <FavoriteButton
                                                         taskId={task._id}
