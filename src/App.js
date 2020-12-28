@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import regeneratorRuntime from 'regenerator-runtime';
 import ReactNotification from 'react-notifications-component';
 import { GlobalStyle } from './assets/css/GlobalStyle';
+import { DatePickerStyle } from './assets/css/react-date-picker';
 import { Helmet } from 'react-helmet';
 import Context, { UserContextProvider } from './context/UserContext';
 import { Layout } from './pages/layout/index';
@@ -37,6 +38,7 @@ export const App = () => {
                 />
             </Helmet>
             <GlobalStyle />
+            <DatePickerStyle />
             <Context.Consumer>{() => <Layout />}</Context.Consumer>
         </UserContextProvider>
     );
