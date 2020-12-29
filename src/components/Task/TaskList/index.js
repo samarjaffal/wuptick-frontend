@@ -24,6 +24,8 @@ const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
         newTask.name = value;
     };
 
+    const isFirstColumn = () => Boolean(columnKey == 0);
+
     return (
         <Draggable draggableId={`${columnId}-${columnKey}`} index={columnKey}>
             {(provided, snapshot) => (
@@ -39,17 +41,19 @@ const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
                         >
                             {list.name}
                         </TaskListTitle>
-                        <TaskListColumns isDragging={snapshot.isDragging}>
-                            <ColumnHeader>
-                                <ColumnName>Asignee</ColumnName>
-                            </ColumnHeader>
-                            <ColumnHeader>
-                                <ColumnName>Deadline</ColumnName>
-                            </ColumnHeader>
-                            <ColumnHeader>
-                                <ColumnName>Favorite</ColumnName>
-                            </ColumnHeader>
-                        </TaskListColumns>
+                        {isFirstColumn() && (
+                            <TaskListColumns isDragging={snapshot.isDragging}>
+                                <ColumnHeader>
+                                    <ColumnName>Asignee</ColumnName>
+                                </ColumnHeader>
+                                <ColumnHeader>
+                                    <ColumnName>Deadline</ColumnName>
+                                </ColumnHeader>
+                                <ColumnHeader>
+                                    <ColumnName>Favorite</ColumnName>
+                                </ColumnHeader>
+                            </TaskListColumns>
+                        )}
                     </TaskListHeader>
                     <Droppable
                         droppableId={columnId}
