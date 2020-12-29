@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { useDragDrop } from '../../../hooks/useDragDrop';
+import { useUser } from '../../../hooks/useUser';
 import { TaskListItems } from '../TaskListItems';
+import { CreateTaskMutation } from '../../../requests/Task/CreateTaskMutation';
 import { AddNew } from '../../AddNew/index';
 import {
     TaskList as TaskListStyled,
@@ -17,6 +18,12 @@ import {
 } from './styles';
 
 const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
+    const { currentModule } = useUser();
+    let newTask = {};
+    const callBackNewTask = (value) => {
+        newTask.name = value;
+    };
+
     return (
         <Draggable draggableId={`${columnId}-${columnKey}`} index={columnKey}>
             {(provided, snapshot) => (
@@ -73,12 +80,28 @@ const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
                         )}
                     </Droppable>
                     <AddNewContainer isDragging={snapshot.isDragging}>
-                        <AddNew
-                            text="Add Task"
-                            icon={true}
-                            border={false}
-                            bgColor="transparent"
-                        />
+                        <CreateTaskMutation>
+                            {({ doAddTask }) => {
+                                const createTask = () => {
+                                    doAddTask(
+                                        newTask,
+                                        currentModule._id,
+                                        list._id
+                                    );
+                                };
+
+                                return (
+                                    <AddNew
+                                        text="Add Task"
+                                        icon={true}
+                                        border={false}
+                                        bgColor="transparent"
+                                        doFunction={createTask}
+                                        setValue={callBackNewTask}
+                                    />
+                                );
+                            }}
+                        </CreateTaskMutation>
                     </AddNewContainer>
                 </TaskListStyled>
             )}

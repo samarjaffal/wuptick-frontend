@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
-import { gqlAssignTask } from '../graphql/gqlAssignTask';
 import { gqlAddDeadlineToTask } from '../graphql/gqlAddDeadlineToTask';
 import PropTypes from 'prop-types';
 
@@ -20,12 +19,6 @@ export const AddDeadlineToTaskMutation = ({ children }) => {
                 taskId,
                 date,
             },
-            /*  refetchQueries: [
-                {
-                    query: gqlGetTaskListsAndTasks,
-                    variables: { moduleId: currentModule._id },
-                },
-            ], */
         });
     });
 

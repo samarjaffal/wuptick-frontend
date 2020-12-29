@@ -77,4 +77,5 @@ export const DeadLinePicker = ({ task = {}, saveDate }) => {
 
 DeadLinePicker.propTypes = {
     task: PropTypes.object,
+    saveDate: PropTypes.func,
 };
