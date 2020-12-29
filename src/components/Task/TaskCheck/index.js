@@ -7,11 +7,27 @@ import {
     SquareChecked,
 } from './styles';
 
-export const TaskCheck = () => {
-    const [checked, setChecked] = useState(false);
+export const TaskCheck = ({ task, saveStatus }) => {
+    const [checked, setChecked] = useState(Boolean(task.done));
+
+    const handleSaveStatus = (status) => {
+        setChecked(status);
+        const checkbox = document.getElementById(`check-${task._id}`);
+        if (status) {
+            checkbox.style.animationName = 'beat';
+            checkbox.style.animationDuration = '1000ms';
+        } else {
+            checkbox.style.animationName = 'none';
+            checkbox.style.animationDuration = '0';
+        }
+        saveStatus(task._id, { done: status });
+    };
 
     return (
-        <TaskCheckStyled onClick={() => setChecked(!checked)}>
+        <TaskCheckStyled
+            onClick={() => handleSaveStatus(!checked)}
+            id={`check-${task._id}`}
+        >
             {checked ? (
                 <SquareChecked icon={['fas', 'check-square']} />
             ) : (
@@ -24,4 +40,7 @@ export const TaskCheck = () => {
     );
 };
 
-TaskCheck.propTypes = {};
+TaskCheck.propTypes = {
+    task: PropTypes.object,
+    saveStatus: PropTypes.func,
+};

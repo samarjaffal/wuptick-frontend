@@ -7,6 +7,7 @@ import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
+import { HandleTaskStatusMutation } from '../../../requests/Task/HandleTaskStatusMutation';
 import {
     Task as TaskStyled,
     TaskText,
@@ -36,7 +37,15 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                 <IconDragDrop icon="grip-horizontal" />
                             </DragDropContainer>
                             <TextContainer>
-                                <TaskCheck />
+                                <HandleTaskStatusMutation>
+                                    {({ doHandleStatus }) => (
+                                        <TaskCheck
+                                            task={task}
+                                            saveStatus={doHandleStatus}
+                                        />
+                                    )}
+                                </HandleTaskStatusMutation>
+
                                 <TaskText>{task.name}</TaskText>
                             </TextContainer>
 

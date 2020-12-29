@@ -37,8 +37,6 @@ export const useDragDrop = (
             return;
         }
 
-        console.log(source, destination, 'soure');
-
         const startColumn = columns.find(
             (column) => column._id == source.droppableId
         );

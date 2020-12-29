@@ -27,6 +27,4 @@ export const SquareHover = styled(FontAwesomeIcon)`
 
 export const SquareChecked = styled(FontAwesomeIcon)`
     color: ${Colors.green};
-    animation-name: beat;
-    animation-duration: 1000ms;
 `;
