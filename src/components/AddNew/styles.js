@@ -2,7 +2,13 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
 import { Transition } from '../../assets/css/shared-styles';
-import { borderRadius, info, bold, description } from '../../assets/css/theme';
+import {
+    borderRadius,
+    info,
+    bold,
+    description,
+    regular,
+} from '../../assets/css/theme';
 
 export const Container = styled.div`
     background-color: ${({ isEditing, bgColor }) =>
@@ -48,6 +54,8 @@ export const Input = styled.input`
     width: 100%;
     background-color: transparent;
     ${description};
+    color: ${Colors.black};
+    font-weight: ${regular};
     :focus {
         outline: none;
     }

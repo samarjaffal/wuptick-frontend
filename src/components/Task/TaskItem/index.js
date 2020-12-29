@@ -63,8 +63,9 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                         <MeQuery>
                                             {({ data }) => {
                                                 const favTasks =
-                                                    data.me.favorite_tasks ||
-                                                    [];
+                                                    Object.keys(data).length > 0
+                                                        ? data.me.favorite_tasks
+                                                        : [];
                                                 return (
                                                     <FavoriteButton
                                                         taskId={task._id}
