@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
+import Context, { TaskContextProvider } from '../../context/TaskContext';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { TasksSection } from './TasksSection';
@@ -84,10 +85,18 @@ export const Module = ({ projectId, moduleId, location }) => {
 
                                 <div className="TasksLists">
                                     <DropdownContextProvider>
-                                        <TasksSection
-                                            lists={module.task_lists}
-                                            moduleId={moduleId}
-                                        />
+                                        <TaskContextProvider>
+                                            <Context.Consumer>
+                                                {() => (
+                                                    <TasksSection
+                                                        lists={
+                                                            module.task_lists
+                                                        }
+                                                        moduleId={moduleId}
+                                                    />
+                                                )}
+                                            </Context.Consumer>
+                                        </TaskContextProvider>
                                     </DropdownContextProvider>
                                     <AddTaskListMutation>
                                         {({ doCreateList }) => {
