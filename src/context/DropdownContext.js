@@ -6,6 +6,7 @@ export const DropdownContextProvider = ({ children }) => {
     const [open, setOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState('main');
     const [menuHeight, setMenuHeight] = useState(null);
+    const [selectDropDown, setSelectDropDown] = useState(null);
     const [position, setPosition] = useState({});
 
     const dropdownRef = useRef(null);
@@ -22,6 +23,8 @@ export const DropdownContextProvider = ({ children }) => {
         currentElemRef,
         position,
         setPosition,
+        selectDropDown,
+        setSelectDropDown,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

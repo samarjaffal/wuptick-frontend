@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
+import { OptionsButtonTask } from '../OptionsButtonTask/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
 import { HandleTaskStatusMutation } from '../../../requests/Task/HandleTaskStatusMutation';
@@ -17,6 +18,7 @@ import {
     CenterContent,
     TextContainer,
     DragDropContainer,
+    OptionButtonContainer,
     IconDragDrop,
 } from './styles';
 
@@ -45,8 +47,18 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                         />
                                     )}
                                 </HandleTaskStatusMutation>
-
-                                <TaskText>{task.name}</TaskText>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <TaskText>{task.name}</TaskText>
+                                    <OptionButtonContainer>
+                                        <OptionsButtonTask task={task} />
+                                    </OptionButtonContainer>
+                                </div>
                             </TextContainer>
 
                             <TaskOptions isDragging={snapshot.isDragging}>
@@ -72,7 +84,7 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                         <MeQuery>
                                             {({ data }) => {
                                                 const favTasks =
-                                                    Object.keys(data).length > 0
+                                                    data !== null
                                                         ? data.me.favorite_tasks
                                                         : [];
                                                 return (

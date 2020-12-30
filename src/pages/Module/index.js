@@ -5,12 +5,11 @@ import { useLocation } from '@reach/router';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from '../../components/Module/ModuleTabs';
-import { TaskLists } from '../../components/Task/TaskLists/index';
+import { TasksSection } from './TasksSection';
 import { AddNew } from '../../components/AddNew/index';
 import { Sidebar } from '../../components/Sidebar/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { DropdownContextProvider } from '../../context/DropdownContext';
-import { ListUsersDropdown } from './ModuleDropDowns';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
 import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
@@ -85,11 +84,10 @@ export const Module = ({ projectId, moduleId, location }) => {
 
                                 <div className="TasksLists">
                                     <DropdownContextProvider>
-                                        <TaskLists
+                                        <TasksSection
                                             lists={module.task_lists}
                                             moduleId={moduleId}
                                         />
-                                        <ListUsersDropdown />
                                     </DropdownContextProvider>
                                     <AddTaskListMutation>
                                         {({ doCreateList }) => {

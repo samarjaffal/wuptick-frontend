@@ -36,11 +36,19 @@ export const TaskText = styled.p`
     font-weight: 400;
     margin: 0;
     margin-left: 10px;
+    margin-right: 0.5em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+`;
+
+export const OptionButtonContainer = styled.div`
+    opacity: 0;
+    ${TextContainer}:hover & {
+        opacity: 1;
+    }
 `;
 
 export const TaskOptions = styled.div`

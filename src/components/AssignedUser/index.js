@@ -6,12 +6,18 @@ import { UserIconContainer, UserIconSVG } from './styles';
 import { useUser } from '../../hooks/useUser';
 
 export const AssignedUser = ({ task }) => {
-    const { setRef, setPositionDropDown, openDropCallBack } = useDropdown();
+    const {
+        setRef,
+        setPositionDropDown,
+        openDropCallBack,
+        setSelectedDropDownCB,
+    } = useDropdown();
     const { setCurrentTask } = useUser();
     const assignRef = useRef(null);
 
     const handleDropDown = (value = null) => {
         value = value == null ? true : value;
+        setSelectedDropDownCB('list-users');
         openDropCallBack(value);
         if (value) {
             setRef(assignRef);

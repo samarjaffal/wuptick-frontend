@@ -12,6 +12,8 @@ export const useDropdown = () => {
         currentElemRef,
         setPosition,
         position,
+        selectDropDown,
+        setSelectDropDown,
     } = useContext(Context);
 
     const calcHeight = useCallback((el) => {
@@ -38,6 +40,10 @@ export const useDropdown = () => {
         }
     };
 
+    const setSelectedDropDownCB = (value) => {
+        setSelectDropDown(value);
+    };
+
     return {
         open,
         setOpen,
@@ -52,5 +58,7 @@ export const useDropdown = () => {
         position,
         setPositionDropDown,
         openDropCallBack,
+        selectDropDown,
+        setSelectedDropDownCB,
     };
 };
