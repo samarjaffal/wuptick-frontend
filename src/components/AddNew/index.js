@@ -25,7 +25,6 @@ export const AddNew = ({
 
         if (event.keyCode === 13) {
             if (isFocused) {
-                console.log('item added', setValue);
                 setValue(inputRef.current.value);
                 inputRef.current.value = '';
                 if (doFunction) {

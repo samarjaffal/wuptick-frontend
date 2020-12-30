@@ -5,11 +5,12 @@ import { useDropdown } from '../../../hooks/useDropdown';
 import { useTask } from '../../../hooks/useTask';
 import { ListUsersDropdown, TaskItemDropDown } from '../ModuleDropDowns';
 import { DeleteModal } from '../../../components/Modal/templates/DeleteModal/index';
+import { DeleteTaskMutation } from '../../../requests/Task/DeleteTaskMutation';
 import PropTypes from 'prop-types';
 
 export const TasksSection = ({ lists, moduleId }) => {
     const { selectDropDown } = useDropdown();
-    const { currentTask } = useUser();
+    const { currentTask, currentModule } = useUser();
     const { deleteModalRef } = useTask();
 
     const showSelectedDropDown = () => {
@@ -20,33 +21,43 @@ export const TasksSection = ({ lists, moduleId }) => {
         );
     };
 
+    const listHaveTask = (list) => {
+        return list.tasks.some((task) => task._id == currentTask._id);
+    };
+
+    const getListId = () => {
+        const list = lists.find(listHaveTask);
+        return list._id;
+    };
+
     return (
         <>
             <TaskLists lists={lists} moduleId={moduleId} />
             {showSelectedDropDown()}
-            {/*   <DeleteProjectMutation modalRef={modalRef}>
-                {({ doDeleteProject, loading }) => {
+            <DeleteTaskMutation modalRef={deleteModalRef}>
+                {({ doDeleteTask, loading }) => {
                     const doFunc = () => {
-                        doDeleteProject(projectClicked._id, teamClicked._id);
+                        doDeleteTask(
+                            currentTask._id,
+                            getListId(),
+                            currentModule._id
+                        );
                     };
                     return (
                         <DeleteModal
-                            modalRef={modalRef}
-                            title={`Delete project: ${projectClicked.name}?`}
-                            doFunc={doFunc}
+                            modalRef={deleteModalRef}
+                            title={`Delete Task: ${currentTask.name}?`}
+                            doFunc={() => doFunc()}
                             loading={loading}
                         />
                     );
                 }}
-            </DeleteProjectMutation> */}
-            <DeleteModal
-                modalRef={deleteModalRef}
-                title={`Delete Task: ${currentTask.name}?`}
-                doFunc={() => console.log('deleted')}
-                loading={false}
-            />
+            </DeleteTaskMutation>
         </>
     );
 };
 
-TasksSection.propTypes = {};
+TasksSection.propTypes = {
+    lists: PropTypes.array,
+    moduleId: PropTypes.string,
+};
