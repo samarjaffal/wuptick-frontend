@@ -8,8 +8,13 @@ import { useDropdown } from '../../../hooks/useDropdown';
 import { useTask } from '../../../hooks/useTask';
 
 export const TaskItemDropDown = () => {
-    const { open, position } = useDropdown();
+    const { open, position, setOpen } = useDropdown();
     const { openDeleteModal } = useTask();
+
+    const handleOpenModal = () => {
+        if (open) setOpen(false);
+        openDeleteModal();
+    };
 
     return (
         <Dropdown
@@ -22,7 +27,7 @@ export const TaskItemDropDown = () => {
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
-                    onClicked={() => openDeleteModal()}
+                    onClicked={() => handleOpenModal()}
                 >
                     Delete
                 </DropdownItem>
