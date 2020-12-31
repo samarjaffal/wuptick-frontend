@@ -155,9 +155,11 @@ export const useDragDrop = (
                 updatedArray
                     .slice(0, destinationIndex)
                     .reduce((total, curr) => {
-                        const style = window.getComputedStyle(curr);
-                        const marginBottom = parseFloat(style.marginBottom);
-                        return total + curr.clientHeight + marginBottom;
+                        if (curr) {
+                            const style = window.getComputedStyle(curr);
+                            const marginBottom = parseFloat(style.marginBottom);
+                            return total + curr.clientHeight + marginBottom;
+                        }
                     }, 0);
 
             setPlaceholderProps({
