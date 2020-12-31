@@ -57,7 +57,7 @@ export const ListProjects = ({ teams, userId }) => {
     const [projectClicked, setProjectClicked] = useState({});
     const [teamClicked, setTeamClicked] = useState({});
     const { currentUser } = useUser();
-    const { openDropCallBack } = useDropdown();
+    const { openDropCallBack, open, setOpen } = useDropdown();
 
     const modalRef = useRef();
     const leaveModalRef = useRef();
@@ -65,6 +65,7 @@ export const ListProjects = ({ teams, userId }) => {
     const editProjectRef = useRef();
 
     const openDeleteModal = (action) => {
+        if (open) setOpen(false);
         if (action == 'delete') {
             modalRef.current.openModal();
         } else if (action == 'leave') {
@@ -79,6 +80,7 @@ export const ListProjects = ({ teams, userId }) => {
     };
 
     const openAddProjectModal = (teamId, action) => {
+        if (open) setOpen(false);
         let team = teams.find((_team) => String(_team._id) == String(teamId));
         setTeamClicked(team);
         if (action == 'save') {
