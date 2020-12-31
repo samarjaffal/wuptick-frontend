@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-import { info, borderRadius } from '../../assets/css/theme';
+import {
+    info,
+    borderRadius,
+    description,
+    regular,
+} from '../../assets/css/theme';
 import {
     ShadowSecondary,
     Shadow,
@@ -64,5 +69,17 @@ export const Button = styled.button`
         margin: auto;
         width: 60%;
         text-align: center;
+    }
+`;
+
+export const Input = styled.input`
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    ${description};
+    font-weight: ${regular};
+    ${({ customProps }) => customProps};
+    :focus {
+        outline: none;
     }
 `;

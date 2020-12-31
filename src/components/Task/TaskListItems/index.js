@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { UpdateTaskMutation } from '../../../requests/Task/UpdateTaskMutation';
 import { TaskItem } from '../TaskItem';
 
 const MemoTaskListItems = ({ tasks = [] }) => {
-    return tasks.map((task, index) => (
-        <TaskItem task={task} key={task._id} index={index} />
-    ));
+    return (
+        <UpdateTaskMutation>
+            {({ doUpdateTask }) =>
+                tasks.map((task, index) => (
+                    <TaskItem
+                        task={task}
+                        key={task._id}
+                        index={index}
+                        doUpdate={doUpdateTask}
+                    />
+                ))
+            }
+        </UpdateTaskMutation>
+    );
 };
 
 function areEqual(prevProps, nextProps) {

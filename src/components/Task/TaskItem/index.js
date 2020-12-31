@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import { TaskCheck } from '../TaskCheck/index';
@@ -6,9 +6,11 @@ import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
 import { OptionsButtonTask } from '../OptionsButtonTask/index';
+import { useUser } from '../../../hooks/useUser';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
 import { HandleTaskStatusMutation } from '../../../requests/Task/HandleTaskStatusMutation';
+import { Input } from '../../SharedComponents/styles';
 import {
     Task as TaskStyled,
     TaskText,
@@ -22,9 +24,53 @@ import {
     IconDragDrop,
 } from './styles';
 
-export const TaskItem = ({ task = {}, index, isDragging }) => {
+export const TaskItem = ({ task = {}, index, doUpdate }) => {
     console.log('rendered task');
+    const [isEditing, setEditing] = useState(false);
+    const [isFocused, SetFocus] = useState(false);
+    const inputRef = useRef(null);
 
+    const toggleEditing = (value) => {
+        setEditing(value);
+        SetFocus(value);
+    };
+
+    const escFunction = () => {
+        setEditing(false);
+        SetFocus(false);
+    };
+
+    useEffect(() => {
+        if (isEditing) {
+            inputRef.current.focus();
+            SetFocus(inputRef.current !== document.activeElement);
+        }
+        let taskItem = document.querySelector(`#task-item-${task._id}`);
+        taskItem.addEventListener('keydown', handleKeys, false);
+        taskItem.addEventListener('dblclick', () => toggleEditing(true));
+
+        return () => {
+            taskItem.removeEventListener('dblclick', () => toggleEditing(true));
+            taskItem.removeEventListener('keydown', handleKeys, false);
+        };
+    }, [isEditing]);
+
+    const handleKeys = (event) => {
+        if (event.keyCode === 27) {
+            escFunction();
+        }
+        if (event.keyCode === 13) {
+            if (isEditing) {
+                console.log('test');
+                const taskId = task._id;
+                let input = {
+                    name: inputRef.current.value,
+                };
+                doUpdate(taskId, input);
+                toggleEditing(false);
+            }
+        }
+    };
     return (
         <>
             <Draggable draggableId={task._id} index={index}>
@@ -34,7 +80,10 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                     >
-                        <TaskStyled isDragging={snapshot.isDragging}>
+                        <TaskStyled
+                            isDragging={snapshot.isDragging}
+                            id={`task-item-${task._id}`}
+                        >
                             <DragDropContainer {...provided.dragHandleProps}>
                                 <IconDragDrop icon="grip-horizontal" />
                             </DragDropContainer>
@@ -54,7 +103,16 @@ export const TaskItem = ({ task = {}, index, isDragging }) => {
                                         width: '100%',
                                     }}
                                 >
-                                    <TaskText>{task.name}</TaskText>
+                                    {!isEditing ? (
+                                        <TaskText>{task.name}</TaskText>
+                                    ) : (
+                                        <Input
+                                            type="text"
+                                            defaultValue={task.name}
+                                            ref={inputRef}
+                                            customProps="margin-left:10px;"
+                                        />
+                                    )}
                                     <OptionButtonContainer>
                                         <OptionsButtonTask task={task} />
                                     </OptionButtonContainer>

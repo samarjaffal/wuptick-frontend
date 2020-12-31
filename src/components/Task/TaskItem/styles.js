@@ -42,6 +42,10 @@ export const TaskText = styled.p`
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
+    cursor: pointer;
+    :hover {
+        text-decoration: underline;
+    }
 `;
 
 export const OptionButtonContainer = styled.div`
