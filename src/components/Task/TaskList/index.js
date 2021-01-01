@@ -17,8 +17,13 @@ import {
     AddNewContainer,
 } from './styles';
 
-const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
-    const { currentModule } = useUser();
+const MemoTaskList = ({
+    list = {},
+    columnKey,
+    columnId,
+    moduleId,
+    placeholderProps,
+}) => {
     let newTask = {};
     const callBackNewTask = (value) => {
         newTask.name = value;
@@ -66,7 +71,10 @@ const MemoTaskList = ({ list = {}, columnKey, columnId, placeholderProps }) => {
                                 ref={provided.innerRef}
                                 isDragging={snapshot.isDragging}
                             >
-                                <TaskListItems tasks={list.tasks} />
+                                <TaskListItems
+                                    tasks={list.tasks}
+                                    moduleId={moduleId}
+                                />
                                 {provided.placeholder}
                                 {/*   {Object.keys(placeholderProps).length !== 0 &&
                                     snapshot.isDraggingOver && (

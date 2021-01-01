@@ -55,6 +55,7 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                                             columnKey={index}
                                             columnId={`${list._id}`}
                                             placeholderProps={placeholderProps}
+                                            moduleId={moduleId}
                                         />
                                     ))}
                                     {provided.placeholder}

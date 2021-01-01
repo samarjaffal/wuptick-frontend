@@ -6,7 +6,6 @@ import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
 import { OptionsButtonTask } from '../OptionsButtonTask/index';
-import { useUser } from '../../../hooks/useUser';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
 import { HandleTaskStatusMutation } from '../../../requests/Task/HandleTaskStatusMutation';
@@ -24,27 +23,23 @@ import {
     IconDragDrop,
 } from './styles';
 
-export const TaskItem = ({ task = {}, index, doUpdate }) => {
+export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
     console.log('rendered task');
     const [isEditing, setEditing] = useState(false);
-    const [isFocused, SetFocus] = useState(false);
     const inputRef = useRef(null);
 
     const toggleEditing = (value) => {
         setEditing(value);
-        SetFocus(value);
+        if (value) {
+            inputRef.current.focus();
+        }
     };
 
     const escFunction = () => {
         setEditing(false);
-        SetFocus(false);
     };
 
     useEffect(() => {
-        if (isEditing) {
-            inputRef.current.focus();
-            SetFocus(inputRef.current !== document.activeElement);
-        }
         let taskItem = document.querySelector(`#task-item-${task._id}`);
         taskItem.addEventListener('keydown', handleKeys, false);
         taskItem.addEventListener('dblclick', () => toggleEditing(true));
@@ -61,12 +56,11 @@ export const TaskItem = ({ task = {}, index, doUpdate }) => {
         }
         if (event.keyCode === 13) {
             if (isEditing) {
-                console.log('test');
                 const taskId = task._id;
                 let input = {
                     name: inputRef.current.value,
                 };
-                doUpdate(taskId, input);
+                doUpdate(taskId, input, moduleId);
                 toggleEditing(false);
             }
         }
@@ -166,4 +160,7 @@ export const TaskItem = ({ task = {}, index, doUpdate }) => {
 
 TaskItem.propTypes = {
     task: PropTypes.object,
+    index: PropTypes.number,
+    moduleId: PropTypes.string,
+    doUpdate: PropTypes.func,
 };

@@ -6,14 +6,13 @@ import { gqlGetTaskListsAndTasks } from '../graphql/gqlGetTaskListsAndTasks';
 import PropTypes from 'prop-types';
 
 export const UpdateTaskMutation = ({ children }) => {
-    const { currentModule } = useUser();
     const [updateTask, { error, loading, data }] = useMutation(gqlUpdateTask, {
         onCompleted: (data) => {
             console.log('UpdateTaskMutation', data);
         },
     });
 
-    const doUpdateTask = useCallback((taskId, input) => {
+    const doUpdateTask = useCallback((taskId, input, moduleId) => {
         updateTask({
             variables: {
                 taskId,
@@ -22,7 +21,7 @@ export const UpdateTaskMutation = ({ children }) => {
             refetchQueries: [
                 {
                     query: gqlGetTaskListsAndTasks,
-                    variables: { moduleId: currentModule._id },
+                    variables: { moduleId },
                 },
             ],
         });

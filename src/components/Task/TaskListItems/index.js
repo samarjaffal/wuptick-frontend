@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UpdateTaskMutation } from '../../../requests/Task/UpdateTaskMutation';
 import { TaskItem } from '../TaskItem';
 
-const MemoTaskListItems = ({ tasks = [] }) => {
+const MemoTaskListItems = ({ tasks = [], moduleId }) => {
     return (
         <UpdateTaskMutation>
             {({ doUpdateTask }) =>
@@ -13,6 +13,7 @@ const MemoTaskListItems = ({ tasks = [] }) => {
                         key={task._id}
                         index={index}
                         doUpdate={doUpdateTask}
+                        moduleId={moduleId}
                     />
                 ))
             }
@@ -28,4 +29,5 @@ export const TaskListItems = React.memo(MemoTaskListItems, areEqual);
 
 MemoTaskListItems.propTypes = {
     tasks: PropTypes.array,
+    moduleId: PropTypes.string,
 };
