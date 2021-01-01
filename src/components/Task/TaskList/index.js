@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { useUser } from '../../../hooks/useUser';
 import { TaskListItems } from '../TaskListItems';
+import { OptionsButtonList } from '../OptionsButtonList/index';
 import { CreateTaskMutation } from '../../../requests/Task/CreateTaskMutation';
 import { AddNew } from '../../AddNew/index';
 import {
@@ -45,6 +46,7 @@ const MemoTaskList = ({
                             {...provided.dragHandleProps}
                         >
                             {list.name}
+                            <OptionsButtonList list={list} />
                         </TaskListTitle>
                         {isFirstColumn() && (
                             <TaskListColumns isDragging={snapshot.isDragging}>
@@ -95,11 +97,7 @@ const MemoTaskList = ({
                         <CreateTaskMutation>
                             {({ doAddTask }) => {
                                 const createTask = () => {
-                                    doAddTask(
-                                        newTask,
-                                        currentModule._id,
-                                        list._id
-                                    );
+                                    doAddTask(newTask, moduleId, list._id);
                                 };
 
                                 return (

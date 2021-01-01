@@ -2,7 +2,13 @@ import { useContext, useCallback } from 'react';
 import Context from '../context/TaskContext';
 
 export const useTask = () => {
-    const { deleteModalRef } = useContext(Context);
+    const {
+        deleteModalRef,
+        elemType,
+        setElemType,
+        currentList,
+        setCurrentList,
+    } = useContext(Context);
 
     const openDeleteModal = useCallback(() => {
         deleteModalRef.current.openModal();
@@ -11,5 +17,9 @@ export const useTask = () => {
     return {
         openDeleteModal,
         deleteModalRef,
+        elemType,
+        setElemType,
+        currentList,
+        setCurrentList,
     };
 };
