@@ -32,6 +32,7 @@ export const TaskListTitle = styled.h3`
     ${subtitle}
     font-weight: ${bold};
     margin-left: ${({ isDragging }) => (isDragging ? '1.5em' : '0')};
+    margin-right: 0.5em;
 `;
 
 export const TaskListColumns = styled.div`
@@ -76,4 +77,11 @@ export const AddNewContainer = styled.div`
     visibility: ${({ isDragging }) => (isDragging ? 'hidden' : 'visible')};
     transition: 0ms;
     opacity: ${({ isDragging }) => (isDragging ? 0 : 1)};
+`;
+
+export const OptionButtonContainer = styled.div`
+    opacity: 0;
+    ${TaskListHeader}:hover & {
+        opacity: 1;
+    }
 `;

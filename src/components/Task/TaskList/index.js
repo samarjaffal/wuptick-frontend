@@ -6,6 +6,7 @@ import { TaskListItems } from '../TaskListItems';
 import { OptionsButtonList } from '../OptionsButtonList/index';
 import { CreateTaskMutation } from '../../../requests/Task/CreateTaskMutation';
 import { AddNew } from '../../AddNew/index';
+import { FlexCenter } from '../../SharedComponents/styles';
 import {
     TaskList as TaskListStyled,
     TaskListHeader,
@@ -16,6 +17,7 @@ import {
     Placeholder,
     TaskListItemsContainer,
     AddNewContainer,
+    OptionButtonContainer,
 } from './styles';
 
 const MemoTaskList = ({
@@ -41,13 +43,18 @@ const MemoTaskList = ({
                     isDragging={snapshot.isDragging}
                 >
                     <TaskListHeader>
-                        <TaskListTitle
-                            isDragging={snapshot.isDragging}
-                            {...provided.dragHandleProps}
-                        >
-                            {list.name}
-                            <OptionsButtonList list={list} />
-                        </TaskListTitle>
+                        <FlexCenter>
+                            <TaskListTitle
+                                isDragging={snapshot.isDragging}
+                                {...provided.dragHandleProps}
+                            >
+                                {list.name}
+                            </TaskListTitle>
+                            <OptionButtonContainer>
+                                <OptionsButtonList list={list} />
+                            </OptionButtonContainer>
+                        </FlexCenter>
+
                         {isFirstColumn() && (
                             <TaskListColumns isDragging={snapshot.isDragging}>
                                 <ColumnHeader>
