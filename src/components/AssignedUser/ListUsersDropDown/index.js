@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import List from 'list.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState, useRef } from 'react';
 import { Dropdown } from '../../Dropdrown/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
-import { Avatar } from '../../Avatar/index';
 import { MemberListElement } from '../../MemberListElement/index';
 import { AssignTaskMutation } from '../../../requests/Task/AssignTaskMutation';
 import { Colors } from '../../../assets/css/colors';
@@ -17,63 +14,80 @@ import {
     NotAssigned,
 } from './styles';
 
-export const ListUsersDropDown = () => {
-    const { open, position, setOpen } = useDropdown();
-    const { currentProject, currentTask } = useUser();
-    const [members, setMembers] = useState([]);
+function escapeRegexCharacters(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-    const options = {
-        item: 'member-item',
-        valueNames: ['memberName', 'memberEmail'],
-    };
-
-    const renderMemberList = (members) => {
-        const memberList = (
-            <MembersContainer>
-                <AssignTaskMutation>
-                    {({ doAssignTask }) => (
-                        <Ul className="list">
-                            <NotAssigned
+const RenderMemberList = ({ members }) => {
+    const { setOpen } = useDropdown();
+    const { currentTask } = useUser();
+    return (
+        <MembersContainer>
+            <AssignTaskMutation>
+                {({ doAssignTask }) => (
+                    <Ul className="list">
+                        <NotAssigned
+                            id="member-item"
+                            onClick={() => {
+                                doAssignTask(currentTask._id, null);
+                                setOpen(false);
+                            }}
+                        >
+                            <Span>Not assigned</Span>
+                        </NotAssigned>
+                        {members.map((member, index) => (
+                            <MemberItem
+                                key={index}
                                 id="member-item"
                                 onClick={() => {
-                                    doAssignTask(currentTask._id, null);
+                                    doAssignTask(currentTask._id, member._id);
                                     setOpen(false);
                                 }}
                             >
-                                <Span>Not assigned</Span>
-                            </NotAssigned>
-                            {members.map((member, index) => (
-                                <MemberItem
-                                    key={index}
-                                    id="member-item"
-                                    onClick={() => {
-                                        doAssignTask(
-                                            currentTask._id,
-                                            member._id
-                                        );
-                                        setOpen(false);
-                                    }}
-                                >
-                                    <MemberListElement member={member} />
-                                </MemberItem>
-                            ))}
-                        </Ul>
-                    )}
-                </AssignTaskMutation>
-            </MembersContainer>
-        );
-        new List('members-list', options);
-        return memberList;
-    };
+                                <MemberListElement member={member} />
+                            </MemberItem>
+                        ))}
+                    </Ul>
+                )}
+            </AssignTaskMutation>
+        </MembersContainer>
+    );
+};
+
+export const ListUsersDropDown = () => {
+    const { open, position } = useDropdown();
+    const { currentProject } = useUser();
+    const [items, setItems] = useState([]);
+    const [members, setMembers] = useState([]);
+    let inputRef = useRef(null);
 
     useEffect(() => {
         if (Object.keys(currentProject).length > 0) {
             let newMembers = currentProject.members.map(
                 (member) => member.user
             );
+            setItems(newMembers);
             setMembers(newMembers);
         }
     }, [currentProject.members]);
+
+    const getSuggestions = (defaultValue) => {
+        let value = inputRef.current.value;
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+        const escapedValue = escapeRegexCharacters(inputValue);
+        const regex = new RegExp('^' + escapedValue, 'i');
+        let newMembers =
+            inputLength === 0
+                ? defaultValue
+                : members.filter(
+                      (member) =>
+                          regex.test(member.name) ||
+                          regex.test(member.last_name) ||
+                          regex.test(member.email)
+                  );
+        setItems(newMembers);
+    };
 
     return (
         <Dropdown
@@ -93,15 +107,11 @@ export const ListUsersDropDown = () => {
                         type="text"
                         placeholder="Search"
                         className="search"
+                        ref={inputRef}
+                        onChange={() => getSuggestions(members)}
                     />
                 </div>
-                {renderMemberList(members)}
-                <div style={{ display: 'none' }}>
-                    <li id="member-item">
-                        <div className="memberName"></div>
-                        <div className="memberEmail"></div>
-                    </li>
-                </div>
+                <RenderMemberList members={items} />
             </div>
         </Dropdown>
     );
