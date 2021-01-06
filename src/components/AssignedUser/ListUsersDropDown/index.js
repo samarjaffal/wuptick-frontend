@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Dropdown } from '../../Dropdrown/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useUser } from '../../../hooks/useUser';
+import { useFilter } from '../../../hooks/useFilter';
 import { MemberListElement } from '../../MemberListElement/index';
 import { AssignTaskMutation } from '../../../requests/Task/AssignTaskMutation';
 import { Colors } from '../../../assets/css/colors';
@@ -13,10 +15,6 @@ import {
     Span,
     NotAssigned,
 } from './styles';
-
-function escapeRegexCharacters(str) {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
 const RenderMemberList = ({ members }) => {
     const { setOpen } = useDropdown();
@@ -54,12 +52,21 @@ const RenderMemberList = ({ members }) => {
     );
 };
 
+RenderMemberList.propTypes = {
+    members: PropTypes.object,
+};
+
 export const ListUsersDropDown = () => {
     const { open, position } = useDropdown();
     const { currentProject } = useUser();
-    const [items, setItems] = useState([]);
     const [members, setMembers] = useState([]);
-    let inputRef = useRef(null);
+    const {
+        getSuggestions,
+        inputRef,
+        items,
+        setItems,
+        setParams,
+    } = useFilter();
 
     useEffect(() => {
         if (Object.keys(currentProject).length > 0) {
@@ -67,27 +74,10 @@ export const ListUsersDropDown = () => {
                 (member) => member.user
             );
             setItems(newMembers);
+            setParams(['name', 'last_name', 'email']);
             setMembers(newMembers);
         }
     }, [currentProject.members]);
-
-    const getSuggestions = (defaultValue) => {
-        let value = inputRef.current.value;
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-        const escapedValue = escapeRegexCharacters(inputValue);
-        const regex = new RegExp('^' + escapedValue, 'i');
-        let newMembers =
-            inputLength === 0
-                ? defaultValue
-                : members.filter(
-                      (member) =>
-                          regex.test(member.name) ||
-                          regex.test(member.last_name) ||
-                          regex.test(member.email)
-                  );
-        setItems(newMembers);
-    };
 
     return (
         <Dropdown
