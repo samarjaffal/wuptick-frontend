@@ -5,6 +5,7 @@ import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
+import { TaskPanel } from '../../TaskPanel/index';
 import { OptionsButtonTask } from '../OptionsButtonTask/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
@@ -27,6 +28,9 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
     console.log('rendered task');
     const [isEditing, setEditing] = useState(false);
     const inputRef = useRef(null);
+    const panelRef = useRef(null);
+    let clickCount = 0,
+        timeout = 300;
 
     const toggleEditing = (value) => {
         setEditing(value);
@@ -39,13 +43,29 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
         setEditing(false);
     };
 
+    const handleClicks = () => {
+        clickCount++;
+        if (clickCount == 1) {
+            setTimeout(function () {
+                if (clickCount == 1 && !isEditing) {
+                    panelRef.current.openModal();
+                } else {
+                    toggleEditing(true);
+                }
+                clickCount = 0;
+            }, timeout || 300);
+        }
+    };
+
     useEffect(() => {
         let taskItem = document.querySelector(`#task-item-${task._id}`);
         taskItem.addEventListener('keydown', handleKeys, false);
-        taskItem.addEventListener('dblclick', () => toggleEditing(true));
+        /* taskItem.addEventListener('dblclick', () => toggleEditing(true)); */
+        taskItem.addEventListener('click', handleClicks);
 
         return () => {
-            taskItem.removeEventListener('dblclick', () => toggleEditing(true));
+            /* taskItem.removeEventListener('dblclick', () => toggleEditing(true)); */
+            taskItem.removeEventListener('click', handleClicks);
             taskItem.removeEventListener('keydown', handleKeys, false);
         };
     }, [isEditing]);
@@ -74,10 +94,7 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                     >
-                        <TaskStyled
-                            isDragging={snapshot.isDragging}
-                            id={`task-item-${task._id}`}
-                        >
+                        <TaskStyled isDragging={snapshot.isDragging}>
                             <DragDropContainer {...provided.dragHandleProps}>
                                 <IconDragDrop icon="grip-horizontal" />
                             </DragDropContainer>
@@ -98,13 +115,16 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
                                     }}
                                 >
                                     {!isEditing ? (
-                                        <TaskText>{task.name}</TaskText>
+                                        <TaskText id={`task-item-${task._id}`}>
+                                            {task.name}
+                                        </TaskText>
                                     ) : (
                                         <Input
                                             type="text"
                                             defaultValue={task.name}
                                             ref={inputRef}
                                             customProps="margin-left:10px;"
+                                            id={`task-item-${task._id}`}
                                         />
                                     )}
                                     <OptionButtonContainer>
@@ -150,6 +170,7 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
                                     </CenterContent>
                                 </OptionContainer>
                             </TaskOptions>
+                            <TaskPanel panelRef={panelRef} />
                         </TaskStyled>
                     </div>
                 )}
