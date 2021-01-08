@@ -3,6 +3,7 @@ import {
     faStar as faStarRegular,
     faSquare,
     faCheckSquare,
+    faTrashAlt as faTrashRegular,
 } from '@fortawesome/free-regular-svg-icons';
 import {
     faFolderOpen,
@@ -22,6 +23,10 @@ import {
     faAngleLeft,
     faCheckSquare as CheckedSquare,
     faGripHorizontal,
+    faChevronRight,
+    faCheck,
+    faPaperclip,
+    faInbox,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -44,5 +49,10 @@ library.add(
     faSquare,
     faCheckSquare,
     CheckedSquare,
-    faGripHorizontal
+    faGripHorizontal,
+    faChevronRight,
+    faCheck,
+    faPaperclip,
+    faTrashRegular,
+    faInbox
 );

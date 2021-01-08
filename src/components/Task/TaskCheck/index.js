@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Colors } from '../../../assets/css/colors';
 import {
     TaskCheck as TaskCheckStyled,
     Square,
     SquareHover,
     SquareChecked,
+    PlainCheckIcon,
 } from './styles';
 
-export const TaskCheck = ({ task, saveStatus }) => {
+export const TaskCheck = ({ task, saveStatus, style = 'checkbox' }) => {
     const [checked, setChecked] = useState(Boolean(task.done));
 
     const handleSaveStatus = (status) => {
@@ -28,13 +30,20 @@ export const TaskCheck = ({ task, saveStatus }) => {
             onClick={() => handleSaveStatus(!checked)}
             id={`check-${task._id}`}
         >
-            {checked ? (
-                <SquareChecked icon={['fas', 'check-square']} />
+            {style == 'checkbox' ? (
+                checked ? (
+                    <SquareChecked icon={['fas', 'check-square']} />
+                ) : (
+                    <>
+                        <Square icon={['far', 'square']} />
+                        <SquareHover icon={['far', 'check-square']} />
+                    </>
+                )
             ) : (
-                <>
-                    <Square icon={['far', 'square']} />
-                    <SquareHover icon={['far', 'check-square']} />
-                </>
+                <PlainCheckIcon
+                    icon="check"
+                    color={checked ? Colors.green : Colors.softGray}
+                />
             )}
         </TaskCheckStyled>
     );

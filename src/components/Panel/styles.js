@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
 import { Shadow, Transition } from '../../assets/css/shared-styles';
 import { borderRadius } from '../../assets/css/theme';
@@ -35,7 +36,8 @@ export const ModalBox = styled.div`
     z-index: 101;
     border-radius: ${borderRadius};
     border-bottom-left-radius: 0;
-    border-border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
     padding: 40px;
 
     @media (max-width: 768px) {
@@ -43,24 +45,10 @@ export const ModalBox = styled.div`
     }
 `;
 
-export const CloseButton = styled.div`
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    border: none;
-    background: transparent;
+export const ClosePanelIcon = styled(FontAwesomeIcon)`
+    font-size: 22px;
+    color: ${Colors.gray};
     cursor: pointer;
-    font-size: 12px;
-    border-radius: ${borderRadius};
-    width: 28px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ${Transition};
-    :hover {
-        background-color: ${Colors.hover};
-    }
 `;
 
 export const Title = styled.h2`
@@ -69,11 +57,66 @@ export const Title = styled.h2`
 `;
 
 export const Container = styled.div`
-    margin-top: 0.5em;
+    margin-top: 60px;
     @media (max-width: 425px) {
         max-height: 445px;
     }
     @media (max-width: 350px) {
         max-height: 400px;
     }
+`;
+
+export const Header = styled.div`
+    position: absolute;
+    width: 100%;
+    border-top-left-radius: ${borderRadius};
+    border-top-left-radius: ${borderRadius};
+    background-color: ${Colors.white};
+    padding: 10px;
+    height: 45px;
+    top: 0;
+    left: 0;
+`;
+
+export const HeaderTaskOptions = styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+`;
+
+export const BoxOption = styled.div`
+    border-radius: ${borderRadius};
+    background-color: ${Colors.whitePrimary};
+    width: 35px;
+    height: 35px;
+    margin: 0 8px;
+    cursor: pointer;
+`;
+
+export const BoxOptionContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+`;
+
+export const URLTaskIcon = styled(FontAwesomeIcon)`
+    font-size: 18px;
+    color: ${Colors.softGray};
+`;
+
+export const ArchiveIcon = styled(FontAwesomeIcon)`
+    font-size: 18px;
+    color: ${Colors.softGray};
+`;
+
+export const LeaveIcon = styled(FontAwesomeIcon)`
+    font-size: 18px;
+    color: ${Colors.softGray};
+`;
+
+export const DeleteIcon = styled(FontAwesomeIcon)`
+    font-size: 18px;
+    color: ${Colors.softGray};
 `;
