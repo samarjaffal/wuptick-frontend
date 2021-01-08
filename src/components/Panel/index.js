@@ -4,6 +4,8 @@ import ReactDom from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FavoriteButton } from '../FavoriteButton/index';
 import { TaskCheck } from '../Task/TaskCheck/index';
+import { Avatar } from '../Avatar/index';
+import { FlexCenter } from '../SharedComponents/styles';
 import {
     Container,
     ModalBackdrop,
@@ -18,6 +20,7 @@ import {
     ArchiveIcon,
     DeleteIcon,
     LeaveIcon,
+    CollaboratorsTitle,
 } from './styles';
 
 const Panel = forwardRef(({ children, onCloseFunc = null }, ref) => {
@@ -49,53 +52,73 @@ const Panel = forwardRef(({ children, onCloseFunc = null }, ref) => {
                       <ModalBox>
                           <Header>
                               <HeaderTaskOptions>
-                                  <div
-                                      className="CloseButton"
-                                      style={{ marginRight: '20px' }}
-                                      onClick={() => close()}
-                                  >
-                                      <ClosePanelIcon icon="chevron-right" />
-                                  </div>
+                                  <FlexCenter>
+                                      <div
+                                          className="CloseButton"
+                                          style={{ marginRight: '20px' }}
+                                          onClick={() => close()}
+                                      >
+                                          <ClosePanelIcon icon="chevron-right" />
+                                      </div>
 
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <TaskCheck
-                                              task={{
-                                                  done: false,
-                                                  _id: '12345',
-                                              }}
-                                              style="plain"
-                                          />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <TaskCheck
+                                                  task={{
+                                                      done: false,
+                                                      _id: '12345',
+                                                  }}
+                                                  style="plain"
+                                              />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
 
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <FavoriteButton taskId="252" />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <URLTaskIcon icon="paperclip" />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <ArchiveIcon icon="inbox" />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <LeaveIcon icon="sign-out-alt" />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
-                                  <BoxOption>
-                                      <BoxOptionContainer>
-                                          <DeleteIcon
-                                              icon={['far', 'trash-alt']}
-                                          />
-                                      </BoxOptionContainer>
-                                  </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <FavoriteButton taskId="252" />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <URLTaskIcon icon="paperclip" />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <ArchiveIcon icon="inbox" />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <LeaveIcon icon="sign-out-alt" />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
+                                      <BoxOption>
+                                          <BoxOptionContainer>
+                                              <DeleteIcon
+                                                  icon={['far', 'trash-alt']}
+                                              />
+                                          </BoxOptionContainer>
+                                      </BoxOption>
+                                  </FlexCenter>
+                                  <FlexCenter id="Collaborators">
+                                      <CollaboratorsTitle>
+                                          Colaborators
+                                      </CollaboratorsTitle>
+                                      {Array(3)
+                                          .fill()
+                                          .map((member, index) => (
+                                              <div
+                                                  key={index}
+                                                  style={{
+                                                      margin: '0 4px',
+                                                      display: 'flex',
+                                                  }}
+                                              >
+                                                  <Avatar size={25} />
+                                              </div>
+                                          ))}
+                                  </FlexCenter>
                               </HeaderTaskOptions>
                           </Header>
                           <Container>{children}</Container>

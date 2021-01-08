@@ -7,7 +7,7 @@ import { MemberModal } from '../Modal/templates/MembersModal/index';
 import { Colors } from '../../assets/css/colors';
 import { MembersList as MembersListStyled, List } from './styles';
 
-export const MembersList = ({ members = [] }) => {
+export const MembersList = ({ members = [], showAddButton = true }) => {
     const { generateProfileUrl } = useUser();
     const modalRef = useRef();
     return (
@@ -32,14 +32,16 @@ export const MembersList = ({ members = [] }) => {
                         />
                     </li>
                 ))}
-                <ButtonHome
-                    url=""
-                    icon="plus"
-                    color={Colors.primary}
-                    onClicked={() => modalRef.current.openModal()}
-                >
-                    Add
-                </ButtonHome>
+                {showAddButton && (
+                    <ButtonHome
+                        url=""
+                        icon="plus"
+                        color={Colors.primary}
+                        onClicked={() => modalRef.current.openModal()}
+                    >
+                        Add
+                    </ButtonHome>
+                )}
             </List>
             <MemberModal modalRef={modalRef} />
         </MembersListStyled>

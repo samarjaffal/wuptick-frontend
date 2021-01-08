@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../assets/css/colors';
 import { Shadow, Transition } from '../../assets/css/shared-styles';
-import { borderRadius } from '../../assets/css/theme';
+import { borderRadius, description } from '../../assets/css/theme';
 
 export const ModalWrapper = styled.div`
     position: fixed;
@@ -83,6 +83,7 @@ export const HeaderTaskOptions = styled.div`
     align-items: center;
     height: 100%;
     padding: 0 20px;
+    justify-content: space-between;
 `;
 
 export const BoxOption = styled.div`
@@ -119,4 +120,10 @@ export const LeaveIcon = styled(FontAwesomeIcon)`
 export const DeleteIcon = styled(FontAwesomeIcon)`
     font-size: 18px;
     color: ${Colors.softGray};
+`;
+
+export const CollaboratorsTitle = styled.span`
+    ${description};
+    color: ${Colors.gray};
+    margin-right: 0.5em;
 `;
