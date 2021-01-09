@@ -26,6 +26,7 @@ const MemoTaskList = ({
     columnId,
     moduleId,
     placeholderProps,
+    openTaskPanel,
 }) => {
     let newTask = {};
     const callBackNewTask = (value) => {
@@ -83,6 +84,7 @@ const MemoTaskList = ({
                                 <TaskListItems
                                     tasks={list.tasks}
                                     moduleId={moduleId}
+                                    openTaskPanel={openTaskPanel}
                                 />
                                 {provided.placeholder}
                                 {/*   {Object.keys(placeholderProps).length !== 0 &&
@@ -131,6 +133,8 @@ MemoTaskList.propTypes = {
     columnKey: PropTypes.number,
     columnId: PropTypes.string,
     placeholderProps: PropTypes.object,
+    moduleId: PropTypes.string,
+    openTaskPanel: PropTypes.func,
 };
 
 function areEqual(prevProps, nextProps) {

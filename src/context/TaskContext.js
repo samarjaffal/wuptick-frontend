@@ -6,6 +6,7 @@ export const TaskContextProvider = ({ children }) => {
     const [elemType, setElemType] = useState('task');
     const [currentList, setCurrentList] = useState(null);
     const deleteModalRef = useRef();
+    const panelRef = useRef(null);
 
     const value = {
         deleteModalRef,
@@ -13,6 +14,7 @@ export const TaskContextProvider = ({ children }) => {
         setElemType,
         currentList,
         setCurrentList,
+        panelRef,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

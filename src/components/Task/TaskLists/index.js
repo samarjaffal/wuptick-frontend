@@ -5,7 +5,7 @@ import { useDragDrop } from '../../../hooks/useDragDrop';
 import { TaskList } from '../TaskList';
 import { SaveTaskListsOrderMutation } from '../../../requests/Module/SaveTaskListsOrderMutation';
 
-export const TaskLists = ({ lists = [], moduleId }) => {
+export const TaskLists = ({ lists = [], moduleId, openTaskPanel }) => {
     let _columns = lists;
 
     return (
@@ -56,6 +56,7 @@ export const TaskLists = ({ lists = [], moduleId }) => {
                                             columnId={`${list._id}`}
                                             placeholderProps={placeholderProps}
                                             moduleId={moduleId}
+                                            openTaskPanel={openTaskPanel}
                                         />
                                     ))}
                                     {provided.placeholder}
@@ -69,4 +70,8 @@ export const TaskLists = ({ lists = [], moduleId }) => {
     );
 };
 
-TaskLists.propTypes = {};
+TaskLists.propTypes = {
+    lists: PropTypes.array,
+    moduleId: PropTypes.string,
+    openTaskPanel: PropTypes.func,
+};

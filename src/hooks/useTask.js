@@ -8,11 +8,16 @@ export const useTask = () => {
         setElemType,
         currentList,
         setCurrentList,
+        panelRef,
     } = useContext(Context);
 
     const openDeleteModal = useCallback(() => {
         deleteModalRef.current.openModal();
     });
+
+    const openTaskPanel = useCallback(() => {
+        panelRef.current.openModal();
+    }, []);
 
     return {
         openDeleteModal,
@@ -21,5 +26,7 @@ export const useTask = () => {
         setElemType,
         currentList,
         setCurrentList,
+        openTaskPanel,
+        panelRef,
     };
 };

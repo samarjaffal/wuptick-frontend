@@ -2,6 +2,8 @@ import React from 'react';
 import { TaskLists } from '../../../components/Task/TaskLists/index';
 import { useUser } from '../../../hooks/useUser';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { useTask } from '../../../hooks/useTask';
+import { TaskPanel } from '../../../components/TaskPanel/index';
 import {
     ListUsersDropdown,
     TaskItemDropDown,
@@ -14,6 +16,7 @@ import PropTypes from 'prop-types';
 export const TasksSection = ({ lists, moduleId }) => {
     const { selectDropDown } = useDropdown();
     const { currentTask } = useUser();
+    const { panelRef, openTaskPanel } = useTask();
 
     const showSelectedDropDown = () => {
         return (
@@ -35,8 +38,13 @@ export const TasksSection = ({ lists, moduleId }) => {
 
     return (
         <>
-            <TaskLists lists={lists} moduleId={moduleId} />
+            <TaskLists
+                lists={lists}
+                moduleId={moduleId}
+                openTaskPanel={openTaskPanel}
+            />
             {showSelectedDropDown()}
+            <TaskPanel panelRef={panelRef} />
             <DeleteModal getListId={() => getListId()} />
         </>
     );

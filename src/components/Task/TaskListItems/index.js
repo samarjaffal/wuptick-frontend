@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { UpdateTaskMutation } from '../../../requests/Task/UpdateTaskMutation';
 import { TaskItem } from '../TaskItem';
 
-const MemoTaskListItems = ({ tasks = [], moduleId }) => {
+const MemoTaskListItems = ({ tasks = [], moduleId, openTaskPanel }) => {
     return (
         <UpdateTaskMutation>
             {({ doUpdateTask }) =>
@@ -14,6 +14,7 @@ const MemoTaskListItems = ({ tasks = [], moduleId }) => {
                         index={index}
                         doUpdate={doUpdateTask}
                         moduleId={moduleId}
+                        openTaskPanel={openTaskPanel}
                     />
                 ))
             }
@@ -22,7 +23,10 @@ const MemoTaskListItems = ({ tasks = [], moduleId }) => {
 };
 
 function areEqual(prevProps, nextProps) {
-    return prevProps.tasks === nextProps.tasks;
+    return (
+        prevProps.tasks === nextProps.tasks &&
+        prevProps.moduleId == nextProps.moduleId
+    );
 }
 
 export const TaskListItems = React.memo(MemoTaskListItems, areEqual);
@@ -30,4 +34,5 @@ export const TaskListItems = React.memo(MemoTaskListItems, areEqual);
 MemoTaskListItems.propTypes = {
     tasks: PropTypes.array,
     moduleId: PropTypes.string,
+    openTaskPanel: PropTypes.func,
 };

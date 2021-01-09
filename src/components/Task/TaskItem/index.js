@@ -5,12 +5,12 @@ import { TaskCheck } from '../TaskCheck/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { AssignedUser } from '../../AssignedUser/index';
 import { DeadLinePicker } from '../../DeadLinePicker/index';
-import { TaskPanel } from '../../TaskPanel/index';
 import { OptionsButtonTask } from '../OptionsButtonTask/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import { AddDeadlineToTaskMutation } from '../../../requests/Task/AddDeadlineToTaskMutation';
 import { HandleTaskStatusMutation } from '../../../requests/Task/HandleTaskStatusMutation';
 import { Input } from '../../SharedComponents/styles';
+
 import {
     Task as TaskStyled,
     TaskText,
@@ -24,11 +24,17 @@ import {
     IconDragDrop,
 } from './styles';
 
-export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
+export const TaskItem = ({
+    task = {},
+    index,
+    doUpdate,
+    moduleId,
+    openTaskPanel,
+}) => {
     console.log('rendered task');
     const [isEditing, setEditing] = useState(false);
     const inputRef = useRef(null);
-    const panelRef = useRef(null);
+
     let clickCount = 0,
         timeout = 300;
 
@@ -48,7 +54,7 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
         if (clickCount == 1) {
             setTimeout(function () {
                 if (clickCount == 1 && !isEditing) {
-                    panelRef.current.openModal();
+                    openTaskPanel();
                 } else {
                     toggleEditing(true);
                 }
@@ -170,7 +176,6 @@ export const TaskItem = ({ task = {}, index, doUpdate, moduleId }) => {
                                     </CenterContent>
                                 </OptionContainer>
                             </TaskOptions>
-                            <TaskPanel panelRef={panelRef} />
                         </TaskStyled>
                     </div>
                 )}
@@ -184,4 +189,5 @@ TaskItem.propTypes = {
     index: PropTypes.number,
     moduleId: PropTypes.string,
     doUpdate: PropTypes.func,
+    openTaskPanel: PropTypes.func,
 };
