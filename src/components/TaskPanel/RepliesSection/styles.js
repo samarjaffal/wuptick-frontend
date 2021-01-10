@@ -13,11 +13,11 @@ export const Hr = styled.hr`
     opacity: 0.6;
 `;
 
-export const CommentIconSVG = styled(CommentIcon)`
+export const Icon = styled(CommentIcon)`
     fill: ${Colors.blue};
 `;
 
-export const CommentSectionTitle = styled.div`
+export const ReplySectionTitle = styled.div`
     ${title};
     font-size: 16px;
     margin-left: 0.5em;
