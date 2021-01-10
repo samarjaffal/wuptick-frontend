@@ -12,6 +12,9 @@ import {
 const Panel = forwardRef(
     ({ header: HeaderComponentProp, children, onCloseFunc = null }, ref) => {
         const [display, setDisplay] = useState(false);
+        const body = document.body;
+        const scrollY = body.style.top;
+
         useImperativeHandle(ref, () => {
             return {
                 openModal: () => open(),
@@ -21,10 +24,14 @@ const Panel = forwardRef(
 
         const open = () => {
             setDisplay(true);
+            body.style.overflow = 'hidden';
         };
 
         const close = () => {
             setDisplay(false);
+            /* body.style.position = ''; */
+            body.style.overflow = 'auto';
+
             if (onCloseFunc) {
                 onCloseFunc();
             }

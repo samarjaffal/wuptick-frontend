@@ -28,7 +28,6 @@ export const ModalBox = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
-    min-height: 15%;
     height: 85%;
     width: 45%;
     background-color: ${Colors.whitePrimary};
@@ -39,7 +38,8 @@ export const ModalBox = styled.div`
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     padding: 40px;
-
+    overflow-y: auto;
+    overflow-x: hidden;
     @media (max-width: 768px) {
         width: 60%;
     }
