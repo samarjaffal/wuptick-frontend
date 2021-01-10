@@ -1,49 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Avatar } from '../../Avatar/index';
 import { Colors } from '../../../assets/css/colors';
-import {
-    TaskActionsContainer,
-    BoxOption,
-    BoxOptionContainer,
-    ReplyIconSVG,
-    TagIconSVG,
-    BoxOptionName,
-} from './styles';
+import { MinimalButton } from '../../MinimalButton/index';
+import { TaskActionsContainer, ReplyIconSVG, TagIconSVG } from './styles';
 
 export const TaskPanelOptionButtons = () => {
     return (
         <TaskActionsContainer>
-            <BoxOption color={Colors.blue}>
-                <BoxOptionContainer>
+            <MinimalButton color={Colors.blue} name="Answer">
+                {(isParentHover) => (
                     <ReplyIconSVG
                         width="18px"
                         height="18px"
                         viewBox="0 0 25 25"
                         color={Colors.blue}
+                        hover={isParentHover}
                     />
-                    <BoxOptionName color={Colors.blue}>Answer</BoxOptionName>
-                </BoxOptionContainer>
-            </BoxOption>
-            <BoxOption color={Colors.primary}>
-                <BoxOptionContainer color={Colors.primary}>
-                    <Avatar size={22} />
-                    <BoxOptionName color={Colors.primary}>
-                        Jhon D.
-                    </BoxOptionName>
-                </BoxOptionContainer>
-            </BoxOption>
-            <BoxOption color={Colors.primary}>
-                <BoxOptionContainer color={Colors.primary}>
+                )}
+            </MinimalButton>
+            <MinimalButton color={Colors.primary} name="Jhon D.">
+                {() => <Avatar size={22} />}
+            </MinimalButton>
+            <MinimalButton color={Colors.primary} name="Web">
+                {(isParentHover) => (
                     <TagIconSVG
                         width="18px"
                         height="18px"
                         viewBox="0 0 25 25"
                         color={Colors.primary}
+                        hover={isParentHover}
                     />
-                    <BoxOptionName color={Colors.primary}>Web</BoxOptionName>
-                </BoxOptionContainer>
-            </BoxOption>
+                )}
+            </MinimalButton>
         </TaskActionsContainer>
     );
 };
