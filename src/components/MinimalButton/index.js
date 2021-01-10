@@ -25,4 +25,6 @@ MinimalButton.propTypes = {
     color: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.any,
+    bg: PropTypes.string,
+    size: PropTypes.number,
 };

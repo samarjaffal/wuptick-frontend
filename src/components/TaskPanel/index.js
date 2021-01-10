@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Panel } from '../Panel/index';
 import { TaskPanelHeader } from './TaskPanelHeader';
 import { TaskOverview } from './TaskOverview';
+import { RepliesSection } from './RepliesSection/index';
 
 const MemoTaskPanel = ({ panelRef }) => {
     console.log('render MemoTaskPanel');
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
             <TaskOverview />
+            <RepliesSection />
         </Panel>
     );
 };

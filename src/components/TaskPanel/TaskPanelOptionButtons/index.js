@@ -7,7 +7,7 @@ import { TaskActionsContainer, ReplyIconSVG, TagIconSVG } from './styles';
 export const TaskPanelOptionButtons = () => {
     return (
         <TaskActionsContainer>
-            <MinimalButton color={Colors.blue} name="Answer">
+            <MinimalButton color={Colors.blue} name="Reply">
                 {(isParentHover) => (
                     <ReplyIconSVG
                         width="18px"
