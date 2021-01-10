@@ -5,11 +5,15 @@ import { ToggleFavTaskMutation } from '../../requests/User/ToggleFavTaskMutation
 import { Colors } from '../../assets/css/colors';
 import { Star } from './styles';
 
-export const FavoriteButton = ({ taskId, favTasks = [] }) => {
+export const FavoriteButton = ({
+    taskId,
+    favTasks = [],
+    isParentHover = false,
+    inactiveColor = Colors.softGray,
+    activeColor = Colors.yellow,
+}) => {
     const [active, setActive] = useState(false);
     const { isFavoriteTask } = useUser();
-    const inactiveColor = Colors.softGray;
-    const activeColor = Colors.yellow;
 
     useEffect(() => {
         if (favTasks.length > 0) {
@@ -45,7 +49,13 @@ export const FavoriteButton = ({ taskId, favTasks = [] }) => {
                 >
                     <Star
                         icon="star"
-                        color={active ? activeColor : inactiveColor}
+                        color={
+                            isParentHover
+                                ? Colors.white
+                                : active
+                                ? activeColor
+                                : inactiveColor
+                        }
                         id={`button-favStar-${taskId}`}
                     />
                 </span>
@@ -57,4 +67,7 @@ export const FavoriteButton = ({ taskId, favTasks = [] }) => {
 FavoriteButton.propTypes = {
     taskId: PropTypes.string,
     favTasks: PropTypes.array,
+    isParentHover: PropTypes.bool,
+    inactiveColor: PropTypes.string,
+    activeColor: PropTypes.string,
 };

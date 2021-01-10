@@ -29,7 +29,7 @@ export const ModalBox = styled.div`
     bottom: 0;
     right: 0;
     min-height: 15%;
-    height: 80%;
+    height: 85%;
     width: 45%;
     background-color: ${Colors.whitePrimary};
     ${Shadow};

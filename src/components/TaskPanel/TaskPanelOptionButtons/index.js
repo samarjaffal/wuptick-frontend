@@ -13,8 +13,9 @@ export const TaskPanelOptionButtons = () => {
                         width="18px"
                         height="18px"
                         viewBox="0 0 25 25"
-                        color={Colors.blue}
-                        hover={isParentHover}
+                        color={
+                            isParentHover ? Colors.whitePrimary : Colors.blue
+                        }
                     />
                 )}
             </MinimalButton>
@@ -27,8 +28,9 @@ export const TaskPanelOptionButtons = () => {
                         width="18px"
                         height="18px"
                         viewBox="0 0 25 25"
-                        color={Colors.primary}
-                        hover={isParentHover}
+                        color={
+                            isParentHover ? Colors.whitePrimary : Colors.primary
+                        }
                     />
                 )}
             </MinimalButton>

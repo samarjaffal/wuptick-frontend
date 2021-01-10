@@ -9,7 +9,12 @@ import {
     PlainCheckIcon,
 } from './styles';
 
-export const TaskCheck = ({ task, saveStatus, style = 'checkbox' }) => {
+export const TaskCheck = ({
+    task,
+    saveStatus,
+    style = 'checkbox',
+    isParentHover = false,
+}) => {
     const [checked, setChecked] = useState(Boolean(task.done));
 
     const handleSaveStatus = (status) => {
@@ -22,7 +27,9 @@ export const TaskCheck = ({ task, saveStatus, style = 'checkbox' }) => {
             checkbox.style.animationName = 'none';
             checkbox.style.animationDuration = '0';
         }
-        saveStatus(task._id, { done: status });
+        if (saveStatus) {
+            saveStatus(task._id, { done: status });
+        }
     };
 
     return (
@@ -42,7 +49,13 @@ export const TaskCheck = ({ task, saveStatus, style = 'checkbox' }) => {
             ) : (
                 <PlainCheckIcon
                     icon="check"
-                    color={checked ? Colors.green : Colors.softGray}
+                    color={
+                        isParentHover
+                            ? Colors.white
+                            : checked
+                            ? Colors.white
+                            : Colors.secondary
+                    }
                 />
             )}
         </TaskCheckStyled>
@@ -52,4 +65,6 @@ export const TaskCheck = ({ task, saveStatus, style = 'checkbox' }) => {
 TaskCheck.propTypes = {
     task: PropTypes.object,
     saveStatus: PropTypes.func,
+    style: PropTypes.string,
+    isParentHover: PropTypes.bool,
 };

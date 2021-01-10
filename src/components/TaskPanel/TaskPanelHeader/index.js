@@ -2,17 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TaskCheck } from '../../Task/TaskCheck/index';
 import { Avatar } from '../../Avatar/index';
+import { MinimalButton } from '../../MinimalButton/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
+import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
-    BoxOption,
-    BoxOptionContainer,
-    URLTaskIcon,
-    ArchiveIcon,
-    DeleteIcon,
-    LeaveIcon,
+    Icon,
     CollaboratorsTitle,
 } from './styles';
 export const TaskPanelHeader = () => {
@@ -27,43 +24,99 @@ export const TaskPanelHeader = () => {
                     <ClosePanelIcon icon="chevron-right" />
                 </div>
 
-                <BoxOption>
-                    <BoxOptionContainer>
+                <MinimalButton
+                    color={Colors.green}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
                         <TaskCheck
                             task={{
                                 done: false,
                                 _id: '12345',
                             }}
                             style="plain"
+                            isParentHover={isParentHover}
                         />
-                    </BoxOptionContainer>
-                </BoxOption>
+                    )}
+                </MinimalButton>
 
-                <BoxOption>
-                    <BoxOptionContainer>
-                        <FavoriteButton taskId="252" />
-                    </BoxOptionContainer>
-                </BoxOption>
-                <BoxOption>
-                    <BoxOptionContainer>
-                        <URLTaskIcon icon="paperclip" />
-                    </BoxOptionContainer>
-                </BoxOption>
-                <BoxOption>
-                    <BoxOptionContainer>
-                        <ArchiveIcon icon="inbox" />
-                    </BoxOptionContainer>
-                </BoxOption>
-                <BoxOption>
-                    <BoxOptionContainer>
-                        <LeaveIcon icon="sign-out-alt" />
-                    </BoxOptionContainer>
-                </BoxOption>
-                <BoxOption>
-                    <BoxOptionContainer>
-                        <DeleteIcon icon={['far', 'trash-alt']} />
-                    </BoxOptionContainer>
-                </BoxOption>
+                <MinimalButton
+                    color={Colors.yellow}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
+                        <FavoriteButton
+                            taskId="252"
+                            isParentHover={isParentHover}
+                            inactiveColor={Colors.secondary}
+                            activeColor={Colors.yellow}
+                        />
+                    )}
+                </MinimalButton>
+                <MinimalButton
+                    color={Colors.secondary}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
+                        <Icon
+                            icon="paperclip"
+                            color={
+                                isParentHover
+                                    ? Colors.whitePrimary
+                                    : Colors.secondary
+                            }
+                        />
+                    )}
+                </MinimalButton>
+                <MinimalButton
+                    color={Colors.secondary}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
+                        <Icon
+                            icon="inbox"
+                            color={
+                                isParentHover
+                                    ? Colors.whitePrimary
+                                    : Colors.secondary
+                            }
+                        />
+                    )}
+                </MinimalButton>
+                <MinimalButton
+                    color={Colors.secondary}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
+                        <Icon
+                            icon="sign-out-alt"
+                            color={
+                                isParentHover
+                                    ? Colors.whitePrimary
+                                    : Colors.secondary
+                            }
+                        />
+                    )}
+                </MinimalButton>
+                <MinimalButton
+                    color={Colors.red}
+                    size={35}
+                    bg={Colors.whitePrimary}
+                >
+                    {(isParentHover) => (
+                        <Icon
+                            icon={['far', 'trash-alt']}
+                            color={
+                                isParentHover ? Colors.whitePrimary : Colors.red
+                            }
+                        />
+                    )}
+                </MinimalButton>
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>

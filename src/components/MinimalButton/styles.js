@@ -5,11 +5,15 @@ import { TransitionSecondary } from '../../assets/css/shared-styles';
 
 export const BoxOption = styled.div`
     border-radius: ${borderRadius};
-    background-color: ${Colors.white};
+    background-color: ${({ bg }) => (bg ? bg : Colors.white)};
     padding: 8px;
     margin: 0 8px;
     cursor: pointer;
     max-height: 25px;
+    ${({ size }) =>
+        size
+            ? `width: ${size}px; height: ${size}px; padding:0; max-height: ${size}px`
+            : ''};
     &:first-child {
         margin-left: 0;
     }

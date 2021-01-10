@@ -11,15 +11,13 @@ export const TaskActionsContainer = styled.div`
 
 export const URLTaskIcon = styled(FontAwesomeIcon)`
     font-size: 18px;
-    color: ${Colors.softGray};
+    color: ${({ color }) => (color ? color : Colors.softGray)};
 `;
 
 export const ReplyIconSVG = styled(ReplyIcon)`
-    fill: ${({ color, hover }) =>
-        hover ? Colors.whitePrimary : color ? color : Colors.gray};
+    fill: ${({ color }) => (color ? color : Colors.softGray)};
 `;
 
 export const TagIconSVG = styled(TagIcon)`
-    fill: ${({ color, hover }) =>
-        hover ? Colors.whitePrimary : color ? color : Colors.gray};
+    fill: ${({ color }) => (color ? color : Colors.softGray)};
 `;
