@@ -7,7 +7,7 @@ export const GetTaskListsAndTasksQuery = ({ children, moduleId }) => {
     const { setCurrentModule } = useUser();
     const { error, loading, data } = useQuery(gqlGetTaskListsAndTasks, {
         variables: { moduleId },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'cache-first',
         onCompleted: (data) => {
             console.log(data, 'data GetTaskListsAndTasks');
             setCurrentModule(data.getModule);

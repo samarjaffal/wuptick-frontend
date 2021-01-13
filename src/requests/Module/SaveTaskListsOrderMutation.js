@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlSaveTaskListsOrder } from '../graphql/gqlSaveTaskListsOrder';
+import { gqlGetTaskListsAndTasks } from '../graphql/gqlGetTaskListsAndTasks';
 import PropTypes from 'prop-types';
 
 export const SaveTaskListsOrderMutation = ({ children }) => {
@@ -24,6 +25,12 @@ export const SaveTaskListsOrderMutation = ({ children }) => {
                 moduleId,
                 taskLists,
             },
+            refetchQueries: [
+                {
+                    query: gqlGetTaskListsAndTasks,
+                    variables: { moduleId },
+                },
+            ],
         });
     });
     /* 

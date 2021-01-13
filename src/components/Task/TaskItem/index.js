@@ -24,7 +24,7 @@ import {
     IconDragDrop,
 } from './styles';
 
-export const TaskItem = ({
+const MemoTaskItem = ({
     task = {},
     index,
     doUpdate,
@@ -184,10 +184,18 @@ export const TaskItem = ({
     );
 };
 
-TaskItem.propTypes = {
+MemoTaskItem.propTypes = {
     task: PropTypes.object,
     index: PropTypes.number,
     moduleId: PropTypes.string,
     doUpdate: PropTypes.func,
     openTaskPanel: PropTypes.func,
 };
+
+function areEqual(prevProps, nextProps) {
+    return (
+        prevProps.task === nextProps.task && prevProps.index == nextProps.index
+    );
+}
+
+export const TaskItem = React.memo(MemoTaskItem, areEqual);

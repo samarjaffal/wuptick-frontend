@@ -13,7 +13,6 @@ const Panel = forwardRef(
     ({ header: HeaderComponentProp, children, onCloseFunc = null }, ref) => {
         const [display, setDisplay] = useState(false);
         const body = document.body;
-        const scrollY = body.style.top;
 
         useImperativeHandle(ref, () => {
             return {
@@ -29,7 +28,6 @@ const Panel = forwardRef(
 
         const close = () => {
             setDisplay(false);
-            /* body.style.position = ''; */
             body.style.overflow = 'auto';
 
             if (onCloseFunc) {
