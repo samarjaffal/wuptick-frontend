@@ -19,7 +19,9 @@ export const ModuleSidebar = ({ project = {} }) => {
                 >
                     <Image size={30} src={project.image} />
                     <div style={{ marginLeft: '0.5em' }}>
-                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <ProjectTitle to={`/project/${project._id}`}>
+                            {project.name}
+                        </ProjectTitle>
                         <FavoriteButton />
                     </div>
                 </div>

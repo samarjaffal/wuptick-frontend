@@ -9,12 +9,18 @@ import {
     regular,
 } from '../../../assets/css/theme';
 
-export const ProjectTitle = styled.span`
+export const ProjectTitle = styled(Link)`
     ${subtitle};
     font-size: 18px;
     font-weight: ${bold};
     margin: 0 0.5em;
     color: ${Colors.black};
+    cursor: pointer;
+    text-decoration: none;
+    ${TransitionSecondary};
+    :hover {
+        color: ${Colors.primary};
+    }
 `;
 
 export const TitleSection = styled.div`
