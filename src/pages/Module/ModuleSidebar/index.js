@@ -46,7 +46,9 @@ export const ModuleSidebar = ({ project = {} }) => {
                                 const modules = data.getProjectModules;
                                 return modules.map((module, index) => (
                                     <li key={index}>
-                                        <ModuleTitle to="#">
+                                        <ModuleTitle
+                                            to={`/project/${project._id}/module/${module._id}`}
+                                        >
                                             {module.name}
                                         </ModuleTitle>
                                     </li>

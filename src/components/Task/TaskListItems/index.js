@@ -7,16 +7,20 @@ const MemoTaskListItems = ({ tasks = [], moduleId, openTaskPanel }) => {
     return (
         <UpdateTaskMutation>
             {({ doUpdateTask }) =>
-                tasks.map((task, index) => (
-                    <TaskItem
-                        task={task}
-                        key={task._id}
-                        index={index}
-                        doUpdate={doUpdateTask}
-                        moduleId={moduleId}
-                        openTaskPanel={openTaskPanel}
-                    />
-                ))
+                tasks.length > 0 &&
+                tasks.map(
+                    (task, index) =>
+                        task !== null && (
+                            <TaskItem
+                                task={task}
+                                key={task._id}
+                                index={index}
+                                doUpdate={doUpdateTask}
+                                moduleId={moduleId}
+                                openTaskPanel={openTaskPanel}
+                            />
+                        )
+                )
             }
         </UpdateTaskMutation>
     );
