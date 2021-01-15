@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
+import { Editor } from '../../Editor/index';
 import {
     TaskContainer,
     TaskDetails,
@@ -22,7 +23,7 @@ export const TaskOverview = () => {
             <TaskDetails>
                 <TaskName>Create a Home Page</TaskName>
                 <div className="TaskDescriptionContainer">
-                    <TaskDescription>
+                    {/* <TaskDescription>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -30,7 +31,8 @@ export const TaskOverview = () => {
                         commodo consequat. Duis aute irure dolor in
                         reprehenderit in voluptate velit esse cillum dolore eu
                         fugiat nulla pariatur.
-                    </TaskDescription>
+                    </TaskDescription> */}
+                    <Editor />
                     <TaskInfo>
                         <TaskOwner to="#">Samar Jaffal</TaskOwner>
                         <Dot icon="circle" />

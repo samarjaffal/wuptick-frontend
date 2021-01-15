@@ -12,6 +12,7 @@ export const TaskContainer = styled.div`
 
 export const TaskDetails = styled.div`
     margin-left: 15px;
+    width: 100%;
 `;
 
 export const TaskName = styled.div`
