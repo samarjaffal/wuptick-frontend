@@ -50,7 +50,7 @@ export const ErrorMessage = styled.p`
 export const Button = styled.button`
     border: none;
     background: ${({ bg }) => (bg ? bg : Colors.primary)};
-    padding: 10px 30px;
+    padding: ${({ padding }) => (padding ? padding : `10px 30px`)};
     border-radius: ${borderRadius};
     text-decoration: none;
     font-size: ${({ fontSize }) => (fontSize ? fontSize : '12px')};

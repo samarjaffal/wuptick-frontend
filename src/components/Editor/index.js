@@ -5,8 +5,9 @@ import edjsHTML from 'editorjs-html';
 import { EDITORCONF } from './editor-conf';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
+import { Colors } from '../../assets/css/colors';
 
-export const Editor = ({ data }) => {
+export const Editor = ({ data, setEditing }) => {
     console.log('editor here', data);
 
     const editor = new EditorJS({ ...EDITORCONF, data: data ? data : {} });
@@ -39,11 +40,26 @@ export const Editor = ({ data }) => {
     return (
         <>
             <EditorStyle />
-            <div id="editor"></div>
+            <div id="editor" style={{ marginTop: '0.5em' }}></div>
             {/* <div id="output"></div> */}
-            <Button onClick={() => handleClick()} margin="1em 0">
-                Save
-            </Button>
+            <div className="ButtonsContainer">
+                <Button
+                    onClick={() => handleClick()}
+                    margin="1em 0"
+                    padding="6px 24px"
+                >
+                    Save
+                </Button>
+                <Button
+                    bg={Colors.backgroud}
+                    margin="1em 0 1em 0.5em"
+                    padding="6px 24px"
+                    color={Colors.black}
+                    onClick={() => setEditing(false)}
+                >
+                    Cancel
+                </Button>
+            </div>
         </>
     );
 };

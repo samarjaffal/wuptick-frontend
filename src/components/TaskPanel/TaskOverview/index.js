@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
@@ -14,7 +14,6 @@ import {
     TaskCreatedDate,
     TaskInfo,
     Dot,
-    CancelSpan,
 } from './styles';
 
 export const TaskOverview = () => {
@@ -22,10 +21,6 @@ export const TaskOverview = () => {
 
     const toggleEditing = () => {
         setEditing(!isEditing);
-    };
-
-    const toggleFontButtonName = () => {
-        return isEditing ? 'times' : 'edit';
     };
 
     const handleEditorData = () => {
@@ -51,11 +46,7 @@ export const TaskOverview = () => {
             <TaskDetails>
                 <FlexCenter>
                     <TaskName>Create a Home Page</TaskName>
-                    {isEditing ? (
-                        <CancelSpan onClick={() => toggleEditing()}>
-                            Cancel
-                        </CancelSpan>
-                    ) : (
+                    {!isEditing && (
                         <FontIconButton
                             doOnCLick={toggleEditing}
                             iconName="edit"
@@ -66,7 +57,10 @@ export const TaskOverview = () => {
                 <div className="TaskDescriptionContainer">
                     <div>
                         {isEditing ? (
-                            <Editor data={handleEditorData()} />
+                            <Editor
+                                data={handleEditorData()}
+                                setEditing={setEditing}
+                            />
                         ) : (
                             <>
                                 <TaskDescription>
