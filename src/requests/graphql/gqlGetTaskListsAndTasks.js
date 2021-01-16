@@ -13,6 +13,9 @@ export const gqlGetTaskListsAndTasks = gql`
                     name
                     owner {
                         _id
+                        avatar
+                        name
+                        last_name
                     }
                     assigned {
                         _id

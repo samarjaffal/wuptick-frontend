@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
+
 import {
     TaskContainer,
     TaskDetails,
@@ -13,14 +15,19 @@ import {
     Dot,
 } from './styles';
 
-export const TaskOverview = () => {
+export const TaskOverview = ({ task }) => {
+    const formatDate = (_date) => {
+        let dateFormated = dayjs(_date).format('MMM. D h:mm A');
+        return dateFormated;
+    };
+
     return (
         <TaskContainer>
             <div className="AvatarContainer">
-                <Avatar size={30} />
+                <Avatar size={30} src={task.owner.avatar} />
             </div>
             <TaskDetails>
-                <TaskName>Create a Home Page</TaskName>
+                <TaskName>{task.name}</TaskName>
                 <div className="TaskDescriptionContainer">
                     <TaskDescription>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -32,9 +39,15 @@ export const TaskOverview = () => {
                         fugiat nulla pariatur.
                     </TaskDescription>
                     <TaskInfo>
-                        <TaskOwner to="#">Samar Jaffal</TaskOwner>
+                        <TaskOwner to="#">
+                            {task.owner.name} {task.owner.last_name}
+                        </TaskOwner>
                         <Dot icon="circle" />
-                        <TaskCreatedDate>Oct. 06 4:00pm</TaskCreatedDate>
+                        <TaskCreatedDate>
+                            {task.created_at !== null
+                                ? formatDate(task.created_at)
+                                : ''}
+                        </TaskCreatedDate>
                     </TaskInfo>
                 </div>
                 <TaskPanelOptionButtons />
@@ -43,4 +56,6 @@ export const TaskOverview = () => {
     );
 };
 
-TaskOverview.propTypes = {};
+TaskOverview.propTypes = {
+    task: PropTypes.object,
+};

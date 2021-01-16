@@ -54,7 +54,7 @@ const MemoTaskItem = ({
         if (clickCount == 1) {
             setTimeout(function () {
                 if (clickCount == 1 && !isEditing) {
-                    openTaskPanel();
+                    openTaskPanel(task);
                 } else {
                     toggleEditing(true);
                 }
