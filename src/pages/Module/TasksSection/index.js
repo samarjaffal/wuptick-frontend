@@ -15,8 +15,13 @@ import PropTypes from 'prop-types';
 
 export const TasksSection = ({ lists, moduleId }) => {
     const { selectDropDown } = useDropdown();
-    const { currentTask } = useUser();
+    const { currentTask, setCurrentTask } = useUser();
     const { panelRef, openTaskPanel } = useTask();
+
+    const handleOpenTaskPanel = (task) => {
+        setCurrentTask(task);
+        openTaskPanel();
+    };
 
     const showSelectedDropDown = () => {
         return (
@@ -41,7 +46,7 @@ export const TasksSection = ({ lists, moduleId }) => {
             <TaskLists
                 lists={lists}
                 moduleId={moduleId}
-                openTaskPanel={openTaskPanel}
+                openTaskPanel={handleOpenTaskPanel}
             />
             {showSelectedDropDown()}
             <TaskPanel panelRef={panelRef} />
