@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { Transition } from '../../../assets/css/shared-styles';
 import { title, regular, info, description } from '../../../assets/css/theme';
 import { Colors } from '../../../assets/css/colors';
 
@@ -18,6 +18,7 @@ export const TaskDetails = styled.div`
 export const TaskName = styled.div`
     ${title};
     font-size: 16px;
+    margin-right: 0.5em;
 `;
 
 export const TaskDescription = styled.p`
@@ -45,4 +46,13 @@ export const Dot = styled(FontAwesomeIcon)`
 export const TaskInfo = styled.div`
     display: flex;
     align-items: center;
+`;
+
+export const CancelSpan = styled.span`
+    ${info};
+    cursor: pointer;
+    :hover {
+        color: ${Colors.primary};
+        ${Transition};
+    }
 `;

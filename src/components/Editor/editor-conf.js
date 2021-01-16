@@ -5,6 +5,9 @@ const Quote = require('@editorjs/quote');
 
 export const EDITORCONF = {
     holder: 'editor',
+    placeholder: 'Write a description...',
+    autofocus: true,
+    logLevel: 'WARN',
     tools: {
         image: {
             class: ImageTool,
