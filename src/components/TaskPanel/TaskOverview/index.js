@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
 import { FontIconButton } from '../../FontIconButton/index';
 import { Editor } from '../../Editor/index';
-import { FlexCenter } from '../../SharedComponents/styles';
+import { FlexCenter, Input } from '../../SharedComponents/styles';
+import { Colors } from '../../../assets/css/colors';
 import {
     TaskContainer,
     TaskDetails,
@@ -20,6 +21,7 @@ import {
 
 export const TaskOverview = ({ task }) => {
     const [isEditing, setEditing] = useState(false);
+    let inputRef = useRef(null);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D h:mm A');
@@ -51,12 +53,21 @@ export const TaskOverview = ({ task }) => {
             </div>
             <TaskDetails>
                 <FlexCenter>
-                    <TaskName>{task.name}</TaskName>
-                    {!isEditing && (
-                        <FontIconButton
-                            doOnCLick={toggleEditing}
-                            iconName="edit"
+                    {isEditing ? (
+                        <Input
+                            type="text"
+                            defaultValue={task.name}
+                            ref={inputRef}
+                            customProps={`border: 1px solid ${Colors.backgroud};border-radius: 8px; padding: 1em;`}
                         />
+                    ) : (
+                        <>
+                            <TaskName>{task.name}</TaskName>
+                            <FontIconButton
+                                doOnCLick={toggleEditing}
+                                iconName="edit"
+                            />
+                        </>
                     )}
                 </FlexCenter>
 
