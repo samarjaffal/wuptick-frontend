@@ -21,9 +21,10 @@ export const TaskName = styled.div`
 `;
 
 export const TaskDescription = styled.div`
-    ${description};
-    font-weight: ${regular};
+   /*  ${description};
+    font-weight: ${regular}; */
     margin-bottom: 0.5em;
+    color: ${Colors.black};
 `;
 
 export const TaskOwner = styled(Link)`

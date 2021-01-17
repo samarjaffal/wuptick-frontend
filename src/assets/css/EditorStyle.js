@@ -11,7 +11,9 @@ export const EditorStyle = createGlobalStyle`
         border: 1px solid ${Colors.backgroud};
         border-radius: ${borderRadius};
         padding: 1em;
+        color: ${Colors.black} !important;
     }
+
     .codex-editor--narrow .ce-toolbar__actions{
         right: 5px;
     }
@@ -22,6 +24,7 @@ export const EditorStyle = createGlobalStyle`
 
     .ce-paragraph{
         font-size:14px;
+        color: ${Colors.black} !important;
     }
 
     .ce-header{
@@ -59,5 +62,9 @@ export const EditorStyle = createGlobalStyle`
 
     .cdx-quote__text{
         border-bottom-left-radius:0px;
+    }
+
+    .cdx-list__item{
+        padding: 4px 0;
     }
 `;

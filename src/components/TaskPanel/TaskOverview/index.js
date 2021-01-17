@@ -6,6 +6,7 @@ import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
 import { FontIconButton } from '../../FontIconButton/index';
 import { Editor } from '../../Editor/index';
+import { TaskDescriptionStyle } from '../../../assets/css/TaskDescriptionStyle';
 import { FlexCenter, Input } from '../../SharedComponents/styles';
 import { Colors } from '../../../assets/css/colors';
 import {
@@ -59,6 +60,7 @@ export const TaskOverview = ({
 
     return (
         <TaskContainer>
+            <TaskDescriptionStyle />
             <div className="AvatarContainer">
                 <Avatar size={30} src={task.owner.avatar} />
             </div>
