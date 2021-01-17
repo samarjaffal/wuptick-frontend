@@ -29,7 +29,7 @@ export const ModalBox = styled.div`
     bottom: 0;
     right: 0;
     height: 85%;
-    width: 45%;
+    width: 55%;
     background-color: ${Colors.whitePrimary};
     ${Shadow};
     z-index: 101;
@@ -37,16 +37,15 @@ export const ModalBox = styled.div`
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    padding: 40px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding: 40px 0;
+    /*     overflow-y: auto;
+    overflow-x: hidden; */
     @media (max-width: 768px) {
         width: 60%;
     }
 `;
 
 export const Container = styled.div`
-    margin-top: 60px;
     @media (max-width: 425px) {
         max-height: 445px;
     }
@@ -65,4 +64,5 @@ export const Header = styled.div`
     height: 45px;
     top: 0;
     left: 0;
+    z-index: 2;
 `;

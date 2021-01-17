@@ -5,14 +5,17 @@ import { TaskPanelHeader } from './TaskPanelHeader';
 import { TaskOverview } from './TaskOverview';
 import { RepliesSection } from './RepliesSection/index';
 import { useUser } from '../../hooks/useUser';
+import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
     console.log('render MemoTaskPanel');
     const { currentTask } = useUser();
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
-            <TaskOverview task={currentTask} />
-            <RepliesSection />
+            <Container>
+                <TaskOverview task={currentTask} />
+                <RepliesSection />
+            </Container>
         </Panel>
     );
 };
