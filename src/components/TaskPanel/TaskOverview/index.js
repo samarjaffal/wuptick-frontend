@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
+import parse from 'html-react-parser';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
 import { FontIconButton } from '../../FontIconButton/index';
@@ -19,9 +20,10 @@ import {
     Dot,
 } from './styles';
 
-export const TaskOverview = ({ task, module }) => {
+export const TaskOverview = ({ task, module, doUpdateTask }) => {
     const [isEditing, setEditing] = useState(false);
     let inputRef = useRef(null);
+    let descriptionRef = useRef(null);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D h:mm A');
@@ -33,14 +35,15 @@ export const TaskOverview = ({ task, module }) => {
     };
 
     const onSave = (outputHtml, outputData) => {
+        let outputDataStr = JSON.stringify({ blocks: outputData.blocks });
         let input = {
-            taskId: task._id,
             name: inputRef.current.value,
             description: outputHtml,
-            descriptionJson: { blocks: outputData.blocks },
-            moduleId: module._id,
+            descriptionJson: outputDataStr,
         };
         console.log(input, 'input onSave');
+        doUpdateTask(task._id, input, module._id);
+        setEditing(false);
     };
 
     const handleEditorData = () => {
@@ -83,10 +86,14 @@ export const TaskOverview = ({ task, module }) => {
                 </FlexCenter>
 
                 <div className="TaskDescriptionContainer">
-                    <div>
+                    <div ref={descriptionRef}>
                         {isEditing ? (
                             <Editor
-                                initData={handleEditorData()}
+                                initData={
+                                    task.descriptionJson !== null
+                                        ? JSON.parse(task.descriptionJson)
+                                        : handleEditorData()
+                                }
                                 onSave={onSave}
                                 setEditing={setEditing}
                             />
@@ -95,7 +102,7 @@ export const TaskOverview = ({ task, module }) => {
                                 {task.description !== null &&
                                 task.description !== '' ? (
                                     <TaskDescription>
-                                        {task.description}
+                                        {parse(task.description)}
                                     </TaskDescription>
                                 ) : (
                                     <NoTaskDescription>
@@ -125,4 +132,6 @@ export const TaskOverview = ({ task, module }) => {
 
 TaskOverview.propTypes = {
     task: PropTypes.object,
+    module: PropTypes.object,
+    doUpdateTask: PropTypes.func,
 };

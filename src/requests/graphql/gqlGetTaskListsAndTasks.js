@@ -26,6 +26,7 @@ export const gqlGetTaskListsAndTasks = gql`
                     deadline
                     done
                     description
+                    descriptionJson
                     created_at
                 }
             }

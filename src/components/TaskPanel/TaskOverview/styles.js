@@ -20,7 +20,7 @@ export const TaskName = styled.div`
     margin-right: 0.5em;
 `;
 
-export const TaskDescription = styled.p`
+export const TaskDescription = styled.div`
     ${description};
     font-weight: ${regular};
     margin-bottom: 0.5em;

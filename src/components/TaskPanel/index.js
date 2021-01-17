@@ -5,6 +5,7 @@ import { TaskPanelHeader } from './TaskPanelHeader';
 import { TaskOverview } from './TaskOverview';
 import { RepliesSection } from './RepliesSection/index';
 import { useUser } from '../../hooks/useUser';
+import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
 import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
@@ -13,7 +14,15 @@ const MemoTaskPanel = ({ panelRef }) => {
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
             <Container>
-                <TaskOverview task={currentTask} module={currentModule} />
+                <UpdateTaskMutation>
+                    {({ doUpdateTask, loading }) => (
+                        <TaskOverview
+                            task={currentTask}
+                            module={currentModule}
+                            doUpdateTask={doUpdateTask}
+                        />
+                    )}
+                </UpdateTaskMutation>
                 <RepliesSection />
             </Container>
         </Panel>

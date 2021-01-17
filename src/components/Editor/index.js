@@ -33,7 +33,7 @@ export const Editor = ({ initData, setEditing, onSave }) => {
                 console.log('Article data: ', outputData);
                 let outputHtml = parseToHTMl(outputData);
                 console.log(outputHtml, 'outputHtml');
-                return onSave(outputHtml.outerHTML, outputData);
+                onSave(outputHtml.outerHTML, outputData);
             })
             .catch((error) => {
                 console.log('Saving failed: ', error);
