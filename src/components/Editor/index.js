@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
 import { EDITORCONF } from './editor-conf';
+import { customQuoteBlock } from './customBlocks';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
 import { Colors } from '../../assets/css/colors';
@@ -27,10 +28,10 @@ export const Editor = ({ initData, setEditing, onSave }) => {
     });
 
     const parseToHTMl = (outputData) => {
-        const edjsParser = edjsHTML();
+        const edjsParser = edjsHTML({ quote: customQuoteBlock });
         let html = edjsParser.parse(outputData);
         let output = document.createElement('div');
-        /* output.innerHTML = ''; */
+        output.className = 'custom-task-description';
         html.forEach((element) => {
             output.innerHTML += element;
         });
@@ -41,9 +42,7 @@ export const Editor = ({ initData, setEditing, onSave }) => {
         editor
             .save()
             .then((outputData) => {
-                console.log('Article data: ', outputData);
                 let outputHtml = parseToHTMl(outputData);
-                console.log(outputHtml, 'outputHtml');
                 onSave(outputHtml.outerHTML, outputData);
             })
             .catch((error) => {
@@ -55,7 +54,6 @@ export const Editor = ({ initData, setEditing, onSave }) => {
         <>
             <EditorStyle />
             <div id="editor" style={{ marginTop: '0.5em' }}></div>
-            {/* <div id="output"></div> */}
             <div className="ButtonsContainer">
                 <Button
                     onClick={() => handleClick()}
