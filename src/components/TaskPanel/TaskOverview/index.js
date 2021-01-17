@@ -19,7 +19,7 @@ import {
     Dot,
 } from './styles';
 
-export const TaskOverview = ({ task }) => {
+export const TaskOverview = ({ task, module }) => {
     const [isEditing, setEditing] = useState(false);
     let inputRef = useRef(null);
 
@@ -30,6 +30,17 @@ export const TaskOverview = ({ task }) => {
 
     const toggleEditing = () => {
         setEditing(!isEditing);
+    };
+
+    const onSave = (outputHtml, outputData) => {
+        let input = {
+            taskId: task._id,
+            name: inputRef.current.value,
+            description: outputHtml,
+            descriptionJson: { blocks: outputData.blocks },
+            moduleId: module._id,
+        };
+        console.log(input, 'input onSave');
     };
 
     const handleEditorData = () => {
@@ -75,7 +86,8 @@ export const TaskOverview = ({ task }) => {
                     <div>
                         {isEditing ? (
                             <Editor
-                                data={handleEditorData()}
+                                initData={handleEditorData()}
+                                onSave={onSave}
                                 setEditing={setEditing}
                             />
                         ) : (

@@ -7,10 +7,13 @@ import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
 import { Colors } from '../../assets/css/colors';
 
-export const Editor = ({ data, setEditing }) => {
-    console.log('editor here', data);
+export const Editor = ({ initData, setEditing, onSave }) => {
+    console.log('editor here', initData);
 
-    const editor = new EditorJS({ ...EDITORCONF, data: data ? data : {} });
+    const editor = new EditorJS({
+        ...EDITORCONF,
+        data: initData ? initData : {},
+    });
 
     const parseToHTMl = (outputData) => {
         const edjsParser = edjsHTML();
@@ -29,8 +32,8 @@ export const Editor = ({ data, setEditing }) => {
             .then((outputData) => {
                 console.log('Article data: ', outputData);
                 let outputHtml = parseToHTMl(outputData);
-                console.log(outputHtml, 'html result');
-                //TODO: save outputHtml to DB.
+                console.log(outputHtml, 'outputHtml');
+                return onSave(outputHtml.outerHTML, outputData);
             })
             .catch((error) => {
                 console.log('Saving failed: ', error);
@@ -65,5 +68,7 @@ export const Editor = ({ data, setEditing }) => {
 };
 
 Editor.propTypes = {
-    data: PropTypes.object,
+    initData: PropTypes.object,
+    setEditing: PropTypes.func,
+    onSave: PropTypes.func,
 };

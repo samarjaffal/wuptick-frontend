@@ -9,11 +9,11 @@ import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
     console.log('render MemoTaskPanel');
-    const { currentTask } = useUser();
+    const { currentTask, currentModule } = useUser();
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
             <Container>
-                <TaskOverview task={currentTask} />
+                <TaskOverview task={currentTask} module={currentModule} />
                 <RepliesSection />
             </Container>
         </Panel>
