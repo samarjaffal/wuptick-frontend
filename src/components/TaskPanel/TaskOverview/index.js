@@ -11,6 +11,7 @@ import {
     TaskDetails,
     TaskName,
     TaskDescription,
+    NoTaskDescription,
     TaskOwner,
     TaskCreatedDate,
     TaskInfo,
@@ -69,19 +70,18 @@ export const TaskOverview = ({ task }) => {
                             />
                         ) : (
                             <>
-                                <TaskDescription>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip
-                                    ex ea commodo consequat. Duis aute irure
-                                    dolor in reprehenderit in voluptate velit
-                                    esse cillum dolore eu fugiat nulla pariatur.
-                                </TaskDescription>
+                                {task.description !== null &&
+                                task.description !== '' ? (
+                                    <TaskDescription>
+                                        {task.description}
+                                    </TaskDescription>
+                                ) : (
+                                    <NoTaskDescription>
+                                        Add a description to this task...
+                                    </NoTaskDescription>
+                                )}
                                 <TaskInfo>
                                     <TaskOwner to="#">
-                                        {' '}
                                         {task.owner.name} {task.owner.last_name}
                                     </TaskOwner>
                                     <Dot icon="circle" />

@@ -7,7 +7,6 @@ import { Colors } from '../../../assets/css/colors';
 
 export const TaskContainer = styled.div`
     display: flex;
-    justify-content: center;
 `;
 
 export const TaskDetails = styled.div`
@@ -55,4 +54,9 @@ export const CancelSpan = styled.span`
         color: ${Colors.primary};
         ${Transition};
     }
+`;
+export const NoTaskDescription = styled.p`
+    ${info};
+    font-size: 14px;
+    margin-bottom: 0.5em;
 `;
