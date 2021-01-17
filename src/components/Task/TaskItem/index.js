@@ -66,11 +66,9 @@ const MemoTaskItem = ({
     useEffect(() => {
         let taskItem = document.querySelector(`#task-item-${task._id}`);
         taskItem.addEventListener('keydown', handleKeys, false);
-        /* taskItem.addEventListener('dblclick', () => toggleEditing(true)); */
         taskItem.addEventListener('click', handleClicks);
 
         return () => {
-            /* taskItem.removeEventListener('dblclick', () => toggleEditing(true)); */
             taskItem.removeEventListener('click', handleClicks);
             taskItem.removeEventListener('keydown', handleKeys, false);
         };

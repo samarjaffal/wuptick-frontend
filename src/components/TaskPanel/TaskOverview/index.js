@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
@@ -20,10 +20,22 @@ import {
     Dot,
 } from './styles';
 
-export const TaskOverview = ({ task, module, doUpdateTask }) => {
+export const TaskOverview = ({
+    task,
+    module,
+    doUpdateTask,
+    newTaskData,
+    setCurrentTask,
+}) => {
     const [isEditing, setEditing] = useState(false);
     let inputRef = useRef(null);
     let descriptionRef = useRef(null);
+
+    useEffect(() => {
+        if (typeof newTaskData !== 'undefined' && newTaskData !== null) {
+            setCurrentTask(newTaskData.editTask);
+        }
+    }, [newTaskData]);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D h:mm A');
@@ -34,30 +46,15 @@ export const TaskOverview = ({ task, module, doUpdateTask }) => {
         setEditing(!isEditing);
     };
 
-    const onSave = (outputHtml, outputData) => {
+    const onSave = async (outputHtml, outputData) => {
         let outputDataStr = JSON.stringify({ blocks: outputData.blocks });
         let input = {
             name: inputRef.current.value,
             description: outputHtml,
             descriptionJson: outputDataStr,
         };
-        console.log(input, 'input onSave');
-        doUpdateTask(task._id, input, module._id);
         setEditing(false);
-    };
-
-    const handleEditorData = () => {
-        const data = {
-            blocks: [
-                {
-                    type: 'paragraph',
-                    data: {
-                        text: task.description,
-                    },
-                },
-            ],
-        };
-        return data;
+        await doUpdateTask(task._id, input, module._id);
     };
 
     return (
@@ -92,7 +89,7 @@ export const TaskOverview = ({ task, module, doUpdateTask }) => {
                                 initData={
                                     task.descriptionJson !== null
                                         ? JSON.parse(task.descriptionJson)
-                                        : handleEditorData()
+                                        : null
                                 }
                                 onSave={onSave}
                                 setEditing={setEditing}
@@ -133,5 +130,7 @@ export const TaskOverview = ({ task, module, doUpdateTask }) => {
 TaskOverview.propTypes = {
     task: PropTypes.object,
     module: PropTypes.object,
+    newTaskData: PropTypes.object,
     doUpdateTask: PropTypes.func,
+    setCurrentTask: PropTypes.func,
 };

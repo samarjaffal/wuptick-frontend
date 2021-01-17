@@ -7,12 +7,23 @@ import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
 import { Colors } from '../../assets/css/colors';
 
+const defaultEditorData = {
+    blocks: [
+        {
+            type: 'paragraph',
+            data: {
+                text: '',
+            },
+        },
+    ],
+};
+
 export const Editor = ({ initData, setEditing, onSave }) => {
     console.log('editor here', initData);
 
     const editor = new EditorJS({
         ...EDITORCONF,
-        data: initData ? initData : {},
+        data: initData ? initData : defaultEditorData,
     });
 
     const parseToHTMl = (outputData) => {
