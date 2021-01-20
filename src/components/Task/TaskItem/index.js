@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import { TaskCheck } from '../TaskCheck/index';
@@ -33,6 +33,7 @@ const MemoTaskItem = ({
 }) => {
     console.log('rendered task');
     const [isEditing, setEditing] = useState(false);
+    const [callOpenPanel, setCallOpenPanel] = useState(false);
     const inputRef = useRef(null);
 
     let clickCount = 0,
@@ -49,21 +50,27 @@ const MemoTaskItem = ({
         setEditing(false);
     };
 
-    const handleClicks = () => {
+    const handleClicks = useCallback(() => {
         clickCount++;
         if (clickCount == 1) {
             setTimeout(function () {
                 if (clickCount == 1 && !isEditing) {
-                    openTaskPanel(task);
+                    /*  openTaskPanel(task); */
+                    setCallOpenPanel(true);
                 } else {
                     toggleEditing(true);
                 }
                 clickCount = 0;
             }, timeout || 300);
         }
-    };
+    }, []);
 
     useEffect(() => {
+        if (callOpenPanel) {
+            openTaskPanel(task);
+            setCallOpenPanel(false);
+            return;
+        }
         let taskItem = document.querySelector(`#task-item-${task._id}`);
         taskItem.addEventListener('keydown', handleKeys, false);
         taskItem.addEventListener('click', handleClicks);
@@ -72,13 +79,15 @@ const MemoTaskItem = ({
             taskItem.removeEventListener('click', handleClicks);
             taskItem.removeEventListener('keydown', handleKeys, false);
         };
-    }, [isEditing]);
+    }, [isEditing, callOpenPanel]);
 
-    const handleKeys = (event) => {
-        if (event.keyCode === 27) {
+    const handleKeys = useCallback((event) => {
+        const { key, keyCode } = event;
+
+        if (keyCode === 27) {
             escFunction();
         }
-        if (event.keyCode === 13) {
+        if (keyCode === 13) {
             if (isEditing) {
                 const taskId = task._id;
                 let input = {
@@ -88,7 +97,7 @@ const MemoTaskItem = ({
                 toggleEditing(false);
             }
         }
-    };
+    }, []);
     return (
         <>
             <Draggable draggableId={task._id} index={index}>
