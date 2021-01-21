@@ -1,7 +1,9 @@
 import ImageTool from '@editorjs/image';
-const Header = require('@editorjs/header');
+import Header from '@editorjs/header';
 import List from '@editorjs/list';
-const Quote = require('@editorjs/quote');
+import Quote from '@editorjs/quote';
+import { config } from '../../../config/index';
+import { uploadImageEditor } from '../../requests/uploadImageEditor';
 
 export const EDITORCONF = {
     holder: 'editor',
@@ -12,9 +14,24 @@ export const EDITORCONF = {
         image: {
             class: ImageTool,
             config: {
-                endpoints: {
-                    byFile: 'http://localhost:8080/uploadFile', // Your backend file uploader endpoint
-                    byUrl: 'http://localhost:8080/fetchUrl', // Your endpoint that provides uploading by Url
+                uploader: {
+                    /**
+                     * Upload file to the server and return an uploaded image data
+                     * @param {File} file - file selected from the device or pasted by drag-n-drop
+                     * @return {Promise.<{success, file: {url}}>}
+                     */
+                    uploadByFile(file) {
+                        return uploadImageEditor(file);
+                    },
+
+                    /**
+                     * Send URL-string to the server. Backend should load image by this URL and return an uploaded image data
+                     * @param {string} url - pasted image URL
+                     * @return {Promise.<{success, file: {url}}>}
+                     */
+                    uploadByUrl(url) {
+                        return uploadImageEditor(url);
+                    },
                 },
             },
         },

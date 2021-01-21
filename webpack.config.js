@@ -82,4 +82,7 @@ module.exports = {
     node: {
         fs: 'empty',
     },
+    externals: {
+        FileReader: 'FileReader',
+    },
 };
