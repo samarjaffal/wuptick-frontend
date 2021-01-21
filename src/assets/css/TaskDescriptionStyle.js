@@ -21,4 +21,8 @@ export const TaskDescriptionStyle = createGlobalStyle`
     .custom-task-description li {
         padding: 4px 0;
     }
+
+    .custom-task-description img{
+        max-width:100%;
+    }
 `;

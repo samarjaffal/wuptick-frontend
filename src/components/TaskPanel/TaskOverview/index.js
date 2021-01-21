@@ -84,12 +84,15 @@ export const TaskOverview = ({
                     )}
                 </FlexCenter>
 
-                <div className="TaskDescriptionContainer">
+                <div
+                    className="TaskDescriptionContainer"
+                    style={{ marginTop: '1em' }}
+                >
                     <div ref={descriptionRef}>
                         {isEditing ? (
                             <Editor
                                 initData={
-                                    task.descriptionJson !== null
+                                    Object.keys(task.descriptionJson).length > 0
                                         ? JSON.parse(task.descriptionJson)
                                         : null
                                 }

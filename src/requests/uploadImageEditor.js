@@ -10,12 +10,9 @@ const readImage = async (file) => {
 };
 
 export const uploadImageEditor = async (file) => {
-    console.log(file, 'file');
-
     let base64EncondedImg = await readImage(file);
-    console.log(base64EncondedImg, 'base64EncondedImg 2');
 
-    fetch(URL, {
+    return await fetch(URL, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -24,12 +21,12 @@ export const uploadImageEditor = async (file) => {
         },
         body: JSON.stringify({ data: base64EncondedImg }),
     })
-        .then(async (data) => {
-            console.log(data);
-            return true;
+        .then(async (response) => {
+            const data = await response.json();
+            return data;
         })
         .catch((error) => {
             console.log(error);
-            return false;
+            return { success: 0, file: {} };
         });
 };

@@ -2,7 +2,6 @@ import ImageTool from '@editorjs/image';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
-import { config } from '../../../config/index';
 import { uploadImageEditor } from '../../requests/uploadImageEditor';
 
 export const EDITORCONF = {
