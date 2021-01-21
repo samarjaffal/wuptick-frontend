@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
@@ -38,7 +38,7 @@ export const Editor = ({ initData, setEditing, onSave }) => {
         return output;
     };
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         editor
             .save()
             .then((outputData) => {
@@ -48,7 +48,15 @@ export const Editor = ({ initData, setEditing, onSave }) => {
             .catch((error) => {
                 console.log('Saving failed: ', error);
             });
-    };
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            if (editor) {
+                editor.destroy();
+            }
+        };
+    }, []);
 
     return (
         <>
