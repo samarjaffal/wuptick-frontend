@@ -1,4 +1,5 @@
 import { config } from '../../config/index';
+import { getAccessToken } from '../shared/GetAccessToken';
 const URL = `${config.backUrl}upload_editor_image`;
 
 const readImage = async (file) => {
@@ -19,7 +20,10 @@ export const uploadImageEditor = async (file) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data: base64EncondedImg }),
+        body: JSON.stringify({
+            data: base64EncondedImg,
+            token: getAccessToken(),
+        }),
     })
         .then(async (response) => {
             const data = await response.json();
