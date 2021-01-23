@@ -6,6 +6,7 @@ import { MinimalButton } from '../../MinimalButton/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
+import { Collaborators } from '../../Collaborators/index';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
@@ -120,19 +121,7 @@ export const TaskPanelHeader = () => {
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>
-                {Array(3)
-                    .fill()
-                    .map((member, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                margin: '0 4px',
-                                display: 'flex',
-                            }}
-                        >
-                            <Avatar size={25} />
-                        </div>
-                    ))}
+                <Collaborators />
             </FlexCenter>
         </HeaderTaskOptions>
     );
