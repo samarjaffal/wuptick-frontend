@@ -39,7 +39,7 @@ export const TaskOverview = ({
     }, [newTaskData]);
 
     const formatDate = (_date) => {
-        let dateFormated = dayjs(_date).format('MMM. D h:mm A');
+        let dateFormated = dayjs(_date).format('MMM. D YYYY h:mm A');
         return dateFormated;
     };
 

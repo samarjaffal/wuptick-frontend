@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Reply } from '../../Reply/index';
-import { RepliesDiv, Hr, Icon, ReplySectionTitle } from './styles';
+import { GetCommentsForTaskQuery } from '../../../requests/Comment/GetCommentsForTaskQuery';
+import { RepliesDiv, Hr, Icon, ReplySectionTitle, NoComments } from './styles';
 
-export const RepliesSection = () => {
+export const RepliesSection = ({ task }) => {
     return (
-        <div className="RepliesSection">
+        <div className="RepliesSection" style={{ marginTop: '25px' }}>
             <Hr />
             <div className="RepliesContainer" style={{ paddingLeft: '40px' }}>
                 <RepliesDiv>
@@ -15,14 +16,28 @@ export const RepliesSection = () => {
                         <ReplySectionTitle>Replies</ReplySectionTitle>
                     </FlexCenter>
                 </RepliesDiv>
-                {Array(2)
-                    .fill()
-                    .map((reply, index) => (
-                        <Reply key={index} />
-                    ))}
+                <GetCommentsForTaskQuery taskId={task._id}>
+                    {({ data }) => {
+                        const replies = data.getCommentsForTask;
+                        console.log(replies, 'replies');
+                        return replies.length > 0 ? (
+                            replies.map((replyObj) =>
+                                replyObj.comments.map((reply, index) => (
+                                    <Reply key={index} reply={reply} />
+                                ))
+                            )
+                        ) : (
+                            <NoComments>
+                                This task has no replies yet...
+                            </NoComments>
+                        );
+                    }}
+                </GetCommentsForTaskQuery>
             </div>
         </div>
     );
 };
 
-RepliesSection.propTypes = {};
+RepliesSection.propTypes = {
+    task: PropTypes.object,
+};

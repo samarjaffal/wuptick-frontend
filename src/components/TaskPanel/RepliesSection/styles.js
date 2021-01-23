@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import CommentIcon from '../../../assets/images/task-icons/comment-icon.svg';
 import { Colors } from '../../../assets/css/colors';
-import { title } from '../../../assets/css/theme';
+import { title, info } from '../../../assets/css/theme';
 
 export const RepliesDiv = styled.div`
     width: 100%;
@@ -21,4 +21,10 @@ export const ReplySectionTitle = styled.div`
     ${title};
     font-size: 16px;
     margin-left: 0.5em;
+`;
+
+export const NoComments = styled.p`
+    ${info};
+    font-size: 14px;
+    margin-bottom: 0.5em;
 `;

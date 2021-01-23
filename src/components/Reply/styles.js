@@ -11,6 +11,7 @@ export const Description = styled.p`
     ${description};
     font-weight: ${regular};
     margin-bottom: 0;
+    margin-top: 0.5em;
 `;
 
 export const CreatedDate = styled.span`

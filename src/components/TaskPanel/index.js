@@ -26,7 +26,7 @@ const MemoTaskPanel = ({ panelRef }) => {
                         />
                     )}
                 </UpdateTaskMutation>
-                <RepliesSection />
+                <RepliesSection task={currentTask} />
             </Container>
         </Panel>
     );
