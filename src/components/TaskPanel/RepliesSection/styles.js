@@ -19,8 +19,7 @@ export const Icon = styled(CommentIcon)`
 
 export const ReplySectionTitle = styled.div`
     ${title};
-    font-size: 16px;
-    margin-left: 0.5em;
+    font-size: 18px;
 `;
 
 export const NoComments = styled.p`

@@ -8,11 +8,11 @@ import { RepliesDiv, Hr, Icon, ReplySectionTitle, NoComments } from './styles';
 export const RepliesSection = ({ task }) => {
     return (
         <div className="RepliesSection" style={{ marginTop: '25px' }}>
-            <Hr />
+            {/* <Hr /> */}
             <div className="RepliesContainer" style={{ paddingLeft: '40px' }}>
                 <RepliesDiv>
                     <FlexCenter customProps="margin-top:1em;">
-                        <Icon width="25px" height="25px" viewBox="0 0 25 25" />
+                        {/* <Icon width="25px" height="25px" viewBox="0 0 25 25" /> */}
                         <ReplySectionTitle>Replies</ReplySectionTitle>
                     </FlexCenter>
                 </RepliesDiv>

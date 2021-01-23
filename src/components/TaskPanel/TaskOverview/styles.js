@@ -16,7 +16,7 @@ export const TaskDetails = styled.div`
 
 export const TaskName = styled.div`
     ${title};
-    font-size: 16px;
+    font-size: 18px;
     margin-right: 0.5em;
 `;
 

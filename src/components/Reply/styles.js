@@ -7,6 +7,27 @@ import {
     borderRadius,
 } from '../../assets/css/theme';
 
+export const ReplyContainer = styled.div`
+    margin-bottom: 1em;
+    background-color: #f9faff;
+    padding-bottom: 1em;
+    border: 1px solid ${Colors.hover};
+    border-radius: ${borderRadius};
+`;
+
+export const HeaderContainer = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: ${Colors.whitePrimary};
+    border-top-left-radius: ${borderRadius};
+    border-top-right-radius: ${borderRadius};
+    border-bottom: 1px solid ${Colors.hover};
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-left: 1em;
+`;
+
 export const Description = styled.p`
     ${description};
     font-weight: ${regular};
@@ -15,13 +36,11 @@ export const Description = styled.p`
 `;
 
 export const CreatedDate = styled.span`
-    ${info}
+    ${info};
 `;
 
 export const MemberName = styled.span`
-    background: ${Colors.secondary};
-    padding: 0px 6px;
     ${info};
-    border-radius: ${borderRadius};
-    color: ${Colors.white};
+    color: ${Colors.black};
+    margin-left: 0.5em;
 `;

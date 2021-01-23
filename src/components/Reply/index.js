@@ -4,7 +4,13 @@ import dayjs from 'dayjs';
 import { navigate } from '@reach/router';
 import { Avatar } from '../Avatar/index';
 import { useUser } from '../../hooks/useUser';
-import { Description, CreatedDate, MemberName } from './styles';
+import {
+    ReplyContainer,
+    HeaderContainer,
+    Description,
+    CreatedDate,
+    MemberName,
+} from './styles';
 
 export const Reply = ({ reply }) => {
     const { generateProfileUrl } = useUser();
@@ -15,31 +21,27 @@ export const Reply = ({ reply }) => {
     };
 
     return (
-        <div
-            className="ReplyContainer"
-            style={{ marginBottom: '1em', display: 'flex' }}
-        >
-            <div className="AvatarContainer">
-                <Avatar
-                    size={25}
-                    src={reply.owner.avatar}
-                    onClicked={() =>
-                        navigate(
-                            generateProfileUrl(
-                                reply.owner.name,
-                                reply.owner.last_name,
-                                reply.owner._id
+        <ReplyContainer>
+            <HeaderContainer>
+                <div className="AvatarContainer">
+                    <Avatar
+                        size={25}
+                        src={reply.owner.avatar}
+                        onClicked={() =>
+                            navigate(
+                                generateProfileUrl(
+                                    reply.owner.name,
+                                    reply.owner.last_name,
+                                    reply.owner._id
+                                )
                             )
-                        )
-                    }
-                />
-            </div>
-            <div className="ReplyInfo" style={{ marginLeft: '0.5em' }}>
+                        }
+                    />
+                </div>
                 <MemberName>
                     {reply.owner.name} {reply.owner.last_name}
                 </MemberName>
-                <Description>{reply.comment}</Description>
-                <div>
+                <div style={{ marginLeft: 'auto', paddingRight: '0.5em' }}>
                     <CreatedDate>
                         {' '}
                         {reply.created_at !== null
@@ -47,8 +49,12 @@ export const Reply = ({ reply }) => {
                             : ''}
                     </CreatedDate>
                 </div>
+            </HeaderContainer>
+
+            <div className="ReplyInfo" style={{ padding: '0 1em' }}>
+                <Description>{reply.comment}</Description>
             </div>
-        </div>
+        </ReplyContainer>
     );
 };
 
