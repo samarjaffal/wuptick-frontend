@@ -93,6 +93,9 @@ export const ListModules = ({ modules = [], projectId }) => {
                                                             modules={
                                                                 column.modules
                                                             }
+                                                            projectId={
+                                                                projectId
+                                                            }
                                                             doUpdateModule={
                                                                 doUpdateModule
                                                             }

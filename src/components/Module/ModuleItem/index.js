@@ -8,6 +8,7 @@ import { Container, ModuleContainer, Module, Name, Input } from './styles';
 export const ModuleItem = ({
     index,
     module,
+    projectId,
     setModuleCallback,
     editModuleId,
     setEditModuleId,
@@ -77,7 +78,11 @@ export const ModuleItem = ({
                     <Module isEditing={isEditing}>
                         <ModuleContainer>
                             {!isEditing ? (
-                                <Name to="">{module.name}</Name>
+                                <Name
+                                    to={`/project/${projectId}/module/${module._id}`}
+                                >
+                                    {module.name}
+                                </Name>
                             ) : (
                                 <Input
                                     type="text"

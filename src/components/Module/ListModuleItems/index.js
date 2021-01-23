@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export const ListModuleItems = ({
     modules,
+    projectId,
     setModuleCallback,
     doUpdateModule,
     editModuleId,
@@ -18,6 +19,7 @@ export const ListModuleItems = ({
             key={module._id}
             index={index}
             module={module}
+            projectId={projectId}
             setModuleCallback={setModuleCallback}
             editModuleId={editModuleId}
             setEditModuleId={setEditModuleId}
