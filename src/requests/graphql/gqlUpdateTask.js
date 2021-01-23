@@ -17,6 +17,12 @@ export const gqlUpdateTask = gql`
                 last_name
                 avatar
             }
+            collaborators {
+                _id
+                avatar
+                name
+                last_name
+            }
             deadline
             done
             description
