@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { Colors } from './colors';
 
 export const TaskDescriptionStyle = createGlobalStyle`
+
      .custom-task-description blockquote{
         background: ${Colors.backgroud};
         margin: 30px 0;
@@ -24,5 +25,9 @@ export const TaskDescriptionStyle = createGlobalStyle`
 
     .custom-task-description img{
         max-width:100%;
+    }
+
+    .ReplyInfo .custom-task-description img{
+      max-height:250px;   
     }
 `;

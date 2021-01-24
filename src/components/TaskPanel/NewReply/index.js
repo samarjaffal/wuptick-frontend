@@ -4,11 +4,13 @@ import { Input } from '../../SharedComponents/styles';
 import { Avatar } from '../../Avatar/index';
 import { Editor } from '../../Editor/index';
 import { Me } from '../../Me/index';
+import { useUser } from '../../../hooks/useUser';
 import { SkeletonAvatar } from '../../Loaders/SkeletonAvatar/index';
 import { Colors } from '../../../assets/css/colors';
 import { NewReplyContainer } from './styles';
 
-export const NewReply = () => {
+export const NewReply = ({ task, createComment }) => {
+    const { currentUser } = useUser();
     const [isFocused, setFocus] = useState(false);
     let inputRef = useRef(null);
 
@@ -18,6 +20,25 @@ export const NewReply = () => {
     };
 
     useEffect(() => {}, [isFocused]);
+
+    const onSave = async (outputHtml, outputData) => {
+        let outputDataStr = JSON.stringify({ blocks: outputData.blocks });
+        let input = {
+            task: {
+                _id: task._id,
+            },
+            comments: {
+                owner: {
+                    _id: currentUser._id,
+                },
+                comment: outputHtml,
+                commentJson: outputDataStr,
+                created_at: new Date(),
+            },
+        };
+        setFocus(false);
+        await createComment(input);
+    };
 
     return (
         <NewReplyContainer isFocused={isFocused}>
@@ -46,7 +67,7 @@ export const NewReply = () => {
                     <Editor
                         id="comment-editor"
                         initData={null}
-                        onSave={() => console.log('hello editor')}
+                        onSave={onSave}
                         setEditing={setFocus}
                         buttonSaveText="Send Reply"
                         placeholder="Add a new reply 💬"
@@ -57,4 +78,7 @@ export const NewReply = () => {
     );
 };
 
-NewReply.propTypes = {};
+NewReply.propTypes = {
+    createComment: PropTypes.func,
+    task: PropTypes.object,
+};

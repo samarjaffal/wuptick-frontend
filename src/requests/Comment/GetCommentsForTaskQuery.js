@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export const GetCommentsForTaskQuery = ({ children, taskId }) => {
     const { error, loading, data } = useQuery(gqlGetCommentsForTask, {
         variables: { taskId },
+        fetchPolicy: 'cache-and-network',
         onCompleted: (data) => {
             console.log(data, 'data GetCommentsForTaskQuery');
         },

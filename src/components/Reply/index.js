@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
+import parse from 'html-react-parser';
 import { navigate } from '@reach/router';
 import { Avatar } from '../Avatar/index';
 import { useUser } from '../../hooks/useUser';
@@ -52,7 +53,7 @@ export const Reply = ({ reply }) => {
             </HeaderContainer>
 
             <div className="ReplyInfo" style={{ padding: '0 1em' }}>
-                <Description>{reply.comment}</Description>
+                <Description>{parse(reply.comment)}</Description>
             </div>
         </ReplyContainer>
     );

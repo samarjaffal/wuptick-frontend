@@ -99,4 +99,5 @@ Editor.propTypes = {
     setEditing: PropTypes.func,
     onSave: PropTypes.func,
     buttonSaveText: PropTypes.string,
+    placeholder: PropTypes.string,
 };

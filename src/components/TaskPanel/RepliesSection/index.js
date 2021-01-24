@@ -4,7 +4,8 @@ import { FlexCenter } from '../../SharedComponents/styles';
 import { Reply } from '../../Reply/index';
 import { NewReply } from '../NewReply/index';
 import { GetCommentsForTaskQuery } from '../../../requests/Comment/GetCommentsForTaskQuery';
-import { RepliesDiv, Hr, Icon, ReplySectionTitle, NoComments } from './styles';
+import { CreateCommentMutation } from '../../../requests/Comment/CreateCommentMutation';
+import { RepliesDiv, ReplySectionTitle, NoComments } from './styles';
 
 export const RepliesSection = ({ task }) => {
     return (
@@ -17,7 +18,12 @@ export const RepliesSection = ({ task }) => {
                         <ReplySectionTitle>Replies</ReplySectionTitle>
                     </FlexCenter>
                 </RepliesDiv>
-                <NewReply />
+                <CreateCommentMutation>
+                    {({ doCreateComment }) => (
+                        <NewReply createComment={doCreateComment} task={task} />
+                    )}
+                </CreateCommentMutation>
+
                 <GetCommentsForTaskQuery taskId={task._id}>
                     {({ data }) => {
                         const replies = data.getCommentsForTask;

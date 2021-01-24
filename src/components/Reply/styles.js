@@ -28,7 +28,7 @@ export const HeaderContainer = styled.div`
     padding-left: 1em;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
     ${description};
     font-weight: ${regular};
     margin-bottom: 0;
