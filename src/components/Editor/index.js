@@ -19,12 +19,21 @@ const defaultEditorData = {
     ],
 };
 
-export const Editor = ({ initData, setEditing, onSave }) => {
+export const Editor = ({
+    id = 'editor',
+    initData,
+    setEditing,
+    onSave,
+    buttonSaveText = 'Save',
+    placeholder = 'Write a description...',
+}) => {
     console.log('editor here', initData);
 
     const editor = new EditorJS({
         ...EDITORCONF,
+        holder: id,
         data: initData ? initData : defaultEditorData,
+        placeholder: placeholder,
     });
 
     const parseToHTMl = (outputData) => {
@@ -61,14 +70,14 @@ export const Editor = ({ initData, setEditing, onSave }) => {
     return (
         <>
             <EditorStyle />
-            <div id="editor" style={{ marginTop: '0.5em' }}></div>
+            <div id={id} style={{ marginTop: '0.5em' }}></div>
             <div className="ButtonsContainer">
                 <Button
                     onClick={() => handleClick()}
                     margin="1em 0"
                     padding="6px 24px"
                 >
-                    Save
+                    {buttonSaveText}
                 </Button>
                 <Button
                     bg={Colors.backgroud}
@@ -85,7 +94,9 @@ export const Editor = ({ initData, setEditing, onSave }) => {
 };
 
 Editor.propTypes = {
+    id: PropTypes.string,
     initData: PropTypes.object,
     setEditing: PropTypes.func,
     onSave: PropTypes.func,
+    buttonSaveText: PropTypes.string,
 };
