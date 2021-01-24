@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Reply } from '../../Reply/index';
+import { NewReply } from '../NewReply/index';
 import { GetCommentsForTaskQuery } from '../../../requests/Comment/GetCommentsForTaskQuery';
 import { RepliesDiv, Hr, Icon, ReplySectionTitle, NoComments } from './styles';
 
@@ -16,6 +17,7 @@ export const RepliesSection = ({ task }) => {
                         <ReplySectionTitle>Replies</ReplySectionTitle>
                     </FlexCenter>
                 </RepliesDiv>
+                <NewReply />
                 <GetCommentsForTaskQuery taskId={task._id}>
                     {({ data }) => {
                         const replies = data.getCommentsForTask;

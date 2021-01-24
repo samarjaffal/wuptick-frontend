@@ -79,6 +79,7 @@ export const Input = styled.input`
     ${description};
     font-weight: ${regular};
     ${({ customProps }) => customProps};
+    box-sizing: border-box;
     :focus {
         outline: none;
     }
