@@ -8,7 +8,7 @@ import { TaskActionsContainer, TagIconSVG } from './styles';
 export const TaskPanelOptionButtons = () => {
     return (
         <TaskActionsContainer>
-            <ReplyButton />
+            {/*   <ReplyButton /> */}
             <MinimalButton color={Colors.primary} name="Jhon D.">
                 {() => <Avatar size={22} />}
             </MinimalButton>

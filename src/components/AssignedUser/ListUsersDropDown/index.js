@@ -53,7 +53,7 @@ const RenderMemberList = ({ members }) => {
 };
 
 RenderMemberList.propTypes = {
-    members: PropTypes.object,
+    members: PropTypes.array,
 };
 
 export const ListUsersDropDown = () => {
