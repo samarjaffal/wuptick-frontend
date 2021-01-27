@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TaskLists } from '../../../components/Task/TaskLists/index';
 import { useUser } from '../../../hooks/useUser';
 import { useDropdown } from '../../../hooks/useDropdown';
@@ -17,6 +17,8 @@ export const TasksSection = ({ lists, moduleId }) => {
     const { selectDropDown } = useDropdown();
     const { currentTask, setCurrentTask } = useUser();
     const { panelRef, openTaskPanel } = useTask();
+
+    useEffect(() => {}, [lists, moduleId]);
 
     const handleOpenTaskPanel = (task) => {
         setCurrentTask(task);

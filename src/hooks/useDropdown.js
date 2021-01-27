@@ -44,6 +44,31 @@ export const useDropdown = () => {
         setSelectDropDown(value);
     };
 
+    const handleDropDownOutsideClick = useCallback(
+        (value = null, dropdownRef) => {
+            let open = value == null ? true : value;
+            open
+                ? dropdownRef.current.openDropdown()
+                : dropdownRef.current.closeDropdown();
+        },
+        []
+    );
+
+    const handleDropDown = useCallback(
+        (value = null, dropdownRef, triggerRef) => {
+            let open = value == null ? true : value;
+            open
+                ? dropdownRef.current.openDropdown()
+                : dropdownRef.current.closeDropdown();
+            if (open) {
+                dropdownRef.current.openDropdown();
+                setRef(triggerRef);
+                setPositionDropDown(triggerRef);
+            }
+        },
+        []
+    );
+
     return {
         open,
         setOpen,
@@ -60,5 +85,7 @@ export const useDropdown = () => {
         openDropCallBack,
         selectDropDown,
         setSelectedDropDownCB,
+        handleDropDownOutsideClick,
+        handleDropDown,
     };
 };

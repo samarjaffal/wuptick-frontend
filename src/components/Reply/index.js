@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import { navigate } from '@reach/router';
 import { Avatar } from '../Avatar/index';
+import { OptionsButtonReplies } from '../TaskPanel/OptionsButtonReply/index';
 import { useUser } from '../../hooks/useUser';
 import {
     ReplyContainer,
@@ -13,7 +14,7 @@ import {
     MemberName,
 } from './styles';
 
-export const Reply = ({ reply }) => {
+export const Reply = ({ reply, dropdownRef }) => {
     const { generateProfileUrl } = useUser();
 
     const formatDate = (_date) => {
@@ -42,13 +43,21 @@ export const Reply = ({ reply }) => {
                 <MemberName>
                     {reply.owner.name} {reply.owner.last_name}
                 </MemberName>
-                <div style={{ marginLeft: 'auto', paddingRight: '0.5em' }}>
+                <div
+                    style={{
+                        marginLeft: 'auto',
+                        paddingRight: '0.5em',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
                     <CreatedDate>
                         {' '}
                         {reply.created_at !== null
                             ? formatDate(reply.created_at)
                             : ''}
                     </CreatedDate>
+                    <OptionsButtonReplies dropdownRef={dropdownRef} />
                 </div>
             </HeaderContainer>
 
@@ -61,4 +70,5 @@ export const Reply = ({ reply }) => {
 
 Reply.propTypes = {
     reply: PropTypes.object,
+    dropdownRef: PropTypes.any,
 };

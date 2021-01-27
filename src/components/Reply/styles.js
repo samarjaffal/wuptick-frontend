@@ -37,6 +37,7 @@ export const Description = styled.div`
 
 export const CreatedDate = styled.span`
     ${info};
+    margin-right: 10px;
 `;
 
 export const MemberName = styled.span`
