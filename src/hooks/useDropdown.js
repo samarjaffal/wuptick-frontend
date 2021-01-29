@@ -46,8 +46,7 @@ export const useDropdown = () => {
 
     const handleDropDownOutsideClick = useCallback(
         (value = null, dropdownRef) => {
-            let open = value == null ? true : value;
-            open
+            value
                 ? dropdownRef.current.openDropdown()
                 : dropdownRef.current.closeDropdown();
         },
@@ -56,14 +55,12 @@ export const useDropdown = () => {
 
     const handleDropDown = useCallback(
         (value = null, dropdownRef, triggerRef) => {
-            let open = value == null ? true : value;
-            open
-                ? dropdownRef.current.openDropdown()
-                : dropdownRef.current.closeDropdown();
-            if (open) {
+            if (value) {
                 dropdownRef.current.openDropdown();
                 setRef(triggerRef);
                 setPositionDropDown(triggerRef);
+            } else {
+                dropdownRef.current.closeDropdown();
             }
         },
         []

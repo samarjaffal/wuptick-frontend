@@ -12,6 +12,7 @@ export const EditorStyle = createGlobalStyle`
         border-radius: ${borderRadius};
         padding: 1em;
         color: ${Colors.black} !important;
+        background-color: ${Colors.whitePrimary};
     }
 
     .codex-editor--narrow .ce-toolbar__actions{

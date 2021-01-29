@@ -5,7 +5,12 @@ import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 
-export const ReplyDropDown = ({ dropdownRef }) => {
+export const ReplyDropDown = ({
+    dropdownRef,
+    setOpenEditor,
+    index,
+    closeDropDown,
+}) => {
     const { open, position } = useDropdown();
 
     return (
@@ -18,12 +23,21 @@ export const ReplyDropDown = ({ dropdownRef }) => {
             left={`${position.left}px`}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">
-                <DropdownItem onClicked={() => console.log('hello there')}>
-                    Is working!!
+                <DropdownItem
+                    onClicked={() => {
+                        setOpenEditor(index, true), closeDropDown();
+                    }}
+                >
+                    Edit Comment
                 </DropdownItem>
             </DropdownMenu>
         </Dropdown>
     );
 };
 
-ReplyDropDown.propTypes = {};
+ReplyDropDown.propTypes = {
+    dropdownRef: PropTypes.any,
+    setOpenEditor: PropTypes.func,
+    index: PropTypes.number,
+    closeDropDown: PropTypes.func,
+};

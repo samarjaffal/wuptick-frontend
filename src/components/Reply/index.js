@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import { navigate } from '@reach/router';
+import { Editor } from '../Editor/index';
 import { Avatar } from '../Avatar/index';
 import { OptionsButtonReplies } from '../TaskPanel/OptionsButtonReply/index';
 import { useUser } from '../../hooks/useUser';
@@ -14,16 +15,26 @@ import {
     MemberName,
 } from './styles';
 
-export const Reply = ({ reply, dropdownRef }) => {
+export const Reply = ({ reply, dropdownRef, index, itemsRef }) => {
     const { generateProfileUrl } = useUser();
+    const [isEditing, setEditing] = useState(false);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D, YYYY h:mm A');
         return dateFormated;
     };
 
+    const toggleEditing = (index, value) => {
+        itemsRef.current[index].setEditing(value);
+    };
+
+    const onSave = async (outputHtml, outputData) => {
+        console.log('update');
+    };
     return (
-        <ReplyContainer>
+        <ReplyContainer
+            ref={(el) => (itemsRef.current[index] = { el, setEditing })}
+        >
             <HeaderContainer>
                 <div className="AvatarContainer">
                     <Avatar
@@ -57,12 +68,30 @@ export const Reply = ({ reply, dropdownRef }) => {
                             ? formatDate(reply.created_at)
                             : ''}
                     </CreatedDate>
-                    <OptionsButtonReplies dropdownRef={dropdownRef} />
+                    <OptionsButtonReplies
+                        dropdownRef={dropdownRef}
+                        setOpenEditor={toggleEditing}
+                        index={index}
+                    />
                 </div>
             </HeaderContainer>
 
             <div className="ReplyInfo" style={{ padding: '0 1em' }}>
-                <Description>{parse(reply.comment)}</Description>
+                {isEditing ? (
+                    <Editor
+                        initData={
+                            Object.keys(reply.commentJson).length > 0
+                                ? JSON.parse(reply.commentJson)
+                                : null
+                        }
+                        onSave={onSave}
+                        setEditing={setEditing}
+                        id="edit-comment-editor"
+                        buttonSaveText="Update Comment"
+                    />
+                ) : (
+                    <Description>{parse(reply.comment)}</Description>
+                )}
             </div>
         </ReplyContainer>
     );
@@ -71,4 +100,6 @@ export const Reply = ({ reply, dropdownRef }) => {
 Reply.propTypes = {
     reply: PropTypes.object,
     dropdownRef: PropTypes.any,
+    index: PropTypes.number,
+    itemsRef: PropTypes.object,
 };

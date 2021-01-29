@@ -13,6 +13,7 @@ export const gqlGetCommentsForTask = gql`
                     avatar
                 }
                 comment
+                commentJson
                 created_at
             }
         }
