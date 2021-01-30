@@ -6,7 +6,14 @@ import { ReplyDropDown } from '../ReplyDropDown/index';
 import { OutsideClick } from '../../OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 
-export const OptionsButtonReplies = ({ dropdownRef, setOpenEditor, index }) => {
+export const OptionsButtonReplies = ({
+    dropdownRef,
+    setOpenEditor,
+    index,
+    doDeleteComment,
+    taskId,
+    reply,
+}) => {
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
 
@@ -31,6 +38,12 @@ export const OptionsButtonReplies = ({ dropdownRef, setOpenEditor, index }) => {
         closeDropDown();
     };
 
+    const DeleteComment = () => {
+        console.log(index, reply, taskId, 'delete');
+        doDeleteComment(reply._id, taskId);
+        closeDropDown();
+    };
+
     return (
         <>
             <OptionsButton doFunc={openDropdown} elemRef={optionsRef} />
@@ -41,6 +54,7 @@ export const OptionsButtonReplies = ({ dropdownRef, setOpenEditor, index }) => {
                             dropdownRef={dropdownRef}
                             setOpenEditor={setOpenEditor}
                             closeDropDown={closeDropDown}
+                            DeleteComment={DeleteComment}
                             index={index}
                         />
                     </OutsideClick>,

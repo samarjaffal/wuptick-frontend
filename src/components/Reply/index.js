@@ -7,6 +7,7 @@ import { Editor } from '../Editor/index';
 import { Avatar } from '../Avatar/index';
 import { OptionsButtonReplies } from '../TaskPanel/OptionsButtonReply/index';
 import { useUser } from '../../hooks/useUser';
+import { DeleteCommentMutation } from '../../requests/Comment/DeleteCommentMutation';
 import {
     ReplyContainer,
     HeaderContainer,
@@ -85,11 +86,18 @@ export const Reply = ({
                             ? formatDate(reply.created_at)
                             : ''}
                     </CreatedDate>
-                    <OptionsButtonReplies
-                        dropdownRef={dropdownRef}
-                        setOpenEditor={toggleEditing}
-                        index={index}
-                    />
+                    <DeleteCommentMutation>
+                        {({ doDeleteComment }) => (
+                            <OptionsButtonReplies
+                                dropdownRef={dropdownRef}
+                                setOpenEditor={toggleEditing}
+                                index={index}
+                                doDeleteComment={doDeleteComment}
+                                taskId={taskId}
+                                reply={reply}
+                            />
+                        )}
+                    </DeleteCommentMutation>
                 </div>
             </HeaderContainer>
 

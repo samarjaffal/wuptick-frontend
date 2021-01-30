@@ -4,12 +4,14 @@ import { Dropdown } from '../../Dropdrown/index';
 import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ReplyDropDown = ({
     dropdownRef,
     setOpenEditor,
     index,
     closeDropDown,
+    DeleteComment,
 }) => {
     const { open, position } = useDropdown();
 
@@ -24,11 +26,18 @@ export const ReplyDropDown = ({
         >
             <DropdownMenu menu="main" classMenu="menu-primary">
                 <DropdownItem
+                    leftIcon={<FontAwesomeIcon icon="edit" />}
                     onClicked={() => {
                         setOpenEditor(index, true), closeDropDown();
                     }}
                 >
-                    Edit Comment
+                    Edit
+                </DropdownItem>
+                <DropdownItem
+                    onClicked={() => DeleteComment()}
+                    leftIcon={<FontAwesomeIcon icon="trash-alt" />}
+                >
+                    Delete
                 </DropdownItem>
             </DropdownMenu>
         </Dropdown>
@@ -40,4 +49,5 @@ ReplyDropDown.propTypes = {
     setOpenEditor: PropTypes.func,
     index: PropTypes.number,
     closeDropDown: PropTypes.func,
+    DeleteComment: PropTypes.func,
 };
