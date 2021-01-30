@@ -4,6 +4,7 @@ import { FlexCenter } from '../../SharedComponents/styles';
 import { Reply } from '../../Reply/index';
 import { NewReply } from '../NewReply/index';
 import { GetCommentsForTaskQuery } from '../../../requests/Comment/GetCommentsForTaskQuery';
+import { EditCommentMutation } from '../../../requests/Comment/EditCommentMutation';
 import { CreateCommentMutation } from '../../../requests/Comment/CreateCommentMutation';
 import { RepliesDiv, ReplySectionTitle, NoComments } from './styles';
 
@@ -30,22 +31,36 @@ export const RepliesSection = ({ task }) => {
                     {({ data }) => {
                         const replies = data.getCommentsForTask;
                         console.log(replies, 'replies');
-                        return replies.length > 0 ? (
-                            replies.map((replyObj) =>
-                                replyObj.comments.map((reply, index) => (
-                                    <Reply
-                                        key={index}
-                                        index={index}
-                                        reply={reply}
-                                        dropdownRef={dropdownRef}
-                                        itemsRef={itemsRef}
-                                    />
-                                ))
-                            )
-                        ) : (
-                            <NoComments>
-                                This task has no replies yet...
-                            </NoComments>
+                        return (
+                            <EditCommentMutation>
+                                {({ doUpdateComment }) =>
+                                    replies.length > 0 ? (
+                                        replies.map((replyObj) =>
+                                            replyObj.comments.map(
+                                                (reply, index) => (
+                                                    <Reply
+                                                        key={index}
+                                                        index={index}
+                                                        reply={reply}
+                                                        dropdownRef={
+                                                            dropdownRef
+                                                        }
+                                                        itemsRef={itemsRef}
+                                                        taskId={task._id}
+                                                        updateComment={
+                                                            doUpdateComment
+                                                        }
+                                                    />
+                                                )
+                                            )
+                                        )
+                                    ) : (
+                                        <NoComments>
+                                            This task has no replies yet...
+                                        </NoComments>
+                                    )
+                                }
+                            </EditCommentMutation>
                         );
                     }}
                 </GetCommentsForTaskQuery>

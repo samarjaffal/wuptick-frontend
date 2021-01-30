@@ -19,12 +19,17 @@ export const TaskDescriptionStyle = createGlobalStyle`
         font-size: 14px;
     }
 
+    .custom-task-description p{
+        margin-bottom:0;
+    }
+
     .custom-task-description li {
         padding: 4px 0;
     }
 
     .custom-task-description img{
         max-width:100%;
+        margin-top: 14px;
     }
 
     .ReplyInfo .custom-task-description img{

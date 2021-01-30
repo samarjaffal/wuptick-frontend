@@ -15,8 +15,15 @@ import {
     MemberName,
 } from './styles';
 
-export const Reply = ({ reply, dropdownRef, index, itemsRef }) => {
-    const { generateProfileUrl } = useUser();
+export const Reply = ({
+    reply,
+    dropdownRef,
+    index,
+    itemsRef,
+    updateComment,
+    taskId,
+}) => {
+    const { generateProfileUrl, currentUser } = useUser();
     const [isEditing, setEditing] = useState(false);
 
     const formatDate = (_date) => {
@@ -30,6 +37,16 @@ export const Reply = ({ reply, dropdownRef, index, itemsRef }) => {
 
     const onSave = async (outputHtml, outputData) => {
         console.log('update');
+        let outputDataStr = JSON.stringify({ blocks: outputData.blocks });
+        let input = {
+            taskId: taskId,
+            commentId: reply._id,
+            comment: outputHtml,
+            commentJson: outputDataStr,
+            updated_at: new Date(),
+        };
+        setEditing(false);
+        await updateComment(input);
     };
     return (
         <ReplyContainer
@@ -102,4 +119,6 @@ Reply.propTypes = {
     dropdownRef: PropTypes.any,
     index: PropTypes.number,
     itemsRef: PropTypes.object,
+    updateComment: PropTypes.func,
+    taskId: PropTypes.string,
 };
