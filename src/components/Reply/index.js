@@ -14,6 +14,8 @@ import {
     Description,
     CreatedDate,
     MemberName,
+    OptionsContainer,
+    Container,
 } from './styles';
 
 export const Reply = ({
@@ -50,42 +52,67 @@ export const Reply = ({
         await updateComment(input);
     };
     return (
-        <ReplyContainer
-            ref={(el) => (itemsRef.current[index] = { el, setEditing })}
-        >
-            <HeaderContainer>
-                <div className="AvatarContainer">
-                    <Avatar
-                        size={25}
-                        src={reply.owner.avatar}
-                        onClicked={() =>
-                            navigate(
-                                generateProfileUrl(
-                                    reply.owner.name,
-                                    reply.owner.last_name,
-                                    reply.owner._id
+        <Container>
+            <ReplyContainer
+                ref={(el) => (itemsRef.current[index] = { el, setEditing })}
+            >
+                <HeaderContainer>
+                    <div className="AvatarContainer">
+                        <Avatar
+                            size={25}
+                            src={reply.owner.avatar}
+                            onClicked={() =>
+                                navigate(
+                                    generateProfileUrl(
+                                        reply.owner.name,
+                                        reply.owner.last_name,
+                                        reply.owner._id
+                                    )
                                 )
-                            )
-                        }
-                    />
+                            }
+                        />
+                    </div>
+                    <MemberName>
+                        {reply.owner.name} {reply.owner.last_name}
+                    </MemberName>
+                    <div
+                        style={{
+                            marginLeft: 'auto',
+                            paddingRight: '0.5em',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <CreatedDate>
+                            {' '}
+                            {reply.created_at !== null
+                                ? formatDate(reply.created_at)
+                                : ''}
+                        </CreatedDate>
+                    </div>
+                </HeaderContainer>
+
+                <div className="ReplyInfo" style={{ padding: '0 1em' }}>
+                    {isEditing ? (
+                        <Editor
+                            initData={
+                                Object.keys(reply.commentJson).length > 0
+                                    ? JSON.parse(reply.commentJson)
+                                    : null
+                            }
+                            onSave={onSave}
+                            setEditing={setEditing}
+                            id="edit-comment-editor"
+                            buttonSaveText="Update Comment"
+                        />
+                    ) : (
+                        <Description>{parse(reply.comment)}</Description>
+                    )}
                 </div>
-                <MemberName>
-                    {reply.owner.name} {reply.owner.last_name}
-                </MemberName>
-                <div
-                    style={{
-                        marginLeft: 'auto',
-                        paddingRight: '0.5em',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}
-                >
-                    <CreatedDate>
-                        {' '}
-                        {reply.created_at !== null
-                            ? formatDate(reply.created_at)
-                            : ''}
-                    </CreatedDate>
+            </ReplyContainer>
+
+            {currentUser._id == reply.owner._id && (
+                <OptionsContainer>
                     <DeleteCommentMutation>
                         {({ doDeleteComment }) => (
                             <OptionsButtonReplies
@@ -98,27 +125,9 @@ export const Reply = ({
                             />
                         )}
                     </DeleteCommentMutation>
-                </div>
-            </HeaderContainer>
-
-            <div className="ReplyInfo" style={{ padding: '0 1em' }}>
-                {isEditing ? (
-                    <Editor
-                        initData={
-                            Object.keys(reply.commentJson).length > 0
-                                ? JSON.parse(reply.commentJson)
-                                : null
-                        }
-                        onSave={onSave}
-                        setEditing={setEditing}
-                        id="edit-comment-editor"
-                        buttonSaveText="Update Comment"
-                    />
-                ) : (
-                    <Description>{parse(reply.comment)}</Description>
-                )}
-            </div>
-        </ReplyContainer>
+                </OptionsContainer>
+            )}
+        </Container>
     );
 };
 

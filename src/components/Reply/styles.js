@@ -7,12 +7,17 @@ import {
     borderRadius,
 } from '../../assets/css/theme';
 
+export const Container = styled.div`
+    display: flex;
+`;
+
 export const ReplyContainer = styled.div`
     margin-bottom: 1em;
     background-color: #f9faff;
     padding-bottom: 1em;
     border: 1px solid ${Colors.hover};
     border-radius: ${borderRadius};
+    width: 92%;
 `;
 
 export const HeaderContainer = styled.div`
@@ -44,4 +49,12 @@ export const MemberName = styled.span`
     ${info};
     color: ${Colors.black};
     margin-left: 0.5em;
+`;
+
+export const OptionsContainer = styled.div`
+    margin-left: 1em;
+    display: none;
+    ${Container}:hover & {
+        display: block;
+    }
 `;
