@@ -26,7 +26,7 @@ export const OptionsButtonReplies = ({
 
     const openDropdown = async () => {
         await initDropDown();
-        handleDropDown(true, dropdownRef, optionsRef);
+        handleDropDown(true, dropdownRef, optionsRef, 'RepliesContainer');
     };
 
     const closeDropDown = () => {
@@ -58,7 +58,7 @@ export const OptionsButtonReplies = ({
                             index={index}
                         />
                     </OutsideClick>,
-                    document.getElementById('dropwdown-app')
+                    document.getElementById('dropdownRender')
                 )}
         </>
     );
@@ -67,5 +67,8 @@ export const OptionsButtonReplies = ({
 OptionsButtonReplies.propTypes = {
     dropdownRef: PropTypes.any,
     setOpenEditor: PropTypes.func,
+    doDeleteComment: PropTypes.func,
     index: PropTypes.number,
+    taskId: PropTypes.string,
+    reply: PropTypes.object,
 };

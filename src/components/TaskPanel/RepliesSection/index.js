@@ -14,7 +14,10 @@ export const RepliesSection = ({ task }) => {
     return (
         <div className="RepliesSection" style={{ marginTop: '25px' }}>
             {/* <Hr /> */}
-            <div className="RepliesContainer" style={{ paddingLeft: '40px' }}>
+            <div
+                id="RepliesContainer"
+                style={{ paddingLeft: '40px', position: 'relative' }}
+            >
                 <RepliesDiv>
                     <FlexCenter customProps="margin-top:1em;">
                         {/* <Icon width="25px" height="25px" viewBox="0 0 25 25" /> */}
@@ -64,6 +67,7 @@ export const RepliesSection = ({ task }) => {
                         );
                     }}
                 </GetCommentsForTaskQuery>
+                <div id="dropdownRender"></div>
             </div>
         </div>
     );

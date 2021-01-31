@@ -25,12 +25,22 @@ export const useDropdown = () => {
         currentElemRef.current = ref.current;
     };
 
-    const setPositionDropDown = (elementRef) => {
-        const bodyRect = document.body.getBoundingClientRect();
+    const setPositionDropDown = (elementRef, parentElId = null) => {
         const elemRect = elementRef.current.getBoundingClientRect();
-        const offset = elemRect.top - bodyRect.top;
-        const position = { top: offset, left: elemRect.left };
-        setPosition(position);
+        if (!parentElId) {
+            const bodyRect = document.body.getBoundingClientRect();
+            const offset = elemRect.top - bodyRect.top;
+            const position = { top: offset, left: elemRect.left };
+            setPosition(position);
+        } else {
+            const parentPos = document
+                .getElementById(parentElId)
+                .getBoundingClientRect();
+            const offset = elemRect.top - parentPos.top;
+            const left = elemRect.left - parentPos.left;
+            const position = { top: offset, left: left };
+            setPosition(position);
+        }
     };
 
     const openDropCallBack = (value) => {
@@ -54,11 +64,11 @@ export const useDropdown = () => {
     );
 
     const handleDropDown = useCallback(
-        (value = null, dropdownRef, triggerRef) => {
+        (value = null, dropdownRef, triggerRef, parentElId = null) => {
             if (value) {
                 dropdownRef.current.openDropdown();
                 setRef(triggerRef);
-                setPositionDropDown(triggerRef);
+                setPositionDropDown(triggerRef, parentElId);
             } else {
                 dropdownRef.current.closeDropdown();
             }
