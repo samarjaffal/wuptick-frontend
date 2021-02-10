@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
-import { EDITORCONF } from './editor-conf';
+import { EDITORCONF, setMentionsConfig } from './editor-conf';
 import { customQuoteBlock } from './customBlocks';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
@@ -34,6 +34,26 @@ export const Editor = ({
         holder: id,
         data: initData ? initData : defaultEditorData,
         placeholder: placeholder,
+    });
+
+    setMentionsConfig({
+        items: [
+            {
+                name: 'Samar',
+                lastName: 'Jaffal',
+                id: 1,
+            },
+            {
+                name: 'Kathy',
+                lastName: 'Jordi',
+                id: 2,
+            },
+            {
+                name: 'Yamile',
+                lastName: 'Barakat',
+                id: 3,
+            },
+        ],
     });
 
     const parseToHTMl = (outputData) => {
@@ -70,7 +90,10 @@ export const Editor = ({
     return (
         <>
             <EditorStyle />
-            <div id={id} style={{ marginTop: '0.5em' }}></div>
+            <div
+                id={id}
+                style={{ marginTop: '0.5em', position: 'relative' }}
+            ></div>
             <div className="ButtonsContainer">
                 <Button
                     onClick={() => handleClick()}

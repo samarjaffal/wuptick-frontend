@@ -2,7 +2,15 @@ import ImageTool from '@editorjs/image';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
+import Paragraph from './plugins/custom-paragraph/index.js';
+import { Mention } from './plugins/custom-mention/custom-mention.js';
+import './plugins/custom-mention/custom-mention.css';
 import { uploadImageEditor } from '../../requests/uploadImageEditor';
+
+let mentionsConfig = {};
+export const setMentionsConfig = (config) => {
+    mentionsConfig.items = config.items;
+};
 
 export const EDITORCONF = {
     holder: 'editor',
@@ -10,6 +18,14 @@ export const EDITORCONF = {
     autofocus: true,
     logLevel: 'WARN',
     tools: {
+        paragraph: {
+            class: Paragraph,
+            inlineToolbar: true,
+            config: mentionsConfig,
+        },
+        mention: {
+            class: Mention,
+        },
         image: {
             class: ImageTool,
             config: {
