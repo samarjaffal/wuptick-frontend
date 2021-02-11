@@ -32,6 +32,10 @@
     margin: 0 5px;
 }
 
+.mention-item:first-child{
+    margin-left:0;
+}
+
 .list-container ul{
     list-style: none;
     padding-left: 1em;
