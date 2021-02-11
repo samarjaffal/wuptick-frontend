@@ -27,10 +27,20 @@ export const TaskOverview = ({
     doUpdateTask,
     newTaskData,
     setCurrentTask,
+    currentProject,
 }) => {
     const [isEditing, setEditing] = useState(false);
     let inputRef = useRef(null);
     let descriptionRef = useRef(null);
+    let mentionsItems = currentProject.members
+        ? currentProject.members.map((member) => {
+              return {
+                  id: member.user._id,
+                  name: member.user.name,
+                  lastName: member.user.last_name,
+              };
+          })
+        : [];
 
     useEffect(() => {
         if (typeof newTaskData !== 'undefined' && newTaskData !== null) {
@@ -98,6 +108,7 @@ export const TaskOverview = ({
                                 }
                                 onSave={onSave}
                                 setEditing={setEditing}
+                                mentionItems={mentionsItems}
                             />
                         ) : (
                             <>

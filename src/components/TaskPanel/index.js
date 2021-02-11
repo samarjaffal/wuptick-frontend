@@ -11,7 +11,12 @@ import { Container } from './styles';
 const MemoTaskPanel = ({ panelRef }) => {
     console.log('render MemoTaskPanel');
 
-    const { currentTask, currentModule, setCurrentTask } = useUser();
+    const {
+        currentTask,
+        currentModule,
+        setCurrentTask,
+        currentProject,
+    } = useUser();
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
             <Container>
@@ -23,6 +28,7 @@ const MemoTaskPanel = ({ panelRef }) => {
                             doUpdateTask={doUpdateTask}
                             newTaskData={data}
                             setCurrentTask={setCurrentTask}
+                            currentProject={currentProject}
                         />
                     )}
                 </UpdateTaskMutation>

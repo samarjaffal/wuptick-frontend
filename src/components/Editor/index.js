@@ -26,6 +26,7 @@ export const Editor = ({
     onSave,
     buttonSaveText = 'Save',
     placeholder = 'Write a description...',
+    mentionItems = [],
 }) => {
     console.log('editor here', initData);
 
@@ -37,23 +38,7 @@ export const Editor = ({
     });
 
     setMentionsConfig({
-        items: [
-            {
-                name: 'Samar',
-                lastName: 'Jaffal',
-                id: 1,
-            },
-            {
-                name: 'Kathy',
-                lastName: 'Jordi',
-                id: 2,
-            },
-            {
-                name: 'Yamile',
-                lastName: 'Barakat',
-                id: 3,
-            },
-        ],
+        items: mentionItems,
     });
 
     const parseToHTMl = (outputData) => {
