@@ -1,3 +1,7 @@
+let editorId = 'editor';
+const setEditorId = (id) => {
+    editorId = id;
+};
 class Mention {
     constructor({ data, api }) {
         this.data = data;
@@ -9,7 +13,8 @@ class Mention {
     }
 
     mentionListener() {
-        let element = document.querySelector('#editor');
+        let element = document.querySelector(`#${editorId}`);
+        console.log(editorId, 'editorId');
         let listContainer = document.createElement('div');
         listContainer.classList.add('list-container');
 
@@ -215,4 +220,5 @@ class Mention {
 
 module.exports = {
     Mention,
+    setEditorId,
 };

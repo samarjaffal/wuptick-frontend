@@ -10,9 +10,18 @@ import { Colors } from '../../../assets/css/colors';
 import { NewReplyContainer } from './styles';
 
 export const NewReply = ({ task, createComment }) => {
-    const { currentUser } = useUser();
-    const [isFocused, setFocus] = useState(false);
     let inputRef = useRef(null);
+    const { currentUser, currentProject } = useUser();
+    const [isFocused, setFocus] = useState(false);
+    let mentionsItems = currentProject.members
+        ? currentProject.members.map((member) => {
+              return {
+                  id: member.user._id,
+                  name: member.user.name,
+                  lastName: member.user.last_name,
+              };
+          })
+        : [];
 
     const toggleFocus = () => {
         console.log('toggleFocus');
@@ -71,6 +80,7 @@ export const NewReply = ({ task, createComment }) => {
                         setEditing={setFocus}
                         buttonSaveText="Send Reply"
                         placeholder="Add a new reply 💬"
+                        mentionItems={mentionsItems}
                     />
                 </div>
             )}

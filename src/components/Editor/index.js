@@ -39,6 +39,7 @@ export const Editor = ({
 
     setMentionsConfig({
         items: mentionItems,
+        editorId: id,
     });
 
     const parseToHTMl = (outputData) => {

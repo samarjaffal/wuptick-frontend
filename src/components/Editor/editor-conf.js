@@ -3,13 +3,18 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
 import Paragraph from './plugins/custom-paragraph/index.js';
-import { Mention } from './plugins/custom-mention/custom-mention.js';
+import {
+    Mention,
+    setEditorId,
+} from './plugins/custom-mention/custom-mention.js';
 import './plugins/custom-mention/custom-mention.css';
 import { uploadImageEditor } from '../../requests/uploadImageEditor';
 
 let mentionsConfig = {};
 export const setMentionsConfig = (config) => {
+    setEditorId(config.editorId);
     mentionsConfig.items = config.items;
+    mentionsConfig.editorId = config.editorId;
 };
 
 export const EDITORCONF = {
