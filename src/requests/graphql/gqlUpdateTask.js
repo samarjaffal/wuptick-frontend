@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const gqlUpdateTask = gql`
-    mutation updateTask($taskId: ID!, $input: EditTaskInput!) {
-        editTask(taskId: $taskId, input: $input) {
+    mutation updateTask($taskId: ID!, $input: EditTaskInput!, $url: String) {
+        editTask(taskId: $taskId, input: $input, url: $url) {
             _id
             name
             owner {

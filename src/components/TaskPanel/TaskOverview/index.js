@@ -65,7 +65,8 @@ export const TaskOverview = ({
             descriptionJson: outputDataStr,
         };
         setEditing(false);
-        await doUpdateTask(task._id, input, module._id);
+        let url = `project/${currentProject._id}/module/${module._id}`;
+        await doUpdateTask(task._id, input, module._id, url);
     };
 
     return (
@@ -149,4 +150,5 @@ TaskOverview.propTypes = {
     newTaskData: PropTypes.object,
     doUpdateTask: PropTypes.func,
     setCurrentTask: PropTypes.func,
+    currentProject: PropTypes.object,
 };

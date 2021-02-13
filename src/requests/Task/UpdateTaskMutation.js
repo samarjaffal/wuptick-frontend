@@ -12,11 +12,12 @@ export const UpdateTaskMutation = ({ children }) => {
         },
     });
 
-    const doUpdateTask = useCallback((taskId, input, moduleId) => {
+    const doUpdateTask = useCallback((taskId, input, moduleId, url) => {
         updateTask({
             variables: {
                 taskId,
                 input,
+                url,
             },
             refetchQueries: [
                 {
