@@ -26,7 +26,7 @@ export const Reply = ({
     updateComment,
     taskId,
 }) => {
-    const { generateProfileUrl, currentUser } = useUser();
+    const { generateProfileUrl, currentUser, currentProject } = useUser();
     const [isEditing, setEditing] = useState(false);
 
     const formatDate = (_date) => {
@@ -37,6 +37,16 @@ export const Reply = ({
     const toggleEditing = (index, value) => {
         itemsRef.current[index].setEditing(value);
     };
+
+    let mentionsItems = currentProject.members
+        ? currentProject.members.map((member) => {
+              return {
+                  id: member.user._id,
+                  name: member.user.name,
+                  lastName: member.user.last_name,
+              };
+          })
+        : [];
 
     const onSave = async (outputHtml, outputData) => {
         console.log('update');
@@ -104,6 +114,7 @@ export const Reply = ({
                             setEditing={setEditing}
                             id="edit-comment-editor"
                             buttonSaveText="Update Comment"
+                            mentionItems={mentionsItems}
                         />
                     ) : (
                         <Description>{parse(reply.comment)}</Description>
