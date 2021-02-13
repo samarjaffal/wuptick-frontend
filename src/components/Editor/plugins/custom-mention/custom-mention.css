@@ -26,14 +26,12 @@
 }
 
 .mention-item{
-    background: #F9FAFF;
-    padding: 5px;
     border-radius: 8px;
-    margin: 0 5px;
+    color: #5271FF;
 }
 
-.mention-item:first-child{
-    margin-left:0;
+.mention-item::before{
+    content: '@';
 }
 
 .list-container ul{
