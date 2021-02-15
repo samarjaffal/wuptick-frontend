@@ -9,18 +9,24 @@ export const TaskPanelOptionButtons = () => {
     return (
         <TaskActionsContainer>
             {/*   <ReplyButton /> */}
-            <MinimalButton color={Colors.primary} name="Jhon D.">
+            <MinimalButton
+                color={Colors.blue}
+                hover={Colors.backgroud}
+                name="Jhon D."
+            >
                 {() => <Avatar size={22} />}
             </MinimalButton>
-            <MinimalButton color={Colors.primary} name="Web">
+            <MinimalButton
+                color={Colors.primary}
+                name="Web"
+                hover={Colors.backgroud}
+            >
                 {(isParentHover) => (
                     <TagIconSVG
                         width="18px"
                         height="18px"
                         viewBox="0 0 25 25"
-                        color={
-                            isParentHover ? Colors.whitePrimary : Colors.primary
-                        }
+                        color={isParentHover ? Colors.primary : Colors.primary}
                     />
                 )}
             </MinimalButton>

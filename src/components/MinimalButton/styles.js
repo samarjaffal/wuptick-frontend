@@ -19,7 +19,7 @@ export const BoxOption = styled.div`
     }
     ${TransitionSecondary};
     :hover {
-        background-color: ${({ color }) => (color ? color : Colors.hover)};
+        background-color: ${({ hover }) => (hover ? hover : Colors.hover)};
     }
 `;
 
@@ -35,7 +35,4 @@ export const BoxOptionName = styled.span`
     font-weight: ${bold};
     color: ${({ color }) => (color ? color : Colors.gray)};
     margin-left: 0.5em;
-    ${BoxOption}:hover & {
-        color: ${Colors.whitePrimary};
-    }
 `;
