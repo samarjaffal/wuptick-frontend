@@ -4,18 +4,13 @@ import { Colors } from '../../../assets/css/colors';
 import { MinimalButton } from '../../MinimalButton/index';
 import { ReplyButton } from './ReplyButton';
 import { TaskActionsContainer, TagIconSVG } from './styles';
+import { AssignedButton } from './AssignedButton';
 
 export const TaskPanelOptionButtons = () => {
     return (
         <TaskActionsContainer>
             {/*   <ReplyButton /> */}
-            <MinimalButton
-                color={Colors.blue}
-                hover={Colors.backgroud}
-                name="Jhon D."
-            >
-                {() => <Avatar size={22} />}
-            </MinimalButton>
+            <AssignedButton />
             <MinimalButton
                 color={Colors.primary}
                 name="Web"
