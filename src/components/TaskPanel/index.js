@@ -6,6 +6,7 @@ import { TaskOverview } from './TaskOverview';
 import { RepliesSection } from './RepliesSection/index';
 import { useUser } from '../../hooks/useUser';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
+import { GetTaskQuery } from '../../requests/Task/GetTaskQuery';
 import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
@@ -20,18 +21,26 @@ const MemoTaskPanel = ({ panelRef }) => {
     return (
         <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
             <Container>
-                <UpdateTaskMutation>
-                    {({ doUpdateTask, data }) => (
-                        <TaskOverview
-                            task={currentTask}
-                            module={currentModule}
-                            doUpdateTask={doUpdateTask}
-                            newTaskData={data}
-                            setCurrentTask={setCurrentTask}
-                            currentProject={currentProject}
-                        />
-                    )}
-                </UpdateTaskMutation>
+                <GetTaskQuery taskId={currentTask._id}>
+                    {({ data }) => {
+                        const task = data.getTask;
+                        return (
+                            <UpdateTaskMutation>
+                                {({ doUpdateTask, data }) => (
+                                    <TaskOverview
+                                        task={task}
+                                        module={currentModule}
+                                        doUpdateTask={doUpdateTask}
+                                        newTaskData={data}
+                                        setCurrentTask={setCurrentTask}
+                                        currentProject={currentProject}
+                                    />
+                                )}
+                            </UpdateTaskMutation>
+                        );
+                    }}
+                </GetTaskQuery>
+
                 <RepliesSection task={currentTask} />
             </Container>
         </Panel>

@@ -69,6 +69,7 @@ const MemoTaskItem = ({
         if (callOpenPanel) {
             openTaskPanel(task);
             setCallOpenPanel(false);
+            console.log('hello');
             return;
         }
         let taskItem = document.querySelector(`#task-item-${task._id}`);
