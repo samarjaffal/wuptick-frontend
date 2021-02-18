@@ -138,7 +138,7 @@ export const TaskOverview = ({
                         )}
                     </div>
                 </div>
-                <TaskPanelOptionButtons />
+                <TaskPanelOptionButtons task={task} />
             </TaskDetails>
         </TaskContainer>
     );

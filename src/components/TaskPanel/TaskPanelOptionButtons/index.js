@@ -6,11 +6,11 @@ import { ReplyButton } from './ReplyButton';
 import { TaskActionsContainer, TagIconSVG } from './styles';
 import { AssignedButton } from './AssignedButton';
 
-export const TaskPanelOptionButtons = () => {
+export const TaskPanelOptionButtons = ({ task }) => {
     return (
         <TaskActionsContainer>
             {/*   <ReplyButton /> */}
-            <AssignedButton />
+            <AssignedButton assigned={task.assigned} />
             <MinimalButton
                 color={Colors.primary}
                 name="Web"
