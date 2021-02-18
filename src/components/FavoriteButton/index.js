@@ -51,7 +51,7 @@ export const FavoriteButton = ({
                         icon="star"
                         color={
                             isParentHover
-                                ? Colors.white
+                                ? Colors.secondary
                                 : active
                                 ? activeColor
                                 : inactiveColor

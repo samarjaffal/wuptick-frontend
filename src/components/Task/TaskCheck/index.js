@@ -51,9 +51,9 @@ export const TaskCheck = ({
                     icon="check"
                     color={
                         isParentHover
-                            ? Colors.white
+                            ? Colors.secondary
                             : checked
-                            ? Colors.white
+                            ? Colors.green
                             : Colors.secondary
                     }
                 />

@@ -26,7 +26,8 @@ export const TaskPanelHeader = () => {
                 </div>
 
                 <MinimalButton
-                    color={Colors.green}
+                    color={Colors.secondary}
+                    hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
@@ -43,7 +44,8 @@ export const TaskPanelHeader = () => {
                 </MinimalButton>
 
                 <MinimalButton
-                    color={Colors.yellow}
+                    color={Colors.secondary}
+                    hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
@@ -58,50 +60,28 @@ export const TaskPanelHeader = () => {
                 </MinimalButton>
                 <MinimalButton
                     color={Colors.secondary}
+                    hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
-                    {(isParentHover) => (
-                        <Icon
-                            icon="paperclip"
-                            color={
-                                isParentHover
-                                    ? Colors.whitePrimary
-                                    : Colors.secondary
-                            }
-                        />
-                    )}
+                    {() => <Icon icon="paperclip" color={Colors.secondary} />}
                 </MinimalButton>
                 <MinimalButton
                     color={Colors.secondary}
+                    hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
-                    {(isParentHover) => (
-                        <Icon
-                            icon="inbox"
-                            color={
-                                isParentHover
-                                    ? Colors.whitePrimary
-                                    : Colors.secondary
-                            }
-                        />
-                    )}
+                    {() => <Icon icon="inbox" color={Colors.secondary} />}
                 </MinimalButton>
                 <MinimalButton
                     color={Colors.secondary}
+                    hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
-                    {(isParentHover) => (
-                        <Icon
-                            icon="sign-out-alt"
-                            color={
-                                isParentHover
-                                    ? Colors.whitePrimary
-                                    : Colors.secondary
-                            }
-                        />
+                    {() => (
+                        <Icon icon="sign-out-alt" color={Colors.secondary} />
                     )}
                 </MinimalButton>
                 <MinimalButton
@@ -112,9 +92,7 @@ export const TaskPanelHeader = () => {
                     {(isParentHover) => (
                         <Icon
                             icon={['far', 'trash-alt']}
-                            color={
-                                isParentHover ? Colors.whitePrimary : Colors.red
-                            }
+                            color={isParentHover ? Colors.red : Colors.red}
                         />
                     )}
                 </MinimalButton>
