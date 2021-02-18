@@ -25,8 +25,6 @@ export const TaskOverview = ({
     task,
     module,
     doUpdateTask,
-    newTaskData,
-    setCurrentTask,
     currentProject,
 }) => {
     const [isEditing, setEditing] = useState(false);
@@ -42,11 +40,7 @@ export const TaskOverview = ({
           })
         : [];
 
-    useEffect(() => {
-        if (typeof newTaskData !== 'undefined' && newTaskData !== null) {
-            setCurrentTask(newTaskData.editTask);
-        }
-    }, [newTaskData]);
+    useEffect(() => {}, [task]);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D YYYY h:mm A');
@@ -147,8 +141,6 @@ export const TaskOverview = ({
 TaskOverview.propTypes = {
     task: PropTypes.object,
     module: PropTypes.object,
-    newTaskData: PropTypes.object,
     doUpdateTask: PropTypes.func,
-    setCurrentTask: PropTypes.func,
     currentProject: PropTypes.object,
 };

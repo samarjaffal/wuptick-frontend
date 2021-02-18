@@ -3,6 +3,7 @@ import { useMutation } from 'react-apollo';
 import { gqlUpdateTask } from '../graphql/gqlUpdateTask';
 import { useUser } from '../../hooks/useUser';
 import { gqlGetTaskListsAndTasks } from '../graphql/gqlGetTaskListsAndTasks';
+import { gqlGetTask } from '../graphql/gqlgetTask';
 import PropTypes from 'prop-types';
 
 export const UpdateTaskMutation = ({ children }) => {
@@ -23,6 +24,10 @@ export const UpdateTaskMutation = ({ children }) => {
                 {
                     query: gqlGetTaskListsAndTasks,
                     variables: { moduleId },
+                },
+                {
+                    query: gqlGetTask,
+                    variables: { taskId },
                 },
             ],
         });

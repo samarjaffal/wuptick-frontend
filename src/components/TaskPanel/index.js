@@ -26,12 +26,11 @@ const MemoTaskPanel = ({ panelRef }) => {
                         const task = data.getTask;
                         return (
                             <UpdateTaskMutation>
-                                {({ doUpdateTask, data }) => (
+                                {({ doUpdateTask }) => (
                                     <TaskOverview
                                         task={task}
                                         module={currentModule}
                                         doUpdateTask={doUpdateTask}
-                                        newTaskData={data}
                                         setCurrentTask={setCurrentTask}
                                         currentProject={currentProject}
                                     />
