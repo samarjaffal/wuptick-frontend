@@ -83,7 +83,7 @@ export const ListUsersDropDown = () => {
         <Dropdown
             open={open}
             width="300px"
-            transform="-80%"
+            transform="0"
             bg={Colors.whitePrimary}
             top={`${Math.round(position.top + 30)}px`}
             left={`${position.left}px`}

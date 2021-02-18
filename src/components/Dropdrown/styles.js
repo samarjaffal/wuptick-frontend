@@ -23,7 +23,7 @@ export const Dropdown = styled.div`
     height: ${({ open }) => (open == true ? 'auto' : 0)};
     transition: all 0.2s ease-in-out 0.02s, height 0.3s ease, top 0ms, left 0ms,
         opacity 0ms;
-    z-index: 200;
+    z-index: 105;
 
     @media (max-width: 425px) {
         transform: ${({ transform }) =>
