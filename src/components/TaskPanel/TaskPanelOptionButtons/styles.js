@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../../assets/css/colors';
 import ReplyIcon from '../../../assets/images/task-icons/reply-icon.svg';
-import TagIcon from '../../../assets/images/task-icons/tag-icon.svg';
 
 export const TaskActionsContainer = styled.div`
     display: flex;
@@ -15,9 +14,5 @@ export const URLTaskIcon = styled(FontAwesomeIcon)`
 `;
 
 export const ReplyIconSVG = styled(ReplyIcon)`
-    fill: ${({ color }) => (color ? color : Colors.softGray)};
-`;
-
-export const TagIconSVG = styled(TagIcon)`
     fill: ${({ color }) => (color ? color : Colors.softGray)};
 `;
