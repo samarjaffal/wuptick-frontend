@@ -76,7 +76,11 @@ export const TagButton = ({ tag, tags }) => {
             {renderDropDown &&
                 ReactDom.createPortal(
                     <OutsideClick setLocalDropDownState={handleOutsideClick}>
-                        <TagsDropdown dropdownRef={dropdownRef} tags={tags} />
+                        <TagsDropdown
+                            dropdownRef={dropdownRef}
+                            tags={tags}
+                            closeDropDown={closeDropDown}
+                        />
                     </OutsideClick>,
                     document.getElementById('dropwdown-app')
                 )}
