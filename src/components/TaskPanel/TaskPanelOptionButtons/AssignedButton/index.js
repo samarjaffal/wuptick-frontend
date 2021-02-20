@@ -8,7 +8,7 @@ import { UserIconContainer, UserIconSVG } from './styles';
 
 export const AssignedButton = ({ assigned }) => {
     const assignRef = useRef(null);
-    const defaultText = 'Not assigned';
+    const defaultText = '';
     const defaultAvatar = null;
     const [name, setName] = useState(defaultText);
     const [avatar, setAvatar] = useState(defaultAvatar);

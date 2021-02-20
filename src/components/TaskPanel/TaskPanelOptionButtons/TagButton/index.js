@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import { MinimalButton } from '../../../MinimalButton/index';
@@ -8,11 +8,28 @@ import { TagsDropdown } from '../../../TagsDropdown/index';
 import { Colors } from '../../../../assets/css/colors';
 import { TagIconSVG } from './styles';
 
-export const TagButton = () => {
+export const TagButton = ({ tag }) => {
+    const [name, setName] = useState('');
+    const [color, setColor] = useState('');
+    const defaultColor = Colors.gray;
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
     const eleRef = useRef();
     const dropdownRef = useRef();
+
+    useEffect(() => {
+        handleData();
+    }, [tag]);
+
+    const handleData = () => {
+        if (tag == null || Object.keys(tag).length == 0) {
+            setName('');
+            setColor(defaultColor);
+            return;
+        }
+        setName(tag.name);
+        setColor(tag.color || defaultColor);
+    };
 
     const initDropDown = () => {
         document.getElementById('dropwdown-app').innerHTML = '';
@@ -41,8 +58,8 @@ export const TagButton = () => {
                 ref={eleRef}
             >
                 <MinimalButton
-                    color={Colors.primary}
-                    name="Web"
+                    color={color}
+                    name={name}
                     hover={Colors.backgroud}
                 >
                     {(isParentHover) => (
@@ -50,9 +67,7 @@ export const TagButton = () => {
                             width="18px"
                             height="18px"
                             viewBox="0 0 25 25"
-                            color={
-                                isParentHover ? Colors.primary : Colors.primary
-                            }
+                            color={color}
                         />
                     )}
                 </MinimalButton>
@@ -72,4 +87,6 @@ export const TagButton = () => {
     );
 };
 
-TagButton.propTypes = {};
+TagButton.propTypes = {
+    tag: PropTypes.object,
+};

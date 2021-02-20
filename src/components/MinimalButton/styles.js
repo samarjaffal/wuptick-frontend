@@ -9,7 +9,8 @@ export const BoxOption = styled.div`
     padding: 8px;
     margin: 0 8px;
     cursor: pointer;
-    max-height: 25px;
+    height: 25px;
+    min-width: 25px;
     ${({ size }) =>
         size
             ? `width: ${size}px; height: ${size}px; padding:0; max-height: ${size}px`

@@ -28,6 +28,11 @@ export const gqlGetTask = gql`
             description
             descriptionJson
             created_at
+            tag {
+                _id
+                name
+                color
+            }
         }
     }
 `;

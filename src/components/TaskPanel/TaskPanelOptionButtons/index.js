@@ -10,7 +10,7 @@ export const TaskPanelOptionButtons = ({ task }) => {
         <TaskActionsContainer>
             {/*   <ReplyButton /> */}
             <AssignedButton assigned={task.assigned} />
-            <TagButton />
+            <TagButton tag={task.tag} />
         </TaskActionsContainer>
     );
 };
