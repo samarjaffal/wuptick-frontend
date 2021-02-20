@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Dropdown } from '../Dropdrown/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
+import { CreateTagMutation } from '../../requests/Tag/CreateTagMutation';
 import { useUser } from '../../hooks/useUser';
 import { useFilter } from '../../hooks/useFilter';
 import { Colors } from '../../assets/css/colors';
@@ -20,14 +21,18 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
     const { open, position } = useDropdown();
     const [tags, setTags] = useState([]);
 
-    const { currentProject, currentModule, currentTask } = useUser();
+    const {
+        currentProject,
+        currentModule,
+        currentTask,
+        teamSelected,
+    } = useUser();
 
     const url = `project/${currentProject._id}/module/${currentModule._id}`;
 
     const randomColor = useCallback(() => {
         var keys = Object.keys(Colors);
         const color = Colors[keys[(keys.length * Math.random()) << 0]];
-        console.log(color, 'color');
         return color;
     }, []);
 
@@ -35,7 +40,7 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
         setItems(_tags);
         setParams(['name']);
         setTags(_tags);
-    }, [dropdownRef]);
+    }, [dropdownRef, _tags]);
 
     return (
         <Dropdown
@@ -61,50 +66,88 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
                     />
                 </div>
 
-                <UpdateTaskMutation>
-                    {({ doUpdateTask }) => (
-                        <div id="tags-list">
-                            <Container>
-                                <Ul>
-                                    <ItemList>
-                                        <Tag
-                                            color={Colors.gray}
-                                            onClick={() => {
-                                                doUpdateTask(
-                                                    currentTask._id,
-                                                    { tag: null },
-                                                    currentModule._id,
-                                                    url
-                                                );
-                                                closeDropDown();
-                                            }}
-                                        >
-                                            None
-                                        </Tag>
-                                    </ItemList>
-                                    {items.map((item, index) => (
-                                        <ItemList key={index}>
-                                            <Tag
-                                                color={item.color}
-                                                onClick={() => {
-                                                    doUpdateTask(
-                                                        currentTask._id,
-                                                        { tag: item._id },
-                                                        currentModule._id,
-                                                        url
-                                                    );
-                                                    closeDropDown();
-                                                }}
-                                            >
-                                                {item.name}
-                                            </Tag>
-                                        </ItemList>
-                                    ))}
-                                </Ul>
-                            </Container>
-                        </div>
+                <CreateTagMutation teamId={teamSelected._id}>
+                    {({ doCreateTag }) => (
+                        <UpdateTaskMutation>
+                            {({ doUpdateTask }) => (
+                                <div id="tags-list">
+                                    <Container>
+                                        <Ul>
+                                            {items.length > 0 ? (
+                                                <>
+                                                    <ItemList>
+                                                        <Tag
+                                                            color={Colors.gray}
+                                                            onClick={() => {
+                                                                doUpdateTask(
+                                                                    currentTask._id,
+                                                                    {
+                                                                        tag: null,
+                                                                    },
+                                                                    currentModule._id,
+                                                                    url
+                                                                );
+                                                                closeDropDown();
+                                                            }}
+                                                        >
+                                                            None
+                                                        </Tag>
+                                                    </ItemList>
+                                                    {items.map(
+                                                        (item, index) => (
+                                                            <ItemList
+                                                                key={index}
+                                                            >
+                                                                <Tag
+                                                                    color={
+                                                                        item.color
+                                                                    }
+                                                                    onClick={() => {
+                                                                        doUpdateTask(
+                                                                            currentTask._id,
+                                                                            {
+                                                                                tag:
+                                                                                    item._id,
+                                                                            },
+                                                                            currentModule._id,
+                                                                            url
+                                                                        );
+                                                                        closeDropDown();
+                                                                    }}
+                                                                >
+                                                                    {item.name}
+                                                                </Tag>
+                                                            </ItemList>
+                                                        )
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <ItemList>
+                                                    <Tag
+                                                        color={Colors.primary}
+                                                        onClick={() => {
+                                                            doCreateTag({
+                                                                name:
+                                                                    inputRef
+                                                                        .current
+                                                                        .value,
+                                                                color: randomColor(),
+                                                                team:
+                                                                    teamSelected._id,
+                                                            });
+                                                        }}
+                                                    >
+                                                        Add a new tag
+                                                    </Tag>
+                                                </ItemList>
+                                            )}
+                                        </Ul>
+                                    </Container>
+                                </div>
+                            )}
+                        </UpdateTaskMutation>
                     )}
-                </UpdateTaskMutation>
+                </CreateTagMutation>
             </div>
         </Dropdown>
     );
