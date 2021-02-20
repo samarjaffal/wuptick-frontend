@@ -59,12 +59,12 @@ export const AssignedButton = ({ assigned }) => {
                     avatar !== null ? (
                         <Avatar size={22} src={avatar} />
                     ) : (
-                        <UserIconContainer ishover={isParentHover}>
+                        <UserIconContainer ishover={isParentHover ? 1 : 0}>
                             <UserIconSVG
                                 width="14px"
                                 height="14px"
                                 viewBox="0 0 22 22"
-                                ishover={isParentHover}
+                                ishover={isParentHover ? 1 : 0}
                             />
                         </UserIconContainer>
                     )
