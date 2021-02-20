@@ -6,7 +6,7 @@ import { Colors } from '../../assets/css/colors';
 import { Ul } from '../SharedComponents/styles';
 import { Container, ItemList, Tag } from './styles';
 
-const MemoTagsDropdown = ({ dropdownRef, closeDropDown }) => {
+export const TagsDropdown = ({ dropdownRef, tags }) => {
     const { open, position } = useDropdown();
     const [items, setItems] = useState([]);
 
@@ -18,11 +18,7 @@ const MemoTagsDropdown = ({ dropdownRef, closeDropDown }) => {
     }, []);
 
     useEffect(() => {
-        setItems([
-            { name: 'Item 1', color: Colors.blue },
-            { name: 'Item 2', color: Colors.green },
-            { name: 'Item 3', color: Colors.orange },
-        ]);
+        setItems(tags);
     }, [dropdownRef]);
 
     return (
@@ -50,13 +46,7 @@ const MemoTagsDropdown = ({ dropdownRef, closeDropDown }) => {
     );
 };
 
-MemoTagsDropdown.propTypes = {
+TagsDropdown.propTypes = {
     dropdownRef: PropTypes.any,
-    closeDropDown: PropTypes.func,
+    tags: PropTypes.array,
 };
-
-function areEqual(prevProps, nextProps) {
-    return prevProps.dropdownRef === nextProps.dropdownRef;
-}
-
-export const TagsDropdown = React.memo(MemoTagsDropdown, areEqual);

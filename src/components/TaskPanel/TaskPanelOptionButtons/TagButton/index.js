@@ -8,7 +8,7 @@ import { TagsDropdown } from '../../../TagsDropdown/index';
 import { Colors } from '../../../../assets/css/colors';
 import { TagIconSVG } from './styles';
 
-export const TagButton = ({ tag }) => {
+export const TagButton = ({ tag, tags }) => {
     const [name, setName] = useState('');
     const [color, setColor] = useState('');
     const defaultColor = Colors.gray;
@@ -62,7 +62,7 @@ export const TagButton = ({ tag }) => {
                     name={name}
                     hover={Colors.backgroud}
                 >
-                    {(isParentHover) => (
+                    {() => (
                         <TagIconSVG
                             width="18px"
                             height="18px"
@@ -76,10 +76,7 @@ export const TagButton = ({ tag }) => {
             {renderDropDown &&
                 ReactDom.createPortal(
                     <OutsideClick setLocalDropDownState={handleOutsideClick}>
-                        <TagsDropdown
-                            dropdownRef={dropdownRef}
-                            closeDropDown={closeDropDown}
-                        />
+                        <TagsDropdown dropdownRef={dropdownRef} tags={tags} />
                     </OutsideClick>,
                     document.getElementById('dropwdown-app')
                 )}
@@ -89,4 +86,5 @@ export const TagButton = ({ tag }) => {
 
 TagButton.propTypes = {
     tag: PropTypes.object,
+    tags: PropTypes.array,
 };
