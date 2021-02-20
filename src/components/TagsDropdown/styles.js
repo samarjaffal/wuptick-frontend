@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, description } from '../../assets/css/theme';
+import { borderRadius, description, bold } from '../../assets/css/theme';
 import { TransitionSecondary } from '../../assets/css/shared-styles';
 import { Colors } from '../../assets/css/colors';
 
@@ -22,4 +22,30 @@ export const ItemList = styled.li`
 export const Tag = styled.div`
     ${description};
     color: ${({ color }) => (color ? color : Colors.black)};
+`;
+
+export const InputSearch = styled.input`
+    background-color: ${Colors.backgroud};
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    padding: 10px;
+    color: ${Colors.black};
+    font-weight: ${bold};
+    border-radius: ${borderRadius};
+    width: 100%;
+    :focus {
+        outline: none;
+        border: 1px solid ${Colors.primary};
+        border-radius: ${borderRadius};
+    }
+    ::placeholder,
+    ::-webkit-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
+    }
+    :-ms-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
+    }
 `;

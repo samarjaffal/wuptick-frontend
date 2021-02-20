@@ -4,13 +4,22 @@ import { Dropdown } from '../Dropdrown/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
 import { useUser } from '../../hooks/useUser';
+import { useFilter } from '../../hooks/useFilter';
 import { Colors } from '../../assets/css/colors';
 import { Ul } from '../SharedComponents/styles';
-import { Container, ItemList, Tag } from './styles';
+import { Container, ItemList, Tag, InputSearch } from './styles';
 
-export const TagsDropdown = ({ dropdownRef, tags, closeDropDown }) => {
+export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
+    const {
+        getSuggestions,
+        inputRef,
+        items,
+        setItems,
+        setParams,
+    } = useFilter();
     const { open, position } = useDropdown();
-    const [items, setItems] = useState([]);
+    const [tags, setTags] = useState([]);
+
     const { currentProject, currentModule, currentTask } = useUser();
 
     const url = `project/${currentProject._id}/module/${currentModule._id}`;
@@ -23,7 +32,9 @@ export const TagsDropdown = ({ dropdownRef, tags, closeDropDown }) => {
     }, []);
 
     useEffect(() => {
-        setItems(tags);
+        setItems(_tags);
+        setParams(['name']);
+        setTags(_tags);
     }, [dropdownRef]);
 
     return (
@@ -36,50 +47,65 @@ export const TagsDropdown = ({ dropdownRef, tags, closeDropDown }) => {
             left={`${position.left}px`}
             bg={Colors.whitePrimary}
         >
-            <UpdateTaskMutation>
-                {({ doUpdateTask }) => (
-                    <div id="tags-list">
-                        <Container>
-                            <Ul>
-                                <ItemList>
-                                    <Tag
-                                        color={Colors.gray}
-                                        onClick={() => {
-                                            doUpdateTask(
-                                                currentTask._id,
-                                                { tag: null },
-                                                currentModule._id,
-                                                url
-                                            );
-                                            closeDropDown();
-                                        }}
-                                    >
-                                        None
-                                    </Tag>
-                                </ItemList>
-                                {items.map((item, index) => (
-                                    <ItemList key={index}>
+            <div className="TagsList">
+                <div
+                    className="SearchContainer"
+                    style={{ paddingBottom: '0.5em' }}
+                >
+                    <InputSearch
+                        type="text"
+                        placeholder="Search or add a new tag"
+                        className="search"
+                        ref={inputRef}
+                        onChange={() => getSuggestions(tags)}
+                    />
+                </div>
+
+                <UpdateTaskMutation>
+                    {({ doUpdateTask }) => (
+                        <div id="tags-list">
+                            <Container>
+                                <Ul>
+                                    <ItemList>
                                         <Tag
-                                            color={item.color}
+                                            color={Colors.gray}
                                             onClick={() => {
                                                 doUpdateTask(
                                                     currentTask._id,
-                                                    { tag: item._id },
+                                                    { tag: null },
                                                     currentModule._id,
                                                     url
                                                 );
                                                 closeDropDown();
                                             }}
                                         >
-                                            {item.name}
+                                            None
                                         </Tag>
                                     </ItemList>
-                                ))}
-                            </Ul>
-                        </Container>
-                    </div>
-                )}
-            </UpdateTaskMutation>
+                                    {items.map((item, index) => (
+                                        <ItemList key={index}>
+                                            <Tag
+                                                color={item.color}
+                                                onClick={() => {
+                                                    doUpdateTask(
+                                                        currentTask._id,
+                                                        { tag: item._id },
+                                                        currentModule._id,
+                                                        url
+                                                    );
+                                                    closeDropDown();
+                                                }}
+                                            >
+                                                {item.name}
+                                            </Tag>
+                                        </ItemList>
+                                    ))}
+                                </Ul>
+                            </Container>
+                        </div>
+                    )}
+                </UpdateTaskMutation>
+            </div>
         </Dropdown>
     );
 };
