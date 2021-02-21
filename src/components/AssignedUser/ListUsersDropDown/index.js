@@ -16,9 +16,19 @@ import {
     NotAssigned,
 } from './styles';
 
-const RenderMemberList = ({ members }) => {
+const RenderMemberList = ({ members, closeDropDown = null }) => {
     const { setOpen } = useDropdown();
     const { currentTask } = useUser();
+
+    const handleClose = async () => {
+        if (closeDropDown) {
+            console.log('here');
+            await closeDropDown();
+            return;
+        }
+        setOpen(false);
+    };
+
     return (
         <MembersContainer>
             <AssignTaskMutation>
@@ -28,7 +38,7 @@ const RenderMemberList = ({ members }) => {
                             id="member-item"
                             onClick={() => {
                                 doAssignTask(currentTask._id, null);
-                                setOpen(false);
+                                handleClose();
                             }}
                         >
                             <Span>Not assigned</Span>
@@ -39,7 +49,7 @@ const RenderMemberList = ({ members }) => {
                                 id="member-item"
                                 onClick={() => {
                                     doAssignTask(currentTask._id, member._id);
-                                    setOpen(false);
+                                    handleClose();
                                 }}
                             >
                                 <MemberListElement member={member} />
@@ -56,7 +66,7 @@ RenderMemberList.propTypes = {
     members: PropTypes.array,
 };
 
-export const ListUsersDropDown = () => {
+export const ListUsersDropDown = ({ dropdownRef, closeDropDown = null }) => {
     const { open, position } = useDropdown();
     const { currentProject } = useUser();
     const [members, setMembers] = useState([]);
@@ -84,6 +94,7 @@ export const ListUsersDropDown = () => {
             open={open}
             width="300px"
             transform="0"
+            ref={dropdownRef}
             bg={Colors.whitePrimary}
             top={`${Math.round(position.top + 30)}px`}
             left={`${position.left}px`}
@@ -101,7 +112,10 @@ export const ListUsersDropDown = () => {
                         onChange={() => getSuggestions(members)}
                     />
                 </div>
-                <RenderMemberList members={items} />
+                <RenderMemberList
+                    members={items}
+                    closeDropDown={closeDropDown}
+                />
             </div>
         </Dropdown>
     );
