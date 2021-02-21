@@ -31,8 +31,19 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
     const url = `project/${currentProject._id}/module/${currentModule._id}`;
 
     const randomColor = useCallback(() => {
+        let tempColors = { ...Colors };
+
+        let removeColors = [
+            'white',
+            'whitePrimary',
+            'backgroud',
+            'softGray',
+            'hover',
+            'black',
+        ];
+        removeColors.forEach((e) => delete tempColors[e]);
         var keys = Object.keys(Colors);
-        const color = Colors[keys[(keys.length * Math.random()) << 0]];
+        const color = tempColors[keys[(keys.length * Math.random()) << 0]];
         return color;
     }, []);
 
