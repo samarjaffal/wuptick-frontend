@@ -3,7 +3,14 @@ import { Colors } from '../../assets/css/colors';
 import { PlainCheckIcon, TaskCheckStyled } from './styles';
 import PropTypes from 'prop-types';
 
-export const PlainTaskCheck = ({ task, saveStatus, isParentHover = false }) => {
+export const PlainTaskCheck = ({
+    task,
+    saveStatus,
+    isParentHover = false,
+    inactiveColor,
+    activeColor,
+    setCheckedCB,
+}) => {
     const [checked, setChecked] = useState(Boolean(task.done));
 
     useEffect(() => {
@@ -12,6 +19,7 @@ export const PlainTaskCheck = ({ task, saveStatus, isParentHover = false }) => {
 
     const handleSaveStatus = useCallback((status) => {
         setChecked(status);
+        setCheckedCB(status);
         const checkbox = document.getElementById(`plain-${task._id}`);
         if (status) {
             checkbox.style.animationName = 'beat';
@@ -34,10 +42,10 @@ export const PlainTaskCheck = ({ task, saveStatus, isParentHover = false }) => {
                 icon="check"
                 color={
                     isParentHover
-                        ? Colors.secondary
+                        ? Colors.white
                         : checked
-                        ? Colors.green
-                        : Colors.secondary
+                        ? activeColor
+                        : inactiveColor
                 }
             />
         </TaskCheckStyled>

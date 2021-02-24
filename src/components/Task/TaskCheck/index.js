@@ -12,7 +12,6 @@ const MemoTaskCheck = ({ task, saveStatus }) => {
     const [checked, setChecked] = useState(Boolean(task.done));
 
     useEffect(() => {
-        console.log('render TaskCheck');
         setChecked(Boolean(task.done));
     }, [task.done]);
 

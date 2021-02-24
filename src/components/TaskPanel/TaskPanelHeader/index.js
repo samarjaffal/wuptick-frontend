@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TaskCheck } from '../../Task/TaskCheck/index';
 import { Avatar } from '../../Avatar/index';
@@ -15,6 +15,10 @@ import {
     CollaboratorsTitle,
 } from './styles';
 export const TaskPanelHeader = ({ task }) => {
+    useEffect(() => {
+        console.log('TaskPanelHeader');
+    }, [task.done]);
+
     return (
         <HeaderTaskOptions>
             <FlexCenter>
@@ -25,7 +29,11 @@ export const TaskPanelHeader = ({ task }) => {
                 >
                     <ClosePanelIcon icon="chevron-right" />
                 </div>
-                <HeaderTaskCheck task={task} />
+                <HeaderTaskCheck
+                    task={task}
+                    inactiveColor={Colors.whitePrimary}
+                    activeColor={Colors.green}
+                />
                 <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}
