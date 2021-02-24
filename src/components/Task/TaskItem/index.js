@@ -112,7 +112,7 @@ const MemoTaskItem = ({
                                 <IconDragDrop icon="grip-horizontal" />
                             </DragDropContainer>
                             <TextContainer>
-                                <HandleTaskStatusMutation>
+                                <HandleTaskStatusMutation moduleId={moduleId}>
                                     {({ doHandleStatus }) => (
                                         <TaskCheck
                                             task={task}

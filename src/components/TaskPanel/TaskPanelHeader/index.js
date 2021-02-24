@@ -7,13 +7,14 @@ import { FavoriteButton } from '../../FavoriteButton/index';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from '../../Collaborators/index';
+import { HeaderTaskCheck } from './HeaderTaskCheck/index';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
     Icon,
     CollaboratorsTitle,
 } from './styles';
-export const TaskPanelHeader = () => {
+export const TaskPanelHeader = ({ task }) => {
     return (
         <HeaderTaskOptions>
             <FlexCenter>
@@ -24,25 +25,7 @@ export const TaskPanelHeader = () => {
                 >
                     <ClosePanelIcon icon="chevron-right" />
                 </div>
-
-                <MinimalButton
-                    color={Colors.secondary}
-                    hover={Colors.hover}
-                    size={35}
-                    bg={Colors.whitePrimary}
-                >
-                    {(isParentHover) => (
-                        <TaskCheck
-                            task={{
-                                done: false,
-                                _id: '12345',
-                            }}
-                            style="plain"
-                            isParentHover={isParentHover}
-                        />
-                    )}
-                </MinimalButton>
-
+                <HeaderTaskCheck task={task} />
                 <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}

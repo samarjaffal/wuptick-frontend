@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlHandleTaskStatus } from '../graphql/gqlHandleTaskStatus';
 import { gqlGetTaskListsAndTasks } from '../graphql/gqlGetTaskListsAndTasks';
+import { gqlGetTask } from '../graphql/gqlgetTask';
 import { useUser } from '../../hooks/useUser';
 import PropTypes from 'prop-types';
 
-export const HandleTaskStatusMutation = ({ children }) => {
+export const HandleTaskStatusMutation = ({ children, moduleId }) => {
     const { currentModule } = useUser();
 
     const [handleStatus, { error, loading, data }] = useMutation(
@@ -18,16 +19,28 @@ export const HandleTaskStatusMutation = ({ children }) => {
     );
 
     const doHandleStatus = useCallback((taskId, input) => {
+        console.log(currentModule._id, 'currentModule._id', moduleId);
         handleStatus({
             variables: {
                 taskId,
                 input,
             },
 
+            refetchQueries: [
+                {
+                    query: gqlGetTask,
+                    variables: { taskId },
+                },
+                /*  {
+                    query: gqlGetTaskListsAndTasks,
+                    variables: { moduleId: moduleId || currentModule._id },
+                }, */
+            ],
+
             update: (store) => {
                 const taskListsData = store.readQuery({
                     query: gqlGetTaskListsAndTasks,
-                    variables: { moduleId: currentModule._id },
+                    variables: { moduleId: moduleId || currentModule._id },
                 });
 
                 let tempTaskLists = { ...taskListsData.getModule };

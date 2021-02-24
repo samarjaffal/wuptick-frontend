@@ -28,8 +28,3 @@ export const SquareHover = styled(FontAwesomeIcon)`
 export const SquareChecked = styled(FontAwesomeIcon)`
     color: ${Colors.green};
 `;
-
-export const PlainCheckIcon = styled(FontAwesomeIcon)`
-    font-size: 18px;
-    color: ${({ color }) => (color ? color : Colors.softGray)};
-`;

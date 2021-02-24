@@ -10,7 +10,15 @@ import {
 } from './styles';
 
 const Panel = forwardRef(
-    ({ header: HeaderComponentProp, children, onCloseFunc = null }, ref) => {
+    (
+        {
+            header: HeaderComponentProp,
+            children,
+            onCloseFunc = null,
+            headerProps,
+        },
+        ref
+    ) => {
         const [display, setDisplay] = useState(false);
         const body = document.body;
 
@@ -43,7 +51,7 @@ const Panel = forwardRef(
                           <ModalBox>
                               {HeaderComponentProp && (
                                   <Header>
-                                      <HeaderComponentProp />
+                                      <HeaderComponentProp {...headerProps} />
                                   </Header>
                               )}
                               <Container>{children}</Container>

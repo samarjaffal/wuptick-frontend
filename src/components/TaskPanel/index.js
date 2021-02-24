@@ -19,7 +19,12 @@ const MemoTaskPanel = ({ panelRef }) => {
         currentProject,
     } = useUser();
     return (
-        <Panel ref={panelRef} title="Task Panel" header={TaskPanelHeader}>
+        <Panel
+            ref={panelRef}
+            title="Task Panel"
+            header={TaskPanelHeader}
+            headerProps={{ task: currentTask }}
+        >
             <Container>
                 <GetTaskQuery taskId={currentTask._id}>
                     {({ data }) => {

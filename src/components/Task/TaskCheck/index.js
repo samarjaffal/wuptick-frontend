@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Colors } from '../../../assets/css/colors';
 import {
@@ -6,18 +6,18 @@ import {
     Square,
     SquareHover,
     SquareChecked,
-    PlainCheckIcon,
 } from './styles';
 
-export const TaskCheck = ({
-    task,
-    saveStatus,
-    style = 'checkbox',
-    isParentHover = false,
-}) => {
+const MemoTaskCheck = ({ task, saveStatus }) => {
     const [checked, setChecked] = useState(Boolean(task.done));
 
-    const handleSaveStatus = (status) => {
+    useEffect(() => {
+        console.log('render TaskCheck');
+        setChecked(Boolean(task.done));
+    }, [task.done]);
+
+    /* console.log('render TaskCheck'); */
+    const handleSaveStatus = useCallback((status) => {
         setChecked(status);
         const checkbox = document.getElementById(`check-${task._id}`);
         if (status) {
@@ -30,41 +30,32 @@ export const TaskCheck = ({
         if (saveStatus) {
             saveStatus(task._id, { done: status });
         }
-    };
+    }, []);
 
     return (
         <TaskCheckStyled
             onClick={() => handleSaveStatus(!checked)}
             id={`check-${task._id}`}
         >
-            {style == 'checkbox' ? (
-                checked ? (
-                    <SquareChecked icon={['fas', 'check-square']} />
-                ) : (
-                    <>
-                        <Square icon={['far', 'square']} />
-                        <SquareHover icon={['far', 'check-square']} />
-                    </>
-                )
+            {checked ? (
+                <SquareChecked icon={['fas', 'check-square']} />
             ) : (
-                <PlainCheckIcon
-                    icon="check"
-                    color={
-                        isParentHover
-                            ? Colors.secondary
-                            : checked
-                            ? Colors.green
-                            : Colors.secondary
-                    }
-                />
+                <>
+                    <Square icon={['far', 'square']} />
+                    <SquareHover icon={['far', 'check-square']} />
+                </>
             )}
         </TaskCheckStyled>
     );
 };
 
-TaskCheck.propTypes = {
+MemoTaskCheck.propTypes = {
     task: PropTypes.object,
     saveStatus: PropTypes.func,
-    style: PropTypes.string,
-    isParentHover: PropTypes.bool,
 };
+
+function areEqual(prevProps, nextProps) {
+    return prevProps.task.done === nextProps.task.done;
+}
+
+export const TaskCheck = React.memo(MemoTaskCheck, areEqual);
