@@ -8,6 +8,7 @@ import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from '../../Collaborators/index';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
+import { MeQuery } from '../../../requests/MeQuery';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
@@ -41,12 +42,21 @@ export const TaskPanelHeader = ({ task }) => {
                     bg={Colors.whitePrimary}
                 >
                     {(isParentHover) => (
-                        <FavoriteButton
-                            taskId="252"
-                            isParentHover={isParentHover}
-                            inactiveColor={Colors.secondary}
-                            activeColor={Colors.yellow}
-                        />
+                        <MeQuery>
+                            {({ data }) => {
+                                const favTasks =
+                                    data !== null ? data.me.favorite_tasks : [];
+                                return (
+                                    <FavoriteButton
+                                        taskId={task._id}
+                                        favTasks={favTasks}
+                                        isParentHover={isParentHover}
+                                        inactiveColor={Colors.secondary}
+                                        activeColor={Colors.yellow}
+                                    />
+                                );
+                            }}
+                        </MeQuery>
                     )}
                 </MinimalButton>
                 <MinimalButton

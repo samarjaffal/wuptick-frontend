@@ -20,6 +20,12 @@ export const ToggleFavTaskMutation = ({ children }) => {
                 state,
                 taskId,
             },
+            /* 
+            refetchQueries:[
+                {
+                    query: gqlMe
+                }
+            ] */
             update: (store) => {
                 const meData = store.readQuery({
                     query: gqlMe,
@@ -28,10 +34,16 @@ export const ToggleFavTaskMutation = ({ children }) => {
                 let tempMeData = { ...meData.me };
 
                 if (state) {
-                    tempMeData.favorite_tasks.push({
+                    /*  tempMeData.favorite_tasks.push({
                         _id: taskId,
                         __typename: 'Task',
-                    });
+                    }); */
+
+                    let newArray = [
+                        ...tempMeData.favorite_tasks,
+                        { _id: taskId, __typename: 'Task' },
+                    ];
+                    tempMeData.favorite_tasks = newArray;
                 } else {
                     let newArray = tempMeData.favorite_tasks.filter(
                         (task) => task._id !== taskId
