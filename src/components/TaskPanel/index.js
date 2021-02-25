@@ -23,7 +23,10 @@ const MemoTaskPanel = ({ panelRef }) => {
             ref={panelRef}
             title="Task Panel"
             header={TaskPanelHeader}
-            headerProps={{ task: currentTask }}
+            headerProps={{
+                task: currentTask,
+                panelRef: panelRef,
+            }}
         >
             <Container>
                 <GetTaskQuery taskId={currentTask._id}>

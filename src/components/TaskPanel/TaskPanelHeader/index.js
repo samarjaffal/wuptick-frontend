@@ -15,7 +15,7 @@ import {
     Icon,
     CollaboratorsTitle,
 } from './styles';
-export const TaskPanelHeader = ({ task }) => {
+export const TaskPanelHeader = ({ task, panelRef }) => {
     useEffect(() => {
         console.log('TaskPanelHeader');
     }, [task.done]);
@@ -26,7 +26,7 @@ export const TaskPanelHeader = ({ task }) => {
                 <div
                     className="CloseButton"
                     style={{ marginRight: '20px' }}
-                    onClick={() => close()}
+                    onClick={() => panelRef.current.closeModal()}
                 >
                     <ClosePanelIcon icon="chevron-right" />
                 </div>
