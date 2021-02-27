@@ -9,6 +9,7 @@ import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from '../../Collaborators/index';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
 import { MeQuery } from '../../../requests/MeQuery';
+import { GetTaskQuery } from '../../../requests/Task/GetTaskQuery';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
@@ -100,7 +101,12 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>
-                <Collaborators />
+                <GetTaskQuery taskId={task._id}>
+                    {({ data }) => {
+                        const task = data.getTask;
+                        return <Collaborators task={task} />;
+                    }}
+                </GetTaskQuery>
             </FlexCenter>
         </HeaderTaskOptions>
     );

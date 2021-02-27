@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from '../Panel/index';
 import { TaskPanelHeader } from './TaskPanelHeader';
@@ -10,14 +10,17 @@ import { GetTaskQuery } from '../../requests/Task/GetTaskQuery';
 import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
-    console.log('render MemoTaskPanel');
-
     const {
         currentTask,
         currentModule,
         setCurrentTask,
         currentProject,
     } = useUser();
+
+    useEffect(() => {
+        console.log('render MemoTaskPanel');
+    }, [panelRef]);
+
     return (
         <Panel
             ref={panelRef}

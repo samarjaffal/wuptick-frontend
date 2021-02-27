@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useUser } from '../../hooks/useUser';
 import { Avatar } from '../Avatar/index';
 
-export const Collaborators = () => {
-    const { currentTask } = useUser();
+export const Collaborators = ({ task }) => {
+    useEffect(() => {}, [task.collaborators]);
+
     const size = 3;
     return (
-        Object.keys(currentTask).length > 0 &&
-        currentTask.collaborators.slice(0, size).map((member, index) => (
+        Object.keys(task).length > 0 &&
+        task.collaborators.slice(0, size).map((member, index) => (
             <div
                 key={index}
                 style={{
@@ -22,4 +22,6 @@ export const Collaborators = () => {
     );
 };
 
-Collaborators.propTypes = {};
+Collaborators.propTypes = {
+    task: PropTypes.object,
+};
