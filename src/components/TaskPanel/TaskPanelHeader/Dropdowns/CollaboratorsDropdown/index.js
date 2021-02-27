@@ -34,7 +34,7 @@ export const CollaboratorsDropDown = ({
         <Dropdown
             open={open}
             width="200px"
-            transform="-90%"
+            transform="-85%"
             ref={dropdownRef}
             bg={Colors.whitePrimary}
             top={`${Math.round(position.top + 30)}px`}

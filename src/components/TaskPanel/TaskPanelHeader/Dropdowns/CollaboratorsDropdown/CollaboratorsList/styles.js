@@ -15,8 +15,18 @@ export const MemberItem = styled.li`
     border-radius: ${borderRadius};
     display: flex;
     align-items: center;
+    justify-content: space-between;
     :hover {
         ${TransitionSecondary};
         background-color: ${Colors.hover};
+    }
+`;
+
+export const RemoveButton = styled.div`
+    font-size: 12px;
+    display: none;
+    ${MemberItem}:hover & {
+        display: block;
+        color: ${Colors.red};
     }
 `;

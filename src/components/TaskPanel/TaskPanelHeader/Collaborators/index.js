@@ -37,11 +37,14 @@ export const Collaborators = ({ task }) => {
     const size = 3;
     return (
         <>
-            <div onClick={() => openDropdown()} style={{ display: 'flex' }}>
+            <div
+                ref={elementRef}
+                onClick={() => openDropdown()}
+                style={{ display: 'flex' }}
+            >
                 {Object.keys(task).length > 0 &&
                     task.collaborators.slice(0, size).map((member, index) => (
                         <div
-                            ref={elementRef}
                             key={index}
                             style={{
                                 margin: '0 4px',
