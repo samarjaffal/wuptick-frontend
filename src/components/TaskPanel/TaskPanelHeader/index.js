@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TaskCheck } from '../../Task/TaskCheck/index';
-import { Avatar } from '../../Avatar/index';
 import { MinimalButton } from '../../MinimalButton/index';
 import { FavoriteButton } from '../../FavoriteButton/index';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
-import { Collaborators } from '../../Collaborators/index';
+import { Collaborators } from './Collaborators';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
 import { MeQuery } from '../../../requests/MeQuery';
 import { GetTaskQuery } from '../../../requests/Task/GetTaskQuery';
@@ -112,4 +110,7 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
     );
 };
 
-TaskPanelHeader.propTypes = {};
+TaskPanelHeader.propTypes = {
+    task: PropTypes.object,
+    panelRef: PropTypes.func,
+};
