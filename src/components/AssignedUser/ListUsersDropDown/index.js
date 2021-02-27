@@ -22,7 +22,6 @@ const RenderMemberList = ({ members, closeDropDown = null }) => {
 
     const handleClose = async () => {
         if (closeDropDown) {
-            console.log('here');
             await closeDropDown();
             return;
         }
@@ -52,7 +51,10 @@ const RenderMemberList = ({ members, closeDropDown = null }) => {
                                     handleClose();
                                 }}
                             >
-                                <MemberListElement member={member} />
+                                <MemberListElement
+                                    member={member}
+                                    customProps="margin: 0.5em;"
+                                />
                             </MemberItem>
                         ))}
                     </Ul>
@@ -64,6 +66,7 @@ const RenderMemberList = ({ members, closeDropDown = null }) => {
 
 RenderMemberList.propTypes = {
     members: PropTypes.array,
+    closeDropDown: PropTypes.func,
 };
 
 export const ListUsersDropDown = ({ dropdownRef, closeDropDown = null }) => {
@@ -121,4 +124,7 @@ export const ListUsersDropDown = ({ dropdownRef, closeDropDown = null }) => {
     );
 };
 
-ListUsersDropDown.propTypes = {};
+ListUsersDropDown.propTypes = {
+    dropdownRef: PropTypes.any,
+    closeDropDown: PropTypes.func,
+};

@@ -5,6 +5,7 @@ import {
     borderRadius,
     description,
     regular,
+    bold,
 } from '../../assets/css/theme';
 import {
     ShadowSecondary,
@@ -82,5 +83,31 @@ export const Input = styled.input`
     box-sizing: border-box;
     :focus {
         outline: none;
+    }
+`;
+
+export const InputSearch = styled.input`
+    background-color: ${Colors.backgroud};
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    padding: 10px;
+    color: ${Colors.black};
+    font-weight: ${bold};
+    border-radius: ${borderRadius};
+    width: 100%;
+    :focus {
+        outline: none;
+        border: 1px solid ${Colors.primary};
+        border-radius: ${borderRadius};
+    }
+    ::placeholder,
+    ::-webkit-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
+    }
+    :-ms-input-placeholder {
+        font-weight: ${bold};
+        color: ${Colors.gray};
     }
 `;

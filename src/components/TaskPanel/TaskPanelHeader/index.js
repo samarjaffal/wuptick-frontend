@@ -112,5 +112,5 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
 
 TaskPanelHeader.propTypes = {
     task: PropTypes.object,
-    panelRef: PropTypes.func,
+    panelRef: PropTypes.any,
 };

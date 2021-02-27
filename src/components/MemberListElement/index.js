@@ -9,8 +9,8 @@ import {
     MemberName,
 } from './styles';
 
-export const MemberListElement = ({ member }) => (
-    <FlexCenter customProps="margin-bottom: 0.5em;">
+export const MemberListElement = ({ member, customProps }) => (
+    <FlexCenter customProps={customProps}>
         <Avatar size={30} src={member.avatar} />
         <Div customProps="margin-left: 0.5em;">
             <MemberName className="memberName">
