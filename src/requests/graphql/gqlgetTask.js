@@ -22,6 +22,7 @@ export const gqlGetTask = gql`
                 avatar
                 name
                 last_name
+                email
             }
             deadline
             done

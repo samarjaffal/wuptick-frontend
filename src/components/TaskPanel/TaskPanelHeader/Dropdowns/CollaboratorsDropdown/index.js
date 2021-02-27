@@ -4,6 +4,7 @@ import { useDropdown } from '../../../../../hooks/useDropdown';
 import { useFilter } from '../../../../../hooks/useFilter';
 import { Dropdown } from '../../../../Dropdrown/index';
 import { CollaboratorsList } from './CollaboratorsList';
+import { useUser } from '../../../../../hooks/useUser';
 import { Colors } from '../../../../../assets/css/colors';
 import { InputSearch } from '../../../../SharedComponents/styles';
 
@@ -13,7 +14,11 @@ export const CollaboratorsDropDown = ({
     closeDropDown = null,
 }) => {
     const { open, position } = useDropdown();
+    const { currentProject } = useUser();
+    const [taskCollaborators, setCollaborators] = useState([]);
     const [members, setMembers] = useState([]);
+    const [pivot, setPivot] = useState('collaborators');
+    /* let pivot = 'collaborators'; */
     const {
         getSuggestions,
         inputRef,
@@ -22,18 +27,51 @@ export const CollaboratorsDropDown = ({
         setParams,
     } = useFilter();
 
+    const formatMembers = () => {
+        const collaboratorsIds = collaborators.map((collab) => collab._id);
+        let members =
+            Object.keys(currentProject).length > 0
+                ? currentProject.members.map((member) => member.user)
+                : [];
+        let newMembers = members.filter(
+            (member) => !collaboratorsIds.includes(member._id)
+        );
+        return newMembers;
+    };
+
     useEffect(() => {
         if (collaborators.length > 0) {
             setItems(collaborators);
             setParams(['name', 'last_name', 'email']);
-            setMembers(collaborators);
+            setCollaborators(collaborators);
+            setMembers(formatMembers());
         }
     }, [collaborators]);
+
+    const handleSuggestions = () => {
+        if (pivot == 'collaborators') {
+            getSuggestions(taskCollaborators);
+            if (items.length == 0) {
+                setPivot('members');
+                setItems(members);
+                getSuggestions(members);
+            }
+        }
+
+        if (pivot == 'members') {
+            getSuggestions(members);
+            if (inputRef.current.value.length == 0) {
+                setPivot('collaborators');
+                setItems(taskCollaborators);
+                getSuggestions(taskCollaborators);
+            }
+        }
+    };
 
     return (
         <Dropdown
             open={open}
-            width="200px"
+            width="250px"
             transform="-85%"
             ref={dropdownRef}
             bg={Colors.whitePrimary}
@@ -50,12 +88,13 @@ export const CollaboratorsDropDown = ({
                         placeholder="Search"
                         className="search"
                         ref={inputRef}
-                        onChange={() => getSuggestions(members)}
+                        onChange={() => handleSuggestions()}
                     />
                 </div>
                 <CollaboratorsList
                     collaborators={items}
                     closeDropDown={closeDropDown}
+                    pivot={pivot}
                 />
             </div>
         </Dropdown>

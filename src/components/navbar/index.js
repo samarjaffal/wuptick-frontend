@@ -88,12 +88,12 @@ export const Navbar = () => {
                             url={`/${profileURL}?tab=teams`}
                             icon="users"
                         />
-                        <NavItem
+                        {/*                         <NavItem
                             title="Tasks"
                             option="tasks"
                             url="/project/5ef7fe59db26218144f3f705/module/5edef29d20f2932eaf2cdf9a"
                             icon="tasks"
-                        />
+                        /> */}
                         {isActive && match && (
                             <NavLinkLogout>
                                 <Logout>

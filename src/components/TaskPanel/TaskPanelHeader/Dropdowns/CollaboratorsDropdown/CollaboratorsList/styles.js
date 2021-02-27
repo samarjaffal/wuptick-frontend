@@ -30,3 +30,12 @@ export const RemoveButton = styled.div`
         color: ${Colors.red};
     }
 `;
+
+export const AddButton = styled.div`
+    font-size: 12px;
+    display: none;
+    ${MemberItem}:hover & {
+        display: block;
+        color: ${Colors.primary};
+    }
+`;

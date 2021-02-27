@@ -5,9 +5,18 @@ import { MemberListElement } from '../../../../../MemberListElement/index';
 import { RemoveCollaboratorMutation } from '../../../../../../requests/Task/RemoveCollaboratorMutation';
 import { useUser } from '../../../../../../hooks/useUser';
 import { Ul } from '../../../../../SharedComponents/styles';
-import { MemberItem, MembersContainer, RemoveButton } from './styles';
+import {
+    MemberItem,
+    MembersContainer,
+    RemoveButton,
+    AddButton,
+} from './styles';
 
-export const CollaboratorsList = ({ collaborators, closeDropDown = null }) => {
+export const CollaboratorsList = ({
+    collaborators,
+    pivot,
+    closeDropDown = null,
+}) => {
     const { currentTask } = useUser();
 
     const removeCollaborator = (doRemoveCollaborator) => {
@@ -18,28 +27,36 @@ export const CollaboratorsList = ({ collaborators, closeDropDown = null }) => {
     return (
         <MembersContainer>
             <Ul className="list">
-                {collaborators.map((collaborator, index) => (
-                    <MemberItem key={index} id="member-item">
-                        <MemberListElement member={collaborator} />
-                        <RemoveCollaboratorMutation>
-                            {({ doRemoveCollaborator }) => (
-                                <RemoveButton>
-                                    <FontAwesomeIcon
-                                        icon="times"
-                                        onClick={() =>
-                                            removeCollaborator(() => {
-                                                doRemoveCollaborator(
-                                                    currentTask._id,
-                                                    collaborator._id
-                                                );
-                                            })
-                                        }
-                                    />
-                                </RemoveButton>
-                            )}
-                        </RemoveCollaboratorMutation>
-                    </MemberItem>
-                ))}
+                {pivot == 'collaborators'
+                    ? collaborators.map((collaborator, index) => (
+                          <MemberItem key={index} id="member-item">
+                              <MemberListElement member={collaborator} />
+                              <RemoveCollaboratorMutation>
+                                  {({ doRemoveCollaborator }) => (
+                                      <RemoveButton
+                                          onClick={() =>
+                                              removeCollaborator(() => {
+                                                  doRemoveCollaborator(
+                                                      currentTask._id,
+                                                      collaborator._id
+                                                  );
+                                              })
+                                          }
+                                      >
+                                          <FontAwesomeIcon icon="times" />
+                                      </RemoveButton>
+                                  )}
+                              </RemoveCollaboratorMutation>
+                          </MemberItem>
+                      ))
+                    : collaborators.map((collaborator, index) => (
+                          <MemberItem key={index} id="member-item">
+                              <MemberListElement member={collaborator} />
+                              <AddButton>
+                                  <FontAwesomeIcon icon="plus" /> Add
+                              </AddButton>
+                          </MemberItem>
+                      ))}
             </Ul>
         </MembersContainer>
     );
@@ -48,4 +65,5 @@ export const CollaboratorsList = ({ collaborators, closeDropDown = null }) => {
 CollaboratorsList.propTypes = {
     collaborators: PropTypes.array,
     closeDropDown: PropTypes.func,
+    pivot: PropTypes.string,
 };
