@@ -85,7 +85,7 @@ export const CollaboratorsDropDown = ({
                 >
                     <InputSearch
                         type="text"
-                        placeholder="Search"
+                        placeholder="Search or add a new collaborator"
                         className="search"
                         ref={inputRef}
                         onChange={() => handleSuggestions()}
