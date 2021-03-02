@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-apollo';
 import { gqlCreateComment } from '../graphql/gqlCreateComment';
 import { gqlGetCommentsForTask } from '../graphql/gqlGetCommentsForTask';
+import { gqlGetTask } from '../graphql/gqlgetTask';
 import PropTypes from 'prop-types';
 
 export const CreateCommentMutation = ({ children }) => {
@@ -22,6 +23,10 @@ export const CreateCommentMutation = ({ children }) => {
             refetchQueries: [
                 {
                     query: gqlGetCommentsForTask,
+                    variables: { taskId: input.task._id },
+                },
+                {
+                    query: gqlGetTask,
                     variables: { taskId: input.task._id },
                 },
             ],

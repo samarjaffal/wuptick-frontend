@@ -46,6 +46,7 @@ export const ModalBox = styled.div`
 `;
 
 export const Container = styled.div`
+    height: 100%;
     @media (max-width: 425px) {
         max-height: 445px;
     }
