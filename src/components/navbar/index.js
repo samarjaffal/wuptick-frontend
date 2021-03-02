@@ -77,6 +77,12 @@ export const Navbar = () => {
                 <Nav showMobileNav={isActive}>
                     <NavUl>
                         <NavItem
+                            title="Home"
+                            option="home"
+                            url={`/`}
+                            icon="home"
+                        />
+                        <NavItem
                             title="Projects"
                             option="projects"
                             url={`/${profileURL}?tab=projects`}

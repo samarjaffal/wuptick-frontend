@@ -28,6 +28,7 @@ import {
     faPaperclip,
     faInbox,
     faCircle,
+    faHome,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -56,5 +57,6 @@ library.add(
     faPaperclip,
     faTrashRegular,
     faInbox,
-    faCircle
+    faCircle,
+    faHome
 );
