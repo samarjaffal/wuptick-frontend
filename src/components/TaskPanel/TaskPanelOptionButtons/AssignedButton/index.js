@@ -29,7 +29,7 @@ export const AssignedButton = ({ assigned }) => {
             setAvatar(defaultAvatar);
             return;
         }
-        setName(`${assigned.name} ${assigned.last_name}`);
+        setName(`${assigned.name} ${assigned.last_name.charAt(0)}.`);
         setAvatar(assigned.avatar || null);
     };
 
