@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TaskActionsContainer } from './styles';
 import { AssignedButton } from './AssignedButton';
 import { TagButton } from './TagButton/index';
+import { ChangeListButton } from './ChangeListButton';
 import { GetTagsQuery } from '../../../requests/Tag/GetTagsQuery';
 
 export const TaskPanelOptionButtons = ({ task }) => {
@@ -17,6 +18,7 @@ export const TaskPanelOptionButtons = ({ task }) => {
                     return <TagButton tag={task.tag} tags={tags || []} />;
                 }}
             </GetTagsQuery>
+            <ChangeListButton />
         </TaskActionsContainer>
     );
 };
