@@ -5,6 +5,10 @@ import { OutsideClick } from '../../../OutsideClick/index';
 import { useDropdown } from '../../../../hooks/useDropdown';
 import { CollaboratorsDropDown } from '../Dropdowns/CollaboratorsDropdown/index';
 import { Avatar } from '../../../Avatar/index';
+import {
+    UserIconContainer,
+    UserIconSVG,
+} from '../../../SharedComponents/styles';
 
 export const Collaborators = ({ task }) => {
     const elementRef = useRef();
@@ -34,6 +38,37 @@ export const Collaborators = ({ task }) => {
         closeDropDown();
     };
 
+    const renderItems = () => {
+        return task.collaborators.length == 0 ? (
+            <div
+                style={{
+                    margin: '0 4px',
+                    display: 'flex',
+                }}
+            >
+                <UserIconContainer customProps="line-height: 2.2;">
+                    <UserIconSVG
+                        width="14px"
+                        height="14px"
+                        viewBox="0 0 25 25"
+                    />
+                </UserIconContainer>
+            </div>
+        ) : (
+            task.collaborators.slice(0, size).map((member, index) => (
+                <div
+                    key={index}
+                    style={{
+                        margin: '0 4px',
+                        display: 'flex',
+                    }}
+                >
+                    <Avatar size={25} src={member.avatar} hide={false} />
+                </div>
+            ))
+        );
+    };
+
     const size = 3;
     return (
         <>
@@ -42,22 +77,7 @@ export const Collaborators = ({ task }) => {
                 onClick={() => openDropdown()}
                 style={{ display: 'flex' }}
             >
-                {Object.keys(task).length > 0 &&
-                    task.collaborators.slice(0, size).map((member, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                margin: '0 4px',
-                                display: 'flex',
-                            }}
-                        >
-                            <Avatar
-                                size={25}
-                                src={member.avatar}
-                                hide={false}
-                            />
-                        </div>
-                    ))}
+                {Object.keys(task).length > 0 && renderItems()}
             </div>
             {renderDropDown &&
                 ReactDom.createPortal(

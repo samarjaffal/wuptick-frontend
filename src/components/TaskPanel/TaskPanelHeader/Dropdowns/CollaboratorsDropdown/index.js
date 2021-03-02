@@ -40,11 +40,15 @@ export const CollaboratorsDropDown = ({
     };
 
     useEffect(() => {
+        setMembers(formatMembers());
+        setParams(['name', 'last_name', 'email']);
+
         if (collaborators.length > 0) {
             setItems(collaborators);
-            setParams(['name', 'last_name', 'email']);
             setCollaborators(collaborators);
-            setMembers(formatMembers());
+        } else {
+            setPivot('members');
+            setItems(members);
         }
     }, [collaborators]);
 
