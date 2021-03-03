@@ -64,6 +64,7 @@ export const ChangeListButton = ({ lists: _lists, task }) => {
                 ReactDom.createPortal(
                     <OutsideClick setLocalDropDownState={handleOutsideClick}>
                         <TaskListsDropdown
+                            lists={lists || []}
                             dropdownRef={dropdownRef}
                             closeDropDown={closeDropDown}
                         />
