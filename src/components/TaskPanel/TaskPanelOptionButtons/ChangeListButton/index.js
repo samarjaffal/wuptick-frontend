@@ -65,6 +65,8 @@ export const ChangeListButton = ({ lists: _lists, task }) => {
                     <OutsideClick setLocalDropDownState={handleOutsideClick}>
                         <TaskListsDropdown
                             lists={lists || []}
+                            currentList={currentList}
+                            task={task || {}}
                             dropdownRef={dropdownRef}
                             closeDropDown={closeDropDown}
                         />

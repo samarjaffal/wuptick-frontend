@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 /* import { ReplyButton } from './ReplyButton'; */
 import { TaskActionsContainer } from './styles';
@@ -9,6 +9,7 @@ import { GetTagsQuery } from '../../../requests/Tag/GetTagsQuery';
 import { GetTaskListsAndTasksQuery } from '../../../requests/Module/GetTaskListsAndTasksQuery';
 
 export const TaskPanelOptionButtons = ({ task, module }) => {
+    useEffect(() => {}, []);
     return (
         <TaskActionsContainer>
             {/*   <ReplyButton /> */}
