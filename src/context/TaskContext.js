@@ -5,6 +5,7 @@ const Context = createContext();
 export const TaskContextProvider = ({ children }) => {
     const [elemType, setElemType] = useState('task');
     const [currentList, setCurrentList] = useState(null);
+    const [beforeDeleteTask, setBeforeDeleteTask] = useState(null);
     const deleteModalRef = useRef();
     const panelRef = useRef(null);
 
@@ -15,6 +16,8 @@ export const TaskContextProvider = ({ children }) => {
         currentList,
         setCurrentList,
         panelRef,
+        beforeDeleteTask,
+        setBeforeDeleteTask,
     };
 
     return <Context.Provider value={value}>{children}</Context.Provider>;

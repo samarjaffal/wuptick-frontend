@@ -85,7 +85,7 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                         <Icon icon="sign-out-alt" color={Colors.secondary} />
                     )}
                 </MinimalButton> */}
-                <HeaderDeleteButton />
+                <HeaderDeleteButton panelRef={panelRef} />
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>

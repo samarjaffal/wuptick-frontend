@@ -9,6 +9,8 @@ export const useTask = () => {
         currentList,
         setCurrentList,
         panelRef,
+        beforeDeleteTask,
+        setBeforeDeleteTask,
     } = useContext(Context);
 
     const openDeleteModal = useCallback(() => {
@@ -28,5 +30,7 @@ export const useTask = () => {
         setCurrentList,
         openTaskPanel,
         panelRef,
+        beforeDeleteTask,
+        setBeforeDeleteTask,
     };
 };

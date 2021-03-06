@@ -8,7 +8,13 @@ import { useTask } from '../../../hooks/useTask';
 
 export const DeleteModal = ({ getListId }) => {
     const { currentTask, currentModule } = useUser();
-    const { deleteModalRef, elemType, currentList } = useTask();
+    const {
+        deleteModalRef,
+        elemType,
+        currentList,
+        beforeDeleteTask,
+        setBeforeDeleteTask,
+    } = useTask();
 
     return (
         (elemType == 'list' && (
@@ -29,11 +35,15 @@ export const DeleteModal = ({ getListId }) => {
             <DeleteTaskMutation modalRef={deleteModalRef}>
                 {({ doDeleteTask, loading }) => {
                     const doFunc = () => {
+                        if (beforeDeleteTask !== null) {
+                            beforeDeleteTask();
+                        }
                         doDeleteTask(
                             currentTask._id,
                             getListId(),
                             currentModule._id
                         );
+                        setBeforeDeleteTask(null);
                     };
                     return (
                         <DeleteModalComponent
