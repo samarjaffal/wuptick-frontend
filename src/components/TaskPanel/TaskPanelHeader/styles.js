@@ -17,11 +17,6 @@ export const ClosePanelIcon = styled(FontAwesomeIcon)`
     cursor: pointer;
 `;
 
-export const Icon = styled(FontAwesomeIcon)`
-    font-size: 18px;
-    color: ${({ color }) => (color ? color : Colors.gray)};
-`;
-
 export const CollaboratorsTitle = styled.span`
     ${description};
     color: ${Colors.gray};

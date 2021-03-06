@@ -6,14 +6,15 @@ import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from './Collaborators';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
+import { HeaderDeleteButton } from './HeaderDeleteButton';
 import { MeQuery } from '../../../requests/MeQuery';
 import { GetTaskQuery } from '../../../requests/Task/GetTaskQuery';
 import {
     HeaderTaskOptions,
     ClosePanelIcon,
-    Icon,
     CollaboratorsTitle,
 } from './styles';
+
 export const TaskPanelHeader = ({ task, panelRef }) => {
     useEffect(() => {
         console.log('TaskPanelHeader');
@@ -84,18 +85,7 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                         <Icon icon="sign-out-alt" color={Colors.secondary} />
                     )}
                 </MinimalButton> */}
-                <MinimalButton
-                    color={Colors.red}
-                    size={35}
-                    bg={Colors.whitePrimary}
-                >
-                    {(isParentHover) => (
-                        <Icon
-                            icon={['far', 'trash-alt']}
-                            color={isParentHover ? Colors.red : Colors.red}
-                        />
-                    )}
-                </MinimalButton>
+                <HeaderDeleteButton />
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>
