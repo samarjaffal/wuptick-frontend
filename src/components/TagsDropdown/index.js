@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dropdown } from '../Dropdrown/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
@@ -8,7 +9,7 @@ import { useUser } from '../../hooks/useUser';
 import { useFilter } from '../../hooks/useFilter';
 import { Colors } from '../../assets/css/colors';
 import { Ul } from '../SharedComponents/styles';
-import { Container, ItemList, Tag, InputSearch } from './styles';
+import { Container, ItemList, Tag, InputSearch, RemoveButton } from './styles';
 
 export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
     const {
@@ -72,6 +73,9 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
                 >
                     {item.name}
                 </Tag>
+                <RemoveButton onClick={() => console.log('hello')}>
+                    <FontAwesomeIcon icon="times" />
+                </RemoveButton>
             </ItemList>
         ));
     };

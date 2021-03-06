@@ -13,6 +13,9 @@ export const ItemList = styled.li`
     padding: 0 0.5em;
     border-radius: ${borderRadius};
     margin-bottom: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     :hover {
         ${TransitionSecondary};
         background-color: ${Colors.hover};
@@ -22,6 +25,15 @@ export const ItemList = styled.li`
 export const Tag = styled.div`
     ${description};
     color: ${({ color }) => (color ? color : Colors.black)};
+`;
+
+export const RemoveButton = styled.div`
+    font-size: 12px;
+    display: none;
+    ${ItemList}:hover & {
+        display: block;
+        color: ${Colors.red};
+    }
 `;
 
 export const InputSearch = styled.input`
