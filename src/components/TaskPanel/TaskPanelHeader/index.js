@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { MinimalButton } from '../../MinimalButton/index';
-import { FavoriteButton } from '../../FavoriteButton/index';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from './Collaborators';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
 import { HeaderDeleteButton } from './HeaderDeleteButton';
-import { MeQuery } from '../../../requests/MeQuery';
+import { HeaderFavoriteButton } from './HeaderFavoriteButton';
 import { GetTaskQuery } from '../../../requests/Task/GetTaskQuery';
 import {
     HeaderTaskOptions,
@@ -35,30 +33,8 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                     inactiveColor={Colors.whitePrimary}
                     activeColor={Colors.green}
                 />
-                <MinimalButton
-                    color={Colors.secondary}
-                    hover={Colors.hover}
-                    size={35}
-                    bg={Colors.whitePrimary}
-                >
-                    {(isParentHover) => (
-                        <MeQuery>
-                            {({ data }) => {
-                                const favTasks =
-                                    data !== null ? data.me.favorite_tasks : [];
-                                return (
-                                    <FavoriteButton
-                                        taskId={task._id}
-                                        favTasks={favTasks}
-                                        isParentHover={isParentHover}
-                                        inactiveColor={Colors.secondary}
-                                        activeColor={Colors.yellow}
-                                    />
-                                );
-                            }}
-                        </MeQuery>
-                    )}
-                </MinimalButton>
+                <HeaderFavoriteButton task={task} />
+                <HeaderDeleteButton panelRef={panelRef} />
                 {/* <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}
@@ -85,7 +61,6 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                         <Icon icon="sign-out-alt" color={Colors.secondary} />
                     )}
                 </MinimalButton> */}
-                <HeaderDeleteButton panelRef={panelRef} />
             </FlexCenter>
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>

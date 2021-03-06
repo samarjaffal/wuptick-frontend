@@ -7,7 +7,7 @@ export const BoxOption = styled.div`
     border-radius: ${borderRadius};
     background-color: ${({ bg }) => (bg ? bg : Colors.white)};
     padding: 8px;
-    margin: 0 8px;
+    margin: 0 12px;
     cursor: pointer;
     height: 25px;
     min-width: 25px;

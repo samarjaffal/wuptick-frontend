@@ -17,27 +17,29 @@ export const HeaderTaskCheck = ({ task, inactiveColor, activeColor }) => {
     };
 
     return (
-        <HandleTaskStatusMutation>
-            {({ doHandleStatus }) => (
-                <MinimalButton
-                    color={checked ? Colors.white : Colors.white}
-                    hover={checked ? activeColor : Colors.hover}
-                    size={35}
-                    bg={checked ? activeColor : inactiveColor}
-                >
-                    {(isParentHover) => (
-                        <PlainTaskCheck
-                            task={task}
-                            isParentHover={isParentHover}
-                            saveStatus={doHandleStatus}
-                            inactiveColor={Colors.secondary}
-                            activeColor={Colors.white}
-                            setCheckedCB={setCheckedCB}
-                        />
-                    )}
-                </MinimalButton>
-            )}
-        </HandleTaskStatusMutation>
+        <div className="HeaderTaskCheck">
+            <HandleTaskStatusMutation>
+                {({ doHandleStatus }) => (
+                    <MinimalButton
+                        color={checked ? Colors.white : Colors.white}
+                        hover={checked ? activeColor : Colors.hover}
+                        size={35}
+                        bg={checked ? activeColor : inactiveColor}
+                    >
+                        {(isParentHover) => (
+                            <PlainTaskCheck
+                                task={task}
+                                isParentHover={isParentHover}
+                                saveStatus={doHandleStatus}
+                                inactiveColor={Colors.secondary}
+                                activeColor={Colors.white}
+                                setCheckedCB={setCheckedCB}
+                            />
+                        )}
+                    </MinimalButton>
+                )}
+            </HandleTaskStatusMutation>
+        </div>
     );
 };
 
