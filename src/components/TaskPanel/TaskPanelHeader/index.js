@@ -58,23 +58,23 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                         </MeQuery>
                     )}
                 </MinimalButton>
-                <MinimalButton
+                {/* <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
                     {() => <Icon icon="paperclip" color={Colors.secondary} />}
-                </MinimalButton>
-                <MinimalButton
+                </MinimalButton> */}
+                {/*   <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}
                     size={35}
                     bg={Colors.whitePrimary}
                 >
                     {() => <Icon icon="inbox" color={Colors.secondary} />}
-                </MinimalButton>
-                <MinimalButton
+                </MinimalButton> */}
+                {/* <MinimalButton
                     color={Colors.secondary}
                     hover={Colors.hover}
                     size={35}
@@ -83,7 +83,7 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                     {() => (
                         <Icon icon="sign-out-alt" color={Colors.secondary} />
                     )}
-                </MinimalButton>
+                </MinimalButton> */}
                 <MinimalButton
                     color={Colors.red}
                     size={35}
