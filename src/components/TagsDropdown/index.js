@@ -5,6 +5,7 @@ import { Dropdown } from '../Dropdrown/index';
 import { useDropdown } from '../../hooks/useDropdown';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
 import { CreateTagMutation } from '../../requests/Tag/CreateTagMutation';
+import { DeleteTagMutation } from '../../requests/Tag/DeleteTagMutation';
 import { useUser } from '../../hooks/useUser';
 import { useFilter } from '../../hooks/useFilter';
 import { Colors } from '../../assets/css/colors';
@@ -73,9 +74,13 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
                 >
                     {item.name}
                 </Tag>
-                <RemoveButton onClick={() => console.log('hello')}>
-                    <FontAwesomeIcon icon="times" />
-                </RemoveButton>
+                <DeleteTagMutation teamId={teamSelected._id}>
+                    {({ doDeleteTag }) => (
+                        <RemoveButton onClick={() => doDeleteTag(item._id)}>
+                            <FontAwesomeIcon icon="times" />
+                        </RemoveButton>
+                    )}
+                </DeleteTagMutation>
             </ItemList>
         ));
     };
