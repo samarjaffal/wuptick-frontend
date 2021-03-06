@@ -6,7 +6,7 @@ import { useUser } from '../../../../../hooks/useUser';
 import { SaveTaskListsOrderMutation } from '../../../../../requests/Module/SaveTaskListsOrderMutation';
 import { Colors } from '../../../../../assets/css/colors';
 import { Ul } from '../../../../SharedComponents/styles';
-import { Item } from './styles';
+import { Item, Container } from './styles';
 
 export const TaskListsDropdown = ({
     lists,
@@ -75,22 +75,24 @@ export const TaskListsDropdown = ({
             left={`${position.left}px`}
         >
             <div className="tasks-lists">
-                <SaveTaskListsOrderMutation>
-                    {({ doSaveOrder }) => (
-                        <Ul>
-                            {lists.map((list, index) => (
-                                <li
-                                    key={index}
-                                    onClick={() =>
-                                        saveOrder(list._id, doSaveOrder)
-                                    }
-                                >
-                                    <Item>{list.name}</Item>
-                                </li>
-                            ))}
-                        </Ul>
-                    )}
-                </SaveTaskListsOrderMutation>
+                <Container>
+                    <SaveTaskListsOrderMutation>
+                        {({ doSaveOrder }) => (
+                            <Ul>
+                                {lists.map((list, index) => (
+                                    <li
+                                        key={index}
+                                        onClick={() =>
+                                            saveOrder(list._id, doSaveOrder)
+                                        }
+                                    >
+                                        <Item>{list.name}</Item>
+                                    </li>
+                                ))}
+                            </Ul>
+                        )}
+                    </SaveTaskListsOrderMutation>
+                </Container>
             </div>
         </Dropdown>
     );

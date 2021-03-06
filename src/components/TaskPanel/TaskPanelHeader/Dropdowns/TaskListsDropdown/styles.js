@@ -13,3 +13,8 @@ export const Item = styled.div`
         background-color: ${Colors.hover};
     }
 `;
+
+export const Container = styled.div`
+    max-height: 130px;
+    overflow-y: auto;
+`;
