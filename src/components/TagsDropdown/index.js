@@ -53,6 +53,48 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
         setTags(_tags);
     }, [dropdownRef, _tags]);
 
+    const renderTagsList = (doUpdateTask) => {
+        return items.map((item, index) => (
+            <ItemList key={index}>
+                <Tag
+                    color={item.color}
+                    onClick={() => {
+                        doUpdateTask(
+                            currentTask._id,
+                            {
+                                tag: item._id,
+                            },
+                            currentModule._id,
+                            url
+                        );
+                        closeDropDown();
+                    }}
+                >
+                    {item.name}
+                </Tag>
+            </ItemList>
+        ));
+    };
+
+    const renderAddNewTag = (doCreateTag) => {
+        return (
+            <ItemList>
+                <Tag
+                    color={Colors.primary}
+                    onClick={() => {
+                        doCreateTag({
+                            name: inputRef.current.value,
+                            color: randomColor(),
+                            team: teamSelected._id,
+                        });
+                    }}
+                >
+                    Add a new tag
+                </Tag>
+            </ItemList>
+        );
+    };
+
     return (
         <Dropdown
             ref={dropdownRef}
@@ -104,53 +146,12 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
                                                             None
                                                         </Tag>
                                                     </ItemList>
-                                                    {items.map(
-                                                        (item, index) => (
-                                                            <ItemList
-                                                                key={index}
-                                                            >
-                                                                <Tag
-                                                                    color={
-                                                                        item.color
-                                                                    }
-                                                                    onClick={() => {
-                                                                        doUpdateTask(
-                                                                            currentTask._id,
-                                                                            {
-                                                                                tag:
-                                                                                    item._id,
-                                                                            },
-                                                                            currentModule._id,
-                                                                            url
-                                                                        );
-                                                                        closeDropDown();
-                                                                    }}
-                                                                >
-                                                                    {item.name}
-                                                                </Tag>
-                                                            </ItemList>
-                                                        )
+                                                    {renderTagsList(
+                                                        doUpdateTask
                                                     )}
                                                 </>
                                             ) : (
-                                                <ItemList>
-                                                    <Tag
-                                                        color={Colors.primary}
-                                                        onClick={() => {
-                                                            doCreateTag({
-                                                                name:
-                                                                    inputRef
-                                                                        .current
-                                                                        .value,
-                                                                color: randomColor(),
-                                                                team:
-                                                                    teamSelected._id,
-                                                            });
-                                                        }}
-                                                    >
-                                                        Add a new tag
-                                                    </Tag>
-                                                </ItemList>
+                                                renderAddNewTag(doCreateTag)
                                             )}
                                         </Ul>
                                     </Container>
