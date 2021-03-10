@@ -78,6 +78,11 @@ export const useUser = () => {
         return tasksIds.includes(taskId);
     };
 
+    const setTeam = (team) => {
+        setTeamSelected(team);
+        localStorage.setItem('teamSelected', team._id);
+    };
+
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
 
@@ -87,6 +92,7 @@ export const useUser = () => {
         disableAuth,
         teamSelected,
         setTeamSelected,
+        setTeam,
         loading,
         setLoading,
         currentUser,

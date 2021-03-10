@@ -112,7 +112,7 @@ export const ListProjects = ({ teams, userId }) => {
                                     key={index}
                                     project={project}
                                     userId={userId}
-                                    teamId={team._id}
+                                    team={team}
                                     openDeleteModal={openDeleteModal}
                                     openAddProjectModal={openAddProjectModal}
                                     setProjectAndTeam={setProjectAndTeam}

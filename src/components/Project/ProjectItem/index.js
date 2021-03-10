@@ -27,13 +27,18 @@ import {
 export const ProjectItem = ({
     project,
     userId,
-    teamId,
+    team,
     openDeleteModal,
     openAddProjectModal,
     setProjectAndTeam,
 }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const { generateProfileUrl, generateProjectUrl, currentUser } = useUser();
+    const {
+        generateProfileUrl,
+        generateProjectUrl,
+        currentUser,
+        setTeam,
+    } = useUser();
     const { setPositionDropDown, openDropCallBack } = useDropdown();
     const elemRef = useRef(null);
 
@@ -42,8 +47,13 @@ export const ProjectItem = ({
         openDropCallBack(value);
         if (value) {
             setPositionDropDown(elemRef);
-            setProjectAndTeam(project, teamId);
+            setProjectAndTeam(project, team._id);
         }
+    };
+
+    const goToProject = () => {
+        setTeam(team);
+        navigate(generateProjectUrl(project._id));
     };
 
     let date = dayjs(project.created_at);
@@ -59,14 +69,12 @@ export const ProjectItem = ({
                             margin="0 1em 0 0"
                             description="Project Image"
                             src={project.image}
-                            onClicked={() =>
-                                navigate(generateProjectUrl(project._id))
-                            }
+                            onClicked={() => goToProject()}
                         />
                     </div>
 
                     <DetailsContainer>
-                        <Name to={generateProjectUrl(project._id)}>
+                        <Name onClick={() => goToProject()}>
                             {project.name}
                         </Name>
                         <OwnerAnchor
@@ -137,7 +145,7 @@ export const ProjectItem = ({
 ProjectItem.propTypes = {
     project: PropTypes.object,
     userId: PropTypes.string,
-    teamId: PropTypes.string,
+    team: PropTypes.object,
     setProjectAndTeam: PropTypes.func,
     openDeleteModal: PropTypes.func,
 };

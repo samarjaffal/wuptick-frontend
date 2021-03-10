@@ -4,12 +4,18 @@ import { useUser } from '../hooks/useUser';
 import PropTypes from 'prop-types';
 
 export const MeQuery = ({ children }) => {
-    const { setTeamSelected } = useUser();
+    const { setTeam } = useUser();
     const { error, loading, data } = useQuery(gqlMe, {
         onCompleted: (data) => {
-            /* console.log(data, 'data meQuery'); */
+            console.log(data, 'data meQuery');
             const { me: user } = data;
-            setTeamSelected(user.teams[0]);
+            const lsTeamId = localStorage.getItem('teamSelected');
+
+            let team =
+                lsTeamId !== null && typeof lsTeamId !== undefined
+                    ? user.teams.find((team) => team._id == lsTeamId)
+                    : user.teams[0];
+            setTeam(team);
         },
     });
     return children({ loading, error, data });

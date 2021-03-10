@@ -40,7 +40,7 @@ export const MembersContainer = styled.div`
     }
 `;
 
-export const Name = styled(Link)`
+export const Name = styled.a`
     ${description};
     text-decoration: none;
 `;
