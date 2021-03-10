@@ -11,6 +11,8 @@ import { useUser } from '../../hooks/useUser';
 import { Profile } from '../Profile/index';
 import { EditProfile } from '../Profile/EditProfile/index';
 import { SetupProfile } from '../SetupProfile/index';
+import { config } from '../../../config/index';
+
 const DefaultRoutes = () => {
     const { isLogged, profileURL } = useUser();
     return isLogged ? (
@@ -43,7 +45,7 @@ export const NotFound = ({ location }) => {
     const { isLogged } = useUser();
 
     const handleClick = () => {
-        const url = isLogged ? '/' : 'login';
+        const url = isLogged ? `${config.url}` : `${config.url}login`;
         navigate(url);
     };
 
