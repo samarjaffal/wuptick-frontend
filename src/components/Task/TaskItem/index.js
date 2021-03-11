@@ -81,23 +81,25 @@ const MemoTaskItem = ({
         };
     }, [isEditing, callOpenPanel]);
 
-    const handleKeys = useCallback((event) => {
-        const { key, keyCode } = event;
-
-        if (keyCode === 27) {
-            escFunction();
-        }
-        if (keyCode === 13) {
-            if (isEditing) {
-                const taskId = task._id;
-                let input = {
-                    name: inputRef.current.value,
-                };
-                doUpdate(taskId, input, moduleId);
-                toggleEditing(false);
+    const handleKeys = useCallback(
+        (event) => {
+            const { key, keyCode } = event;
+            if (keyCode === 27) {
+                escFunction();
             }
-        }
-    }, []);
+            if (keyCode === 13) {
+                if (isEditing) {
+                    const taskId = task._id;
+                    let input = {
+                        name: inputRef.current.value,
+                    };
+                    doUpdate(taskId, input, moduleId);
+                    toggleEditing(false);
+                }
+            }
+        },
+        [isEditing]
+    );
     return (
         <>
             <Draggable draggableId={task._id} index={index}>
