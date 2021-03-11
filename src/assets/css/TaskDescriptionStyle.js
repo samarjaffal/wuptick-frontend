@@ -27,12 +27,16 @@ export const TaskDescriptionStyle = createGlobalStyle`
         padding: 4px 0;
     }
 
-    .custom-task-description img{
+    .custom-task-description figure{
+        margin:0;
+    }
+    
+    .custom-task-description figure img{
         max-width:100%;
         margin-top: 14px;
     }
 
-    .ReplyInfo .custom-task-description img{
+    .ReplyInfo .custom-task-description figure img{
       max-height:250px;   
     }
 `;

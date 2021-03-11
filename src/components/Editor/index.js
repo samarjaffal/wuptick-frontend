@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
 import { EDITORCONF, setMentionsConfig } from './editor-conf';
-import { customQuoteBlock } from './customBlocks';
+import { customQuoteBlock, customImageBlock } from './customBlocks';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
 import { Colors } from '../../assets/css/colors';
@@ -43,7 +43,10 @@ export const Editor = ({
     });
 
     const parseToHTMl = (outputData) => {
-        const edjsParser = edjsHTML({ quote: customQuoteBlock });
+        const edjsParser = edjsHTML({
+            quote: customQuoteBlock,
+            image: customImageBlock,
+        });
         let html = edjsParser.parse(outputData);
         let output = document.createElement('div');
         output.className = 'custom-task-description';
