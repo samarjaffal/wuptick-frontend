@@ -171,7 +171,8 @@ const MemoTaskItem = ({
                                         <MeQuery>
                                             {({ data }) => {
                                                 const favTasks =
-                                                    data !== null
+                                                    data !== null &&
+                                                    typeof data !== 'undefined'
                                                         ? data.me.favorite_tasks
                                                         : [];
                                                 return (
