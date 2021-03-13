@@ -9,7 +9,7 @@ import {
     IconContainer,
 } from './styles';
 
-export const SidebarItem = ({ title, icon, url, color }) => {
+export const SidebarItem = ({ title, icon, url, color, children }) => {
     return (
         <SidebarLink>
             <Container>
@@ -20,6 +20,7 @@ export const SidebarItem = ({ title, icon, url, color }) => {
                     <Title>{title}</Title>
                 </SideAnchor>
             </Container>
+            {children}
         </SidebarLink>
     );
 };
