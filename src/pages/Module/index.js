@@ -8,7 +8,8 @@ import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { TasksSection } from './TasksSection';
 import { AddNew } from '../../components/AddNew/index';
-import { Sidebar } from '../../components/Sidebar/index';
+/* import { Sidebar } from '../../components/Sidebar/index'; */
+import { Sidebar } from '../../components/Sidebar2/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { DropdownContextProvider } from '../../context/DropdownContext';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
@@ -42,7 +43,7 @@ export const Module = ({ projectId, moduleId, location }) => {
             </Helmet>
 
             <Container>
-                <SidebarContainer>
+                {/*  <SidebarContainer>
                     <Sidebar>
                         <GetProjectSidebarQuery projectId={projectId}>
                             {({ data }) => {
@@ -51,6 +52,9 @@ export const Module = ({ projectId, moduleId, location }) => {
                             }}
                         </GetProjectSidebarQuery>
                     </Sidebar>
+                </SidebarContainer> */}
+                <SidebarContainer>
+                    <Sidebar />
                 </SidebarContainer>
 
                 <GetTaskListsAndTasksQuery moduleId={moduleId}>

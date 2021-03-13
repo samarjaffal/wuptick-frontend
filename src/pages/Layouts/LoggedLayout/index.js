@@ -7,11 +7,11 @@ export const LoggedLayout = ({ children, showNavbar = true, styles }) => {
     const { isLogged } = useUser();
     return (
         <Fragment>
-            {isLogged && showNavbar && (
+            {/*   {isLogged && showNavbar && (
                 <DropdownContextProvider>
                     <Navbar />
                 </DropdownContextProvider>
-            )}
+            )} */}
             <Container {...styles}>{children}</Container>
         </Fragment>
     );
