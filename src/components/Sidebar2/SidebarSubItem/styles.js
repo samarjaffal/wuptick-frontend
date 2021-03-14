@@ -60,7 +60,8 @@ export const Icon = styled(FontAwesomeIcon)`
 `;
 
 export const ButtonToggleList = styled.div`
-    margin-right: 1em;
+    margin-right: 16px;
     width: 40px;
     cursor: pointer;
+    text-align: right;
 `;

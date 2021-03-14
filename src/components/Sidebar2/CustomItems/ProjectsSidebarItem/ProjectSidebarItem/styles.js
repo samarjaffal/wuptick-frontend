@@ -7,6 +7,7 @@ import { TransitionSecondary } from '../../../../../assets/css/shared-styles';
 export const ModulesList = styled.ul`
     list-style: none;
     margin: 0;
+    padding: 5px 30px;
     display: ${({ show }) => (show ? show : 'none')};
 `;
 
