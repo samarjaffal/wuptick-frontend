@@ -38,6 +38,12 @@ export const Profile = ({ location, username }) => {
         setUserId(splittedURL[2]);
     };
 
+    const filterTeamsByUserLogged = (teams) => {
+        return teams.filter((team) =>
+            team.members.some((member) => member._id == currentUser._id)
+        );
+    };
+
     useEffect(() => {
         setCurrentTab(tab);
         getUserIdFromURL();
@@ -52,14 +58,17 @@ export const Profile = ({ location, username }) => {
             >
                 {({ data }) => {
                     const { getUser: user } = data;
+
+                    const teams = filterTeamsByUserLogged(user.teams);
+
                     return currentTab == undefined ||
                         currentTab == 'projects' ? (
                         <DropdownContextProvider>
-                            <ListProjects teams={user.teams} userId={userId} />{' '}
+                            <ListProjects teams={teams} userId={userId} />{' '}
                         </DropdownContextProvider>
                     ) : (
                         <DropdownContextProvider>
-                            <ListTeams teams={user.teams} userId={userId} />
+                            <ListTeams teams={teams} userId={userId} />
                         </DropdownContextProvider>
                     );
                 }}
