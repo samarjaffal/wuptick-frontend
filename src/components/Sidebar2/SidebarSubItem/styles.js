@@ -26,6 +26,12 @@ export const Title = styled(Link)`
     text-decoration: none;
     font-size: ${defaultFontSize};
     color: ${Colors.black};
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    width: 100%;
+    overflow: hidden;
 `;
 
 export const SidebarLink = styled.li`
