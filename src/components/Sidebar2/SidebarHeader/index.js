@@ -14,7 +14,7 @@ import {
     HamburguerMenu,
 } from './styles';
 
-export const SidebarHeader = () => {
+export const SidebarHeader = ({ setCollapsed }) => {
     return (
         <SidebarStyled>
             <Col>
@@ -31,7 +31,10 @@ export const SidebarHeader = () => {
                             <Avatar size={25} src={avatar} margin="0 1em" />
                         )}
                     </Me>
-                    <HamburguerMenu icon="bars" />
+                    <HamburguerMenu
+                        icon="bars"
+                        onClick={() => setCollapsed(true)}
+                    />
                 </OptionsContainer>
             </Col>
         </SidebarStyled>

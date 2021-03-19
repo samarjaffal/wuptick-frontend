@@ -42,7 +42,8 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-    ${title}
+    ${title};
+    margin: 0;
 `;
 
 export const Filter = styled.span`
@@ -91,9 +92,9 @@ export const SidebarContainer = styled.div`
 
 export const ModuleContainer = styled.div`
     padding-bottom: 15px;
-    width: 80%;
-    padding-left: 50px;
-    @media (max-width: 1024px) {
+    width: 100%;
+    /* padding-left: 50px; */
+    /*  @media (max-width: 1024px) {
         width: 70%;
     }
 
@@ -102,5 +103,5 @@ export const ModuleContainer = styled.div`
     }
     @media (max-width: 425px) {
         padding-left: 0;
-    }
+    } */
 `;

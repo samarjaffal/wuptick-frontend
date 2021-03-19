@@ -44,7 +44,7 @@ export const OptionsDropDown = ({
             width="200px"
             transform="-45%"
             bg={Colors.whitePrimary}
-            top={`${Math.round(position.top + 30)}px`}
+            top={`${position.top ? Math.round(position.top + 30) : 0}px`}
             left={`${position.left}px`}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">

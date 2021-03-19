@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../../assets/css/colors';
+import { TransitionSecondary } from '../../../assets/css/shared-styles';
 
 export const LogoImg = styled.img`
     width: 96px;
@@ -32,5 +33,10 @@ export const Col = styled.div`
 
 export const HamburguerMenu = styled(FontAwesomeIcon)`
     font-size: 20px;
-    color: ${Colors.primary};
+    color: ${Colors.gray};
+    ${TransitionSecondary};
+    cursor: pointer;
+    :hover {
+        color: ${Colors.primary};
+    }
 `;

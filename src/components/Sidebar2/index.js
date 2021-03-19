@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
@@ -9,11 +9,13 @@ import { Colors } from '../../assets/css/colors';
 import { Sidebar as SidebarStyled, Ul, Hr } from './styles';
 
 export const Sidebar = ({ project }) => {
+    const [isCollapsed, setCollapsed] = useState(false);
     const { profileURL, teamSelected } = useUser();
 
+    const left = isCollapsed ? '-250px' : '0';
     return (
-        <SidebarStyled>
-            <SidebarHeader />
+        <SidebarStyled left={left}>
+            <SidebarHeader setCollapsed={setCollapsed} />
             <Ul>
                 <SidebarItem
                     title="Home"

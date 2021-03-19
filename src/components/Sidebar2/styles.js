@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 import { Colors } from '../../assets/css/colors';
-import { ShadowSecondary } from '../../assets/css/shared-styles';
+import {
+    ShadowSecondary,
+    TransitionSecondary,
+} from '../../assets/css/shared-styles';
 
 export const Sidebar = styled.div`
     height: 100%;
-    width: 250px;
+    width: 260px;
+    left: ${({ left }) => (left ? left : 0)};
+    position: fixed;
+    left: 0;
+    overflow: hidden;
+    ${TransitionSecondary};
     background-color: ${Colors.backgroud};
     ${ShadowSecondary}
     box-shadow: 0px 0px 4px ${Colors.softGray};

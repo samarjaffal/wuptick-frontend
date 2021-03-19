@@ -37,7 +37,7 @@ export const Module = ({ projectId, moduleId, location }) => {
     };
 
     return (
-        <LoggedLayout styles={{ marginLeft: '0px' }}>
+        <LoggedLayout>
             <Helmet>
                 <title>Wuptick - Module</title>
             </Helmet>
@@ -53,9 +53,9 @@ export const Module = ({ projectId, moduleId, location }) => {
                         </GetProjectSidebarQuery>
                     </Sidebar>
                 </SidebarContainer> */}
-                <SidebarContainer>
+                {/* <SidebarContainer>
                     <Sidebar />
-                </SidebarContainer>
+                </SidebarContainer> */}
 
                 <GetTaskListsAndTasksQuery moduleId={moduleId}>
                     {({ data }) => {
