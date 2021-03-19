@@ -69,7 +69,7 @@ export const Profile = ({ location, username }) => {
 
     return (
         <LoggedLayout>
-            <div className="Container">
+            <div className="Container" style={{ width: '100%' }}>
                 <GetUserQuery
                     userId={userId}
                     loader={SkeletonInfoProfile}

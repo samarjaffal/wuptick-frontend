@@ -6,6 +6,7 @@ import { Transition } from '../../assets/css/shared-styles';
 
 export const Container = styled.div`
     /*     margin-top: 20px; */
+    width: 100%;
 `;
 
 export const ProjectInfoContainer = styled.div`

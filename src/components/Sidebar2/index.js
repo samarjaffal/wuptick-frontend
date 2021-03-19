@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Context from '../../context/SidebarContext';
 import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
-import { SidebarSubItem } from './SidebarSubItem/index';
 import { ProjectsSidebarItem } from './CustomItems/ProjectsSidebarItem';
 import { useUser } from '../../hooks/useUser';
 import { Colors } from '../../assets/css/colors';
 import { Sidebar as SidebarStyled, Ul, Hr } from './styles';
 
-export const Sidebar = ({ project }) => {
-    const [isCollapsed, setCollapsed] = useState(false);
+export const Sidebar = () => {
+    const { isCollapsed, setCollapsed } = useContext(Context);
+
     const { profileURL, teamSelected } = useUser();
 
-    const left = isCollapsed ? '-250px' : '0';
+    const left = isCollapsed ? '-280px' : '0';
     return (
         <SidebarStyled left={left}>
             <SidebarHeader setCollapsed={setCollapsed} />

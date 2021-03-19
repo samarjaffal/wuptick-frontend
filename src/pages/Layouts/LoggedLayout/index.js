@@ -1,25 +1,31 @@
-import React, { Fragment } from 'react';
-import { Navbar } from '../../../components/navbar/index';
+import React, { useContext } from 'react';
+import Context from '../../../context/SidebarContext';
+import PropTypes from 'prop-types';
 import { useUser } from '../../../hooks/useUser';
-import { DropdownContextProvider } from '../../../context/DropdownContext';
 import { Sidebar } from '../../../components/Sidebar2/index';
-import { Container } from './styles';
+import { Container, HamburguerMenu, HamburguerMenuContainer } from './styles';
+
 export const LoggedLayout = ({ children, showNavbar = true, styles }) => {
     const { isLogged } = useUser();
-    return (
-        <div style={{ display: 'flex', height: '100vh' }}>
-            {/*   {isLogged && showNavbar && (
-                <DropdownContextProvider>
-                    <Navbar />
-                </DropdownContextProvider>
-            )} */}
+    const { isCollapsed, setCollapsed } = useContext(Context);
 
-            {isLogged && showNavbar && (
-                <div>
-                    <Sidebar />
-                </div>
+    return (
+        <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+            {isLogged && showNavbar && <Sidebar />}
+            {isCollapsed && (
+                <HamburguerMenuContainer onClick={() => setCollapsed(false)}>
+                    <HamburguerMenu icon="bars" isCollapsed={isCollapsed} />
+                </HamburguerMenuContainer>
             )}
-            <Container {...styles}>{children}</Container>
+            <Container {...styles} isCollapsed={isCollapsed}>
+                {children}
+            </Container>
         </div>
     );
+};
+
+LoggedLayout.propTypes = {
+    children: PropTypes.any,
+    showNavbar: PropTypes.bool,
+    styles: PropTypes.object,
 };

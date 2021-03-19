@@ -8,9 +8,9 @@ import {
 export const Sidebar = styled.div`
     height: 100%;
     width: 260px;
+    z-index: 99;
     left: ${({ left }) => (left ? left : 0)};
     position: fixed;
-    left: 0;
     overflow: hidden;
     ${TransitionSecondary};
     background-color: ${Colors.backgroud};
@@ -22,10 +22,6 @@ export const Ul = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
-    @media (max-width: 767px) {
-        width: 100vw;
-        padding: 2em;
-    }
 `;
 
 export const Hr = styled.hr`
