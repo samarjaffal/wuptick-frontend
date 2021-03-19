@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar } from '../../Avatar/index';
-import { Me } from '../../Me/index';
-import { SkeletonAvatar } from '../../Loaders/SkeletonAvatar/index';
 import Logo from '../../../assets/images/logo.png';
+import { SidebarAvatar } from '../SidebarAvatar/index';
 import {
     Anchor,
     LogoImg,
@@ -26,11 +24,7 @@ export const SidebarHeader = ({ setCollapsed }) => {
             </Col>
             <Col>
                 <OptionsContainer>
-                    <Me loader={SkeletonAvatar} loaderProps={{ qty: 1 }}>
-                        {({ avatar }) => (
-                            <Avatar size={25} src={avatar} margin="0 1em" />
-                        )}
-                    </Me>
+                    <SidebarAvatar />
                     <HamburguerMenu
                         icon="bars"
                         onClick={() => setCollapsed(true)}
@@ -41,4 +35,6 @@ export const SidebarHeader = ({ setCollapsed }) => {
     );
 };
 
-SidebarHeader.propTypes = {};
+SidebarHeader.propTypes = {
+    setCollapsed: PropTypes.bool,
+};

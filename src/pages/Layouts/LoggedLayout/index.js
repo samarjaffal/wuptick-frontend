@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Context from '../../../context/SidebarContext';
 import PropTypes from 'prop-types';
+import { DropdownContextProvider } from '../../../context/DropdownContext';
 import { useUser } from '../../../hooks/useUser';
 import { Sidebar } from '../../../components/Sidebar2/index';
 import { Container, HamburguerMenu, HamburguerMenuContainer } from './styles';
@@ -11,7 +12,11 @@ export const LoggedLayout = ({ children, showNavbar = true, styles }) => {
 
     return (
         <div style={{ display: 'flex', height: '100%', width: '100%' }}>
-            {isLogged && showNavbar && <Sidebar />}
+            {isLogged && showNavbar && (
+                <DropdownContextProvider>
+                    <Sidebar />
+                </DropdownContextProvider>
+            )}
             {isCollapsed && (
                 <HamburguerMenuContainer onClick={() => setCollapsed(false)}>
                     <HamburguerMenu icon="bars" isCollapsed={isCollapsed} />
