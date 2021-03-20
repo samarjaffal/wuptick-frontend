@@ -45,6 +45,7 @@ export const useUser = () => {
     const disableAuth = useCallback(() => {
         setAccessToken('');
         setToken('');
+        localStorage.removeItem('teamSelected');
     }, []);
 
     const getAge = useCallback((bornDate) => {
