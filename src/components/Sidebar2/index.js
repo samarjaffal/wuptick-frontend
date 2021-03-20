@@ -42,7 +42,6 @@ export const Sidebar = () => {
                     )}
                 </Me>
                 <Hr />
-                {teamSelected.name}
             </Ul>
         </SidebarStyled>
     );
