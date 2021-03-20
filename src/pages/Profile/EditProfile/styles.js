@@ -10,6 +10,11 @@ import {
 import { Colors } from '../../../assets/css/colors';
 import { Transition, Shadow } from '../../../assets/css/shared-styles';
 
+export const Container = styled.div`
+    width: 100%;
+    ${({ customProps }) => (customProps ? customProps : '')}
+`;
+
 export const Title = styled.h1`
     ${title}
     @media (max-width: 768px) {
