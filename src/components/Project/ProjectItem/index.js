@@ -33,12 +33,7 @@ export const ProjectItem = ({
     setProjectAndTeam,
 }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
-    const {
-        generateProfileUrl,
-        generateProjectUrl,
-        currentUser,
-        setTeam,
-    } = useUser();
+    const { generateProfileUrl, currentUser, goToProject } = useUser();
     const { setPositionDropDown, openDropCallBack } = useDropdown();
     const elemRef = useRef(null);
 
@@ -49,11 +44,6 @@ export const ProjectItem = ({
             setPositionDropDown(elemRef);
             setProjectAndTeam(project, team._id);
         }
-    };
-
-    const goToProject = () => {
-        setTeam(team);
-        navigate(generateProjectUrl(project._id));
     };
 
     let date = dayjs(project.created_at);
@@ -69,12 +59,12 @@ export const ProjectItem = ({
                             margin="0 1em 0 0"
                             description="Project Image"
                             src={project.image}
-                            onClicked={() => goToProject()}
+                            onClicked={() => goToProject(team, project._id)}
                         />
                     </div>
 
                     <DetailsContainer>
-                        <Name onClick={() => goToProject()}>
+                        <Name onClick={() => goToProject(team, project._id)}>
                             {project.name}
                         </Name>
                         <OwnerAnchor

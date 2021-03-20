@@ -24,6 +24,7 @@ export const ProjectsSidebarItem = ({ teams, profileURL }) => {
                                         <ProjectSidebarItem
                                             key={index}
                                             project={project}
+                                            team={team}
                                         />
                                     ))}
                             </Ul>

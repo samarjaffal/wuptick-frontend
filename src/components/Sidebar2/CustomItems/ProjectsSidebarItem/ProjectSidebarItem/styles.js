@@ -11,7 +11,7 @@ export const ModulesList = styled.ul`
     display: ${({ show }) => (show ? show : 'none')};
 `;
 
-export const ModuleTitle = styled(Link)`
+export const ModuleTitle = styled.div`
     ${description};
     font-weight: ${regular};
     color: ${Colors.black};

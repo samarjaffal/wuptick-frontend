@@ -9,21 +9,8 @@ import {
     defaultFontSize,
 } from '../../../assets/css/theme';
 
-export const SideAnchor = styled(Link)`
-    font-weight: ${semiBold};
-    color: ${Colors.black};
-    text-decoration: none;
-    padding: 0.5em 0;
-    border-radius: ${borderRadius};
-    width: 100%;
-    display: flex;
-    align-items: center;
-    font-size: ${defaultFontSize};
-`;
-
-export const Title = styled(Link)`
+export const Title = styled.div`
     flex: 80%;
-    text-decoration: none;
     font-size: ${defaultFontSize};
     color: ${Colors.black};
     text-overflow: ellipsis;
@@ -32,6 +19,7 @@ export const Title = styled(Link)`
     -webkit-box-orient: vertical;
     width: 100%;
     overflow: hidden;
+    cursor: pointer;
 `;
 
 export const SidebarLink = styled.li`

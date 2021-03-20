@@ -1,6 +1,7 @@
 import { useContext, useCallback } from 'react';
 import dayjs from 'dayjs';
 import Context from '../context/UserContext';
+import { navigate } from '@reach/router';
 import { setAccessToken as setToken } from '../shared/GetAccessToken';
 import jwtDecode from 'jwt-decode';
 
@@ -73,6 +74,11 @@ export const useUser = () => {
         return url;
     };
 
+    const generateModuleUrl = (projedId, moduleId) => {
+        const url = `/project/${projedId}/module/${moduleId}`;
+        return url;
+    };
+
     const isFavoriteTask = (taskId, tasks) => {
         let tasksIds = tasks.map((task) => task._id);
         return tasksIds.includes(taskId);
@@ -82,6 +88,16 @@ export const useUser = () => {
         setTeamSelected(team);
         localStorage.setItem('teamSelected', team._id);
     };
+
+    const goToProject = useCallback((team, projectId) => {
+        setTeam(team);
+        navigate(generateProjectUrl(projectId));
+    }, []);
+
+    const goToModule = useCallback((team, projectId, moduleId) => {
+        setTeam(team);
+        navigate(generateModuleUrl(projectId, moduleId));
+    }, []);
 
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
     const profileURL = `profile/${nameUrl}-${currentUser._id}`;
@@ -108,5 +124,7 @@ export const useUser = () => {
         generateProfileUrl,
         generateProjectUrl,
         isFavoriteTask,
+        goToProject,
+        goToModule,
     };
 };

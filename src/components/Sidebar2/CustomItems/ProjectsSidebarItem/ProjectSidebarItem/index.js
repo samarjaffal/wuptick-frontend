@@ -4,14 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Image } from '../../../../Image/index';
 import { SidebarSubItem } from '../../../SidebarSubItem/index';
 import { GetProjectModules } from '../../../../../requests/Module/getProjectModuleQuery';
+import { useUser } from '../../../../../hooks/useUser';
 import { Colors } from '../../../../../assets/css/colors';
 import { ModuleTitle, ModulesList } from './styles';
 
-export const ProjectSidebarItem = ({ project }) => {
+export const ProjectSidebarItem = ({ team, project }) => {
     const [show, setShow] = useState(false);
+
+    const { goToModule, goToProject } = useUser();
 
     const toggleShow = () => {
         setShow(!show);
+    };
+
+    const navigateToProject = () => {
+        goToProject(team, project._id);
     };
 
     const arrow = show ? 'caret-up' : 'caret-right';
@@ -23,7 +30,7 @@ export const ProjectSidebarItem = ({ project }) => {
                 icon={Image}
                 iconProps={{ size: 22, src: project.image }}
                 fIcon={false}
-                url={`/project/${project._id}`}
+                goTo={navigateToProject}
                 color={Colors.primary}
                 onClick={toggleShow}
                 arrow={arrow}
@@ -38,7 +45,13 @@ export const ProjectSidebarItem = ({ project }) => {
                             return modules.map((module, index) => (
                                 <li key={index}>
                                     <ModuleTitle
-                                        to={`/project/${project._id}/module/${module._id}`}
+                                        onClick={() =>
+                                            goToModule(
+                                                team,
+                                                project._id,
+                                                module._id
+                                            )
+                                        }
                                     >
                                         {module.name}
                                     </ModuleTitle>

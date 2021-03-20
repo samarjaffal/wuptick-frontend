@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    SideAnchor,
     Title,
     SidebarLink,
     Container,
-    Icon,
     IconContainer,
     ButtonToggleList,
 } from './styles';
@@ -14,7 +12,7 @@ import {
 export const SidebarSubItem = ({
     title,
     icon: Icon,
-    url,
+    goTo,
     color,
     fIcon = true,
     iconProps,
@@ -28,7 +26,7 @@ export const SidebarSubItem = ({
                 <IconContainer>
                     {fIcon ? <Icon icon={Icon} /> : <Icon {...iconProps} />}
                 </IconContainer>
-                <Title color={color} to={url}>
+                <Title color={color} onClick={() => goTo()}>
                     {title}
                 </Title>
                 {arrow && (
@@ -48,8 +46,12 @@ export const SidebarSubItem = ({
 SidebarSubItem.propTypes = {
     title: PropTypes.string,
     icon: PropTypes.any,
-    url: PropTypes.string,
+    goTo: PropTypes.func,
     option: PropTypes.string,
     children: PropTypes.node,
     color: PropTypes.string,
+    fIcon: PropTypes.bool,
+    iconProps: PropTypes.object,
+    onClick: PropTypes.func,
+    arrow: PropTypes.string,
 };
