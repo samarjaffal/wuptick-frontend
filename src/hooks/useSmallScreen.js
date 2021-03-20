@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const SIZE = 'screen and (max-width: 767px)';
+const SIZE = 'screen and (max-width: 768px)';
 
 export const useSmallScreen = () => {
     const screen = window.matchMedia(SIZE);

@@ -7,7 +7,8 @@ import { borderRadius } from '../../../assets/css/theme';
 export const Container = styled.div`
     /* padding-top: 60px; */
     display: flex;
-    margin-left: ${({ collapsed }) => (collapsed ? '150px' : '300px')};
+    margin-left: ${({ collapsed, match }) =>
+        match ? '150px' : collapsed ? '150px' : '300px'};
     margin-right: 75px;
     width: 85%;
     padding-top: 15px;
