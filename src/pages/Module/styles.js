@@ -32,6 +32,7 @@ export const RightItemsContainer = styled.div`
     align-items: center;
     @media (max-width: 425px) {
         width: 100%;
+        margin: 1.5em 0;
     }
 `;
 

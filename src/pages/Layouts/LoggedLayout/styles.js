@@ -15,6 +15,7 @@ export const Container = styled.div`
     ${TransitionSecondary}
     @media (max-width: 767px) {
         margin: 0 20px;
+        width: 100%;
     }
 `;
 
@@ -38,4 +39,7 @@ export const HamburguerMenuContainer = styled.div`
     position: absolute;
     left: 50px;
     top: 15px;
+    @media (max-width: 425px) {
+        left: 20px;
+    }
 `;
