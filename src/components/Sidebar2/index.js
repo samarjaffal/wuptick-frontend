@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
 import { ProjectsSidebarItem } from './CustomItems/ProjectsSidebarItem';
+import { Me } from '../Me/index';
 import { useUser } from '../../hooks/useUser';
 import { useSidebar } from '../../hooks/useSidebar';
 import { Colors } from '../../assets/css/colors';
@@ -32,10 +33,15 @@ export const Sidebar = () => {
                 />
 
                 <Hr />
-                <ProjectsSidebarItem
-                    profileURL={profileURL}
-                    team={teamSelected}
-                />
+                <Me loaderProps={{ qty: 1 }}>
+                    {({ teams }) => (
+                        <ProjectsSidebarItem
+                            profileURL={profileURL}
+                            teams={teams}
+                        />
+                    )}
+                </Me>
+                <Hr />
             </Ul>
         </SidebarStyled>
     );
