@@ -7,7 +7,7 @@ import { borderRadius } from '../../../assets/css/theme';
 export const Container = styled.div`
     /* padding-top: 60px; */
     display: flex;
-    margin-left: ${({ isCollapsed }) => (isCollapsed ? '150px' : '300px')};
+    margin-left: ${({ collapsed }) => (collapsed ? '150px' : '300px')};
     margin-right: 75px;
     width: 85%;
     padding-top: 15px;
@@ -25,7 +25,7 @@ export const HamburguerMenu = styled(FontAwesomeIcon)`
     padding: 8px;
     border-radius: ${borderRadius};
     background-color: ${Colors.white};
-    opacity: ${({ isCollapsed }) => (isCollapsed ? '1' : '0')};
+    opacity: ${({ collapsed }) => (collapsed ? '1' : '0')};
     :hover {
         background-color: ${Colors.hover};
     }

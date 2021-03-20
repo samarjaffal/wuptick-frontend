@@ -36,5 +36,5 @@ export const SidebarHeader = ({ setCollapsed }) => {
 };
 
 SidebarHeader.propTypes = {
-    setCollapsed: PropTypes.bool,
+    setCollapsed: PropTypes.func,
 };

@@ -19,10 +19,13 @@ export const LoggedLayout = ({ children, showNavbar = true, styles }) => {
             )}
             {isCollapsed && (
                 <HamburguerMenuContainer onClick={() => setCollapsed(false)}>
-                    <HamburguerMenu icon="bars" isCollapsed={isCollapsed} />
+                    <HamburguerMenu
+                        icon="bars"
+                        collapsed={isCollapsed ? 1 : 0}
+                    />
                 </HamburguerMenuContainer>
             )}
-            <Container {...styles} isCollapsed={isCollapsed}>
+            <Container {...styles} collapsed={isCollapsed ? 1 : 0}>
                 {children}
             </Container>
         </div>
