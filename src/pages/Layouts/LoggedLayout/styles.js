@@ -12,7 +12,7 @@ export const Container = styled.div`
     margin-right: 75px;
     width: 85%;
     padding-top: 15px;
-    ${TransitionSecondary}
+    transition: margin-left 0.5s ease 0s;
     @media (max-width: 767px) {
         margin: 0 20px;
         width: 100%;

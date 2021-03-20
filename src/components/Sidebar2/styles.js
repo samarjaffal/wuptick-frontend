@@ -12,7 +12,7 @@ export const Sidebar = styled.div`
     left: ${({ left }) => (left ? left : 0)};
     position: fixed;
     overflow: hidden;
-    ${TransitionSecondary};
+    transition: left 0.5s ease 0s;
     background-color: ${Colors.backgroud};
     ${ShadowSecondary}
     box-shadow: 0px 0px 4px ${Colors.softGray};
