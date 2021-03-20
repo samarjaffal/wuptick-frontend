@@ -33,6 +33,7 @@ const DefaultRoutes = () => {
         </Router>
     ) : (
         <Router>
+            <PublicRoute component={Auth} path="/" type="login" />
             <PublicRoute component={Auth} path="login" type="login" />
             <PublicRoute component={Auth} path="register" type="register" />
             <NotFound default />
