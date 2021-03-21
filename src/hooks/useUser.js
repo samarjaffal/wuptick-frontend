@@ -98,6 +98,7 @@ export const useUser = () => {
 
     const goToModule = useCallback((team, project, module) => {
         setTeam(team);
+        setCurrentProject(project);
         setCurrentModule(module);
         navigate(generateModuleUrl(project._id, module._id));
     }, []);
