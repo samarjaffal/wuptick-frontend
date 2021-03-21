@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { useLocation } from '@reach/router';
@@ -9,12 +9,14 @@ import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { TasksSection } from './TasksSection';
 import { AddNew } from '../../components/AddNew/index';
 /* import { Sidebar } from '../../components/Sidebar/index'; */
-import { Sidebar } from '../../components/Sidebar2/index';
+/* import { Sidebar } from '../../components/Sidebar2/index';
 import { ModuleSidebar } from './ModuleSidebar';
+import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery'; */
 import { DropdownContextProvider } from '../../context/DropdownContext';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
-import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery';
+
 import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
+import { useUser } from '../../hooks/useUser';
 import {
     Container,
     TopContainer,
@@ -31,10 +33,22 @@ export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
     const { tab } = queryString.parse(location.search);
+    const { teamSelected, setCurrentProject } = useUser();
     let newList = '';
     const callBackNewList = (value) => {
         newList = value;
     };
+
+    useEffect(() => {
+        if (Object.keys(teamSelected).length > 0) {
+            const project = teamSelected.projects.find(
+                (project) => project._id == projectId
+            );
+            if (project) {
+                setCurrentProject(project);
+            }
+        }
+    }, [teamSelected.projects]);
 
     return (
         <LoggedLayout>

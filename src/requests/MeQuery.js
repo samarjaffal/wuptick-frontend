@@ -7,7 +7,7 @@ export const MeQuery = ({ children }) => {
     const { setCurrentUser, currentUser, setTeam } = useUser();
     const { error, loading, data } = useQuery(gqlMe, {
         onCompleted: (data) => {
-            console.log(data, 'data meQuery');
+            /* console.log(data, 'data meQuery'); */
             const { me: user } = data;
             /**const lsTeamId = localStorage.getItem('teamSelected');
             let team =

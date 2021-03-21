@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SidebarItem } from '../../SidebarItem/index';
 import { ProjectSidebarItem } from './ProjectSidebarItem';
@@ -6,6 +6,10 @@ import { Colors } from '../../../../assets/css/colors';
 import { Ul, ProjectsContainer } from './styles';
 
 export const ProjectsSidebarItem = ({ teams, profileURL }) => {
+    useEffect(() => {
+        console.log(teams, 'teams');
+    }, [teams]);
+
     return (
         <>
             <SidebarItem

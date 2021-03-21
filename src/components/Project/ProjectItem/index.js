@@ -59,12 +59,12 @@ export const ProjectItem = ({
                             margin="0 1em 0 0"
                             description="Project Image"
                             src={project.image}
-                            onClicked={() => goToProject(team, project._id)}
+                            onClicked={() => goToProject(team, project)}
                         />
                     </div>
 
                     <DetailsContainer>
-                        <Name onClick={() => goToProject(team, project._id)}>
+                        <Name onClick={() => goToProject(team, project)}>
                             {project.name}
                         </Name>
                         <OwnerAnchor

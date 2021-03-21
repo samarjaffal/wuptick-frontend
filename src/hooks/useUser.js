@@ -90,14 +90,16 @@ export const useUser = () => {
         localStorage.setItem('teamSelected', team._id);
     };
 
-    const goToProject = useCallback((team, projectId) => {
+    const goToProject = useCallback((team, project) => {
         setTeam(team);
-        navigate(generateProjectUrl(projectId));
+        setCurrentProject(project);
+        navigate(generateProjectUrl(project._id));
     }, []);
 
-    const goToModule = useCallback((team, projectId, moduleId) => {
+    const goToModule = useCallback((team, project, module) => {
         setTeam(team);
-        navigate(generateModuleUrl(projectId, moduleId));
+        setCurrentModule(module);
+        navigate(generateModuleUrl(project._id, module._id));
     }, []);
 
     const nameUrl = `${currentUser.name}-${currentUser.last_name}`;

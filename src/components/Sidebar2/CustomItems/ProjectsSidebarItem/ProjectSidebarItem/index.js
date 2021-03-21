@@ -18,7 +18,7 @@ export const ProjectSidebarItem = ({ team, project }) => {
     };
 
     const navigateToProject = () => {
-        goToProject(team, project._id);
+        goToProject(team, project);
     };
 
     const arrow = show ? 'caret-up' : 'caret-right';
@@ -46,11 +46,7 @@ export const ProjectSidebarItem = ({ team, project }) => {
                                 <li key={index}>
                                     <ModuleTitle
                                         onClick={() =>
-                                            goToModule(
-                                                team,
-                                                project._id,
-                                                module._id
-                                            )
+                                            goToModule(team, project, module)
                                         }
                                     >
                                         {module.name}

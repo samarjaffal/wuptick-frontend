@@ -42,6 +42,19 @@ export const gqlMe = gql`
                         name
                         last_name
                     }
+                    members {
+                        user {
+                            _id
+                            avatar
+                            name
+                            last_name
+                            email
+                        }
+                        role {
+                            _id
+                            name
+                        }
+                    }
                 }
                 members {
                     _id
