@@ -8,8 +8,13 @@ import { useUser } from '../../../../hooks/useUser';
 import { Colors } from '../../../../assets/css/colors';
 
 export const OptionsDropDown = ({ userId, doRemoveInvitation }) => {
-    const { open, position } = useDropdown();
+    const { open, position, setOpen } = useDropdown();
     const { currentProject } = useUser();
+
+    const handleRemoveInvitation = () => {
+        doRemoveInvitation(userId, currentProject._id);
+        setOpen(false);
+    };
 
     return (
         <Dropdown
@@ -20,11 +25,7 @@ export const OptionsDropDown = ({ userId, doRemoveInvitation }) => {
             bg={Colors.whitePrimary}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">
-                <DropdownItem
-                    onClicked={() =>
-                        doRemoveInvitation(userId, currentProject._id)
-                    }
-                >
+                <DropdownItem onClicked={() => handleRemoveInvitation()}>
                     <span style={{ color: Colors.red }}>Cancel Invitation</span>
                 </DropdownItem>
             </DropdownMenu>
@@ -38,4 +39,5 @@ OptionsDropDown.propTypes = {
     position: PropTypes.object,
     doRemoveMember: PropTypes.func,
     userId: PropTypes.string,
+    doRemoveInvitation: PropTypes.func,
 };

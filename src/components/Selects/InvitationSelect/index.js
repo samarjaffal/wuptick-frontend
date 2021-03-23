@@ -1,7 +1,6 @@
 import React, { useState, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Label } from '../../Label/index';
-import { OutsideClick } from '../../OutsideClick/index';
 import { Colors } from '../../../assets/css/colors';
 
 export const InvitationSelect = forwardRef(
@@ -27,25 +26,23 @@ export const InvitationSelect = forwardRef(
             openDropCallBack(value);
             if (value) {
                 setRef(selectRef);
-                setPositionCallBack(labelRef.current.getBoundingClientRect());
+                setPositionCallBack(labelRef);
                 setUserCallBack(userId);
             }
         };
 
         return (
             <div ref={selectRef}>
-                <OutsideClick setLocalDropDownState={handleDropDown}>
-                    <Label
-                        name={label}
-                        color={color}
-                        showCaret={true}
-                        width="max-content"
-                        ref={labelRef}
-                        pointer={true}
-                        onClicked={handleDropDown}
-                        fullWidth="80%"
-                    />
-                </OutsideClick>
+                <Label
+                    name={label}
+                    color={color}
+                    showCaret={true}
+                    width="max-content"
+                    ref={labelRef}
+                    pointer={true}
+                    onClicked={handleDropDown}
+                    fullWidth="80%"
+                />
             </div>
         );
     }

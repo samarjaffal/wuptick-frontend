@@ -6,6 +6,7 @@ import { InvitationSelect } from '../../../../Selects/InvitationSelect/index';
 import { OptionsDropDown as InvitationDropDown } from '../../../../Selects/InvitationSelect/OptionsDropDown/index';
 import { useDropdown } from '../../../../../hooks/useDropdown';
 import { RemoveInvitationMutation } from '../../../../../requests/project/RemoveInvitationMutation';
+import { OutsideClick } from '../../../../OutsideClick/index';
 import { Colors } from '../../../../../assets/css/colors';
 import { FlexSpaceBetween, Div, Ul } from '../../../../SharedComponents/styles';
 
@@ -20,6 +21,11 @@ export const InvitationList = ({ members }) => {
 
     const setUserCallBack = (user) => {
         setSelectedUser(user);
+    };
+
+    const handleDropDown = (value = null) => {
+        value = value == null ? true : value;
+        openDropCallBack(value);
     };
 
     return (
@@ -51,14 +57,16 @@ export const InvitationList = ({ members }) => {
                 );
             })}
             {ReactDom.createPortal(
-                <RemoveInvitationMutation>
-                    {({ doRemoveInvitation }) => (
-                        <InvitationDropDown
-                            userId={selectedUser}
-                            doRemoveInvitation={doRemoveInvitation}
-                        />
-                    )}
-                </RemoveInvitationMutation>,
+                <OutsideClick setLocalDropDownState={handleDropDown}>
+                    <RemoveInvitationMutation>
+                        {({ doRemoveInvitation }) => (
+                            <InvitationDropDown
+                                userId={selectedUser}
+                                doRemoveInvitation={doRemoveInvitation}
+                            />
+                        )}
+                    </RemoveInvitationMutation>
+                </OutsideClick>,
                 document.getElementById('dropwdown-app')
             )}
         </Ul>
