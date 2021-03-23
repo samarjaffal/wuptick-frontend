@@ -17,6 +17,7 @@ export const OptionsDropDown = ({ setOption, doRemoveMember, userId }) => {
         let newMembers = members.filter((member) => member.user._id !== userId);
         currentProject.members = newMembers;
         doRemoveMember(currentProject._id, userId);
+        setOpen(false);
     };
 
     return (

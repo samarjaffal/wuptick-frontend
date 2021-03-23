@@ -4,10 +4,12 @@ import { gqlRemoveMember } from '../graphql/gqlRemoveMember';
 import { gqlGetProject } from '../graphql/gqlGetProject';
 import { gqlGetUser } from '../graphql/gqlGetUser';
 import { Notification } from '../../shared/Notification';
+import { useUser } from '../../hooks/useUser';
 import PropTypes from 'prop-types';
 
 export const RemoveMemberMutation = ({ children, modalRef }) => {
     const { addNotification, customTypes, customTitles } = Notification();
+    const { setCurrentProject, currentProject } = useUser();
     const [removeMember, { error, loading, data }] = useMutation(
         gqlRemoveMember,
         {
@@ -30,6 +32,34 @@ export const RemoveMemberMutation = ({ children, modalRef }) => {
             variables: {
                 projectId,
                 userId,
+            },
+            update: (store, { data }) => {
+                const projectData = store.readQuery({
+                    query: gqlGetProject,
+                    variables: { projectId },
+                });
+
+                console.log(projectData, 'projectData');
+
+                const tempData = { ...projectData.getProject };
+
+                let { members } = tempData;
+
+                members = members.filter(
+                    (member) => member.user._id !== userId
+                );
+                store.writeQuery({
+                    query: gqlGetProject,
+                    variables: { projectId },
+                    data: {
+                        getProject: {
+                            ...projectData.getProject,
+                            members: members,
+                        },
+                    },
+                });
+
+                setCurrentProject({ ...currentProject, members: members });
             },
             refetchQueries: [
                 {
