@@ -11,7 +11,7 @@ function escapeRegexCharacters(str) {
 }
 
 export const MembersInputSearch = ({ doInvitation, setMembers }) => {
-    const { currentProject, teamSelected } = useUser();
+    const { currentProject, teamSelected, getMembersFromTeams } = useUser();
     const [suggestions, setSuggestions] = useState([]);
     const [member, setMember] = useState('');
 
@@ -25,7 +25,8 @@ export const MembersInputSearch = ({ doInvitation, setMembers }) => {
         const inputLength = inputValue.length;
         const escapedValue = escapeRegexCharacters(inputValue);
         const regex = new RegExp('^' + escapedValue, 'i');
-        let membersList = teamSelected.members;
+        /* let membersList = teamSelected.members; */
+        let membersList = getMembersFromTeams();
 
         return inputLength === 0
             ? []

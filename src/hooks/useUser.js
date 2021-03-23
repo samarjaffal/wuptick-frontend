@@ -23,6 +23,9 @@ export const useUser = () => {
         setCurrentTask,
     } = useContext(Context);
 
+    const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
+    const profileURL = `profile/${nameUrl}-${currentUser._id}`;
+
     const activateAuth = useCallback(
         (token) => {
             setAccessToken(token);
@@ -103,8 +106,26 @@ export const useUser = () => {
         navigate(generateModuleUrl(project._id, module._id));
     }, []);
 
-    const nameUrl = `${currentUser.name}-${currentUser.last_name}`;
-    const profileURL = `profile/${nameUrl}-${currentUser._id}`;
+    const getMembersFromTeams = () => {
+        if (!('teams' in currentUser)) return [];
+
+        const { teams } = currentUser;
+
+        //get all members, this is with repeated values
+        const tempMembers = teams.map((team) => team.members).flat();
+
+        if (tempMembers.length == 0) return [];
+
+        //get members ids
+        const membersIds = tempMembers.map((member) => member._id);
+
+        //filter members and remove repeated values
+        const members = tempMembers.filter(
+            (member, index) => !membersIds.includes(member._id, index + 1)
+        );
+
+        return members;
+    };
 
     return {
         isLogged: Boolean(accessToken),
@@ -130,5 +151,6 @@ export const useUser = () => {
         isFavoriteTask,
         goToProject,
         goToModule,
+        getMembersFromTeams,
     };
 };
