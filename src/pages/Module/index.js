@@ -17,6 +17,7 @@ import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAnd
 
 import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
 import { useUser } from '../../hooks/useUser';
+
 import {
     Container,
     TopContainer,
@@ -32,8 +33,9 @@ import {
 export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
-    const { tab } = queryString.parse(location.search);
+    const { tab, task } = queryString.parse(location.search);
     const { teamSelected, setCurrentProject } = useUser();
+
     let newList = '';
     const callBackNewList = (value) => {
         newList = value;
@@ -71,78 +73,87 @@ export const Module = ({ projectId, moduleId, location }) => {
                     <Sidebar />
                 </SidebarContainer> */}
 
-                <GetTaskListsAndTasksQuery moduleId={moduleId}>
-                    {({ data }) => {
-                        const module = data.getModule;
+                <TaskContextProvider>
+                    <Context.Consumer>
+                        {() => (
+                            <GetTaskListsAndTasksQuery moduleId={moduleId}>
+                                {({ data }) => {
+                                    const module = data.getModule;
 
-                        return (
-                            <ModuleContainer>
-                                <TopContainer>
-                                    <TitleContainer>
-                                        <Title>{module.name}</Title>
-                                    </TitleContainer>
+                                    return (
+                                        <ModuleContainer>
+                                            <TopContainer>
+                                                <TitleContainer>
+                                                    <Title>{module.name}</Title>
+                                                </TitleContainer>
 
-                                    <RightItemsContainer>
-                                        <div>
-                                            <Filter>Filter</Filter>
-                                        </div>
-                                        <InputSearch
-                                            type="text"
-                                            placeholder="Search"
-                                        />
-                                    </RightItemsContainer>
-                                </TopContainer>
+                                                <RightItemsContainer>
+                                                    <div>
+                                                        <Filter>Filter</Filter>
+                                                    </div>
+                                                    <InputSearch
+                                                        type="text"
+                                                        placeholder="Search"
+                                                    />
+                                                </RightItemsContainer>
+                                            </TopContainer>
 
-                                <div className="TabsContainer">
-                                    <ModuleTabs
-                                        tab={tab}
-                                        currentURL={currentURL}
-                                        moduleId={moduleId}
-                                    />
-                                </div>
+                                            <div className="TabsContainer">
+                                                <ModuleTabs
+                                                    tab={tab}
+                                                    currentURL={currentURL}
+                                                    moduleId={moduleId}
+                                                />
+                                            </div>
 
-                                <div className="TasksLists">
-                                    <DropdownContextProvider>
-                                        <TaskContextProvider>
-                                            <Context.Consumer>
-                                                {() => (
+                                            <div className="TasksLists">
+                                                <DropdownContextProvider>
                                                     <TasksSection
                                                         lists={
                                                             module.task_lists
                                                         }
                                                         moduleId={moduleId}
+                                                        url={currentURL}
+                                                        taskId={task}
                                                     />
-                                                )}
-                                            </Context.Consumer>
-                                        </TaskContextProvider>
-                                    </DropdownContextProvider>
-                                    <AddTaskListMutation>
-                                        {({ doCreateList }) => {
-                                            const createList = () => {
-                                                console.log(
-                                                    moduleId,
-                                                    newList,
-                                                    'testing'
-                                                );
+                                                </DropdownContextProvider>
+                                                <AddTaskListMutation>
+                                                    {({ doCreateList }) => {
+                                                        const createList = () => {
+                                                            console.log(
+                                                                moduleId,
+                                                                newList,
+                                                                'testing'
+                                                            );
 
-                                                doCreateList(moduleId, newList);
-                                            };
-                                            return (
-                                                <AddNew
-                                                    text="Add List"
-                                                    icon={true}
-                                                    border={true}
-                                                    setValue={callBackNewList}
-                                                    doFunction={createList}
-                                                />
-                                            );
-                                        }}
-                                    </AddTaskListMutation>
-                                </div>
-                            </ModuleContainer>
-                        );
-                    }}
-                </GetTaskListsAndTasksQuery>
+                                                            doCreateList(
+                                                                moduleId,
+                                                                newList
+                                                            );
+                                                        };
+                                                        return (
+                                                            <AddNew
+                                                                text="Add List"
+                                                                icon={true}
+                                                                border={true}
+                                                                setValue={
+                                                                    callBackNewList
+                                                                }
+                                                                doFunction={
+                                                                    createList
+                                                                }
+                                                            />
+                                                        );
+                                                    }}
+                                                </AddTaskListMutation>
+                                            </div>
+                                        </ModuleContainer>
+                                    );
+                                }}
+                            </GetTaskListsAndTasksQuery>
+                        )}
+                    </Context.Consumer>
+                </TaskContextProvider>
             </Container>
         </LoggedLayout>
     );

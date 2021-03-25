@@ -18,7 +18,9 @@ export const HeaderFavoriteButton = ({ task }) => {
                     <MeQuery>
                         {({ data }) => {
                             const favTasks =
-                                data !== null ? data.me.favorite_tasks : [];
+                                data !== null && typeof data !== 'undefined'
+                                    ? data.me.favorite_tasks
+                                    : [];
                             return (
                                 <FavoriteButton
                                     taskId={task._id}

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { navigate } from '@reach/router';
 import { TaskLists } from '../../../components/Task/TaskLists/index';
 import { useUser } from '../../../hooks/useUser';
 import { useDropdown } from '../../../hooks/useDropdown';
@@ -13,17 +14,36 @@ import {
 import { DeleteModal } from '../ModuleModals';
 import PropTypes from 'prop-types';
 
-export const TasksSection = ({ lists, moduleId }) => {
+export const TasksSection = ({ lists, moduleId, url, taskId }) => {
     const { selectDropDown } = useDropdown();
     const { currentTask, setCurrentTask } = useUser();
-    const { panelRef, openTaskPanel } = useTask();
+    const {
+        panelRef,
+        openTaskPanel,
+        getListId,
+        getTaskFromLists,
+        setLists,
+        setIsPanelOpen,
+        isPanelOpen,
+    } = useTask();
 
-    useEffect(() => {}, [lists, moduleId]);
+    useEffect(() => {
+        setLists(lists);
+        if (taskId && !isPanelOpen) {
+            let task = getTaskFromLists(lists, taskId);
+            handleOpenTaskPanel(task, true);
+        }
+    }, [lists, moduleId]);
 
-    const handleOpenTaskPanel = (task) => {
+    const handleOpenTaskPanel = useCallback((task, openFromReload = false) => {
         setCurrentTask(task);
+        setIsPanelOpen(true);
         openTaskPanel();
-    };
+        let taskURL = `${url}?task=${task._id}`;
+        if (!openFromReload) {
+            navigate(taskURL);
+        }
+    }, []);
 
     const showSelectedDropDown = () => {
         return (
@@ -32,15 +52,6 @@ export const TasksSection = ({ lists, moduleId }) => {
             (selectDropDown == 'list' && <ListDropDown />) ||
             null
         );
-    };
-
-    const listHaveTask = (list) => {
-        return list.tasks.some((task) => task._id == currentTask._id);
-    };
-
-    const getListId = () => {
-        const list = lists.find(listHaveTask);
-        return list._id;
     };
 
     return (
@@ -52,7 +63,7 @@ export const TasksSection = ({ lists, moduleId }) => {
             />
             {showSelectedDropDown()}
             <TaskPanel panelRef={panelRef} />
-            <DeleteModal getListId={() => getListId()} />
+            <DeleteModal getListId={() => getListId(lists, currentTask._id)} />
         </>
     );
 };

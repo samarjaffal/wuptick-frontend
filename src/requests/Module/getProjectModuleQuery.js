@@ -7,7 +7,7 @@ export const GetProjectModules = ({ children, projectId }) => {
         variables: { projectId },
         fetchPolicy: 'cache-and-network',
         onCompleted: (data) => {
-            console.log(data, 'data getProjectModules');
+            /*  console.log(data, 'data getProjectModules'); */
         },
     });
     if (loading || !data) {

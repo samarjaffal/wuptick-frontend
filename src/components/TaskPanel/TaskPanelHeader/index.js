@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation, navigate } from '@reach/router';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from './Collaborators';
@@ -14,9 +15,20 @@ import {
 } from './styles';
 
 export const TaskPanelHeader = ({ task, panelRef }) => {
+    const path = useLocation();
+    const location = path.pathname;
+
     useEffect(() => {
         console.log('TaskPanelHeader');
     }, [task.done]);
+
+    const closePanel = () => {
+        panelRef.current.closeModal();
+        const queryParams = new URLSearchParams(path.search);
+        if (queryParams.has('task')) {
+            navigate(location);
+        }
+    };
 
     return (
         <HeaderTaskOptions>
@@ -24,7 +36,7 @@ export const TaskPanelHeader = ({ task, panelRef }) => {
                 <div
                     className="CloseButton"
                     style={{ marginRight: '20px' }}
-                    onClick={() => panelRef.current.closeModal()}
+                    onClick={() => closePanel()}
                 >
                     <ClosePanelIcon icon="chevron-right" />
                 </div>
