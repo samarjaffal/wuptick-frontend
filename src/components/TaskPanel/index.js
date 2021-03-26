@@ -5,6 +5,7 @@ import { TaskPanelHeader } from './TaskPanelHeader';
 import { TaskOverview } from './TaskOverview';
 import { RepliesSection } from './RepliesSection/index';
 import { useUser } from '../../hooks/useUser';
+import { useTask } from '../../hooks/useTask';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
 import { GetTaskQuery } from '../../requests/Task/GetTaskQuery';
 import { Container } from './styles';
@@ -16,6 +17,8 @@ const MemoTaskPanel = ({ panelRef }) => {
         setCurrentTask,
         currentProject,
     } = useUser();
+
+    const { closePanel, removeTaskFromURL } = useTask();
 
     useEffect(() => {
         console.log('render MemoTaskPanel');
@@ -29,7 +32,9 @@ const MemoTaskPanel = ({ panelRef }) => {
             headerProps={{
                 task: currentTask,
                 panelRef: panelRef,
+                closePanel: closePanel,
             }}
+            onCloseFunc={removeTaskFromURL}
         >
             <Container>
                 <GetTaskQuery taskId={currentTask._id}>

@@ -113,7 +113,6 @@ export const Module = ({ projectId, moduleId, location }) => {
                                                             module.task_lists
                                                         }
                                                         moduleId={moduleId}
-                                                        url={currentURL}
                                                         taskId={task}
                                                     />
                                                 </DropdownContextProvider>

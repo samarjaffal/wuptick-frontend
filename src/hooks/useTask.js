@@ -1,6 +1,6 @@
 import Context from '../context/TaskContext';
 import { useContext, useCallback } from 'react';
-import { navigate } from '@reach/router';
+import { useLocation, navigate } from '@reach/router';
 import { useUser } from './useUser';
 
 export const useTask = () => {
@@ -19,6 +19,9 @@ export const useTask = () => {
         setIsPanelOpen,
     } = useContext(Context);
 
+    const path = useLocation();
+    const location = path.pathname;
+
     const { setCurrentTask } = useUser();
 
     const openDeleteModal = useCallback(() => {
@@ -28,18 +31,6 @@ export const useTask = () => {
     const openTaskPanel = useCallback(() => {
         panelRef.current.openModal();
     }, []);
-
-    const handleOpenTaskPanel = useCallback(
-        (url, task, openFromReload = false) => {
-            setCurrentTask(task);
-            openTaskPanel();
-            let taskURL = `${url}?task=${task._id}`;
-            if (!openFromReload) {
-                navigate(taskURL);
-            }
-        },
-        []
-    );
 
     const listHaveTask = useCallback((list, taskId) => {
         return list.tasks.some((task) => task._id == taskId);
@@ -60,6 +51,34 @@ export const useTask = () => {
         [lists]
     );
 
+    const handleOpenTaskPanel = useCallback((task, openFromReload = false) => {
+        setCurrentTask(task);
+        openTaskPanel();
+        let taskURL = `${location}?task=${task._id}`;
+        if (!openFromReload) {
+            navigate(taskURL);
+        }
+    }, []);
+
+    const openTaskPanelFromURL = useCallback((taskId, lists) => {
+        if (taskId && !isPanelOpen) {
+            let task = getTaskFromLists(lists, taskId);
+            handleOpenTaskPanel(task, true);
+        }
+    }, []);
+
+    const removeTaskFromURL = () => {
+        const queryParams = new URLSearchParams(path.search);
+        if (queryParams.has('task')) {
+            navigate(location);
+        }
+    };
+
+    const closePanel = () => {
+        panelRef.current.closeModal();
+        removeTaskFromURL();
+    };
+
     return {
         openDeleteModal,
         deleteModalRef,
@@ -78,5 +97,8 @@ export const useTask = () => {
         handleOpenTaskPanel,
         isPanelOpen,
         setIsPanelOpen,
+        closePanel,
+        openTaskPanelFromURL,
+        removeTaskFromURL,
     };
 };

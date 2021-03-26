@@ -12,8 +12,9 @@ export const GetTaskQuery = ({ children, taskId }) => {
             setCurrentTask(data.getTask);
         },
     });
+
     if (loading) {
-        console.log('loading...');
+        return '';
     }
 
     if (!data) {

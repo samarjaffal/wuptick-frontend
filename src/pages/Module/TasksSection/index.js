@@ -14,36 +14,21 @@ import {
 import { DeleteModal } from '../ModuleModals';
 import PropTypes from 'prop-types';
 
-export const TasksSection = ({ lists, moduleId, url, taskId }) => {
+export const TasksSection = ({ lists, moduleId, taskId }) => {
     const { selectDropDown } = useDropdown();
-    const { currentTask, setCurrentTask } = useUser();
+    const { currentTask } = useUser();
     const {
         panelRef,
-        openTaskPanel,
         getListId,
-        getTaskFromLists,
         setLists,
-        setIsPanelOpen,
-        isPanelOpen,
+        handleOpenTaskPanel,
+        openTaskPanelFromURL,
     } = useTask();
 
     useEffect(() => {
         setLists(lists);
-        if (taskId && !isPanelOpen) {
-            let task = getTaskFromLists(lists, taskId);
-            handleOpenTaskPanel(task, true);
-        }
+        openTaskPanelFromURL(taskId, lists);
     }, [lists, moduleId]);
-
-    const handleOpenTaskPanel = useCallback((task, openFromReload = false) => {
-        setCurrentTask(task);
-        setIsPanelOpen(true);
-        openTaskPanel();
-        let taskURL = `${url}?task=${task._id}`;
-        if (!openFromReload) {
-            navigate(taskURL);
-        }
-    }, []);
 
     const showSelectedDropDown = () => {
         return (
@@ -71,4 +56,5 @@ export const TasksSection = ({ lists, moduleId, url, taskId }) => {
 TasksSection.propTypes = {
     lists: PropTypes.array,
     moduleId: PropTypes.string,
+    taskId: PropTypes.string,
 };
