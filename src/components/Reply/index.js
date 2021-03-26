@@ -26,8 +26,16 @@ export const Reply = ({
     updateComment,
     taskId,
 }) => {
-    const { generateProfileUrl, currentUser, currentProject } = useUser();
+    const {
+        generateProfileUrl,
+        currentUser,
+        currentProject,
+        currentModule,
+        generateTaskUrl,
+    } = useUser();
     const [isEditing, setEditing] = useState(false);
+
+    const url = generateTaskUrl(currentProject._id, currentModule._id, taskId);
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D, YYYY h:mm A');
@@ -57,6 +65,7 @@ export const Reply = ({
             comment: outputHtml,
             commentJson: outputDataStr,
             updated_at: new Date(),
+            url,
         };
         setEditing(false);
         await updateComment(input);
