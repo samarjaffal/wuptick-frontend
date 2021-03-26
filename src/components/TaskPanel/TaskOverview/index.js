@@ -115,7 +115,9 @@ export const TaskOverview = ({
                                         {parse(task.description)}
                                     </TaskDescription>
                                 ) : (
-                                    <NoTaskDescription>
+                                    <NoTaskDescription
+                                        onClick={() => toggleEditing()}
+                                    >
                                         Add a description to this task...
                                     </NoTaskDescription>
                                 )}
