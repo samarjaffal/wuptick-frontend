@@ -28,9 +28,8 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
         currentModule,
         currentTask,
         teamSelected,
+        generateTaskUrl,
     } = useUser();
-
-    const url = `project/${currentProject._id}/module/${currentModule._id}`;
 
     const randomColor = useCallback(() => {
         let tempColors = { ...Colors };
@@ -67,7 +66,11 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
                                 tag: item._id,
                             },
                             currentModule._id,
-                            url
+                            generateTaskUrl(
+                                currentProject._id,
+                                currentModule._id,
+                                currentTask._id
+                            )
                         );
                         closeDropDown();
                     }}

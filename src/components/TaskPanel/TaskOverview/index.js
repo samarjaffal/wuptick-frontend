@@ -7,6 +7,7 @@ import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
 import { FontIconButton } from '../../FontIconButton/index';
 import { Editor } from '../../Editor/index';
 import { TaskDescriptionStyle } from '../../../assets/css/TaskDescriptionStyle';
+import { useUser } from '../../../hooks/useUser';
 import { FlexCenter, Input } from '../../SharedComponents/styles';
 import { Colors } from '../../../assets/css/colors';
 import {
@@ -28,6 +29,7 @@ export const TaskOverview = ({
     currentProject,
 }) => {
     const [isEditing, setEditing] = useState(false);
+    const { generateTaskUrl } = useUser();
     let inputRef = useRef(null);
     let descriptionRef = useRef(null);
     let mentionsItems = currentProject.members
@@ -59,7 +61,7 @@ export const TaskOverview = ({
             descriptionJson: outputDataStr,
         };
         setEditing(false);
-        let url = `project/${currentProject._id}/module/${module._id}`;
+        let url = generateTaskUrl(currentProject._id, module._id, task._id);
         await doUpdateTask(task._id, input, module._id, url);
     };
 

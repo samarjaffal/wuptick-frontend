@@ -78,6 +78,11 @@ export const useUser = () => {
         return url;
     };
 
+    const generateTaskUrl = (projectId, moduleId, taskId) => {
+        const url = `project/${currentProject._id}/module/${currentModule._id}?task=${taskId}`;
+        return url;
+    };
+
     const generateModuleUrl = (projedId, moduleId) => {
         const url = `/project/${projedId}/module/${moduleId}`;
         return url;
@@ -148,6 +153,7 @@ export const useUser = () => {
         getAge,
         generateProfileUrl,
         generateProjectUrl,
+        generateTaskUrl,
         isFavoriteTask,
         goToProject,
         goToModule,
