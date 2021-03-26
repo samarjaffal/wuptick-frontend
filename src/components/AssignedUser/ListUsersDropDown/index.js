@@ -18,7 +18,18 @@ import {
 
 const RenderMemberList = ({ members, closeDropDown = null }) => {
     const { setOpen } = useDropdown();
-    const { currentTask } = useUser();
+    const {
+        currentTask,
+        currentProject,
+        currentModule,
+        generateTaskUrl,
+    } = useUser();
+
+    const url = generateTaskUrl(
+        currentProject._id,
+        currentModule._id,
+        currentTask._id
+    );
 
     const handleClose = async () => {
         if (closeDropDown) {
@@ -47,7 +58,11 @@ const RenderMemberList = ({ members, closeDropDown = null }) => {
                                 key={index}
                                 id="member-item"
                                 onClick={() => {
-                                    doAssignTask(currentTask._id, member._id);
+                                    doAssignTask(
+                                        currentTask._id,
+                                        member._id,
+                                        url
+                                    );
                                     handleClose();
                                 }}
                             >

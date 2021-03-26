@@ -14,11 +14,12 @@ export const AssignTaskMutation = ({ children }) => {
         },
     });
 
-    const doAssignTask = useCallback((taskId, userId) => {
+    const doAssignTask = useCallback((taskId, userId, url) => {
         assignTask({
             variables: {
                 taskId,
                 userId,
+                url,
             },
             refetchQueries: [
                 {
