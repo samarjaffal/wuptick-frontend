@@ -11,8 +11,20 @@ import { NewReplyContainer } from './styles';
 
 export const NewReply = ({ task, createComment }) => {
     let inputRef = useRef(null);
-    const { currentUser, currentProject } = useUser();
+    const {
+        currentUser,
+        currentProject,
+        currentModule,
+        generateTaskUrl,
+    } = useUser();
     const [isFocused, setFocus] = useState(false);
+
+    const url = generateTaskUrl(
+        currentProject._id,
+        currentModule._id,
+        task._id
+    );
+
     let mentionsItems = currentProject.members
         ? currentProject.members.map((member) => {
               return {
@@ -44,6 +56,7 @@ export const NewReply = ({ task, createComment }) => {
                 commentJson: outputDataStr,
                 created_at: new Date(),
             },
+            url,
         };
         setFocus(false);
         await createComment(input);
