@@ -111,6 +111,21 @@ export const useUser = () => {
         navigate(generateModuleUrl(project._id, module._id));
     }, []);
 
+    const projectExistInTeam = useCallback((team, projectId) => {
+        const { projects } = team;
+        return projects.find((project) => project._id == projectId);
+    }, []);
+
+    const getTeamByProjectId = useCallback((teams, projectId) => {
+        if (teams.length > 0) {
+            const team = teams.find((team) =>
+                team.projects.some((project) => project._id == projectId)
+            );
+
+            return team || {};
+        }
+    }, []);
+
     const getMembersFromTeams = () => {
         if (!('teams' in currentUser)) return [];
 
@@ -158,5 +173,7 @@ export const useUser = () => {
         goToProject,
         goToModule,
         getMembersFromTeams,
+        getTeamByProjectId,
+        projectExistInTeam,
     };
 };

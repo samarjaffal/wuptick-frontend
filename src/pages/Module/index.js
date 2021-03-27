@@ -34,23 +34,32 @@ export const Module = ({ projectId, moduleId, location }) => {
     const path = useLocation();
     const currentURL = path.pathname;
     const { tab, task } = queryString.parse(location.search);
-    const { teamSelected, setCurrentProject } = useUser();
+    const {
+        setCurrentProject,
+        currentUser,
+        setTeam,
+        getTeamByProjectId,
+        projectExistInTeam,
+    } = useUser();
 
     let newList = '';
     const callBackNewList = (value) => {
         newList = value;
     };
 
+    const initModule = () => {
+        if (Object.keys(currentUser).length == 0) return;
+
+        let team = getTeamByProjectId(currentUser.teams, projectId);
+        if (team) setTeam(team);
+
+        let project = projectExistInTeam(team, projectId);
+        if (project) setCurrentProject(project);
+    };
+
     useEffect(() => {
-        if (Object.keys(teamSelected).length > 0) {
-            const project = teamSelected.projects.find(
-                (project) => project._id == projectId
-            );
-            if (project) {
-                setCurrentProject(project);
-            }
-        }
-    }, [teamSelected.projects]);
+        initModule();
+    }, [currentUser.teams]);
 
     return (
         <LoggedLayout>
@@ -158,4 +167,8 @@ export const Module = ({ projectId, moduleId, location }) => {
     );
 };
 
-Module.propTypes = {};
+Module.propTypes = {
+    projectId: PropTypes.string,
+    moduleId: PropTypes.string,
+    location: PropTypes.object,
+};
