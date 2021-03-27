@@ -17,9 +17,9 @@ export const useRefreshToken = () => {
         })
             .then(async (data) => {
                 const { token } = await data.json();
-                setLoading(false);
                 activateAuth(token);
                 setRefreshToken(true);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log('error refresh token');

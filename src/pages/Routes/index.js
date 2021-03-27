@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Router, navigate, Redirect } from '@reach/router';
 import { Auth } from '../Auth/index';
 import { Home } from '../Home/index';
@@ -15,6 +15,8 @@ import { config } from '../../../config/index';
 
 const DefaultRoutes = () => {
     const { isLogged, profileURL } = useUser();
+    useEffect(() => {}, [isLogged]);
+
     return isLogged ? (
         <Router>
             <PrivateRoute path="/" component={Home} />
