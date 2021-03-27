@@ -23,7 +23,12 @@ export const useFormAlert = (data, type) => {
                 if (attempts <= 1) {
                     navigate('/setup-profile');
                 } else {
-                    navigate('/');
+                    let redirecTo = localStorage.getItem(
+                        'redirect_after_login'
+                    );
+                    let url = redirecTo !== null ? redirecTo : '/';
+                    navigate(url);
+                    localStorage.removeItem('redirect_after_login');
                 }
             }
         }

@@ -49,7 +49,7 @@ export const Module = ({ projectId, moduleId, location }) => {
 
     const initModule = () => {
         if (Object.keys(currentUser).length == 0) return;
-
+        if (!('teams' in currentUser)) return;
         let team = getTeamByProjectId(currentUser.teams, projectId);
         if (team) setTeam(team);
 

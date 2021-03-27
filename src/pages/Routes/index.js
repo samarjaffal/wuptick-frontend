@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Router, navigate } from '@reach/router';
+import { Router, navigate, Redirect } from '@reach/router';
 import { Auth } from '../Auth/index';
 import { Home } from '../Home/index';
 import { TestPage } from '../TestPage';
@@ -36,10 +36,16 @@ const DefaultRoutes = () => {
             <PublicRoute component={Auth} path="/" type="login" />
             <PublicRoute component={Auth} path="login" type="login" />
             <PublicRoute component={Auth} path="register" type="register" />
-            <NotFound default />
+            <RedirectTo default />
             <Oops path="oops" />
         </Router>
     );
+};
+
+export const RedirectTo = ({ location }) => {
+    const redirectTo = `${location.pathname}${location.search}`;
+    localStorage.setItem('redirect_after_login', redirectTo);
+    return <Redirect from="*" to="/login" noThrow />;
 };
 
 export const NotFound = ({ location }) => {
