@@ -8,10 +8,10 @@ export const LogoutMutation = ({ children }) => {
     const { disableAuth } = useUser();
     const [logout, { error, loading, client }] = useMutation(gqlLogout, {
         onCompleted: () => {
-            console.log('logout');
+            localStorage.setItem('is_logout', true);
+            navigate('/login');
             disableAuth();
             client.resetStore();
-            navigate('/login');
         },
     });
     const doLogout = () => {

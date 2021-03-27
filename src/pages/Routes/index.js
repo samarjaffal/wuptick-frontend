@@ -46,7 +46,11 @@ const DefaultRoutes = () => {
 
 export const RedirectTo = ({ location }) => {
     const redirectTo = `${location.pathname}${location.search}`;
-    localStorage.setItem('redirect_after_login', redirectTo);
+    const isLogout = localStorage.getItem('is_logout');
+    if (!isLogout) localStorage.setItem('redirect_after_login', redirectTo);
+
+    localStorage.removeItem('is_logout');
+
     return <Redirect from="*" to="/login" noThrow />;
 };
 
