@@ -28,6 +28,7 @@ export const SidebarAvatar = () => {
                             size={25}
                             src={avatar}
                             margin="0 1em"
+                            hide={false}
                             onClicked={() => setOpen(!open)}
                         />
                     )}
