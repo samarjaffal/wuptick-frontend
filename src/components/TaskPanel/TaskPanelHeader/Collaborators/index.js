@@ -9,12 +9,14 @@ import {
     UserIconContainer,
     UserIconSVG,
 } from '../../../SharedComponents/styles';
+import { Plus, CollaboratorsListContainer } from './styles';
 
 export const Collaborators = ({ task }) => {
     const elementRef = useRef();
     const dropdownRef = useRef();
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
+    const SIZE = 3;
 
     useEffect(() => {}, [task.collaborators]);
 
@@ -38,6 +40,20 @@ export const Collaborators = ({ task }) => {
         closeDropDown();
     };
 
+    const CollaboratorsList = () => {
+        return task.collaborators.slice(0, SIZE).map((member, index) => (
+            <div
+                key={index}
+                style={{
+                    margin: '0 4px',
+                    display: 'flex',
+                }}
+            >
+                <Avatar size={25} src={member.avatar} hide={false} />
+            </div>
+        ));
+    };
+
     const renderItems = () => {
         return task.collaborators.length == 0 ? (
             <div
@@ -55,28 +71,16 @@ export const Collaborators = ({ task }) => {
                 </UserIconContainer>
             </div>
         ) : (
-            task.collaborators.slice(0, size).map((member, index) => (
-                <div
-                    key={index}
-                    style={{
-                        margin: '0 4px',
-                        display: 'flex',
-                    }}
-                >
-                    <Avatar size={25} src={member.avatar} hide={false} />
-                </div>
-            ))
+            <CollaboratorsListContainer>
+                <CollaboratorsList />
+                <Plus icon="plus" />
+            </CollaboratorsListContainer>
         );
     };
 
-    const size = 3;
     return (
         <>
-            <div
-                ref={elementRef}
-                onClick={() => openDropdown()}
-                style={{ display: 'flex' }}
-            >
+            <div ref={elementRef} onClick={() => openDropdown()}>
                 {Object.keys(task).length > 0 && renderItems()}
             </div>
             {renderDropDown &&

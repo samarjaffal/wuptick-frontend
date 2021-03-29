@@ -69,10 +69,10 @@ export const TaskOverview = ({
         <TaskContainer>
             <TaskDescriptionStyle />
             <div className="AvatarContainer">
-                <Avatar size={30} src={task.owner.avatar} />
+                <Avatar size={30} src={task.owner.avatar} hide={false} />
             </div>
             <TaskDetails>
-                <FlexCenter>
+                <FlexCenter customProps="@media(max-width: 320px) {align-items:normal;}">
                     {isEditing ? (
                         <Input
                             type="text"

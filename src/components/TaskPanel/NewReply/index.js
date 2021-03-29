@@ -69,6 +69,7 @@ export const NewReply = ({ task, createComment }) => {
                     <Avatar
                         size={30}
                         src={avatar}
+                        hide={false}
                         margin={isFocused ? '20px 0 0 0' : '0'}
                     />
                 )}

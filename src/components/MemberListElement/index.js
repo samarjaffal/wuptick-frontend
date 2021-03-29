@@ -11,7 +11,7 @@ import {
 
 export const MemberListElement = ({ member, customProps }) => (
     <FlexCenter customProps={customProps}>
-        <Avatar size={30} src={member.avatar} />
+        <Avatar size={30} src={member.avatar} hide={false} />
         <Div customProps="margin-left: 0.5em;">
             <MemberName className="memberName">
                 {member.name} {member.last_name}

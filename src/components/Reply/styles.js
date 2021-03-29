@@ -18,6 +18,9 @@ export const ReplyContainer = styled.div`
     border: 1px solid ${Colors.hover};
     border-radius: ${borderRadius};
     width: 92%;
+    @media (max-width: 425px) {
+        width: 100%;
+    }
 `;
 
 export const HeaderContainer = styled.div`

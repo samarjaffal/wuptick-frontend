@@ -21,4 +21,8 @@ export const CollaboratorsTitle = styled.span`
     ${description};
     color: ${Colors.gray};
     margin-right: 0.5em;
+    display: block;
+    @media (max-width: 425px) {
+        display: none;
+    }
 `;

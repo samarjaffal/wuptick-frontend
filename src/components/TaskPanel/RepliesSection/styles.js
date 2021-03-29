@@ -27,3 +27,12 @@ export const NoComments = styled.p`
     font-size: 14px;
     margin-bottom: 0.5em;
 `;
+
+export const Container = styled.div`
+    padding-left: 40px;
+    position: relative;
+
+    @media (max-width: 425px) {
+        padding-left: 0;
+    }
+`;

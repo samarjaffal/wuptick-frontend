@@ -6,7 +6,7 @@ import { NewReply } from '../NewReply/index';
 import { GetCommentsForTaskQuery } from '../../../requests/Comment/GetCommentsForTaskQuery';
 import { EditCommentMutation } from '../../../requests/Comment/EditCommentMutation';
 import { CreateCommentMutation } from '../../../requests/Comment/CreateCommentMutation';
-import { RepliesDiv, ReplySectionTitle, NoComments } from './styles';
+import { RepliesDiv, ReplySectionTitle, NoComments, Container } from './styles';
 
 export const RepliesSection = ({ task }) => {
     let dropdownRef = useRef(null);
@@ -14,10 +14,7 @@ export const RepliesSection = ({ task }) => {
     return (
         <div className="RepliesSection" style={{ marginTop: '25px' }}>
             {/* <Hr /> */}
-            <div
-                id="RepliesContainer"
-                style={{ paddingLeft: '40px', position: 'relative' }}
-            >
+            <Container id="RepliesContainer">
                 <RepliesDiv>
                     <FlexCenter customProps="margin-top:1em;">
                         {/* <Icon width="25px" height="25px" viewBox="0 0 25 25" /> */}
@@ -68,7 +65,7 @@ export const RepliesSection = ({ task }) => {
                     }}
                 </GetCommentsForTaskQuery>
                 <div id="dropdownRender"></div>
-            </div>
+            </Container>
         </div>
     );
 };

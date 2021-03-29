@@ -80,6 +80,7 @@ export const Reply = ({
                         <Avatar
                             size={25}
                             src={reply.owner.avatar}
+                            hide={false}
                             onClicked={() =>
                                 navigate(
                                     generateProfileUrl(

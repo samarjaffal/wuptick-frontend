@@ -41,17 +41,14 @@ export const ModalBox = styled.div`
     /*     overflow-y: auto;
     overflow-x: hidden; */
     @media (max-width: 768px) {
-        width: 60%;
+        width: 90%;
     }
 `;
 
 export const Container = styled.div`
     height: 100%;
-    @media (max-width: 425px) {
-        max-height: 445px;
-    }
-    @media (max-width: 350px) {
-        max-height: 400px;
+    @media (max-width: 768px) {
+        height: auto;
     }
 `;
 
