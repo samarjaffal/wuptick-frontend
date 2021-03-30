@@ -20,7 +20,7 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
         setItems,
         setParams,
     } = useFilter();
-    const { open, position } = useDropdown();
+    const { open, position, width } = useDropdown();
     const [tags, setTags] = useState([]);
 
     const {
@@ -112,7 +112,7 @@ export const TagsDropdown = ({ dropdownRef, tags: _tags, closeDropDown }) => {
             ref={dropdownRef}
             open={open}
             transform="0"
-            width="200px"
+            width={`${width}px`}
             top={`${Math.round(position.top + 30)}px`}
             left={`${position.left}px`}
             bg={Colors.whitePrimary}
