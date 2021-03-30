@@ -1,5 +1,7 @@
 import { useContext, useCallback } from 'react';
 import Context from '../context/DropdownContext';
+import { isElementVisible } from '../shared/viewport';
+
 export const useDropdown = () => {
     const {
         open,
@@ -14,6 +16,8 @@ export const useDropdown = () => {
         position,
         selectDropDown,
         setSelectDropDown,
+        width,
+        setWidth,
     } = useContext(Context);
 
     const calcHeight = useCallback((el) => {
@@ -25,22 +29,53 @@ export const useDropdown = () => {
         currentElemRef.current = ref.current;
     };
 
-    const setPositionDropDown = (elementRef, parentElId = null) => {
-        const elemRect = elementRef.current.getBoundingClientRect();
-        if (!parentElId) {
+    const generateBoundings = (parentId, element) => {
+        let position = {};
+
+        //if element doesn't have parent
+        if (!parentId) {
             const bodyRect = document.body.getBoundingClientRect();
-            const offset = elemRect.top - bodyRect.top;
-            const position = { top: offset, left: elemRect.left };
-            setPosition(position);
+            const offset = element.top - bodyRect.top;
+            position = {
+                top: offset,
+                left: element.left,
+                right: element.right,
+                bottom: element.bottom,
+            };
+            //if element has a parent
         } else {
-            const parentPos = document
-                .getElementById(parentElId)
+            const parentElem = document
+                .getElementById(parentId)
                 .getBoundingClientRect();
-            const offset = elemRect.top - parentPos.top;
-            const left = elemRect.left - parentPos.left;
-            const position = { top: offset, left: left };
-            setPosition(position);
+            const offset = element.top - parentElem.top;
+            const left = element.left - parentElem.left;
+            position = { top: offset, left: left };
         }
+        return position;
+    };
+
+    const dropdownIsOutside = (position, width) => {
+        //if no width return
+        if (!width) return;
+        //check if element is completely visible
+        const isVisible = isElementVisible({ ...position, width });
+        //if is not visible change ? change left position : keep default left position
+        position.left = !isVisible ? window.innerWidth - width : position.left;
+    };
+
+    const setPositionDropDown = (
+        elementRef,
+        parentElId = null,
+        width = null
+    ) => {
+        //get element bounding
+        const element = elementRef.current.getBoundingClientRect();
+        //get position of the element depending if it has a parent.
+        const position = generateBoundings(parentElId, element);
+        //check if dropdown is outside viewport
+        dropdownIsOutside(position, width);
+        //set dropdown position
+        setPosition(position);
     };
 
     const openDropCallBack = (value) => {
@@ -64,11 +99,18 @@ export const useDropdown = () => {
     );
 
     const handleDropDown = useCallback(
-        (value = null, dropdownRef, triggerRef, parentElId = null) => {
+        (
+            value = null,
+            dropdownRef,
+            triggerRef,
+            parentElId = null,
+            width = null
+        ) => {
             if (value) {
                 dropdownRef.current.openDropdown();
                 setRef(triggerRef);
-                setPositionDropDown(triggerRef, parentElId);
+                if (width) setWidth(width);
+                setPositionDropDown(triggerRef, parentElId, width);
             } else {
                 dropdownRef.current.closeDropdown();
             }
@@ -94,5 +136,7 @@ export const useDropdown = () => {
         setSelectedDropDownCB,
         handleDropDownOutsideClick,
         handleDropDown,
+        width,
+        setWidth,
     };
 };

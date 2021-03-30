@@ -16,6 +16,7 @@ export const TagButton = ({ tag, tags }) => {
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
     const eleRef = useRef();
     const dropdownRef = useRef();
+    const DROPDOWN_SIZE = 200;
 
     useEffect(() => {
         handleData();
@@ -38,7 +39,7 @@ export const TagButton = ({ tag, tags }) => {
 
     const openDropdown = async () => {
         await initDropDown();
-        handleDropDown(true, dropdownRef, eleRef);
+        handleDropDown(true, dropdownRef, eleRef, null, DROPDOWN_SIZE);
     };
 
     const closeDropDown = () => {
