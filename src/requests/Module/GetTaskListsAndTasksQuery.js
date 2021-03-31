@@ -17,10 +17,10 @@ export const GetTaskListsAndTasksQuery = ({ children, moduleId }) => {
             setLists([...data.getModule.task_lists]);
         },
     });
-    if (loading || !data) {
+    /*    if (loading || !data) {
         return 'loading...';
     }
-
+ */
     if (error) {
         console.log(error, 'error');
     }

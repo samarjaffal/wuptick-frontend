@@ -12,19 +12,15 @@ import { AddNew } from '../../components/AddNew/index';
 /* import { Sidebar } from '../../components/Sidebar2/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery'; */
+import { ModuleTopBar } from './ModuleTopBar';
+import { SkeletonModule } from '../../components/Loaders/SkeletonModule/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
-
 import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
 import { useUser } from '../../hooks/useUser';
 
 import {
     Container,
-    TopContainer,
-    RightItemsContainer,
-    Title,
-    Filter,
-    InputSearch,
     ModuleContainer,
     SidebarContainer,
     TitleContainer,
@@ -86,26 +82,16 @@ export const Module = ({ projectId, moduleId, location }) => {
                     <Context.Consumer>
                         {() => (
                             <GetTaskListsAndTasksQuery moduleId={moduleId}>
-                                {({ data }) => {
+                                {({ data, loading }) => {
+                                    if (loading) {
+                                        return <SkeletonModule />;
+                                    }
+
                                     const module = data.getModule;
 
                                     return (
                                         <ModuleContainer>
-                                            <TopContainer>
-                                                <TitleContainer>
-                                                    <Title>{module.name}</Title>
-                                                </TitleContainer>
-
-                                                <RightItemsContainer>
-                                                    <div>
-                                                        <Filter>Filter</Filter>
-                                                    </div>
-                                                    <InputSearch
-                                                        type="text"
-                                                        placeholder="Search"
-                                                    />
-                                                </RightItemsContainer>
-                                            </TopContainer>
+                                            <ModuleTopBar module={module} />
 
                                             <div className="TabsContainer">
                                                 <ModuleTabs
