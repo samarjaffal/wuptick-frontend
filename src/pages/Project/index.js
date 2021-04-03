@@ -17,6 +17,8 @@ import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
 import { GetProjectTopics } from '../../requests/Topic/GetProjectTopics';
 import { ListFiles } from '../../components/File/ListFiles/index';
 import { DropdownContextProvider } from '../../context/DropdownContext';
+import { SkeletonProject } from '../../components/Loaders/SkeletonProject/index';
+import { SkeletonModulesList } from '../../components/Loaders/SkeletonModulesList/index';
 import { FlexCenter } from '../../components/SharedComponents/styles';
 import {
     Container,
@@ -71,14 +73,20 @@ export const Project = ({ id, location }) => {
         return (
             (currentTab == undefined && (
                 <GetProjectModules projectId={id}>
-                    {({ data }) => (
-                        <DropdownContextProvider>
-                            <ListModules
-                                modules={data.getProjectModules}
-                                projectId={id}
-                            />
-                        </DropdownContextProvider>
-                    )}
+                    {({ data, loading }) => {
+                        if (loading) {
+                            return <SkeletonModulesList quantity={5} />;
+                        }
+
+                        return (
+                            <DropdownContextProvider>
+                                <ListModules
+                                    modules={data.getProjectModules}
+                                    projectId={id}
+                                />
+                            </DropdownContextProvider>
+                        );
+                    }}
                 </GetProjectModules>
             )) ||
             (currentTab == 'topics' && (
@@ -99,7 +107,10 @@ export const Project = ({ id, location }) => {
                 <title>Wuptick - Project</title>
             </Helmet>
             <GetProjectQuery projectId={id}>
-                {({ data }) => {
+                {({ data, loading }) => {
+                    if (loading || !data) {
+                        return <SkeletonProject />;
+                    }
                     const { getProject: project } = data;
                     const members = project.members.map(
                         (member) => member.user

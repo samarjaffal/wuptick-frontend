@@ -12,9 +12,9 @@ export const GetProjectQuery = ({ children, projectId }) => {
             setCurrentProject(data.getProject);
         },
     });
-    if (loading || !data) {
-        return 'loading...';
-    }
+    /*     if (loading || !data) {
+        return 'loading jajaj...';
+    } */
 
     if (error) {
         console.log(error, 'error');

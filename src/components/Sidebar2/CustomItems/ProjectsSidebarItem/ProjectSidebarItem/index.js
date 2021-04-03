@@ -40,7 +40,10 @@ export const ProjectSidebarItem = ({ team, project }) => {
                     show={show ? 'block' : 'none'}
                 >
                     <GetProjectModules projectId={project._id}>
-                        {({ data }) => {
+                        {({ data, loading }) => {
+                            if (loading) {
+                                return 'loading...';
+                            }
                             const modules = data.getProjectModules;
                             return modules.map((module, index) => (
                                 <li key={index}>

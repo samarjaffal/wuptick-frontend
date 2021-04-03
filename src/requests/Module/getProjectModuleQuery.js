@@ -10,9 +10,9 @@ export const GetProjectModules = ({ children, projectId }) => {
             /*  console.log(data, 'data getProjectModules'); */
         },
     });
-    if (loading || !data) {
+    /*   if (loading || !data) {
         return 'loading...';
-    }
+    } */
 
     if (error) {
         console.log(error, 'error');

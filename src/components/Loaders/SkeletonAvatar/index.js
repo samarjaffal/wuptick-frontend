@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-export const SkeletonAvatar = () => {
-    return <Skeleton circle={true} width={25} height={25} />;
+export const SkeletonAvatar = ({ size = 25 }) => {
+    return <Skeleton circle={true} width={size} height={size} />;
 };
