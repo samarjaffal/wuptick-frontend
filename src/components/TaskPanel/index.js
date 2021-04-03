@@ -4,6 +4,7 @@ import { Panel } from '../Panel/index';
 import { TaskPanelHeader } from './TaskPanelHeader';
 import { TaskOverview } from './TaskOverview';
 import { RepliesSection } from './RepliesSection/index';
+import { SkeletonTaskDescription } from '../Loaders/SkeletonTaskDescription/index';
 import { useUser } from '../../hooks/useUser';
 import { useTask } from '../../hooks/useTask';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
@@ -38,8 +39,12 @@ const MemoTaskPanel = ({ panelRef }) => {
         >
             <Container>
                 <GetTaskQuery taskId={currentTask._id}>
-                    {({ data }) => {
+                    {({ data, loading }) => {
+                        if (loading) {
+                            return <SkeletonTaskDescription />;
+                        }
                         const task = data.getTask;
+
                         return (
                             <UpdateTaskMutation>
                                 {({ doUpdateTask }) => (

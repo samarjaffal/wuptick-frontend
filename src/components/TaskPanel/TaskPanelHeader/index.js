@@ -65,7 +65,10 @@ export const TaskPanelHeader = ({ task, panelRef, closePanel }) => {
             <FlexCenter id="Collaborators">
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>
                 <GetTaskQuery taskId={task._id}>
-                    {({ data }) => {
+                    {({ data, loading }) => {
+                        if (loading || !data) {
+                            return 'loading';
+                        }
                         const task = data.getTask;
                         return <Collaborators task={task} />;
                     }}

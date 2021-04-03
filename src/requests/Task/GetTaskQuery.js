@@ -13,14 +13,6 @@ export const GetTaskQuery = ({ children, taskId }) => {
         },
     });
 
-    if (loading) {
-        return '';
-    }
-
-    if (!data) {
-        return '';
-    }
-
     if (error) {
         console.log(error, 'error');
     }
