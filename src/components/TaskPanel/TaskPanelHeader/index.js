@@ -4,6 +4,7 @@ import { Colors } from '../../../assets/css/colors';
 import { FlexCenter } from '../../SharedComponents/styles';
 import { Collaborators } from './Collaborators';
 import { HeaderTaskCheck } from './HeaderTaskCheck/index';
+import { SkeletonMembers } from '../../Loaders/SkeletonMembers/index';
 import { HeaderDeleteButton } from './HeaderDeleteButton';
 import { HeaderFavoriteButton } from './HeaderFavoriteButton';
 import { GetTaskQuery } from '../../../requests/Task/GetTaskQuery';
@@ -66,8 +67,8 @@ export const TaskPanelHeader = ({ task, panelRef, closePanel }) => {
                 <CollaboratorsTitle>Colaborators</CollaboratorsTitle>
                 <GetTaskQuery taskId={task._id}>
                     {({ data, loading }) => {
-                        if (loading || !data) {
-                            return 'loading';
+                        if (loading) {
+                            return <SkeletonMembers quantity={2} />;
                         }
                         const task = data.getTask;
                         return <Collaborators task={task} />;

@@ -17,17 +17,17 @@ export const SkeletonTaskDescription = () => {
                     <Skeleton circle={true} width={30} height={30} />
                 </div>
                 <DescriptionContainer>
-                    <SkeletonStyled w={380} />
-                    <SkeletonStyled w={600} height={120} />
+                    <SkeletonStyled w="50%" />
+                    <SkeletonStyled w="100%" height={120} />
                     <ButtonsContainer>
                         <div style={{ marginRight: '12px' }}>
-                            <SkeletonStyled w={36} height={36} />
+                            <SkeletonStyled w="36px" height={36} />
                         </div>
                         <div style={{ marginRight: '12px' }}>
-                            <SkeletonStyled w={36} height={36} />
+                            <SkeletonStyled w="36px" height={36} />
                         </div>
                         <div style={{ marginRight: '12px' }}>
-                            <SkeletonStyled w={36} height={36} />
+                            <SkeletonStyled w="36px" height={36} />
                         </div>
                     </ButtonsContainer>
                 </DescriptionContainer>
