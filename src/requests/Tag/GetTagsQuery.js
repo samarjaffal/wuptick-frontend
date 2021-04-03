@@ -11,9 +11,6 @@ export const GetTagsQuery = ({ children }) => {
             console.log(data, 'data GetTagsQuery');
         },
     });
-    if (loading || !data) {
-        return 'loading...';
-    }
 
     if (error) {
         console.log(error, 'error');
