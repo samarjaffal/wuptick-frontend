@@ -4,6 +4,7 @@ import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
 import { ProjectsSidebarItem } from './CustomItems/ProjectsSidebarItem';
 import { Me } from '../Me/index';
+import { SkeletonProjectsSidebar } from '../Loaders/SkeletonProjectsSidebar/index';
 import { useUser } from '../../hooks/useUser';
 import { useSidebar } from '../../hooks/useSidebar';
 import { Colors } from '../../assets/css/colors';
@@ -33,7 +34,7 @@ export const Sidebar = () => {
                 />
 
                 <Hr />
-                <Me loaderProps={{ qty: 1 }}>
+                <Me loaderProps={{ qty: 1 }} loader={SkeletonProjectsSidebar}>
                     {({ teams }) => (
                         <ProjectsSidebarItem
                             profileURL={profileURL}
