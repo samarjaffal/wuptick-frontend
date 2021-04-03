@@ -1,6 +1,8 @@
+import React from 'react';
 import { useQuery } from 'react-apollo';
-import { gqlGetCommentsForTask } from '../graphql/gqlGetCommentsForTask';
 import PropTypes from 'prop-types';
+import { gqlGetCommentsForTask } from '../graphql/gqlGetCommentsForTask';
+import { SkeletonReplies } from '../../components/Loaders/SkeletonReplies/index';
 
 export const GetCommentsForTaskQuery = ({ children, taskId }) => {
     const { error, loading, data } = useQuery(gqlGetCommentsForTask, {
@@ -11,7 +13,7 @@ export const GetCommentsForTaskQuery = ({ children, taskId }) => {
         },
     });
     if (loading || !data) {
-        return 'loading...';
+        return <SkeletonReplies />;
     }
 
     if (error) {
