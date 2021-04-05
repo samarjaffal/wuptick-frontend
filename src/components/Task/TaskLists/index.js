@@ -9,6 +9,9 @@ export const TaskLists = ({ lists = [], moduleId, openTaskPanel }) => {
     let _columns = lists;
     const prevModuleRef = useRef();
 
+    let dropdownRef = useRef(null);
+    const itemsRef = useRef([]);
+
     useEffect(() => {
         prevModuleRef.current = moduleId;
     }, [moduleId]);
@@ -62,6 +65,8 @@ export const TaskLists = ({ lists = [], moduleId, openTaskPanel }) => {
                                             placeholderProps={placeholderProps}
                                             moduleId={moduleId}
                                             openTaskPanel={openTaskPanel}
+                                            itemsRef={itemsRef}
+                                            dropdownRef={dropdownRef}
                                         />
                                     ))}
                                     {provided.placeholder}

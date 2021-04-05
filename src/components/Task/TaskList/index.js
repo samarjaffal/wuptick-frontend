@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { useUser } from '../../../hooks/useUser';
@@ -27,8 +27,16 @@ const MemoTaskList = ({
     moduleId,
     placeholderProps,
     openTaskPanel,
+    itemsRef,
+    dropdownRef,
 }) => {
+    const [isEditing, setEditing] = useState(false);
     let newTask = {};
+
+    const toggleEditing = (index, value) => {
+        itemsRef.current[index].setEditing(value);
+    };
+
     const callBackNewTask = (value) => {
         newTask.name = value;
     };
@@ -43,7 +51,11 @@ const MemoTaskList = ({
                     ref={provided.innerRef}
                     isDragging={snapshot.isDragging}
                 >
-                    <TaskListHeader>
+                    <TaskListHeader
+                        ref={(el) =>
+                            (itemsRef.current[columnKey] = { el, setEditing })
+                        }
+                    >
                         <FlexCenter>
                             <TaskListTitle
                                 isDragging={snapshot.isDragging}
@@ -52,7 +64,11 @@ const MemoTaskList = ({
                                 {list.name}
                             </TaskListTitle>
                             <OptionButtonContainer>
-                                <OptionsButtonList list={list} />
+                                <OptionsButtonList
+                                    list={list}
+                                    dropdownRef={dropdownRef}
+                                    index={columnKey}
+                                />
                             </OptionButtonContainer>
                         </FlexCenter>
 
@@ -135,6 +151,8 @@ MemoTaskList.propTypes = {
     placeholderProps: PropTypes.object,
     moduleId: PropTypes.string,
     openTaskPanel: PropTypes.func,
+    itemsRef: PropTypes.object,
+    dropdownRef: PropTypes.any,
 };
 
 function areEqual(prevProps, nextProps) {

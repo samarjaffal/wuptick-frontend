@@ -1,34 +1,66 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import ReactDom from 'react-dom';
 import { OptionsButton } from '../../OptionsButton/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 import { useTask } from '../../../hooks/useTask';
+import { TaskListDropDown } from '../TaskListDropDown/index';
+import { OutsideClick } from '../../OutsideClick/index';
 import PropTypes from 'prop-types';
 
-export const OptionsButtonList = ({ list }) => {
-    const {
-        setRef,
-        setPositionDropDown,
-        openDropCallBack,
-        setSelectedDropDownCB,
-    } = useDropdown();
-    const { setElemType, setCurrentList } = useTask();
+export const OptionsButtonList = ({ list, dropdownRef, index }) => {
+    const [renderDropDown, setRenderDropdown] = useState(false);
+    const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
+    const { setCurrentList, openDeleteModal, setElemType } = useTask();
+
     let optionsRef = useRef();
 
-    const handleDropDown = (value = null) => {
-        value = value == null ? true : value;
-        setSelectedDropDownCB('list');
-        openDropCallBack(value);
-        if (value) {
-            setRef(optionsRef);
-            setPositionDropDown(optionsRef);
-            setElemType('list');
-            setCurrentList(list);
-        }
+    const initDropDown = () => {
+        document.getElementById('dropwdown-app').innerHTML = '';
+        setRenderDropdown(true);
     };
 
-    return <OptionsButton doFunc={handleDropDown} elemRef={optionsRef} />;
+    const openDropdown = async () => {
+        await initDropDown();
+        handleDropDown(true, dropdownRef, optionsRef);
+        setCurrentList(list);
+        setElemType('list');
+    };
+
+    const closeDropDown = () => {
+        handleDropDownOutsideClick(false, dropdownRef);
+        setRenderDropdown(false);
+    };
+
+    const handleOutsideClick = () => {
+        closeDropDown();
+    };
+
+    const deleteList = () => {
+        if (open) closeDropDown();
+        openDeleteModal();
+    };
+
+    return (
+        <>
+            <OptionsButton doFunc={openDropdown} elemRef={optionsRef} />
+            {renderDropDown &&
+                ReactDom.createPortal(
+                    <OutsideClick setLocalDropDownState={handleOutsideClick}>
+                        <TaskListDropDown
+                            dropdownRef={dropdownRef}
+                            closeDropDown={closeDropDown}
+                            index={index}
+                            deleteList={deleteList}
+                        />
+                    </OutsideClick>,
+                    document.getElementById('dropwdown-app')
+                )}
+        </>
+    );
 };
 
 OptionsButtonList.propTypes = {
     list: PropTypes.object,
+    dropdownRef: PropTypes.any,
+    index: PropTypes.number,
 };
