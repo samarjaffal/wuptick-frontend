@@ -7,7 +7,7 @@ import { TaskListDropDown } from '../TaskListDropDown/index';
 import { OutsideClick } from '../../OutsideClick/index';
 import PropTypes from 'prop-types';
 
-export const OptionsButtonList = ({ list, dropdownRef, index }) => {
+export const OptionsButtonList = ({ list, dropdownRef, index, editList }) => {
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
     const { setCurrentList, openDeleteModal, setElemType } = useTask();
@@ -51,6 +51,7 @@ export const OptionsButtonList = ({ list, dropdownRef, index }) => {
                             closeDropDown={closeDropDown}
                             index={index}
                             deleteList={deleteList}
+                            editList={editList}
                         />
                     </OutsideClick>,
                     document.getElementById('dropwdown-app')

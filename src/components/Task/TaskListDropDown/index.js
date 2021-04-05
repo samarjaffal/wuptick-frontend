@@ -6,7 +6,13 @@ import { DropdownMenu } from '../../DropdownMenu/index';
 import { DropdownItem } from '../../DropdownItem/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 
-export const TaskListDropDown = ({ dropdownRef, deleteList }) => {
+export const TaskListDropDown = ({
+    dropdownRef,
+    deleteList,
+    editList,
+    index,
+    closeDropDown,
+}) => {
     const { open, position } = useDropdown();
 
     return (
@@ -19,6 +25,15 @@ export const TaskListDropDown = ({ dropdownRef, deleteList }) => {
             left={`${position.left}px`}
         >
             <DropdownMenu menu="main" classMenu="menu-primary">
+                <DropdownItem
+                    leftIcon={<FontAwesomeIcon icon="edit" />}
+                    onClicked={() => {
+                        closeDropDown();
+                        editList(index, true);
+                    }}
+                >
+                    Edit
+                </DropdownItem>
                 <DropdownItem
                     leftIcon={<FontAwesomeIcon icon="trash-alt" />}
                     onClicked={() => deleteList()}
@@ -33,4 +48,7 @@ export const TaskListDropDown = ({ dropdownRef, deleteList }) => {
 TaskListDropDown.propTypes = {
     dropdownRef: PropTypes.any,
     deleteList: PropTypes.func,
+    editList: PropTypes.func,
+    closeDropDown: PropTypes.func,
+    index: PropTypes.number,
 };

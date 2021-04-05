@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { useUser } from '../../../hooks/useUser';
@@ -6,7 +6,7 @@ import { TaskListItems } from '../TaskListItems';
 import { OptionsButtonList } from '../OptionsButtonList/index';
 import { CreateTaskMutation } from '../../../requests/Task/CreateTaskMutation';
 import { AddNew } from '../../AddNew/index';
-import { FlexCenter } from '../../SharedComponents/styles';
+import { FlexCenter, Input } from '../../SharedComponents/styles';
 import {
     TaskList as TaskListStyled,
     TaskListHeader,
@@ -29,9 +29,11 @@ const MemoTaskList = ({
     openTaskPanel,
     itemsRef,
     dropdownRef,
+    doEditList,
 }) => {
     const [isEditing, setEditing] = useState(false);
     let newTask = {};
+    const inputRef = useRef(null);
 
     const toggleEditing = (index, value) => {
         itemsRef.current[index].setEditing(value);
@@ -43,6 +45,41 @@ const MemoTaskList = ({
 
     const isFirstColumn = () => Boolean(columnKey == 0);
 
+    const handleKeys = useCallback(
+        (event) => {
+            const { keyCode } = event;
+            if (keyCode === 27) {
+                escFunction();
+            }
+
+            if (keyCode === 13) {
+                if (isEditing) {
+                    const listId = list._id;
+                    const name = inputRef.current.value;
+                    doEditList(moduleId, listId, name);
+                    toggleEditing(columnKey, false);
+                }
+            }
+        },
+        [isEditing]
+    );
+
+    useEffect(() => {
+        if (isEditing) {
+            inputRef.current.focus();
+        }
+        let listElem = document.querySelector(`#list-${list._id}`);
+        listElem.addEventListener('keydown', handleKeys, false);
+
+        return () => {
+            listElem.removeEventListener('keydown', handleKeys, false);
+        };
+    }, [isEditing]);
+
+    const escFunction = () => {
+        setEditing(false);
+    };
+
     return (
         <Draggable draggableId={`${columnId}-${columnKey}`} index={columnKey}>
             {(provided, snapshot) => (
@@ -53,21 +90,36 @@ const MemoTaskList = ({
                 >
                     <TaskListHeader
                         ref={(el) =>
-                            (itemsRef.current[columnKey] = { el, setEditing })
+                            (itemsRef.current[columnKey] = {
+                                el,
+                                setEditing,
+                                inputRef,
+                            })
                         }
                     >
-                        <FlexCenter>
-                            <TaskListTitle
-                                isDragging={snapshot.isDragging}
-                                {...provided.dragHandleProps}
-                            >
-                                {list.name}
-                            </TaskListTitle>
+                        <FlexCenter
+                            isDragging={snapshot.isDragging}
+                            {...provided.dragHandleProps}
+                        >
+                            {!isEditing ? (
+                                <TaskListTitle id={`list-${list._id}`}>
+                                    {list.name}
+                                </TaskListTitle>
+                            ) : (
+                                <Input
+                                    type="text"
+                                    defaultValue={list.name}
+                                    ref={inputRef}
+                                    customProps="margin-left:10px;"
+                                    id={`list-${list._id}`}
+                                />
+                            )}
                             <OptionButtonContainer>
                                 <OptionsButtonList
                                     list={list}
                                     dropdownRef={dropdownRef}
                                     index={columnKey}
+                                    editList={toggleEditing}
                                 />
                             </OptionButtonContainer>
                         </FlexCenter>

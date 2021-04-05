@@ -4,6 +4,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useDragDrop } from '../../../hooks/useDragDrop';
 import { TaskList } from '../TaskList';
 import { SaveTaskListsOrderMutation } from '../../../requests/Module/SaveTaskListsOrderMutation';
+import { EditTaskListMutation } from '../../../requests/Module/EditTaskListMutation';
 
 export const TaskLists = ({ lists = [], moduleId, openTaskPanel }) => {
     let _columns = lists;
@@ -56,19 +57,29 @@ export const TaskLists = ({ lists = [], moduleId, openTaskPanel }) => {
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
-                                    {columns.map((list, index) => (
-                                        <TaskList
-                                            list={list}
-                                            key={index}
-                                            columnKey={index}
-                                            columnId={`${list._id}`}
-                                            placeholderProps={placeholderProps}
-                                            moduleId={moduleId}
-                                            openTaskPanel={openTaskPanel}
-                                            itemsRef={itemsRef}
-                                            dropdownRef={dropdownRef}
-                                        />
-                                    ))}
+                                    <EditTaskListMutation>
+                                        {({ doEditList }) =>
+                                            columns.map((list, index) => (
+                                                <TaskList
+                                                    list={list}
+                                                    key={index}
+                                                    columnKey={index}
+                                                    columnId={`${list._id}`}
+                                                    placeholderProps={
+                                                        placeholderProps
+                                                    }
+                                                    moduleId={moduleId}
+                                                    openTaskPanel={
+                                                        openTaskPanel
+                                                    }
+                                                    itemsRef={itemsRef}
+                                                    dropdownRef={dropdownRef}
+                                                    doEditList={doEditList}
+                                                />
+                                            ))
+                                        }
+                                    </EditTaskListMutation>
+
                                     {provided.placeholder}
                                 </div>
                             )}
