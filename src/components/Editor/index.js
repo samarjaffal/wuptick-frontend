@@ -4,6 +4,7 @@ import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
 import { EDITORCONF, setMentionsConfig } from './editor-conf';
 import { customQuoteBlock, customImageBlock } from './customBlocks';
+import { urlify } from './editor-helpers';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
 import { Colors } from '../../assets/css/colors';
@@ -61,7 +62,8 @@ export const Editor = ({
             .save()
             .then((outputData) => {
                 let outputHtml = parseToHTMl(outputData);
-                onSave(outputHtml.outerHTML, outputData);
+                let outputHtmlString = urlify(outputHtml.outerHTML);
+                onSave(outputHtmlString, outputData);
             })
             .catch((error) => {
                 console.log('Saving failed: ', error);
