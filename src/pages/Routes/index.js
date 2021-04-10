@@ -11,6 +11,7 @@ import { useUser } from '../../hooks/useUser';
 import { Profile } from '../Profile/index';
 import { EditProfile } from '../Profile/EditProfile/index';
 import { SetupProfile } from '../SetupProfile/index';
+import { MyUpdates } from '../MyUpdates/index';
 import { config } from '../../../config/index';
 
 const DefaultRoutes = () => {
@@ -30,6 +31,7 @@ const DefaultRoutes = () => {
             <PrivateRoute path="/profile/:username" component={Profile} />
             <PrivateRoute path={`${profileURL}/edit`} component={EditProfile} />
             <PrivateRoute path="/setup-profile" component={SetupProfile} />
+            <PrivateRoute path="/my-updates" component={MyUpdates} />
             <NotFound default />
             <Oops path="oops" />
         </Router>

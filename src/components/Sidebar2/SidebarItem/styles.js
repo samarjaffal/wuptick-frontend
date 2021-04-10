@@ -50,4 +50,5 @@ export const IconContainer = styled.div`
 
 export const Icon = styled(FontAwesomeIcon)`
     /*   flex: 30%; */
+    font-size: 14px;
 `;

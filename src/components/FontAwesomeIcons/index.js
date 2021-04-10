@@ -30,6 +30,8 @@ import {
     faInbox,
     faCircle,
     faHome,
+    faBell,
+    faCheckDouble,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -60,5 +62,7 @@ library.add(
     faTrashRegular,
     faInbox,
     faCircle,
-    faHome
+    faHome,
+    faBell,
+    faCheckDouble
 );

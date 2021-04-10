@@ -33,6 +33,13 @@ export const Sidebar = () => {
                     color={Colors.yellow}
                 />
 
+                <SidebarItem
+                    title="My Updates"
+                    icon="check-double"
+                    url={`/my-updates`}
+                    color={Colors.orange}
+                />
+
                 <Hr />
                 <Me loaderProps={{ qty: 1 }} loader={SkeletonProjectsSidebar}>
                     {({ teams }) => (
