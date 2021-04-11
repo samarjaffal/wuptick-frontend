@@ -133,6 +133,35 @@ export const GlobalStyle = createGlobalStyle`
     } 
 }
 
+@keyframes twinkle {
+    0%
+  {
+    opacity: 0;
+  }
+  20%
+  {
+    opacity: 0.25;
+  }
+  40%
+  {
+    opacity: 0.50;
+  }
+  60%
+  {
+    opacity: 0.75;
+  }
+
+  90%
+  {
+    opacity: 0.90;
+  }
+
+  100%
+  {
+    opacity: 1;
+  }
+}
+
 @keyframes beat {
     0%
   {

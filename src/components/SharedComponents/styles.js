@@ -62,7 +62,6 @@ export const Button = styled.button`
     margin: ${({ margin }) => (margin ? margin : 'auto')};
     cursor: pointer;
     :hover {
-        ${Shadow};
         ${TransitionSecondary};
         opacity: 0.8;
     }

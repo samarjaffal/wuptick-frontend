@@ -32,6 +32,8 @@ import {
     faHome,
     faBell,
     faCheckDouble,
+    faCommentAlt,
+    faAt,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -64,5 +66,7 @@ library.add(
     faCircle,
     faHome,
     faBell,
-    faCheckDouble
+    faCheckDouble,
+    faCommentAlt,
+    faAt
 );
