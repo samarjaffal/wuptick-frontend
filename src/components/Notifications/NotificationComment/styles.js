@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Colors } from '../../../assets/css/colors';
-import { description } from '../../../assets/css/theme';
+import { description, bold } from '../../../assets/css/theme';
 
 export const NotificationDescription = styled.p`
     color: ${Colors.black};
@@ -15,4 +15,9 @@ export const NotificationDescription = styled.p`
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
     cursor: pointer;
+`;
+
+export const NotificationType = styled.span`
+    ${description};
+    font-weight: ${bold};
 `;

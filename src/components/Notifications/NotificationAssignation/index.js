@@ -4,20 +4,24 @@ import { Notification } from '../Notification';
 import { Avatar } from '../../Avatar/index';
 import { Me } from '../../Me/index';
 import { SkeletonAvatar } from '../../Loaders/SkeletonAvatar/index';
-import { NotificationDescription } from './styles';
+import { NotificationDescription, NotificationType } from './styles';
 
-export const NotificationAssignation = () => {
+export const NotificationAssignation = ({ notification }) => {
+    const { external_id: task } = notification;
+
     return (
-        <Notification>
+        <Notification notification={notification}>
             <Me loader={SkeletonAvatar} loaderProps={{ qty: 1, size: 20 }}>
                 {({ avatar }) => <Avatar size={20} src={avatar} hide={false} />}
             </Me>
             <NotificationDescription>
-                Lorem Ipsum is simply. Lorem Ipsum is simply Lorem Ipsum is
-                simple is ter...
+                <NotificationType>New assignation: </NotificationType>
+                {task.name}
             </NotificationDescription>
         </Notification>
     );
 };
 
-NotificationAssignation.propTypes = {};
+NotificationAssignation.propTypes = {
+    notification: PropTypes.object,
+};

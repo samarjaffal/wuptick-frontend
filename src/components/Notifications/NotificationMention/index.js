@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../Notification';
 import { Colors } from '../../../assets/css/colors';
-import { NotificationDescription } from './styles';
+import { NotificationDescription, NotificationType } from './styles';
 
-export const NotificationMention = () => {
+export const NotificationMention = ({ notification }) => {
+    const { external_id: task } = notification;
+
     return (
-        <Notification>
+        <Notification notification={notification}>
             <FontAwesomeIcon icon="at" color={Colors.primary} />
             <NotificationDescription>
-                Lorem Ipsum is simply. Lorem Ipsum is simply Lorem Ipsum is
-                simple is ter...
+                <NotificationType>New mention: </NotificationType>
+                {task.name}
             </NotificationDescription>
         </Notification>
     );
 };
 
-NotificationMention.propTypes = {};
+NotificationMention.propTypes = {
+    notification: PropTypes.object,
+};

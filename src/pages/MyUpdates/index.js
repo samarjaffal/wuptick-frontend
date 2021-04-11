@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
-import { NotificationAssignation } from '../../components/Notifications/NotificationAssignation/index';
-import { NotificationMention } from '../../components/Notifications/NotificationMention/index';
-import { NotificationComment } from '../../components/Notifications/NotificationComment/index';
+import { NotificationsList } from './NotificationsList';
+import { GetNotificationsQuery } from '../../requests/Notifications/GetNotificationsQuery';
 import {
     FlexSpaceBetween,
     Button,
@@ -19,18 +18,30 @@ export const MyUpdates = () => {
                 <title>Wuptick - My Updates</title>
             </Helmet>
             <div className="Container" style={{ width: '100%' }}>
-                <FlexSpaceBetween customProps="width:100%;">
-                    <Title>My Updates</Title>
-                    <Button margin="0" bg={Colors.white} color={Colors.black}>
-                        Mark all as read
-                    </Button>
-                </FlexSpaceBetween>
-
-                <NotificationsContainer>
-                    <NotificationComment />
-                    <NotificationAssignation />
-                    <NotificationMention />
-                </NotificationsContainer>
+                <GetNotificationsQuery>
+                    {({ data }) => {
+                        const { getNotifications: notifications } = data;
+                        return (
+                            <>
+                                <FlexSpaceBetween customProps="width:100%;">
+                                    <Title>My Updates</Title>
+                                    <Button
+                                        margin="0"
+                                        bg={Colors.white}
+                                        color={Colors.black}
+                                    >
+                                        Mark all as read
+                                    </Button>
+                                </FlexSpaceBetween>
+                                <NotificationsContainer>
+                                    <NotificationsList
+                                        notifications={notifications}
+                                    />
+                                </NotificationsContainer>
+                            </>
+                        );
+                    }}
+                </GetNotificationsQuery>
             </div>
         </LoggedLayout>
     );
