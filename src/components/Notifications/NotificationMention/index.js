@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '../../../../config/index';
 import { Notification } from '../Notification';
 import { Colors } from '../../../assets/css/colors';
 import {
@@ -14,7 +14,7 @@ export const NotificationMention = ({ notification, setRead }) => {
     const { external_id: task } = notification;
 
     const goToNotification = () => {
-        navigate(notification.url);
+        window.open(`${config.url}${notification.url}`, '_blank').focus();
         setRead([notification._id]);
     };
 

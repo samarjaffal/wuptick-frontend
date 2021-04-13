@@ -26,6 +26,8 @@ export const SideAnchor = styled(Link)`
 
 export const Title = styled.div`
     flex: 80%;
+    display: flex;
+    align-items: center;
     /* margin-left: 5px; */
 `;
 

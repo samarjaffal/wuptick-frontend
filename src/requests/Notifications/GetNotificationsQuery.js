@@ -10,7 +10,7 @@ export const GetNotificationsQuery = ({ children }) => {
         },
     });
     if (loading || !data) {
-        return 'loading...';
+        return '';
     }
 
     if (error) {
@@ -21,5 +21,4 @@ export const GetNotificationsQuery = ({ children }) => {
 
 GetNotificationsQuery.propTypes = {
     children: PropTypes.any,
-    taskId: PropTypes.string,
 };

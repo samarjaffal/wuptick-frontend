@@ -19,11 +19,11 @@ export const SetNotificationAsReadMutation = ({ children }) => {
             variables: {
                 ids,
             },
-            /* refetchQueries: [
+            refetchQueries: [
                 {
                     query: gqlGetNotifications,
                 },
-            ], */
+            ],
         });
     });
 

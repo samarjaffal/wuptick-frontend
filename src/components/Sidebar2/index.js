@@ -38,6 +38,7 @@ export const Sidebar = () => {
                     icon="check-double"
                     url={`/my-updates`}
                     color={Colors.orange}
+                    hasNotifications={true}
                 />
 
                 <Hr />

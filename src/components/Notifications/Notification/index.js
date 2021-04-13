@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
@@ -9,6 +9,10 @@ import { Notification as NotificationStyled, Date } from './styles';
 
 export const Notification = ({ notification = {}, children }) => {
     const [isNew, setNew] = useState(Boolean(notification.read_at == null));
+
+    useEffect(() => {
+        setNew(Boolean(notification.read_at == null));
+    }, [notification]);
 
     const formatDate = (_date) => {
         dayjs.extend(calendar);

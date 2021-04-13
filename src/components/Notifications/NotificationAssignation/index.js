@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from '@reach/router';
 import { Notification } from '../Notification';
+import { config } from '../../../../config/index';
 import { Avatar } from '../../Avatar/index';
 import { Me } from '../../Me/index';
 import { SkeletonAvatar } from '../../Loaders/SkeletonAvatar/index';
@@ -15,7 +15,7 @@ export const NotificationAssignation = ({ notification, setRead }) => {
     const { external_id: task } = notification;
 
     const goToNotification = () => {
-        navigate(notification.url);
+        window.open(`${config.url}${notification.url}`, '_blank').focus();
         setRead([notification._id]);
     };
 

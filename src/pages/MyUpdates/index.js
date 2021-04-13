@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { NotificationsList } from './NotificationsList';
+import { NotificationsCounter } from '../../components/NotificationsCounter/index';
 import { GetNotificationsQuery } from '../../requests/Notifications/GetNotificationsQuery';
 import { SetNotificationAsReadMutation } from '../../requests/Notifications/SetNotificationAsReadMutation';
 import {
     FlexSpaceBetween,
+    FlexCenter,
     Button,
 } from '../../components/SharedComponents/styles';
-import { NotificationsContainer, Title } from './styles';
 import { Colors } from '../../assets/css/colors';
+import { NotificationsContainer, Title } from './styles';
 
 export const MyUpdates = () => {
     return (
@@ -22,10 +24,16 @@ export const MyUpdates = () => {
                 <GetNotificationsQuery>
                     {({ data }) => {
                         const { getNotifications: notifications } = data;
+
                         return (
                             <>
                                 <FlexSpaceBetween customProps="width:100%;">
-                                    <Title>My Updates</Title>
+                                    <FlexCenter>
+                                        <Title>My Updates</Title>
+                                        <NotificationsCounter
+                                            notifications={notifications}
+                                        />
+                                    </FlexCenter>
                                     <Button
                                         margin="0"
                                         bg={Colors.white}
