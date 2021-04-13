@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from '@reach/router';
 import { Colors } from '../../../assets/css/colors';
 import { description, bold } from '../../../assets/css/theme';
 
@@ -20,4 +21,11 @@ export const NotificationDescription = styled.p`
 export const NotificationType = styled.span`
     ${description};
     font-weight: ${bold};
+`;
+
+export const GoToNotification = styled(Link)`
+    text-decoration: none;
+    :hover {
+        text-decoration: underline;
+    }
 `;

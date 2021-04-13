@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../Notification';
 import { Colors } from '../../../assets/css/colors';
-import { NotificationDescription, NotificationType } from './styles';
+import {
+    NotificationDescription,
+    NotificationType,
+    GoToNotification,
+} from './styles';
 
 export const NotificationMention = ({ notification }) => {
     const { external_id: task } = notification;
@@ -11,10 +15,12 @@ export const NotificationMention = ({ notification }) => {
     return (
         <Notification notification={notification}>
             <FontAwesomeIcon icon="at" color={Colors.primary} />
-            <NotificationDescription>
-                <NotificationType>New mention: </NotificationType>
-                {task.name}
-            </NotificationDescription>
+            <GoToNotification to={`/${notification.url}`}>
+                <NotificationDescription>
+                    <NotificationType>New mention: </NotificationType>
+                    {task.name}
+                </NotificationDescription>
+            </GoToNotification>
         </Notification>
     );
 };
