@@ -10,10 +10,13 @@ import { SetNotificationAsReadMutation } from '../../requests/Notifications/SetN
 import {
     FlexSpaceBetween,
     FlexCenter,
-    Button,
 } from '../../components/SharedComponents/styles';
 import { Colors } from '../../assets/css/colors';
-import { NotificationsContainer, Title } from './styles';
+import {
+    NotificationsContainer,
+    Title,
+    NoNotificationsMessage,
+} from './styles';
 
 export const MyUpdates = () => {
     return (
@@ -40,14 +43,25 @@ export const MyUpdates = () => {
                                     />
                                 </FlexSpaceBetween>
                                 <NotificationsContainer>
-                                    <SetNotificationAsReadMutation>
-                                        {({ doUpdateNotifications }) => (
-                                            <NotificationsList
-                                                notifications={notifications}
-                                                setRead={doUpdateNotifications}
-                                            />
-                                        )}
-                                    </SetNotificationAsReadMutation>
+                                    {notifications.length > 0 ? (
+                                        <SetNotificationAsReadMutation>
+                                            {({ doUpdateNotifications }) => (
+                                                <NotificationsList
+                                                    notifications={
+                                                        notifications
+                                                    }
+                                                    setRead={
+                                                        doUpdateNotifications
+                                                    }
+                                                />
+                                            )}
+                                        </SetNotificationAsReadMutation>
+                                    ) : (
+                                        <NoNotificationsMessage>
+                                            You don&apos;t have new
+                                            notifications yet 🔔.
+                                        </NoNotificationsMessage>
+                                    )}
                                 </NotificationsContainer>
                             </>
                         );
