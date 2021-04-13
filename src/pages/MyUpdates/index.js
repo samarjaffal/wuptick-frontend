@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { NotificationsList } from './NotificationsList';
+import { ButtonMarkAllAsRead } from './ButtonMarkAllAsRead';
 import { NotificationsCounter } from '../../components/NotificationsCounter/index';
 import { GetNotificationsQuery } from '../../requests/Notifications/GetNotificationsQuery';
 import { SetNotificationAsReadMutation } from '../../requests/Notifications/SetNotificationAsReadMutation';
@@ -34,13 +35,9 @@ export const MyUpdates = () => {
                                             notifications={notifications}
                                         />
                                     </FlexCenter>
-                                    <Button
-                                        margin="0"
-                                        bg={Colors.white}
-                                        color={Colors.black}
-                                    >
-                                        Mark all as read
-                                    </Button>
+                                    <ButtonMarkAllAsRead
+                                        notifications={notifications}
+                                    />
                                 </FlexSpaceBetween>
                                 <NotificationsContainer>
                                     <SetNotificationAsReadMutation>

@@ -65,6 +65,9 @@ export const Button = styled.button`
         ${TransitionSecondary};
         opacity: 0.8;
     }
+    :focus {
+        outline: none;
+    }
     opacity: ${({ disabled }) => (disabled == true ? 0.6 : 1)};
     @media (max-width: 768px) {
         margin: auto;
