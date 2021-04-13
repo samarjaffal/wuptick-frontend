@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { navigate } from '@reach/router';
 import { Notification } from '../Notification';
 import { Avatar } from '../../Avatar/index';
 import { Me } from '../../Me/index';
@@ -10,15 +11,20 @@ import {
     GoToNotification,
 } from './styles';
 
-export const NotificationAssignation = ({ notification }) => {
+export const NotificationAssignation = ({ notification, setRead }) => {
     const { external_id: task } = notification;
+
+    const goToNotification = () => {
+        navigate(notification.url);
+        setRead([notification._id]);
+    };
 
     return (
         <Notification notification={notification}>
             <Me loader={SkeletonAvatar} loaderProps={{ qty: 1, size: 20 }}>
                 {({ avatar }) => <Avatar size={20} src={avatar} hide={false} />}
             </Me>
-            <GoToNotification to={`/${notification.url}`}>
+            <GoToNotification onClick={() => goToNotification()}>
                 <NotificationDescription>
                     <NotificationType>New assignation: </NotificationType>
                     {task.name}

@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { NotificationsList } from './NotificationsList';
 import { GetNotificationsQuery } from '../../requests/Notifications/GetNotificationsQuery';
+import { SetNotificationAsReadMutation } from '../../requests/Notifications/SetNotificationAsReadMutation';
 import {
     FlexSpaceBetween,
     Button,
@@ -34,9 +35,14 @@ export const MyUpdates = () => {
                                     </Button>
                                 </FlexSpaceBetween>
                                 <NotificationsContainer>
-                                    <NotificationsList
-                                        notifications={notifications}
-                                    />
+                                    <SetNotificationAsReadMutation>
+                                        {({ doUpdateNotifications }) => (
+                                            <NotificationsList
+                                                notifications={notifications}
+                                                setRead={doUpdateNotifications}
+                                            />
+                                        )}
+                                    </SetNotificationAsReadMutation>
                                 </NotificationsContainer>
                             </>
                         );

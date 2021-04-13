@@ -5,17 +5,26 @@ import { NotificationMention } from '../../../components/Notifications/Notificat
 import { NotificationComment } from '../../../components/Notifications/NotificationComment/index';
 import { Ul } from '../../../components/SharedComponents/styles';
 
-export const NotificationsList = ({ notifications }) => {
+export const NotificationsList = ({ notifications, setRead }) => {
     const handleNotification = (notification) => {
         return (
             (notification.type == 'task_comment' && (
-                <NotificationComment notification={notification} />
+                <NotificationComment
+                    notification={notification}
+                    setRead={setRead}
+                />
             )) ||
             (notification.type == 'task_assignation' && (
-                <NotificationAssignation notification={notification} />
+                <NotificationAssignation
+                    notification={notification}
+                    setRead={setRead}
+                />
             )) ||
             (notification.type == 'task_mention' && (
-                <NotificationMention notification={notification} />
+                <NotificationMention
+                    notification={notification}
+                    setRead={setRead}
+                />
             ))
         );
     };
