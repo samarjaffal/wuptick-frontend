@@ -8,6 +8,7 @@ export const Notification = () => {
     const customTitles = {
         success: 'Success!',
         error: 'Opps...',
+        info: 'Wait!',
     };
 
     const customTypes = {
