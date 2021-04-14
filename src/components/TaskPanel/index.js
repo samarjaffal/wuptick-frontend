@@ -9,6 +9,7 @@ import { useUser } from '../../hooks/useUser';
 import { useTask } from '../../hooks/useTask';
 import { UpdateTaskMutation } from '../../requests/Task/UpdateTaskMutation';
 import { GetTaskQuery } from '../../requests/Task/GetTaskQuery';
+import { SetNotificationAsReadByUserIdQuery } from '../../requests/Notifications/SetNotificationAsReadByUserIdQuery';
 import { Container } from './styles';
 
 const MemoTaskPanel = ({ panelRef }) => {
@@ -46,17 +47,23 @@ const MemoTaskPanel = ({ panelRef }) => {
                         const task = data.getTask;
 
                         return (
-                            <UpdateTaskMutation>
-                                {({ doUpdateTask }) => (
-                                    <TaskOverview
-                                        task={task}
-                                        module={currentModule}
-                                        doUpdateTask={doUpdateTask}
-                                        setCurrentTask={setCurrentTask}
-                                        currentProject={currentProject}
-                                    />
+                            <SetNotificationAsReadByUserIdQuery
+                                externalId={currentTask._id}
+                            >
+                                {() => (
+                                    <UpdateTaskMutation>
+                                        {({ doUpdateTask }) => (
+                                            <TaskOverview
+                                                task={task}
+                                                module={currentModule}
+                                                doUpdateTask={doUpdateTask}
+                                                setCurrentTask={setCurrentTask}
+                                                currentProject={currentProject}
+                                            />
+                                        )}
+                                    </UpdateTaskMutation>
                                 )}
-                            </UpdateTaskMutation>
+                            </SetNotificationAsReadByUserIdQuery>
                         );
                     }}
                 </GetTaskQuery>
