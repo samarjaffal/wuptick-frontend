@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { Colors } from '../../../assets/css/colors';
 import { info } from '../../../assets/css/theme';
 
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 export const Notification = styled.div`
     border: 1px solid #dddee5;
     border-left: none;
@@ -10,7 +15,7 @@ export const Notification = styled.div`
     justify-content: left;
     align-items: center;
     height: 40px;
-    width: 100%;
+    width: 98%;
     background-color: ${Colors.whitePrimary};
     border-right: none;
     position: relative;

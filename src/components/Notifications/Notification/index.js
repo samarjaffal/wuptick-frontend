@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 import { NotificationIcon } from '../../NotificationIcon/index';
+import { HideNotificationButton } from '../HideNotificationButton';
 import { Colors } from '../../../assets/css/colors';
 import { FlexCenter, FlexSpaceBetween } from '../../SharedComponents/styles';
-import { Notification as NotificationStyled, Date } from './styles';
+import { Notification as NotificationStyled, Date, Container } from './styles';
 
 export const Notification = ({ notification = {}, children }) => {
     const [isNew, setNew] = useState(Boolean(notification.read_at == null));
+    const [isParentHover, setIsParentHover] = useState(false);
 
     useEffect(() => {
         setNew(Boolean(notification.read_at == null));
@@ -20,20 +22,27 @@ export const Notification = ({ notification = {}, children }) => {
         return dateFormated;
     };
     return (
-        <NotificationStyled>
-            <FlexSpaceBetween customProps="margin-right:0.8em; width:100%;">
-                <FlexCenter customProps="margin-left:0.8em;">
-                    {isNew && <NotificationIcon color={Colors.green} />}
-                    {children}
-                </FlexCenter>
-                <div>
-                    <Date>{formatDate(notification.created_at)}</Date>
-                </div>
-            </FlexSpaceBetween>
-        </NotificationStyled>
+        <Container
+            onMouseEnter={() => setIsParentHover(true)}
+            onMouseLeave={() => setIsParentHover(false)}
+        >
+            <NotificationStyled>
+                <FlexSpaceBetween customProps="margin-right:0.8em; width:100%;">
+                    <FlexCenter customProps="margin-left:0.8em;">
+                        {isNew && <NotificationIcon color={Colors.green} />}
+                        {children}
+                    </FlexCenter>
+                    <FlexSpaceBetween>
+                        <Date>{formatDate(notification.created_at)}</Date>
+                    </FlexSpaceBetween>
+                </FlexSpaceBetween>
+            </NotificationStyled>
+            <HideNotificationButton isHover={isParentHover} />
+        </Container>
     );
 };
 
 Notification.propTypes = {
     children: PropTypes.node,
+    notification: PropTypes.object,
 };
