@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { NotificationAssignation } from '../../../components/Notifications/NotificationAssignation/index';
 import { NotificationMention } from '../../../components/Notifications/NotificationMention/index';
@@ -6,6 +6,18 @@ import { NotificationComment } from '../../../components/Notifications/Notificat
 import { Ul } from '../../../components/SharedComponents/styles';
 
 export const NotificationsList = ({ notifications, setRead }) => {
+    const isNotHiden = (notification) => !notification.hide;
+
+    const filterNotifications = () => notifications.filter(isNotHiden);
+
+    const [filteredNotifications, setNotifications] = useState(() =>
+        filterNotifications(notifications)
+    );
+
+    useEffect(() => {
+        setNotifications(filterNotifications(notifications));
+    }, [notifications]);
+
     const handleNotification = (notification) => {
         return (
             (notification.type == 'task_comment' && (
@@ -31,7 +43,7 @@ export const NotificationsList = ({ notifications, setRead }) => {
 
     return (
         <Ul>
-            {notifications.map((notification, index) => (
+            {filteredNotifications.map((notification, index) => (
                 <li key={index}>{handleNotification(notification)}</li>
             ))}
         </Ul>
@@ -40,4 +52,5 @@ export const NotificationsList = ({ notifications, setRead }) => {
 
 NotificationsList.propTypes = {
     notifications: PropTypes.array,
+    setRead: PropTypes.func,
 };

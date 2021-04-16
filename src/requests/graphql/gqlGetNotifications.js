@@ -18,6 +18,7 @@ export const gqlGetNotifications = gql`
             created_at
             read_at
             url
+            hide
         }
     }
 `;

@@ -37,7 +37,10 @@ export const Notification = ({ notification = {}, children }) => {
                     </FlexSpaceBetween>
                 </FlexSpaceBetween>
             </NotificationStyled>
-            <HideNotificationButton isHover={isParentHover} />
+            <HideNotificationButton
+                isHover={isParentHover}
+                notification={notification}
+            />
         </Container>
     );
 };
