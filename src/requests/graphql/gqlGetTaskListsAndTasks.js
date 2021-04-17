@@ -16,18 +16,21 @@ export const gqlGetTaskListsAndTasks = gql`
                         avatar
                         name
                         last_name
+                        color
                     }
                     assigned {
                         _id
                         name
                         last_name
                         avatar
+                        color
                     }
                     collaborators {
                         _id
                         avatar
                         name
                         last_name
+                        color
                     }
                     deadline
                     done

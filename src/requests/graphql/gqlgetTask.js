@@ -10,12 +10,14 @@ export const gqlGetTask = gql`
                 avatar
                 name
                 last_name
+                color
             }
             assigned {
                 _id
                 name
                 last_name
                 avatar
+                color
             }
             collaborators {
                 _id
@@ -23,6 +25,7 @@ export const gqlGetTask = gql`
                 name
                 last_name
                 email
+                color
             }
             deadline
             done

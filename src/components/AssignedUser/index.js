@@ -29,7 +29,12 @@ export const AssignedUser = ({ task }) => {
     return (
         <UserIconContainer ref={assignRef} onClick={() => handleDropDown()}>
             {task.assigned !== null && Object.keys(task.assigned).length > 0 ? (
-                <Avatar hide={false} size={25} src={task.assigned.avatar} />
+                <Avatar
+                    hide={false}
+                    size={25}
+                    src={task.assigned.avatar}
+                    user={task.assigned}
+                />
             ) : (
                 <UserIconSVG width="14px" height="14px" viewBox="0 0 25 25" />
             )}
