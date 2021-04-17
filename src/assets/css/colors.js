@@ -3,7 +3,6 @@ export const Colors = {
     orange: '#FFA23A',
     blue: '#41D0FF',
     green: '#00E36A',
-    /* yellow: '#FFE53A', */
     yellow: '#FFDE0B',
     black: '#413F4A',
     softGray: '#D6D7E0',

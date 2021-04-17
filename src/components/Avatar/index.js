@@ -1,12 +1,14 @@
-import React from 'react';
-import NoImage from '../../assets/images/no_image.png';
-import { Avatar as AvatarStyled } from './styles';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import NoImage from '../../assets/images/no_image.png';
+import { useAvatar } from '../../hooks/useAvatar';
+import { Avatar as AvatarStyled } from './styles';
 
-export const Avatar = ({ size, src, onClicked, margin, hide = true }) => {
-    const srcDefault =
-        'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ';
-    let avatar = src || NoImage;
+export const Avatar = ({ size, src, onClicked, margin, hide = true, user }) => {
+    const { generateAvatar } = useAvatar(user);
+
+    let avatar = src || generateAvatar();
+
     return (
         <AvatarStyled
             size={size}
@@ -25,4 +27,5 @@ Avatar.propTypes = {
     onClicked: PropTypes.func,
     margin: PropTypes.string,
     hide: PropTypes.bool,
+    user: PropTypes.object,
 };

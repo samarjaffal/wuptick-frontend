@@ -96,6 +96,7 @@ export const Profile = ({ location, username }) => {
                                         <Avatar
                                             size={100}
                                             src={user.avatar}
+                                            user={user}
                                             hide={false}
                                         />
                                         <ProfileInfo>

@@ -96,6 +96,7 @@ export const ProjectItem = ({
                                         key={index}
                                         size={28}
                                         src={member.user.avatar}
+                                        user={member.user}
                                         hide={false}
                                         onClicked={() =>
                                             navigate(

@@ -50,6 +50,7 @@ export const TeamItem = ({ team, userId, setTeamSelected }) => {
                                         size={28}
                                         src={member.avatar}
                                         hide={false}
+                                        user={member}
                                         onClicked={() =>
                                             navigate(
                                                 generateProfileUrl(

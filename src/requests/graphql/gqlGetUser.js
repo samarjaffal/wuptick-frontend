@@ -10,6 +10,7 @@ export const gqlGetUser = gql`
             occupation
             email
             birthday
+            color
             teams {
                 _id
                 name
