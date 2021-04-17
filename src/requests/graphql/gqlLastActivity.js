@@ -12,6 +12,7 @@ export const gqlLastActivity = gql`
                 firstName
                 lastName
                 avatar
+                color
             }
             dateFilter
             created_at

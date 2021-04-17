@@ -46,6 +46,7 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                     description="Feed Image"
                     src={user.avatar}
                     size={50}
+                    user={user}
                     onClicked={() =>
                         navigate(
                             generateProfileUrl(
