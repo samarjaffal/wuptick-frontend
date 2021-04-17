@@ -20,6 +20,7 @@ export const gqlGetUser = gql`
                     last_name
                     avatar
                     email
+                    color
                 }
                 projects {
                     _id
@@ -33,6 +34,7 @@ export const gqlGetUser = gql`
                         _id
                         name
                         last_name
+                        color
                     }
                     members {
                         user {
@@ -40,6 +42,7 @@ export const gqlGetUser = gql`
                             name
                             last_name
                             avatar
+                            color
                         }
                     }
                 }
