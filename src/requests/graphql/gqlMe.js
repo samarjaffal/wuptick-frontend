@@ -49,6 +49,7 @@ export const gqlMe = gql`
                             name
                             last_name
                             email
+                            color
                         }
                         role {
                             _id
@@ -62,6 +63,7 @@ export const gqlMe = gql`
                     last_name
                     email
                     avatar
+                    color
                 }
             }
         }

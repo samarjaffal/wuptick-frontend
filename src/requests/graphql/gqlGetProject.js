@@ -17,6 +17,7 @@ export const gqlGetProject = gql`
                     name
                     last_name
                     email
+                    color
                 }
                 role {
                     _id

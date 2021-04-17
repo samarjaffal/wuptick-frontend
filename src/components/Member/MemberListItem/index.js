@@ -7,7 +7,7 @@ import { MemberEmail, MemberName } from './styles';
 export const MemberListItem = ({ member }) => {
     return (
         <FlexCenter customProps="margin-bottom: 0.5em;">
-            <Avatar size={30} src={member.avatar} hide={false} />
+            <Avatar size={30} src={member.avatar} hide={false} user={member} />
             <Div customProps="margin-left: 0.5em;">
                 <MemberName>
                     {member.name} {member.last_name}

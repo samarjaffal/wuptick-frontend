@@ -36,6 +36,7 @@ export const InvitationList = ({ members }) => {
                     last_name: null,
                     avatar: null,
                     email: member.email,
+                    color: Colors.secondary,
                 };
                 return (
                     <li key={index}>
