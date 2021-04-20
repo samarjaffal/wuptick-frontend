@@ -123,6 +123,7 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                                 <Image
                                     description="Comment Avatar"
                                     src={user.avatar}
+                                    user={user}
                                     margin="0 0.5em 0 0"
                                     size={30}
                                     radius="50px"
