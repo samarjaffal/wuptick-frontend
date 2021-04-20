@@ -49,7 +49,12 @@ export const Collaborators = ({ task }) => {
                     display: 'flex',
                 }}
             >
-                <Avatar size={25} src={member.avatar} hide={false} />
+                <Avatar
+                    size={25}
+                    src={member.avatar}
+                    user={member}
+                    hide={false}
+                />
             </div>
         ));
     };
