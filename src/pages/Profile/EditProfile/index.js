@@ -54,6 +54,7 @@ export const EditProfile = () => {
                                             avatar,
                                             occupation,
                                             birthday,
+                                            color,
                                         }) => {
                                             return (
                                                 <FormContainer>
@@ -120,6 +121,12 @@ export const EditProfile = () => {
                                                             hide={false}
                                                             size={120}
                                                             src={avatar}
+                                                            user={{
+                                                                avatar,
+                                                                name,
+                                                                last_name,
+                                                                color,
+                                                            }}
                                                         />
                                                         <div>
                                                             <Anchor href="#">
