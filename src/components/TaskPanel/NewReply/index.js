@@ -65,11 +65,12 @@ export const NewReply = ({ task, createComment }) => {
     return (
         <NewReplyContainer isFocused={isFocused}>
             <Me loader={SkeletonAvatar} loaderProps={{ qty: 1 }}>
-                {({ avatar }) => (
+                {({ avatar, name, last_name, color }) => (
                     <Avatar
                         size={30}
                         src={avatar}
                         hide={false}
+                        user={{ avatar, name, last_name, color }}
                         margin={isFocused ? '20px 0 0 0' : '0'}
                     />
                 )}
