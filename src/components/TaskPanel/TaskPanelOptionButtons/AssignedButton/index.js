@@ -21,6 +21,7 @@ export const AssignedButton = ({ assigned }) => {
 
     useEffect(() => {
         handleData();
+        console.log(assigned, 'assigned');
     }, [assigned]);
 
     const handleData = () => {
@@ -66,8 +67,8 @@ export const AssignedButton = ({ assigned }) => {
                     name={name}
                 >
                     {(isParentHover) =>
-                        avatar !== null ? (
-                            <Avatar size={22} src={avatar} />
+                        avatar !== null || Object.keys(assigned).length > 0 ? (
+                            <Avatar size={22} src={avatar} user={assigned} />
                         ) : (
                             <UserIconContainer ishover={isParentHover ? 1 : 0}>
                                 <UserIconSVG
