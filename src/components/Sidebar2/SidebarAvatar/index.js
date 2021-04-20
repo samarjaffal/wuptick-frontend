@@ -23,12 +23,13 @@ export const SidebarAvatar = () => {
         <OutsideClick setLocalDropDownState={handleDropDown}>
             <>
                 <Me loader={SkeletonAvatar} loaderProps={{ qty: 1 }}>
-                    {({ avatar }) => (
+                    {({ avatar, name, last_name, color }) => (
                         <Avatar
                             size={25}
                             src={avatar}
                             margin="0 1em"
                             hide={false}
+                            user={{ avatar, name, last_name, color }}
                             onClicked={() => setOpen(!open)}
                         />
                     )}

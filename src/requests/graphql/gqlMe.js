@@ -11,6 +11,7 @@ export const gqlMe = gql`
             occupation
             birthday
             user_attempts
+            color
             favorite_projects {
                 _id
                 name
