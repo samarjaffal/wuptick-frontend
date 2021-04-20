@@ -20,6 +20,7 @@ export const MembersList = ({ members = [], showAddButton = true }) => {
                             margin="0 4px"
                             size={28}
                             hide={false}
+                            user={member}
                             onClicked={() =>
                                 navigate(
                                     generateProfileUrl(
