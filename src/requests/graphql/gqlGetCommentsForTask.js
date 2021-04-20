@@ -11,6 +11,7 @@ export const gqlGetCommentsForTask = gql`
                     name
                     last_name
                     avatar
+                    color
                 }
                 comment
                 commentJson
