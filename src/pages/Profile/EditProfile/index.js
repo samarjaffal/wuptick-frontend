@@ -5,6 +5,7 @@ import { Avatar } from '../../../components/Avatar/index';
 import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
 import { ChangePasswordModal } from '../../../components/Modal/templates/ChangePasswordModal/index';
+import { EditProfileAvatar } from '../EditProfileAvatar';
 import {
     Container,
     Title,
@@ -116,24 +117,14 @@ export const EditProfile = () => {
                                                             />
                                                         </Row>
                                                     </InfoContainer>
-                                                    <AvatarContainer>
-                                                        <Avatar
-                                                            hide={false}
-                                                            size={120}
-                                                            src={avatar}
-                                                            user={{
-                                                                avatar,
-                                                                name,
-                                                                last_name,
-                                                                color,
-                                                            }}
-                                                        />
-                                                        <div>
-                                                            <Anchor href="#">
-                                                                Change picture
-                                                            </Anchor>
-                                                        </div>
-                                                    </AvatarContainer>
+                                                    <EditProfileAvatar
+                                                        user={{
+                                                            avatar,
+                                                            name,
+                                                            last_name,
+                                                            color,
+                                                        }}
+                                                    />
                                                 </FormContainer>
                                             );
                                         }}
