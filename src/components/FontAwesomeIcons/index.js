@@ -34,6 +34,8 @@ import {
     faCheckDouble,
     faCommentAlt,
     faAt,
+    faArrowCircleUp,
+    faChevronCircleUp,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -68,5 +70,7 @@ library.add(
     faBell,
     faCheckDouble,
     faCommentAlt,
-    faAt
+    faAt,
+    faArrowCircleUp,
+    faChevronCircleUp
 );
