@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../../components/Avatar/index';
+import { UpdateAvatarMutation } from '../../../requests/User/UpdateAvatarMutation';
 import {
     Anchor,
     AvatarContainer,
@@ -36,6 +37,10 @@ export const EditProfileAvatar = ({ user }) => {
         }
     };
 
+    const afterSave = () => {
+        setShowSaveButton(false);
+    };
+
     const setPreviousImage = () => {
         setImage(originalImage);
         setShowSaveButton(false);
@@ -58,18 +63,26 @@ export const EditProfileAvatar = ({ user }) => {
             </AvatarWrapper>
 
             {showSaveButton && (
-                <SaveAvatarContainer>
-                    {/*  <Anchor href="#">Change picture</Anchor> */}
-                    <SaveAvatarSpan>
-                        Do you like your new avatar?{' '}
-                        <SaveAvatarButton>
-                            Let&apos; save it 🚀.
-                        </SaveAvatarButton>
-                        <CancelAvatarButton onClick={() => setPreviousImage()}>
-                            Or revert the changes
-                        </CancelAvatarButton>
-                    </SaveAvatarSpan>
-                </SaveAvatarContainer>
+                <UpdateAvatarMutation doAfterSave={afterSave}>
+                    {({ doEditAvatar }) => (
+                        <SaveAvatarContainer>
+                            {/*  <Anchor href="#">Change picture</Anchor> */}
+                            <SaveAvatarSpan>
+                                Do you like your new avatar?{' '}
+                                <SaveAvatarButton
+                                    onClick={() => doEditAvatar(image)}
+                                >
+                                    Let&apos; save it 🚀.
+                                </SaveAvatarButton>
+                                <CancelAvatarButton
+                                    onClick={() => setPreviousImage()}
+                                >
+                                    Or revert the changes
+                                </CancelAvatarButton>
+                            </SaveAvatarSpan>
+                        </SaveAvatarContainer>
+                    )}
+                </UpdateAvatarMutation>
             )}
         </AvatarContainer>
     );
