@@ -67,7 +67,7 @@ export const AssignedButton = ({ assigned }) => {
                     name={name}
                 >
                     {(isParentHover) =>
-                        avatar !== null || Object.keys(assigned).length > 0 ? (
+                        avatar !== null || assigned !== null ? (
                             <Avatar size={22} src={avatar} user={assigned} />
                         ) : (
                             <UserIconContainer ishover={isParentHover ? 1 : 0}>
