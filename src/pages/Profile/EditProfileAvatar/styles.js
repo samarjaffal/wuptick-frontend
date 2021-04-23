@@ -85,6 +85,16 @@ export const UploadIcon = styled(FontAwesomeIcon)`
     }
 `;
 
+export const LoadingImg = styled.div`
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    text-align: center;
+    opacity: 0.6;
+    background-color: ${Colors.white};
+    transition: all 0.3s ease;
+`;
+
 export const SaveAvatarContainer = styled.div`
     text-align: center;
     padding: 5px 20px;
@@ -112,4 +122,11 @@ export const CancelAvatarButton = styled.button`
     color: ${Colors.red};
     font-weight: ${bold};
     cursor: pointer;
+`;
+
+export const LoadingText = styled.span`
+    font-size: 12px;
+    font-weight: ${bold};
+    color: ${Colors.black};
+    margin-top: 0.5em;
 `;

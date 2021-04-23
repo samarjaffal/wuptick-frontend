@@ -13,6 +13,8 @@ import {
     SaveAvatarSpan,
     SaveAvatarContainer,
     CancelAvatarButton,
+    LoadingImg,
+    LoadingText,
 } from './styles';
 
 export const EditProfileAvatar = ({ user }) => {
@@ -47,24 +49,38 @@ export const EditProfileAvatar = ({ user }) => {
     };
 
     return (
-        <AvatarContainer>
-            <AvatarWrapper>
-                <Avatar hide={false} size={120} src={image} user={user} />
-                <UploadButton onClick={() => fileUpload.current.click()}>
-                    <UploadIcon icon="chevron-circle-up" aria-hidden="true" />
-                </UploadButton>
-                <input
-                    className="file-upload"
-                    type="file"
-                    accept="image/*"
-                    ref={fileUpload}
-                    onChange={() => previewImage()}
-                />
-            </AvatarWrapper>
+        <UpdateAvatarMutation doAfterSave={afterSave}>
+            {({ doEditAvatar, loading }) => (
+                <AvatarContainer>
+                    <AvatarWrapper>
+                        <Avatar
+                            hide={false}
+                            size={120}
+                            src={image}
+                            user={user}
+                        />
+                        <UploadButton
+                            onClick={() => fileUpload.current.click()}
+                        >
+                            {loading ? (
+                                <LoadingImg />
+                            ) : (
+                                <UploadIcon
+                                    icon="chevron-circle-up"
+                                    aria-hidden="true"
+                                />
+                            )}
+                        </UploadButton>
+                        <input
+                            className="file-upload"
+                            type="file"
+                            accept="image/*"
+                            ref={fileUpload}
+                            onChange={() => previewImage()}
+                        />
+                    </AvatarWrapper>
 
-            {showSaveButton && (
-                <UpdateAvatarMutation doAfterSave={afterSave}>
-                    {({ doEditAvatar }) => (
+                    {showSaveButton && !loading && (
                         <SaveAvatarContainer>
                             {/*  <Anchor href="#">Change picture</Anchor> */}
                             <SaveAvatarSpan>
@@ -82,9 +98,11 @@ export const EditProfileAvatar = ({ user }) => {
                             </SaveAvatarSpan>
                         </SaveAvatarContainer>
                     )}
-                </UpdateAvatarMutation>
+
+                    {loading && <LoadingText>Loading...</LoadingText>}
+                </AvatarContainer>
             )}
-        </AvatarContainer>
+        </UpdateAvatarMutation>
     );
 };
 
