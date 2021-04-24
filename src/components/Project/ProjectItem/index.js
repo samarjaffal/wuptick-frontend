@@ -9,6 +9,7 @@ import { Avatar } from '../../Avatar';
 import { Colors } from '../../../assets/css/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from '../../../hooks/useUser';
+import { useAvatar } from '../../../hooks/useAvatar';
 import { useDropdown } from '../../../hooks/useDropdown';
 import {
     Container,
@@ -34,6 +35,8 @@ export const ProjectItem = ({
 }) => {
     const [openDropDown, setOpenDropDown] = useState(false);
     const { generateProfileUrl, currentUser, goToProject } = useUser();
+    const { generateProjectAvatar } = useAvatar({});
+
     const { setPositionDropDown, openDropCallBack } = useDropdown();
     const elemRef = useRef(null);
 
@@ -58,7 +61,7 @@ export const ProjectItem = ({
                             size={50}
                             margin="0 1em 0 0"
                             description="Project Image"
-                            src={project.image}
+                            src={generateProjectAvatar(project)}
                             onClicked={() => goToProject(team, project)}
                         />
                     </div>

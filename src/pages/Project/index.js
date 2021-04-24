@@ -11,6 +11,7 @@ import { Tabs } from '../../components/Tabs/index';
 import { TabItem } from '../../components/Tabs/TabItem';
 import { MembersList } from '../../components/MembersList/index';
 import { ListTopics } from '../../components/Topics/ListTopics/index';
+import { ProjectPicture } from './ProjectPicture';
 import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
 import { EditProjectMutation } from '../../requests/project/EditProjectMutation';
 import { GetProjectModules } from '../../requests/Module/getProjectModuleQuery';
@@ -119,13 +120,7 @@ export const Project = ({ id, location }) => {
                         <Container>
                             <div>
                                 <ProjectInfoContainer>
-                                    <ImageContainer>
-                                        <Image
-                                            size={100}
-                                            description="Project Image"
-                                            src={project.image}
-                                        />
-                                    </ImageContainer>
+                                    <ProjectPicture project={project} />
 
                                     <InfoContainer>
                                         <ProjectNameContainer>

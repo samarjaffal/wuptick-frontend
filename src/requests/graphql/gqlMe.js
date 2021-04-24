@@ -38,6 +38,7 @@ export const gqlMe = gql`
                     name
                     image
                     created_at
+                    color
                     owner {
                         _id
                         name
