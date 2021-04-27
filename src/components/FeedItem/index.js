@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import calendar from 'dayjs/plugin/calendar';
 import { navigate } from '@reach/router';
 import { useUser } from '../../hooks/useUser';
+import { useAvatar } from '../../hooks/useAvatar';
 import { Image } from '../Image/index';
 import { Avatar } from '../Avatar/index';
 import { ListContainer } from '../ListContainer/index';
@@ -32,6 +33,7 @@ import {
 
 export const FeedItem = ({ type, dateFilter, user, body }) => {
     const { generateProfileUrl, generateProjectUrl } = useUser();
+    const { generateProjectAvatar } = useAvatar({});
 
     const formatDate = (_date) => {
         dayjs.extend(calendar);
@@ -93,7 +95,10 @@ export const FeedItem = ({ type, dateFilter, user, body }) => {
                     <ItemContainer>
                         {type == 'project' ? (
                             <Image
-                                src={body.project.image}
+                                src={generateProjectAvatar({
+                                    name: body.name,
+                                    color: body.project.color,
+                                })}
                                 size={30}
                                 margin="0 0.5em 0.5em 0"
                             />

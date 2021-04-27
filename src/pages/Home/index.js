@@ -3,6 +3,7 @@ import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { Info } from '../../components/Info/index';
 import { ListContainer } from '../../components/ListContainer/index';
 import { useUser } from '../../hooks/useUser';
+import { useAvatar } from '../../hooks/useAvatar';
 import { Me } from '../../components/Me/index';
 import { Colors } from '../../assets/css/colors';
 import { LastActivity } from '../../components/LastActivity/index';
@@ -21,6 +22,7 @@ import {
 
 export const Home = () => {
     const { teamSelected, generateProfileUrl, generateProjectUrl } = useUser();
+    const { generateProjectAvatar } = useAvatar({});
     const modalRef = useRef();
 
     return (
@@ -81,7 +83,9 @@ export const Home = () => {
                                             )}
                                             owner={`${project.owner.name} ${project.owner.last_name}`}
                                             time={project.created_at}
-                                            image={project.image}
+                                            image={generateProjectAvatar(
+                                                project
+                                            )}
                                             description="Favorite Project Avatar"
                                             key={project._id}
                                         />
@@ -120,7 +124,9 @@ export const Home = () => {
                                                     )}
                                                     owner={`${project.owner.name} ${project.owner.last_name}`}
                                                     time={project.created_at}
-                                                    image={project.image}
+                                                    image={generateProjectAvatar(
+                                                        project
+                                                    )}
                                                     description="Project Avatar"
                                                     key={project._id}
                                                 />

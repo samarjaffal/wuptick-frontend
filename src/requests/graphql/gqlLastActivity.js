@@ -26,6 +26,7 @@ export const gqlLastActivity = gql`
                     projectId
                     name
                     image
+                    color
                 }
                 comment {
                     commentId
