@@ -29,9 +29,18 @@ export const TaskOverview = ({
     currentProject,
 }) => {
     const [isEditing, setEditing] = useState(false);
-    const { generateTaskUrl } = useUser();
+    const { generateTaskUrl, currentUser } = useUser();
     let inputRef = useRef(null);
     let descriptionRef = useRef(null);
+
+    const editorExternalData = {
+        parentId: task._id,
+        owner: {
+            _id: currentUser._id,
+        },
+        parentUrl: generateTaskUrl(currentProject._id, module._id, task._id),
+    };
+
     let mentionsItems = currentProject.members
         ? currentProject.members.map((member) => {
               return {
@@ -106,6 +115,7 @@ export const TaskOverview = ({
                                 onSave={onSave}
                                 setEditing={setEditing}
                                 mentionItems={mentionsItems}
+                                externalDataConf={editorExternalData}
                             />
                         ) : (
                             <>

@@ -1,5 +1,6 @@
 import { config } from '../../config/index';
 import { getAccessToken } from '../shared/GetAccessToken';
+import { useUser } from '../hooks/useUser';
 const URL = `${config.backUrl}upload_editor_image`;
 
 const readImage = async (file) => {
@@ -10,7 +11,7 @@ const readImage = async (file) => {
     });
 };
 
-export const uploadImageEditor = async (file) => {
+export const uploadImageEditor = async (file, fileData) => {
     let base64EncondedImg = await readImage(file);
 
     return await fetch(URL, {
@@ -23,6 +24,7 @@ export const uploadImageEditor = async (file) => {
         body: JSON.stringify({
             data: base64EncondedImg,
             token: getAccessToken(),
+            fileData: JSON.stringify(fileData),
         }),
     })
         .then(async (response) => {

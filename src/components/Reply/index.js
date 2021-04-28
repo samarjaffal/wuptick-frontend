@@ -37,6 +37,14 @@ export const Reply = ({
 
     const url = generateTaskUrl(currentProject._id, currentModule._id, taskId);
 
+    const editorExternalData = {
+        parentId: taskId,
+        owner: {
+            _id: currentUser._id,
+        },
+        parentUrl: url,
+    };
+
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D, YYYY h:mm A');
         return dateFormated;
@@ -126,6 +134,7 @@ export const Reply = ({
                             id="edit-comment-editor"
                             buttonSaveText="Update Comment"
                             mentionItems={mentionsItems}
+                            externalDataConf={editorExternalData}
                         />
                     ) : (
                         <Description>{parse(reply.comment)}</Description>

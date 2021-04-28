@@ -25,6 +25,14 @@ export const NewReply = ({ task, createComment }) => {
         task._id
     );
 
+    const editorExternalData = {
+        parentId: task._id,
+        owner: {
+            _id: currentUser._id,
+        },
+        parentUrl: url,
+    };
+
     let mentionsItems = currentProject.members
         ? currentProject.members.map((member) => {
               return {
@@ -96,6 +104,7 @@ export const NewReply = ({ task, createComment }) => {
                         buttonSaveText="Send Reply"
                         placeholder="Add a new reply 💬"
                         mentionItems={mentionsItems}
+                        externalDataConf={editorExternalData}
                     />
                 </div>
             )}

@@ -2,7 +2,11 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
-import { EDITORCONF, setMentionsConfig } from './editor-conf';
+import {
+    EDITORCONF,
+    setMentionsConfig,
+    setExternalDataConf,
+} from './editor-conf';
 import { customQuoteBlock, customImageBlock } from './customBlocks';
 import { urlify } from './editor-helpers';
 import { Button } from '../SharedComponents/styles';
@@ -28,6 +32,7 @@ export const Editor = ({
     buttonSaveText = 'Save',
     placeholder = 'Write a description...',
     mentionItems = [],
+    externalDataConf = {},
 }) => {
     console.log('editor here', initData);
 
@@ -42,6 +47,8 @@ export const Editor = ({
         items: mentionItems,
         editorId: id,
     });
+
+    setExternalDataConf(externalDataConf);
 
     const parseToHTMl = (outputData) => {
         const edjsParser = edjsHTML({

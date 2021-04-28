@@ -17,6 +17,12 @@ export const setMentionsConfig = (config) => {
     mentionsConfig.editorId = config.editorId;
 };
 
+let externalDataConf = {};
+
+export const setExternalDataConf = (data) => {
+    externalDataConf = data;
+};
+
 export const EDITORCONF = {
     holder: 'editor',
     placeholder: 'Write a description...',
@@ -41,7 +47,7 @@ export const EDITORCONF = {
                      * @return {Promise.<{success, file: {url}}>}
                      */
                     uploadByFile(file) {
-                        return uploadImageEditor(file);
+                        return uploadImageEditor(file, externalDataConf);
                     },
 
                     /**
