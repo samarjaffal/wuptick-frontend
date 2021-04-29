@@ -26,7 +26,7 @@ export const NewReply = ({ task, createComment }) => {
     );
 
     const editorExternalData = {
-        parentId: task._id,
+        parentId: currentModule._id,
         owner: {
             _id: currentUser._id,
         },

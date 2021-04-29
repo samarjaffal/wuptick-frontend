@@ -34,7 +34,7 @@ export const TaskOverview = ({
     let descriptionRef = useRef(null);
 
     const editorExternalData = {
-        parentId: task._id,
+        parentId: module._id,
         owner: {
             _id: currentUser._id,
         },

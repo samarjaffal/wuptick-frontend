@@ -38,7 +38,7 @@ export const Reply = ({
     const url = generateTaskUrl(currentProject._id, currentModule._id, taskId);
 
     const editorExternalData = {
-        parentId: taskId,
+        parentId: currentModule._id,
         owner: {
             _id: currentUser._id,
         },

@@ -6,17 +6,14 @@ import { Helmet } from 'react-helmet';
 import Context, { TaskContextProvider } from '../../context/TaskContext';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from '../../components/Module/ModuleTabs';
-import { TasksSection } from './TasksSection';
-import { AddNew } from '../../components/AddNew/index';
+import { ModuleTaskLists } from './ModuleTasksLists';
 /* import { Sidebar } from '../../components/Sidebar/index'; */
 /* import { Sidebar } from '../../components/Sidebar2/index';
 import { ModuleSidebar } from './ModuleSidebar';
 import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebarQuery'; */
 import { ModuleTopBar } from './ModuleTopBar';
 import { SkeletonModule } from '../../components/Loaders/SkeletonModule/index';
-import { DropdownContextProvider } from '../../context/DropdownContext';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
-import { AddTaskListMutation } from '../../requests/Module/AddTaskListMutation';
 import { useUser } from '../../hooks/useUser';
 
 import {
@@ -101,46 +98,11 @@ export const Module = ({ projectId, moduleId, location }) => {
                                                 />
                                             </div>
 
-                                            <div className="TasksLists">
-                                                <DropdownContextProvider>
-                                                    <TasksSection
-                                                        lists={
-                                                            module.task_lists
-                                                        }
-                                                        moduleId={moduleId}
-                                                        taskId={task}
-                                                    />
-                                                </DropdownContextProvider>
-                                                <AddTaskListMutation>
-                                                    {({ doCreateList }) => {
-                                                        const createList = () => {
-                                                            console.log(
-                                                                moduleId,
-                                                                newList,
-                                                                'testing'
-                                                            );
-
-                                                            doCreateList(
-                                                                moduleId,
-                                                                newList
-                                                            );
-                                                        };
-                                                        return (
-                                                            <AddNew
-                                                                text="Add List"
-                                                                icon={true}
-                                                                border={true}
-                                                                setValue={
-                                                                    callBackNewList
-                                                                }
-                                                                doFunction={
-                                                                    createList
-                                                                }
-                                                            />
-                                                        );
-                                                    }}
-                                                </AddTaskListMutation>
-                                            </div>
+                                            <ModuleTaskLists
+                                                moduleId={moduleId}
+                                                task={task}
+                                                module={module}
+                                            />
                                         </ModuleContainer>
                                     );
                                 }}

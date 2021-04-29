@@ -18,7 +18,7 @@ export const ModuleTabs = ({ currentURL, tab, moduleId }) => {
                 currenTab={currentTab}
                 tab={undefined}
             />
-            <TabItem
+            {/*             <TabItem
                 text="Topics"
                 url={`${currentURL}?tab=topics`}
                 currenTab={currentTab}
@@ -30,7 +30,7 @@ export const ModuleTabs = ({ currentURL, tab, moduleId }) => {
                 url={`${currentURL}?tab=links`}
                 currenTab={currentTab}
                 tab="links"
-            />
+            /> */}
             <TabItem
                 text="Files"
                 url={`${currentURL}?tab=files`}
