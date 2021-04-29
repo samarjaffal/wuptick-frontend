@@ -35,11 +35,6 @@ export const Module = ({ projectId, moduleId, location }) => {
         projectExistInTeam,
     } = useUser();
 
-    let newList = '';
-    const callBackNewList = (value) => {
-        newList = value;
-    };
-
     const initModule = () => {
         if (Object.keys(currentUser).length == 0) return;
         if (!('teams' in currentUser)) return;
@@ -53,6 +48,20 @@ export const Module = ({ projectId, moduleId, location }) => {
     useEffect(() => {
         initModule();
     }, [currentUser.teams]);
+
+    const renderTabComponent = (module) => {
+        return (
+            (typeof tab == 'undefined' && (
+                <ModuleTaskLists
+                    moduleId={module._id}
+                    task={task}
+                    module={module}
+                />
+            )) ||
+            (tab == 'files' && <div>Hola</div>) ||
+            null
+        );
+    };
 
     return (
         <LoggedLayout>
@@ -98,11 +107,7 @@ export const Module = ({ projectId, moduleId, location }) => {
                                                 />
                                             </div>
 
-                                            <ModuleTaskLists
-                                                moduleId={moduleId}
-                                                task={task}
-                                                module={module}
-                                            />
+                                            {renderTabComponent(module)}
                                         </ModuleContainer>
                                     );
                                 }}
