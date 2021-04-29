@@ -7,6 +7,7 @@ import Context, { TaskContextProvider } from '../../context/TaskContext';
 import { LoggedLayout } from '../Layouts/LoggedLayout/index';
 import { ModuleTabs } from '../../components/Module/ModuleTabs';
 import { ModuleTaskLists } from './ModuleTasksLists';
+import { ListFiles } from '../../components/File/ListFiles/index';
 /* import { Sidebar } from '../../components/Sidebar/index'; */
 /* import { Sidebar } from '../../components/Sidebar2/index';
 import { ModuleSidebar } from './ModuleSidebar';
@@ -58,7 +59,7 @@ export const Module = ({ projectId, moduleId, location }) => {
                     module={module}
                 />
             )) ||
-            (tab == 'files' && <div>Hola</div>) ||
+            (tab == 'files' && <ListFiles />) ||
             null
         );
     };

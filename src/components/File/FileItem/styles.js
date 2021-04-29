@@ -7,9 +7,11 @@ import {
     info,
 } from '../../../assets/css/theme';
 
+const FILE_WIDTH = '280px';
+
 export const Container = styled.div`
-    width: 350px;
-    max-width: 350px;
+    width: ${FILE_WIDTH};
+    max-width: ${FILE_WIDTH};
     background: ${Colors.white};
     padding: 0.8em;
     border-radius: ${borderRadius};
@@ -33,12 +35,7 @@ export const Flex = styled.div`
     display: flex;
     flex-wrap: ${({ wrap }) => (wrap == true ? 'wrap' : 'none')};
 `;
-export const DetailsContainer = styled.div`
-    text-align: right;
-    width: 50%;
-    margin-left: auto;
-    margin-top: -20px;
-`;
+export const DetailsContainer = styled.div``;
 
 export const FileName = styled.span`
     ${description};
@@ -59,4 +56,10 @@ export const Date = styled.span`
 export const Size = styled.span`
     ${info};
     font-weight: ${bold};
+`;
+
+export const FileImg = styled.img`
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5em;
 `;

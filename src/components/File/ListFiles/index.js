@@ -4,7 +4,7 @@ import { List } from './styles';
 export const ListFiles = () => {
     return (
         <List>
-            {Array(6)
+            {Array(8)
                 .fill()
                 .map((item, index) => (
                     <li key={index}>
