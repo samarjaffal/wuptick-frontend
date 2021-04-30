@@ -8,7 +8,7 @@ export const ListFiles = ({ files }) => {
         <List>
             {files.map((file, index) => (
                 <li key={index}>
-                    <FileItem file={file} />
+                    <FileItem file={file} index={index + 1} />
                 </li>
             ))}
         </List>

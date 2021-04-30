@@ -67,3 +67,9 @@ export const FileImg = styled.img`
     object-fit: cover;
     object-position: center center;
 `;
+
+export const FileLink = styled.div`
+    ${description};
+    font-weight: ${bold};
+    font-size: 12px;
+`;

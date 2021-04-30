@@ -25,3 +25,8 @@ export const randomColor = () => {
     const color = tempColors[keys[(keys.length * Math.random()) << 0]];
     return color;
 };
+
+export const fileNameFromUrl = (path) => {
+    path = path.substring(path.lastIndexOf('/') + 1);
+    return (path.match(/[^.]+(\.[^?#]+)?/) || [])[0];
+};
