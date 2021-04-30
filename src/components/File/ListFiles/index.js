@@ -1,16 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FileItem } from '../FileItem/index';
 import { List } from './styles';
-export const ListFiles = () => {
+
+export const ListFiles = ({ files }) => {
     return (
         <List>
-            {Array(8)
-                .fill()
-                .map((item, index) => (
-                    <li key={index}>
-                        <FileItem />
-                    </li>
-                ))}
+            {files.map((file, index) => (
+                <li key={index}>
+                    <FileItem file={file} />
+                </li>
+            ))}
         </List>
     );
+};
+
+ListFiles.propTypes = {
+    files: PropTypes.array,
 };

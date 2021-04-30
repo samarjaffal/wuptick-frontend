@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 import { Image } from '../../Image/index';
 import { Avatar } from '../../Avatar/index';
 import {
@@ -14,29 +16,36 @@ import {
     FileImg,
 } from './styles';
 
-export const FileItem = () => {
+export const FileItem = ({ file }) => {
+    const formatDate = (_date) => {
+        let dateFormated = dayjs(_date).format('MMM. D, YYYY h:mm A');
+        return dateFormated;
+    };
+
     return (
         <Container>
             <Flex>
                 <FileName>File_name.jpg</FileName>
                 <AvatarContainer>
-                    <Avatar size={22} />
+                    <Avatar
+                        size={22}
+                        user={file.owner}
+                        src={file.owner.avatar}
+                    />
                 </AvatarContainer>
-                {/*  <InfoContainer>
-                    <FileName>File_name.jpg</FileName>
-                    <Origin>Task 1</Origin>
-                </InfoContainer> */}
             </Flex>
             <div>
-                <FileImg
-                    src="https://res.cloudinary.com/dotkp2bln/image/upload/v1619572432/dev-tests/pyh30cr3wtqekitsy6ns.png"
-                    alt="File 1"
-                />
+                <a href={file.fileUrl} target="_blank" rel="noreferrer">
+                    <FileImg src={file.fileUrl} alt="File 1" />
+                </a>
             </div>
             <DetailsContainer>
-                <Date>Apr. 10 2021 3:11 PM</Date>
-                <Size>12Mb</Size>
+                <Date>{formatDate(file.created_at)}</Date>
             </DetailsContainer>
         </Container>
     );
+};
+
+FileItem.propTypes = {
+    file: PropTypes.object,
 };

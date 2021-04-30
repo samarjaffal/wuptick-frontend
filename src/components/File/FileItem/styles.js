@@ -62,4 +62,8 @@ export const FileImg = styled.img`
     width: 100%;
     border-radius: 8px;
     margin-top: 0.5em;
+    width: 280px;
+    height: 145px;
+    object-fit: cover;
+    object-position: center center;
 `;

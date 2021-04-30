@@ -15,6 +15,7 @@ import { GetProjectSidebarQuery } from '../../requests/project/GetProjectSidebar
 import { ModuleTopBar } from './ModuleTopBar';
 import { SkeletonModule } from '../../components/Loaders/SkeletonModule/index';
 import { GetTaskListsAndTasksQuery } from '../../requests/Module/GetTaskListsAndTasksQuery';
+import { GetFilesQuery } from '../../requests/Files/GetFilesQuery';
 import { useUser } from '../../hooks/useUser';
 
 import {
@@ -59,7 +60,14 @@ export const Module = ({ projectId, moduleId, location }) => {
                     module={module}
                 />
             )) ||
-            (tab == 'files' && <ListFiles />) ||
+            (tab == 'files' && (
+                <GetFilesQuery id={moduleId}>
+                    {({ data }) => {
+                        const { getFiles: files } = data;
+                        return <ListFiles files={files} />;
+                    }}
+                </GetFilesQuery>
+            )) ||
             null
         );
     };
