@@ -39,6 +39,7 @@ export const TaskOverview = ({
             _id: currentUser._id,
         },
         parentUrl: generateTaskUrl(currentProject._id, module._id, task._id),
+        additional_params: JSON.stringify({ taskId: task._id }),
     };
 
     let mentionsItems = currentProject.members

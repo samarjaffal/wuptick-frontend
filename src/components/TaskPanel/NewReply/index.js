@@ -31,6 +31,7 @@ export const NewReply = ({ task, createComment }) => {
             _id: currentUser._id,
         },
         parentUrl: url,
+        additional_params: JSON.stringify({ taskId: task._id }),
     };
 
     let mentionsItems = currentProject.members

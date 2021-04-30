@@ -43,6 +43,7 @@ export const Reply = ({
             _id: currentUser._id,
         },
         parentUrl: url,
+        additional_params: JSON.stringify({ taskId: taskId }),
     };
 
     const formatDate = (_date) => {
