@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
+import { OptionsButtonFile } from '../OptionsButtonFile/index';
+import { DeleteFileMutation } from '../../../requests/Files/DeleteFileMutation';
 import { useTask } from '../../../hooks/useTask';
 import { Avatar } from '../../Avatar/index';
 import {
@@ -14,7 +16,7 @@ import {
     FileImg,
 } from './styles';
 
-export const FileItem = ({ file, index, type = 'task' }) => {
+export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     const [fileLinkName, setFileLinkName] = useState('');
     const [fileName, setFileName] = useState(file.fileName);
     const { getTaskFromLists, lists } = useTask();
@@ -57,6 +59,15 @@ export const FileItem = ({ file, index, type = 'task' }) => {
                         src={file.owner.avatar}
                     />
                 </AvatarContainer>
+                <DeleteFileMutation id={file.parentId}>
+                    {({ doDeleteFile }) => (
+                        <OptionsButtonFile
+                            file={file}
+                            dropdownRef={dropdownRef}
+                            doDeleteFile={doDeleteFile}
+                        />
+                    )}
+                </DeleteFileMutation>
             </Flex>
             <FileLink to={`/${file.parentUrl}`}>{fileLinkName}</FileLink>
             <div>

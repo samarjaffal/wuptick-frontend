@@ -31,10 +31,11 @@ export const InfoContainer = styled.div`
 
 export const AvatarContainer = styled.div`
     position: absolute;
-    right: 0.5em;
+    right: 45px;
 `;
 export const Flex = styled.div`
     display: flex;
+    justify-content: space-between;
     flex-wrap: ${({ wrap }) => (wrap == true ? 'wrap' : 'none')};
 `;
 export const DetailsContainer = styled.div``;

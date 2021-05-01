@@ -17,6 +17,7 @@ export const gqlGetFiles = gql`
             parentUrl
             fileUrl
             additional_params
+            deleted_at
         }
     }
 `;
