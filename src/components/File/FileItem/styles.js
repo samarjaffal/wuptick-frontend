@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Link } from '@reach/router';
 import { Colors } from '../../../assets/css/colors';
+import { Transition } from '../../../assets/css/shared-styles';
 import {
     borderRadius,
     description,
@@ -68,8 +70,14 @@ export const FileImg = styled.img`
     object-position: center center;
 `;
 
-export const FileLink = styled.div`
+export const FileLink = styled(Link)`
     ${description};
     font-weight: ${bold};
     font-size: 12px;
+    text-decoration: none;
+    ${Transition};
+    :hover {
+        text-decoration: underline;
+        color: ${Colors.primary};
+    }
 `;

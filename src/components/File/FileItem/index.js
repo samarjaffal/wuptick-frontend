@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { useTask } from '../../../hooks/useTask';
@@ -14,7 +14,8 @@ import {
     FileImg,
 } from './styles';
 
-export const FileItem = ({ file, index }) => {
+export const FileItem = ({ file, index, type = 'task' }) => {
+    const [fileLinkName, setFileLinkName] = useState('');
     const { getTaskFromLists, lists } = useTask();
 
     const formatDate = (_date) => {
@@ -24,9 +25,25 @@ export const FileItem = ({ file, index }) => {
 
     const fileParams = JSON.parse(file.additional_params);
 
-    const taskId = 'taskId' in fileParams ? fileParams.taskId : null;
+    const getTaskValues = () => {
+        const taskId = 'taskId' in fileParams ? fileParams.taskId : null;
+        const task = taskId ? getTaskFromLists(lists, taskId) : null;
+        setFileLinkName(task.name);
+    };
 
-    const task = taskId ? getTaskFromLists(lists, taskId) : null;
+    const checkFileType = () => {
+        switch (type) {
+            case 'task':
+                return getTaskValues();
+
+            case 'module':
+                return null;
+        }
+    };
+
+    useEffect(() => {
+        checkFileType();
+    }, []);
 
     return (
         <Container>
@@ -40,7 +57,7 @@ export const FileItem = ({ file, index }) => {
                     />
                 </AvatarContainer>
             </Flex>
-            <FileLink>{task.name}</FileLink>
+            <FileLink to={`/${file.parentUrl}`}>{fileLinkName}</FileLink>
             <div>
                 <a href={file.fileUrl} target="_blank" rel="noreferrer">
                     <FileImg src={file.fileUrl} alt="File 1" />
@@ -56,4 +73,5 @@ export const FileItem = ({ file, index }) => {
 FileItem.propTypes = {
     file: PropTypes.object,
     index: PropTypes.number,
+    type: PropTypes.string,
 };
