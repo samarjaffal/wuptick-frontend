@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FileItem } from '../FileItem/index';
+import { NoData } from '../../NoData/index';
 import { List } from './styles';
 
 export const ListFiles = ({ files }) => {
-    return (
+    return files.length > 0 ? (
         <List>
             {files.map((file, index) => (
                 <li key={index}>
@@ -12,6 +13,8 @@ export const ListFiles = ({ files }) => {
                 </li>
             ))}
         </List>
+    ) : (
+        <NoData message="You don't have any files here 👀." />
     );
 };
 
