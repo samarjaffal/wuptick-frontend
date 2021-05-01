@@ -45,6 +45,7 @@ export const useTask = () => {
         (lists, taskId) => {
             if (lists.length == 0) return;
             const list = lists.find((list) => listHaveTask(list, taskId));
+            if (typeof list == 'undefined') return null;
             const task = list.tasks.find((task) => task._id == taskId);
             return task;
         },

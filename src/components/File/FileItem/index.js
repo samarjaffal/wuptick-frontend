@@ -31,7 +31,8 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     const getTaskValues = () => {
         const taskId = 'taskId' in fileParams ? fileParams.taskId : null;
         const task = taskId ? getTaskFromLists(lists, taskId) : null;
-        setFileLinkName(task.name);
+        const fileLinkName = task == null ? '' : task.name;
+        setFileLinkName(fileLinkName);
     };
 
     const checkFileType = () => {
