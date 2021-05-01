@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 import ReactDom from 'react-dom';
 import { OptionsButton } from '../../OptionsButton/index';
 import { FileDropDown } from '../FileDropdown';
+import { DeleteModal } from '../../Modal/templates/DeleteModal/index';
 import { OutsideClick } from '../../OutsideClick/index';
 import { useDropdown } from '../../../hooks/useDropdown';
 
-export const OptionsButtonFile = ({ dropdownRef, file, doDeleteFile }) => {
+export const OptionsButtonFile = ({
+    dropdownRef,
+    file,
+    doDeleteFile,
+    loadingDelete,
+}) => {
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
 
     let optionsRef = useRef();
+    let modalRef = useRef();
 
     const initDropDown = () => {
         document.getElementById('dropwdown-app').innerHTML = '';
@@ -31,9 +38,14 @@ export const OptionsButtonFile = ({ dropdownRef, file, doDeleteFile }) => {
         closeDropDown();
     };
 
+    const openDeleteModal = () => {
+        modalRef.current.openModal();
+        closeDropDown();
+    };
+
     const DeleteFile = async () => {
         await doDeleteFile(file._id);
-        closeDropDown();
+        modalRef.current.closeModal();
     };
 
     return (
@@ -44,11 +56,17 @@ export const OptionsButtonFile = ({ dropdownRef, file, doDeleteFile }) => {
                     <OutsideClick setLocalDropDownState={handleOutsideClick}>
                         <FileDropDown
                             dropdownRef={dropdownRef}
-                            DeleteFile={DeleteFile}
+                            DeleteFile={openDeleteModal}
                         />
                     </OutsideClick>,
                     document.getElementById('dropwdown-app')
                 )}
+            <DeleteModal
+                modalRef={modalRef}
+                title={`Are you about delete this file?`}
+                doFunc={DeleteFile}
+                loading={loadingDelete}
+            />
         </>
     );
 };

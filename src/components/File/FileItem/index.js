@@ -61,11 +61,12 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
                     />
                 </AvatarContainer>
                 <DeleteFileMutation id={file.parentId}>
-                    {({ doDeleteFile }) => (
+                    {({ doDeleteFile, loading }) => (
                         <OptionsButtonFile
                             file={file}
                             dropdownRef={dropdownRef}
                             doDeleteFile={doDeleteFile}
+                            loadingDelete={loading}
                         />
                     )}
                 </DeleteFileMutation>
