@@ -16,6 +16,7 @@ import {
 
 export const FileItem = ({ file, index, type = 'task' }) => {
     const [fileLinkName, setFileLinkName] = useState('');
+    const [fileName, setFileName] = useState(file.fileName);
     const { getTaskFromLists, lists } = useTask();
 
     const formatDate = (_date) => {
@@ -48,7 +49,7 @@ export const FileItem = ({ file, index, type = 'task' }) => {
     return (
         <Container>
             <Flex>
-                <FileName>{`File ${index}`}</FileName>
+                <FileName>{fileName || `File ${index}`}</FileName>
                 <AvatarContainer>
                     <Avatar
                         size={22}

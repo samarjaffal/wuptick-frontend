@@ -5,6 +5,7 @@ export const gqlGetFiles = gql`
         getFiles(id: $id) {
             _id
             parentId
+            fileName
             owner {
                 _id
                 name

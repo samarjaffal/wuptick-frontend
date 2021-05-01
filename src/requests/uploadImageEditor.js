@@ -3,9 +3,12 @@ import { getAccessToken } from '../shared/GetAccessToken';
 import { useUser } from '../hooks/useUser';
 const URL = `${config.backUrl}upload_editor_image`;
 
+let FILE_NAME = '';
+
 const readImage = async (file) => {
     return new Promise((resolve) => {
         const reader = new FileReader();
+        FILE_NAME = file.name;
         reader.readAsDataURL(file);
         reader.onloadend = () => resolve(reader.result);
     });
@@ -24,7 +27,7 @@ export const uploadImageEditor = async (file, fileData) => {
         body: JSON.stringify({
             data: base64EncondedImg,
             token: getAccessToken(),
-            fileData: JSON.stringify(fileData),
+            fileData: JSON.stringify({ ...fileData, fileName: FILE_NAME }),
         }),
     })
         .then(async (response) => {
