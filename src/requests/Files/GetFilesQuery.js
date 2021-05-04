@@ -1,6 +1,8 @@
+import React from 'react';
 import { useQuery } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { gqlGetFiles } from '../graphql/gqlGetFiles';
+import { SkeletonFiles } from '../../components/Loaders/SkeletonFiles/index';
 
 export const GetFilesQuery = ({ children, id }) => {
     const { error, loading, data } = useQuery(gqlGetFiles, {
@@ -11,7 +13,7 @@ export const GetFilesQuery = ({ children, id }) => {
         },
     });
     if (loading || !data) {
-        return 'loading';
+        return <SkeletonFiles />;
     }
 
     if (error) {

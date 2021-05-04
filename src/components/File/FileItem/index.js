@@ -19,7 +19,10 @@ import {
 export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     const [fileLinkName, setFileLinkName] = useState('');
     const [fileName, setFileName] = useState(file.fileName);
+    const [fileParentUrl, setFileParentUrl] = useState(`/${file.parentUrl}`);
     const { getTaskFromLists, lists } = useTask();
+
+    const NO_URL = '?tab=files';
 
     const formatDate = (_date) => {
         let dateFormated = dayjs(_date).format('MMM. D, YYYY h:mm A');
@@ -31,7 +34,9 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     const getTaskValues = () => {
         const taskId = 'taskId' in fileParams ? fileParams.taskId : null;
         const task = taskId ? getTaskFromLists(lists, taskId) : null;
-        const fileLinkName = task == null ? '' : task.name;
+        const fileLinkName = task == null ? 'N/A' : task.name;
+        const updatedFileParentUrl = task == null ? NO_URL : fileParentUrl;
+        setFileParentUrl(updatedFileParentUrl);
         setFileLinkName(fileLinkName);
     };
 
@@ -71,7 +76,7 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
                     )}
                 </DeleteFileMutation>
             </Flex>
-            <FileLink to={`/${file.parentUrl}`}>{fileLinkName}</FileLink>
+            <FileLink to={fileParentUrl}>{fileLinkName}</FileLink>
             <div>
                 <a href={file.fileUrl} target="_blank" rel="noreferrer">
                     <FileImg src={file.fileUrl} alt="File 1" />
