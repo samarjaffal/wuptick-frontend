@@ -1,6 +1,5 @@
 import { config } from '../../config/index';
 import { getAccessToken } from '../shared/GetAccessToken';
-import { useUser } from '../hooks/useUser';
 const URL = `${config.backUrl}upload_editor_image`;
 
 let FILE_NAME = '';

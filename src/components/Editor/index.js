@@ -2,12 +2,18 @@ import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
+import { getAccessToken } from '../../shared/GetAccessToken';
+import AttachesTool from '@editorjs/attaches';
 import {
     EDITORCONF,
     setMentionsConfig,
     setExternalDataConf,
 } from './editor-conf';
-import { customQuoteBlock, customImageBlock } from './customBlocks';
+import {
+    customQuoteBlock,
+    customImageBlock,
+    customFileBlock,
+} from './customBlocks';
 import { urlify } from './editor-helpers';
 import { Button } from '../SharedComponents/styles';
 import { EditorStyle } from '../../assets/css/EditorStyle';
@@ -41,6 +47,15 @@ export const Editor = ({
         holder: id,
         data: initData ? initData : defaultEditorData,
         placeholder: placeholder,
+        tools: {
+            ...EDITORCONF.tools,
+            attaches: {
+                class: AttachesTool,
+                config: {
+                    endpoint: `http://localhost:27017/upload_editor_file?token=${getAccessToken()}`,
+                },
+            },
+        },
     });
 
     setMentionsConfig({
@@ -54,6 +69,7 @@ export const Editor = ({
         const edjsParser = edjsHTML({
             quote: customQuoteBlock,
             image: customImageBlock,
+            attaches: customFileBlock,
         });
         let html = edjsParser.parse(outputData);
         let output = document.createElement('div');

@@ -39,4 +39,10 @@ export const TaskDescriptionStyle = createGlobalStyle`
     .ReplyInfo .custom-task-description figure img{
       max-height:250px;   
     }
+
+    .custom-task-description .cdx-attaches--with-file .cdx-attaches__file-icon::before {
+        position: absolute;
+        bottom: 12px;
+        left: 7.5px;
+    }
 `;

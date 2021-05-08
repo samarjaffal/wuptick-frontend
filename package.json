@@ -25,6 +25,7 @@
         "@babel/plugin-transform-runtime": "^7.10.5",
         "@babel/preset-env": "^7.10.4",
         "@babel/preset-react": "^7.10.4",
+        "@editorjs/attaches": "^1.0.1",
         "@editorjs/image": "^2.6.0",
         "@editorjs/quote": "^2.4.0",
         "@svgr/webpack": "^5.5.0",

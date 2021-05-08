@@ -68,4 +68,11 @@ export const EditorStyle = createGlobalStyle`
     .cdx-list__item{
         padding: 4px 0;
     }
+    .cdx-attaches--with-file .cdx-attaches__file-icon::before{
+        color: ${Colors.gray} !important;
+    }
+
+    .cdx-attaches--with-file .cdx-attaches__file-icon svg{
+        fill:  ${Colors.gray} !important;
+    }
 `;
