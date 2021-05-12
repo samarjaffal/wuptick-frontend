@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { getAccessToken } from '../../../shared/GetAccessToken';
 import { Input } from '../../SharedComponents/styles';
 import { Avatar } from '../../Avatar/index';
 import { Editor } from '../../Editor/index';
@@ -32,6 +33,7 @@ export const NewReply = ({ task, createComment }) => {
         },
         parentUrl: url,
         additional_params: JSON.stringify({ taskId: task._id }),
+        token: getAccessToken(),
     };
 
     let mentionsItems = currentProject.members

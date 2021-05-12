@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import { navigate } from '@reach/router';
+import { getAccessToken } from '../../shared/GetAccessToken';
 import { Editor } from '../Editor/index';
 import { Avatar } from '../Avatar/index';
 import { OptionsButtonReplies } from '../TaskPanel/OptionsButtonReply/index';
@@ -44,6 +45,7 @@ export const Reply = ({
         },
         parentUrl: url,
         additional_params: JSON.stringify({ taskId: taskId }),
+        token: getAccessToken(),
     };
 
     const formatDate = (_date) => {

@@ -1,14 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import EditorJS from '@editorjs/editorjs';
 import edjsHTML from 'editorjs-html';
-import { getAccessToken } from '../../shared/GetAccessToken';
-import AttachesTool from '@editorjs/attaches';
-import {
-    EDITORCONF,
-    setMentionsConfig,
-    setExternalDataConf,
-} from './editor-conf';
+import { useEditorTools } from './useEditorTools';
 import {
     customQuoteBlock,
     customImageBlock,
@@ -41,29 +35,30 @@ export const Editor = ({
     externalDataConf = {},
 }) => {
     console.log('editor here', initData);
+    const [editor, setEditor] = useState(null);
 
-    const editor = new EditorJS({
-        ...EDITORCONF,
-        holder: id,
-        data: initData ? initData : defaultEditorData,
-        placeholder: placeholder,
-        tools: {
-            ...EDITORCONF.tools,
-            attaches: {
-                class: AttachesTool,
-                config: {
-                    endpoint: `http://localhost:27017/upload_editor_file?token=${getAccessToken()}`,
-                },
-            },
-        },
-    });
+    const {
+        setMentionsConfig,
+        setExternalDataConf,
+        setEditorConfig,
+    } = useEditorTools(setEditor);
 
-    setMentionsConfig({
-        items: mentionItems,
-        editorId: id,
-    });
+    useEffect(() => {
+        setMentionsConfig({
+            items: mentionItems,
+            editorId: id,
+        });
 
-    setExternalDataConf(externalDataConf);
+        setExternalDataConf(externalDataConf);
+
+        setEditorConfig({
+            holder: id,
+            data: initData ? initData : defaultEditorData,
+            placeholder: placeholder,
+            autofocus: true,
+            logLevel: 'WARN',
+        });
+    }, []);
 
     const parseToHTMl = (outputData) => {
         const edjsParser = edjsHTML({
@@ -91,15 +86,7 @@ export const Editor = ({
             .catch((error) => {
                 console.log('Saving failed: ', error);
             });
-    }, []);
-
-    useEffect(() => {
-        return () => {
-            if (editor) {
-                editor.destroy();
-            }
-        };
-    }, []);
+    }, [editor]);
 
     return (
         <>
@@ -137,4 +124,6 @@ Editor.propTypes = {
     onSave: PropTypes.func,
     buttonSaveText: PropTypes.string,
     placeholder: PropTypes.string,
+    mentionItems: PropTypes.array,
+    externalDataConf: PropTypes.object,
 };

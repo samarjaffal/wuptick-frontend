@@ -44,6 +44,7 @@
         "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
+        "@codexteam/ajax": "^4.2.0",
         "@editorjs/editorjs": "^2.19.1",
         "@editorjs/header": "^2.6.1",
         "@editorjs/list": "^1.6.1",

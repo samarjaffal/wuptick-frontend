@@ -1,8 +1,11 @@
+import { useState, useEffect } from 'react';
+import EditorJS from '@editorjs/editorjs';
 import ImageTool from '@editorjs/image';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Quote from '@editorjs/quote';
 import Paragraph from './plugins/custom-paragraph/index.js';
+import AttachesTool from './plugins/custom-attaches';
 import {
     Mention,
     setEditorId,
@@ -10,25 +13,31 @@ import {
 import './plugins/custom-mention/custom-mention.css';
 import { uploadImageEditor } from '../../requests/uploadImageEditor';
 
-let mentionsConfig = {};
-export const setMentionsConfig = (config) => {
-    setEditorId(config.editorId);
-    mentionsConfig.items = config.items;
-    mentionsConfig.editorId = config.editorId;
-};
+export const useEditorTools = (setEditorData) => {
+    const [mentionsConfig] = useState({});
+    const [externalDataConf, setExternalDataConf] = useState({});
+    const [editorConfig, setEditorConfig] = useState({});
+    let editor;
 
-let externalDataConf = {};
+    useEffect(() => {
+        if (Object.keys(editorConfig).length) {
+            editor = new EditorJS({ ...editorConfig, tools });
+            setEditorData(editor);
+        }
+        return () => {
+            if (editor) {
+                editor.destroy();
+            }
+        };
+    }, [editorConfig]);
 
-export const setExternalDataConf = (data) => {
-    externalDataConf = data;
-};
+    const setMentionsConfig = (config) => {
+        setEditorId(config.editorId);
+        mentionsConfig.items = config.items;
+        mentionsConfig.editorId = config.editorId;
+    };
 
-export const EDITORCONF = {
-    holder: 'editor',
-    placeholder: 'Write a description...',
-    autofocus: true,
-    logLevel: 'WARN',
-    tools: {
+    const tools = {
         paragraph: {
             class: Paragraph,
             inlineToolbar: true,
@@ -84,5 +93,22 @@ export const EDITORCONF = {
                 captionPlaceholder: "Quote's author",
             },
         },
-    },
+
+        attaches: {
+            class: AttachesTool,
+            config: {
+                endpoint: `http://localhost:27017/upload_editor_file`,
+                additionalRequestData: {
+                    data: JSON.stringify({ ...externalDataConf, type: 'file' }),
+                },
+            },
+        },
+    };
+
+    return {
+        setMentionsConfig,
+        setExternalDataConf,
+        editor,
+        setEditorConfig,
+    };
 };

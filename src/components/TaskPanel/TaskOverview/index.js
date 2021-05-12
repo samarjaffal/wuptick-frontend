@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
+import { getAccessToken } from '../../../shared/GetAccessToken';
 import { Avatar } from '../../Avatar/index';
 import { TaskPanelOptionButtons } from '../TaskPanelOptionButtons/index';
 import { FontIconButton } from '../../FontIconButton/index';
@@ -40,6 +41,7 @@ export const TaskOverview = ({
         },
         parentUrl: generateTaskUrl(currentProject._id, module._id, task._id),
         additional_params: JSON.stringify({ taskId: task._id }),
+        token: getAccessToken(),
     };
 
     let mentionsItems = currentProject.members
