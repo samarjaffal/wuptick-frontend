@@ -26,7 +26,11 @@ export const uploadImageEditor = async (file, fileData) => {
         body: JSON.stringify({
             data: base64EncondedImg,
             token: getAccessToken(),
-            fileData: JSON.stringify({ ...fileData, fileName: FILE_NAME }),
+            fileData: JSON.stringify({
+                ...fileData,
+                additional_params: JSON.stringify(fileData.additional_params),
+                fileName: FILE_NAME,
+            }),
         }),
     })
         .then(async (response) => {

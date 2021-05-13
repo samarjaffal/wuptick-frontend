@@ -32,7 +32,7 @@ export const NewReply = ({ task, createComment }) => {
             _id: currentUser._id,
         },
         parentUrl: url,
-        additional_params: JSON.stringify({ taskId: task._id }),
+        additional_params: { taskId: task._id },
         token: getAccessToken(),
     };
 

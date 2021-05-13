@@ -99,7 +99,13 @@ export const useEditorTools = (setEditorData) => {
             config: {
                 endpoint: `http://localhost:27017/upload_editor_file`,
                 additionalRequestData: {
-                    data: JSON.stringify({ ...externalDataConf, type: 'file' }),
+                    data: JSON.stringify({
+                        ...externalDataConf,
+                        additional_params: JSON.stringify({
+                            ...externalDataConf.additional_params,
+                            type: 'file',
+                        }),
+                    }),
                 },
             },
         },

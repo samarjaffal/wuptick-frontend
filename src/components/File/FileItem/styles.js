@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Colors } from '../../../assets/css/colors';
 import { Transition } from '../../../assets/css/shared-styles';
 import {
@@ -71,6 +72,28 @@ export const FileImg = styled.img`
     object-position: center center;
 `;
 
+export const FileContainer = styled.div`
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5em;
+    width: 280px;
+    height: 145px;
+    background-color: ${Colors.whitePrimary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Circle = styled.div`
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px solid ${Colors.softGray};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const FileLink = styled(Link)`
     ${description};
     font-weight: ${bold};
@@ -81,4 +104,9 @@ export const FileLink = styled(Link)`
         text-decoration: underline;
         color: ${Colors.primary};
     }
+`;
+
+export const FileIcon = styled(FontAwesomeIcon)`
+    color: ${Colors.primary};
+    font-size: 40px;
 `;

@@ -4,6 +4,7 @@ import {
     faSquare,
     faCheckSquare,
     faTrashAlt as faTrashRegular,
+    faFileAlt,
 } from '@fortawesome/free-regular-svg-icons';
 import {
     faFolderOpen,
@@ -72,5 +73,6 @@ library.add(
     faCommentAlt,
     faAt,
     faArrowCircleUp,
-    faChevronCircleUp
+    faChevronCircleUp,
+    faFileAlt
 );

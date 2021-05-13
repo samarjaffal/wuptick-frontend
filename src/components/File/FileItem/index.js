@@ -14,12 +14,16 @@ import {
     Date,
     FileLink,
     FileImg,
+    FileContainer,
+    Circle,
+    FileIcon,
 } from './styles';
 
 export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     const [fileLinkName, setFileLinkName] = useState('');
     const [fileName, setFileName] = useState(file.fileName);
     const [fileParentUrl, setFileParentUrl] = useState(`/${file.parentUrl}`);
+    const [fileType, setFileType] = useState(file.fileName);
     const { getTaskFromLists, lists } = useTask();
 
     const NO_URL = '?tab=files';
@@ -31,6 +35,11 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
 
     const fileParams = JSON.parse(file.additional_params);
 
+    const checkFileType = () => {
+        const type = 'type' in fileParams ? fileParams.type : 'image';
+        setFileType(type);
+    };
+
     const getTaskValues = () => {
         const taskId = 'taskId' in fileParams ? fileParams.taskId : null;
         const task = taskId ? getTaskFromLists(lists, taskId) : null;
@@ -38,9 +47,10 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
         const updatedFileParentUrl = task == null ? NO_URL : fileParentUrl;
         setFileParentUrl(updatedFileParentUrl);
         setFileLinkName(fileLinkName);
+        checkFileType();
     };
 
-    const checkFileType = () => {
+    const checkParent = () => {
         switch (type) {
             case 'task':
                 return getTaskValues();
@@ -51,7 +61,7 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
     };
 
     useEffect(() => {
-        checkFileType();
+        checkParent();
     }, []);
 
     return (
@@ -79,7 +89,15 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
             <FileLink to={fileParentUrl}>{fileLinkName}</FileLink>
             <div>
                 <a href={file.fileUrl} target="_blank" rel="noreferrer">
-                    <FileImg src={file.fileUrl} alt="File 1" />
+                    {fileType === 'image' ? (
+                        <FileImg src={file.fileUrl} alt="File 1" />
+                    ) : (
+                        <FileContainer>
+                            <Circle>
+                                <FileIcon icon={['far', 'file-alt']} />
+                            </Circle>
+                        </FileContainer>
+                    )}
                 </a>
             </div>
             <DetailsContainer>

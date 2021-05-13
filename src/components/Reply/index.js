@@ -44,7 +44,7 @@ export const Reply = ({
             _id: currentUser._id,
         },
         parentUrl: url,
-        additional_params: JSON.stringify({ taskId: taskId }),
+        additional_params: { taskId: taskId },
         token: getAccessToken(),
     };
 
