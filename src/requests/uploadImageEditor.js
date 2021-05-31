@@ -14,24 +14,27 @@ const readImage = async (file) => {
 };
 
 export const uploadImageEditor = async (file, fileData) => {
-    let base64EncondedImg = await readImage(file);
+    // let base64EncondedImg = await readImage(file);
+
+    const formData = new FormData();
+
+    formData.append('file', file);
+    formData.append(
+        'data',
+        JSON.stringify({
+            ...fileData,
+            additional_params: JSON.stringify(fileData.additional_params),
+            fileName: FILE_NAME,
+        })
+    );
 
     return await fetch(URL, {
         method: 'POST',
         credentials: 'include',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            data: base64EncondedImg,
-            token: getAccessToken(),
-            fileData: JSON.stringify({
-                ...fileData,
-                additional_params: JSON.stringify(fileData.additional_params),
-                fileName: FILE_NAME,
-            }),
-        }),
+        body: formData,
     })
         .then(async (response) => {
             const data = await response.json();
