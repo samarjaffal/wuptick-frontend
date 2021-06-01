@@ -21,17 +21,22 @@ export const EditProfileAvatar = ({ user }) => {
     const [image, setImage] = useState(user.avatar);
     const [originalImage] = useState(user.avatar);
     const [showSaveButton, setShowSaveButton] = useState(false);
+    const [fileName, setFileName] = useState('');
     const fileUpload = useRef(null);
 
     const previewImage = () => {
         let input = fileUpload.current;
         let previewImage = '';
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            const file = input.files[0];
+            const reader = new FileReader();
 
+            setFileName(file.name);
+            console.log(file.name, 'filename');
             reader.onload = function (e) {
                 previewImage = e.target.result;
                 setImage(previewImage);
+                console.log(previewImage, 'previewImage');
                 setShowSaveButton(true);
             };
 
@@ -86,7 +91,9 @@ export const EditProfileAvatar = ({ user }) => {
                             <SaveAvatarSpan>
                                 Do you like your new avatar?{' '}
                                 <SaveAvatarButton
-                                    onClick={() => doEditAvatar(image)}
+                                    onClick={() =>
+                                        doEditAvatar(image, fileName)
+                                    }
                                 >
                                     Let&apos; save it 🚀.
                                 </SaveAvatarButton>

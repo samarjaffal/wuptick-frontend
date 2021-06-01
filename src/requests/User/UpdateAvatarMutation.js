@@ -13,10 +13,11 @@ export const UpdateAvatarMutation = ({ children, doAfterSave }) => {
             },
         }
     );
-    const doEditAvatar = useCallback((imgStr) => {
+    const doEditAvatar = useCallback((imgStr, fileName) => {
         editAvatar({
             variables: {
                 imgStr,
+                fileName,
             },
         });
     });
