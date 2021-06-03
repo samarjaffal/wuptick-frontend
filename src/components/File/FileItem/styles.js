@@ -10,7 +10,7 @@ import {
     info,
 } from '../../../assets/css/theme';
 
-const FILE_WIDTH = '280px';
+const FILE_WIDTH = '100%';
 
 export const Container = styled.div`
     width: ${FILE_WIDTH};
@@ -19,8 +19,7 @@ export const Container = styled.div`
     padding: 0.8em;
     border-radius: ${borderRadius};
     position: relative;
-    margin-right: 1em;
-    margin-bottom: 1em;
+    box-sizing: border-box;
 `;
 
 export const InfoContainer = styled.div`
@@ -44,6 +43,12 @@ export const DetailsContainer = styled.div``;
 export const FileName = styled.span`
     ${description};
     font-weight: ${bold};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 220px;
 `;
 
 export const Origin = styled.span`
@@ -66,7 +71,6 @@ export const FileImg = styled.img`
     width: 100%;
     border-radius: 8px;
     margin-top: 0.5em;
-    width: 280px;
     height: 145px;
     object-fit: cover;
     object-position: center center;
@@ -76,7 +80,7 @@ export const FileContainer = styled.div`
     width: 100%;
     border-radius: 8px;
     margin-top: 0.5em;
-    width: 280px;
+    width: 100%;
     height: 145px;
     background-color: ${Colors.whitePrimary};
     display: flex;

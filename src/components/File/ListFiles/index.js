@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DropdownContextProvider } from '../../../context/DropdownContext';
 import { FileItem } from '../FileItem/index';
 import { NoData } from '../../NoData/index';
-import { List } from './styles';
+import { List, Li } from './styles';
 
 export const ListFiles = ({ files }) => {
     const dropdownRef = useRef(null);
@@ -16,13 +16,13 @@ export const ListFiles = ({ files }) => {
                 {files.map(
                     (file, index) =>
                         !isDeleted(file) && (
-                            <li key={index}>
+                            <Li key={index}>
                                 <FileItem
                                     file={file}
                                     index={index + 1}
                                     dropdownRef={dropdownRef}
                                 />
-                            </li>
+                            </Li>
                         )
                 )}
             </List>

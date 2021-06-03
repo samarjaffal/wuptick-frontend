@@ -73,6 +73,7 @@ export const FileItem = ({ dropdownRef, file, index, type = 'task' }) => {
                         size={22}
                         user={file.owner}
                         src={file.owner.avatar}
+                        hide={false}
                     />
                 </AvatarContainer>
                 <DeleteFileMutation id={file.parentId}>
