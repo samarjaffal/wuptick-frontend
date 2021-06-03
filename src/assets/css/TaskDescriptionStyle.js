@@ -45,4 +45,9 @@ export const TaskDescriptionStyle = createGlobalStyle`
         bottom: 12px;
         left: 7.5px;
     }
+
+    .cdx-attaches--with-file .cdx-attaches__title{
+        max-width: 450px;
+    }
+
 `;
