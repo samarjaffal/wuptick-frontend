@@ -1,3 +1,4 @@
+import { config } from '../../../config/index';
 import { useState, useEffect } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import ImageTool from '@editorjs/image';
@@ -97,7 +98,7 @@ export const useEditorTools = (setEditorData) => {
         attaches: {
             class: AttachesTool,
             config: {
-                endpoint: `http://localhost:27017/upload_editor_file`,
+                endpoint: `${config.backUrl}upload_editor_file`,
                 additionalRequestData: {
                     data: JSON.stringify({
                         ...externalDataConf,
