@@ -6,6 +6,7 @@ import { Me } from '../../../requests/MeQuery../../../components/Me/index';
 import { EditUserMutation } from '../../../requests/User/EditUserMutation';
 import { ChangePasswordModal } from '../../../components/Modal/templates/ChangePasswordModal/index';
 import { EditProfileAvatar } from '../EditProfileAvatar';
+import { Colors } from '../../../assets/css/colors';
 import {
     Container,
     Title,
@@ -169,16 +170,11 @@ export const EditProfile = () => {
                                     <Hr />
                                     <DeleteAccountContainer>
                                         <DeleteAccountInfoContainer>
-                                            <SubTitle>Delete</SubTitle>
+                                            <SubTitle>Inactive my account</SubTitle>
                                             <Description>
-                                                Delete my account
+                                                If you want to inactive your account, please contact us at &nbsp;<a style={{ color: Colors.black }} href="mailto: dev.wuptick@gmail.com">dev.wuptick@gmail.com</a>
                                             </Description>
                                         </DeleteAccountInfoContainer>
-                                        <DeleteAnchorContainer>
-                                            <Anchor href="#" color="red">
-                                                Delete account
-                                            </Anchor>
-                                        </DeleteAnchorContainer>
                                     </DeleteAccountContainer>
                                 </AccountContainer>
                             </Container>
