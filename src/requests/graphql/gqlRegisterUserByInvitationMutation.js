@@ -25,6 +25,10 @@ export const gqlRegisterUserByInvitation = gql`
                 teamId
                 updated_at
             }
+
+            ... on InvalidUser {
+                message
+            }
         }
     }
 `;
