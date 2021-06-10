@@ -28,6 +28,10 @@ export const RegisterUserByInvitationMutation = ({ children }) => {
                     (d) => d['registerUserByInvitation'].__typename
                 );
 
+                if (typename === 'InvalidUser' || typename === 'Error') {
+                    return;
+                }
+
                 if (typename == 'Invitation') {
                     const invitationsData = store.readQuery({
                         query: gqlGetInvitationsForProject,
