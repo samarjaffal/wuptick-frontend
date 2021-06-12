@@ -45,6 +45,7 @@ export const RepliesSection = ({ task }) => {
                                                         dropdownRef={
                                                             dropdownRef
                                                         }
+                                                        isActiveUser={reply.owner.status === 'active'}
                                                         itemsRef={itemsRef}
                                                         taskId={task._id}
                                                         updateComment={
