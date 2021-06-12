@@ -5,7 +5,7 @@ import { useUser } from '../hooks/useUser';
 import PropTypes from 'prop-types';
 
 export const LastActivityQuery = ({ children }) => {
-    const { teamSelected } = useUser();
+    const { currentUser } = useUser();
     const [lastActivity, { error, loading, data }] = useLazyQuery(
         gqlLastActivity,
         {
@@ -14,15 +14,15 @@ export const LastActivityQuery = ({ children }) => {
             },
         }
     );
-    const doLastActivity = useCallback((teamId) => {
+    const doLastActivity = useCallback((userId) => {
         lastActivity({
-            variables: { team: teamId },
+            variables: { userId },
         });
     });
 
     useEffect(() => {
-        if (teamSelected._id) doLastActivity(teamSelected._id);
-    }, [teamSelected]);
+        if (currentUser._id) doLastActivity(currentUser._id);
+    }, [currentUser]);
 
     return children({ loading, error, data });
 };
