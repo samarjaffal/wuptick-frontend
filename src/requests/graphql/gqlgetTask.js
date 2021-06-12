@@ -18,6 +18,7 @@ export const gqlGetTask = gql`
                 last_name
                 avatar
                 color
+                status
             }
             collaborators {
                 _id
