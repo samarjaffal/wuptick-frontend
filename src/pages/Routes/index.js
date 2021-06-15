@@ -16,7 +16,7 @@ import { config } from '../../../config/index';
 
 const DefaultRoutes = () => {
     const { isLogged, profileURL } = useUser();
-    useEffect(() => {}, [isLogged]);
+    useEffect(() => { }, [isLogged]);
 
     return isLogged ? (
         <Router>
@@ -39,7 +39,7 @@ const DefaultRoutes = () => {
         <Router>
             <PublicRoute component={Auth} path="/" type="login" />
             <PublicRoute component={Auth} path="login" type="login" />
-            <PublicRoute component={Auth} path="register" type="register" />
+            {/* <PublicRoute component={Auth} path="register" type="register" /> */}
             <RedirectTo default />
             <Oops path="oops" />
         </Router>
