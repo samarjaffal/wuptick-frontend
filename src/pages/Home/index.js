@@ -32,32 +32,35 @@ export const Home = () => {
             <Container>
                 <HeaderContainer>
                     <Title>Activity </Title>
-                    <div>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            color={Colors.primary}
-                            onClicked={() => modalRef.current.openModal()}
-                        >
-                            New Project
-                        </ButtonHome>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            margin="0 0 0 1em"
-                            color={Colors.orange}
-                        >
-                            New Team
-                        </ButtonHome>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            margin="0 0 0 1em"
-                            color={Colors.yellow}
-                        >
-                            New Task
-                        </ButtonHome>
-                    </div>
+                    {false && (
+                        <div>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                color={Colors.primary}
+                                onClicked={() => modalRef.current.openModal()}
+                            >
+                                New Project
+                            </ButtonHome>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                margin="0 0 0 1em"
+                                color={Colors.orange}
+                            >
+                                New Team
+                            </ButtonHome>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                margin="0 0 0 1em"
+                                color={Colors.yellow}
+                            >
+                                New Task
+                            </ButtonHome>
+                        </div>
+                    )}
+
                 </HeaderContainer>
 
                 <Wrapper>
