@@ -14,6 +14,7 @@ export const gqlGetNotifications = gql`
                 name
                 last_name
                 email
+                avatar
             }
             created_at
             read_at

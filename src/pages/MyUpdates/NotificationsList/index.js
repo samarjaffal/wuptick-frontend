@@ -7,8 +7,9 @@ import { Ul } from '../../../components/SharedComponents/styles';
 
 export const NotificationsList = ({ notifications, setRead }) => {
     const isNotHiden = (notification) => !notification.hide;
+    const isValid = notification => notification.external_id !== null;
 
-    const filterNotifications = () => notifications.filter(isNotHiden);
+    const filterNotifications = () => notifications.filter(isNotHiden && isValid);
 
     const [filteredNotifications, setNotifications] = useState(() =>
         filterNotifications(notifications)

@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Notification } from '../Notification';
 import { config } from '../../../../config/index';
 import { Avatar } from '../../Avatar/index';
-import { Me } from '../../Me/index';
-import { SkeletonAvatar } from '../../Loaders/SkeletonAvatar/index';
 import {
     NotificationDescription,
     NotificationType,
@@ -14,6 +12,8 @@ import {
 export const NotificationAssignation = ({ notification, setRead }) => {
     const { external_id: task } = notification;
 
+    useEffect(() => { }, [])
+
     const goToNotification = () => {
         window.open(`${config.url}${notification.url}`, '_blank').focus();
         setRead([notification._id]);
@@ -21,9 +21,7 @@ export const NotificationAssignation = ({ notification, setRead }) => {
 
     return (
         <Notification notification={notification}>
-            <Me loader={SkeletonAvatar} loaderProps={{ qty: 1, size: 20 }}>
-                {({ avatar }) => <Avatar size={20} src={avatar} hide={false} />}
-            </Me>
+            <Avatar size={20} src={notification.recipient.avatar} hide={false} user={notification.recipient} />
             <GoToNotification onClick={() => goToNotification()}>
                 <NotificationDescription>
                     <NotificationType>New assignation: </NotificationType>
