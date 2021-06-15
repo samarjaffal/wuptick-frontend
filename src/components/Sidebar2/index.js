@@ -13,7 +13,7 @@ import { Sidebar as SidebarStyled, Ul, Hr } from './styles';
 export const Sidebar = () => {
     const { handleCollapse, isCollapsed } = useSidebar();
 
-    const { profileURL, teamSelected } = useUser();
+    const { profileURL } = useUser();
 
     const left = isCollapsed ? '-280px' : '0';
     return (
@@ -51,7 +51,6 @@ export const Sidebar = () => {
                     )}
                 </Me>
                 <Hr />
-                {teamSelected.name}
             </Ul>
         </SidebarStyled>
     );
