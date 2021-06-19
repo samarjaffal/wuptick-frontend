@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 import { Avatar } from '../../../Avatar/index';
@@ -16,23 +16,36 @@ export const AssignedButton = ({ assigned }) => {
     const defaultAvatar = null;
     const [name, setName] = useState(defaultText);
     const [avatar, setAvatar] = useState(defaultAvatar);
+    const [isActive, setIsActive] = useState(false);
     const [renderDropDown, setRenderDropdown] = useState(false);
     const { handleDropDown, handleDropDownOutsideClick } = useDropdown();
 
-    useEffect(() => {
-        handleData();
-        console.log(assigned, 'assigned');
-    }, [assigned]);
+    const showAvatar = (avatar !== null || assigned !== null) && isActive;
 
-    const handleData = () => {
-        if (assigned == null || Object.keys(assigned).length == 0) {
-            setName(defaultText);
-            setAvatar(defaultAvatar);
+    useEffect(() => {
+        if (assigned) {
+            setIsActive(assigned.status === 'active');
+        }
+        handleData();
+    }, [assigned, isActive]);
+
+    const setButtonData = (name, avatar) => {
+        setName(name);
+        setAvatar(avatar);
+    }
+
+    const handleData = useCallback(() => {
+        const isAssigned = Boolean(assigned !== null && Object.keys(assigned).length > 0);
+
+        if (!isAssigned || !isActive) {
+            setButtonData(defaultText, defaultAvatar);
             return;
         }
-        setName(`${assigned.name} ${assigned.last_name.charAt(0)}.`);
-        setAvatar(assigned.avatar || null);
-    };
+
+        const name = `${assigned.name} ${assigned.last_name.charAt(0)}.`;
+        const avatar = assigned.avatar;
+        setButtonData(name, avatar);
+    }, [isActive]);
 
     const initDropDown = () => {
         document.getElementById('dropwdown-app').innerHTML = '';
@@ -67,7 +80,7 @@ export const AssignedButton = ({ assigned }) => {
                     name={name}
                 >
                     {(isParentHover) =>
-                        avatar !== null || assigned !== null ? (
+                        showAvatar ? (
                             <Avatar size={22} src={avatar} user={assigned} />
                         ) : (
                             <UserIconContainer ishover={isParentHover ? 1 : 0}>

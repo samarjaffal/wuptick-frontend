@@ -124,9 +124,9 @@ export const UserForm = ({
                         >
                             {title}
                         </Button>
-                        <ClickableText text={anchorText}>
+                        {/* <ClickableText text={anchorText}>
                             <Anchor to={`/${anchorURL}`}>{anchorTitle}</Anchor>
-                        </ClickableText>
+                        </ClickableText> */}
                     </Content>
                 </Container>
             </form>

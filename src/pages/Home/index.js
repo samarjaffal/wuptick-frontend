@@ -10,6 +10,7 @@ import { LastActivity } from '../../components/LastActivity/index';
 import { SkeletonCardItem } from '../../components/Loaders/SkeletonCardItem/index';
 import { ButtonHome } from '../../components/ButtonHome/index';
 import { AddProjectModal } from '../../components/Modal/templates/AddProjectModal/index';
+import { RecentProjects } from './RecentProjects';
 import { CreateProjectMutation } from '../../requests/project/CreateProjectMutation';
 import {
     Container,
@@ -21,41 +22,45 @@ import {
 } from './styles';
 
 export const Home = () => {
-    const { teamSelected, generateProfileUrl, generateProjectUrl } = useUser();
+    const { generateProfileUrl, generateProjectUrl } = useUser();
     const { generateProjectAvatar } = useAvatar({});
     const modalRef = useRef();
+
 
     return (
         <LoggedLayout>
             <Container>
                 <HeaderContainer>
                     <Title>Activity </Title>
-                    <div>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            color={Colors.primary}
-                            onClicked={() => modalRef.current.openModal()}
-                        >
-                            New Project
-                        </ButtonHome>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            margin="0 0 0 1em"
-                            color={Colors.orange}
-                        >
-                            New Team
-                        </ButtonHome>
-                        <ButtonHome
-                            url="/"
-                            icon="plus"
-                            margin="0 0 0 1em"
-                            color={Colors.yellow}
-                        >
-                            New Task
-                        </ButtonHome>
-                    </div>
+                    {false && (
+                        <div>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                color={Colors.primary}
+                                onClicked={() => modalRef.current.openModal()}
+                            >
+                                New Project
+                            </ButtonHome>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                margin="0 0 0 1em"
+                                color={Colors.orange}
+                            >
+                                New Team
+                            </ButtonHome>
+                            <ButtonHome
+                                url="/"
+                                icon="plus"
+                                margin="0 0 0 1em"
+                                color={Colors.yellow}
+                            >
+                                New Task
+                            </ButtonHome>
+                        </div>
+                    )}
+
                 </HeaderContainer>
 
                 <Wrapper>
@@ -93,48 +98,16 @@ export const Home = () => {
                                 }}
                             </Me>
                         </ListContainer>
-                        <ListContainer
-                            title="Recent Projects"
-                            icon="folder-open"
-                            color={Colors.primary}
-                            button={false}
-                        >
-                            <Me loader={SkeletonCardItem}>
-                                {({ teams, loading }) => {
-                                    if (loading) {
-                                        return 'loading...';
-                                    }
 
-                                    return teams
-                                        .filter(
-                                            (team) =>
-                                                team._id == teamSelected._id
-                                        )
-                                        .map(({ projects }) =>
-                                            projects.map((project) => (
-                                                <Info
-                                                    name={project.name}
-                                                    profileUrl={generateProfileUrl(
-                                                        project.owner.name,
-                                                        project.owner.last_name,
-                                                        project.owner._id
-                                                    )}
-                                                    projectUrl={generateProjectUrl(
-                                                        project._id
-                                                    )}
-                                                    owner={`${project.owner.name} ${project.owner.last_name}`}
-                                                    time={project.created_at}
-                                                    image={generateProjectAvatar(
-                                                        project
-                                                    )}
-                                                    description="Project Avatar"
-                                                    key={project._id}
-                                                />
-                                            ))
-                                        );
-                                }}
-                            </Me>
-                        </ListContainer>
+                        <Me loader={SkeletonCardItem}>
+                            {({ teams, loading }) => {
+                                if (loading) {
+                                    return 'loading...';
+                                }
+                                return <RecentProjects teams={teams} />
+                            }}
+                        </Me>
+
                     </ProjectsContainer>
                     <ActivityContainer>
                         <LastActivity />

@@ -54,6 +54,11 @@ export const MemberName = styled.span`
     margin-left: 0.5em;
 `;
 
+export const UserInactiveMsg = styled.span`
+    ${info};
+    color: ${Colors.gray};
+`;
+
 export const OptionsContainer = styled.div`
     margin-left: 1em;
     display: none;

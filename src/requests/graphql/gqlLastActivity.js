@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const gqlLastActivity = gql`
-    query getLastActivity($team: ID!) {
-        getLastActivity(teamId: $team) {
+    query getLastActivity($userId: ID!) {
+        getLastActivity(userId: $userId) {
             _id
             type
             action

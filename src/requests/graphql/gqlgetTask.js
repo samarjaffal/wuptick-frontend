@@ -18,6 +18,7 @@ export const gqlGetTask = gql`
                 last_name
                 avatar
                 color
+                status
             }
             collaborators {
                 _id
@@ -26,6 +27,7 @@ export const gqlGetTask = gql`
                 last_name
                 email
                 color
+                status
             }
             deadline
             done

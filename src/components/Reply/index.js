@@ -17,6 +17,7 @@ import {
     MemberName,
     OptionsContainer,
     Container,
+    UserInactiveMsg
 } from './styles';
 
 export const Reply = ({
@@ -26,6 +27,7 @@ export const Reply = ({
     itemsRef,
     updateComment,
     taskId,
+    isActiveUser
 }) => {
     const {
         generateProfileUrl,
@@ -106,6 +108,7 @@ export const Reply = ({
                     </div>
                     <MemberName>
                         {reply.owner.name} {reply.owner.last_name}
+                        {!isActiveUser && <UserInactiveMsg> - (Inactive User)</UserInactiveMsg>}
                     </MemberName>
                     <div
                         style={{
@@ -172,4 +175,5 @@ Reply.propTypes = {
     itemsRef: PropTypes.object,
     updateComment: PropTypes.func,
     taskId: PropTypes.string,
+    isActiveUser: PropTypes.bool
 };
