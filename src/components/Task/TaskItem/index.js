@@ -63,14 +63,9 @@ const MemoTaskItem = ({
                 clickCount = 0;
             }, timeout || 300);
         }
-    }, []);
+    }, [isEditing]);
 
     useEffect(() => {
-        if (callOpenPanel) {
-            openTaskPanel(task);
-            setCallOpenPanel(false);
-            return;
-        }
         let taskItem = document.querySelector(`#task-item-${task._id}`);
         taskItem.addEventListener('keydown', handleKeys, false);
         taskItem.addEventListener('click', handleClicks);
@@ -79,7 +74,16 @@ const MemoTaskItem = ({
             taskItem.removeEventListener('click', handleClicks);
             taskItem.removeEventListener('keydown', handleKeys, false);
         };
-    }, [isEditing, callOpenPanel]);
+    }, [isEditing]);
+
+
+    useEffect(() => {
+        if (callOpenPanel) {
+            openTaskPanel(task);
+            setCallOpenPanel(false);
+            return;
+        }
+    }, [callOpenPanel])
 
     const handleKeys = useCallback(
         (event) => {
@@ -172,7 +176,7 @@ const MemoTaskItem = ({
                                             {({ data }) => {
                                                 const favTasks =
                                                     data !== null &&
-                                                    typeof data !== 'undefined'
+                                                        typeof data !== 'undefined'
                                                         ? data.me.favorite_tasks
                                                         : [];
                                                 return (
