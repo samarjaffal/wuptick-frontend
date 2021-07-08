@@ -31,7 +31,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0.5em 0;
-    padding-left: 15px;
+    /* padding-left: 15px; */
     font-weight: ${semiBold};
     color: ${Colors.black};
     text-decoration: none;
