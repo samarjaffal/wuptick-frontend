@@ -5,11 +5,12 @@ export const Ul = styled.ul`
     list-style: none;
     margin: 0;
     padding: 0;
+    margin-left: 35px;
 `;
 
 export const ProjectsContainer = styled.div`
-    overflow-y: auto;
-    max-height: 280px;
+    /* overflow-y: auto;
+    max-height: 280px; */
 
     ::-webkit-scrollbar {
         width: 10px;

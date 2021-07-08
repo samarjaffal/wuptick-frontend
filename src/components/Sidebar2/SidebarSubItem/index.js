@@ -19,13 +19,19 @@ export const SidebarSubItem = ({
     onClick,
     children,
     arrow = null,
+    hasIcon = true
 }) => {
     return (
         <SidebarLink>
             <Container>
-                <IconContainer>
-                    {fIcon ? <Icon icon={Icon} /> : <Icon {...iconProps} />}
-                </IconContainer>
+
+                {
+                    hasIcon && (
+                        <IconContainer>
+                            {fIcon ? <Icon icon={Icon} /> : <Icon {...iconProps} />}
+                        </IconContainer>)
+                }
+
                 <Title color={color} onClick={() => goTo()}>
                     {title}
                 </Title>

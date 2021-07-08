@@ -50,7 +50,7 @@ export const Sidebar = () => {
                         />
                     )}
                 </Me>
-                <Hr />
+                {/* <Hr /> */}
             </Ul>
         </SidebarStyled>
     );

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SidebarItem } from '../../SidebarItem/index';
-import { ProjectSidebarItem } from './ProjectSidebarItem';
+import { TeamSidebarItem } from '../TeamSidebarItem/index';
 import { Colors } from '../../../../assets/css/colors';
 import { Ul, ProjectsContainer } from './styles';
 
@@ -19,20 +19,12 @@ export const ProjectsSidebarItem = ({ teams, profileURL }) => {
                 color={Colors.orange}
             >
                 <ProjectsContainer>
-                    {teams.length > 0 &&
-                        teams.map((team, index) => (
-                            <Ul key={index}>
-                                {typeof team !== undefined &&
-                                    Object.keys(team).length > 0 &&
-                                    team.projects.map((project, index) => (
-                                        <ProjectSidebarItem
-                                            key={index}
-                                            project={project}
-                                            team={team}
-                                        />
-                                    ))}
-                            </Ul>
-                        ))}
+                    <Ul >
+                        {teams.length > 0 &&
+                            teams.map((team) => (
+                                <TeamSidebarItem key={team._id} team={team} />
+                            ))}
+                    </Ul>
                 </ProjectsContainer>
             </SidebarItem>
         </>
