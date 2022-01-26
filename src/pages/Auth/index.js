@@ -34,7 +34,6 @@ export const Auth = ({ type, ...rest }) => {
                     )}
                 </RegisterMutation>
             )}
-            ;
         </Fragment>
     );
 };
