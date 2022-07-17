@@ -3,7 +3,7 @@ Wuptick es una aplicación web pensada para la gestión de proyectos, tareas y e
 Este repositorio contiene el código perteneciente al front de la app.
 
 ## Tecnologías usadas
-Fué desarrollado basado en el stack MERN. En el front se utilizó lo siguiente:
+Fue desarrollado basado en el stack MERN. En el front se utilizó lo siguiente:
   - React
   - Styled components
   - Apollo
@@ -56,7 +56,7 @@ En los comentarios se utiliza el mismo componente de Editor.js para agregar cual
 Por último se desarrolló la opción de gestión de notificaciones, cada vez que se crean proyectos, cuando se asignan tareas o alguién comenta en una tarea a la que pertenece el usuario como colaborador.
 
 ## Motivo de creación del proyecto
-El proyecto fue desarrollado con fines de aprendizaje para las diferentes tecnologías en el area de front. Fué una excelente experiencia su desarrollo, el cual tomó alrededor de un año en mis tiempos libres.
+El proyecto fue desarrollado con fines de aprendizaje para las diferentes tecnologías en el area de front. Fue una excelente experiencia su desarrollo, el cual tomó alrededor de un año en mis tiempos libres.
 
 ## Agradecimientos
 Gracias al apoyo de [@juanpgarciac](https://github.com/juanpgarciac), quien contribuyó en el desarollo del proyecto a través de sus asesorías y despliegue del proyecto en servidores.
